@@ -1,0 +1,8 @@
+pkg
+bin
+
+# the admin api's boltdb
+config.db
+
+# the dotenv file (env.sample is committed)
+.env

@@ -1,0 +1,49 @@
+#!/bin/sh
+
+main() {
+    SERVICE_NAME=$1
+    PACKAGE=${2:-harrow}
+    # setup_tmp &&
+    build
+}
+
+_trace() {
+    printf "%s[%s]: %s\n" "$0" "$SERVICE_NAME" "$*" >&2
+    "$@"
+}
+
+setup_tmp() {
+    GOBIN=/tmp/harrow-api.$(id -u)
+    export GOBIN
+    if ! [ -d $GOBIN ]; then mkdir $GOBIN; fi
+}
+
+build() {
+    env
+    _trace go generate -x github.com/harrowio/harrow/cmd/...
+    _trace go build -i ${BUILD_OPTIONS} -o harrow github.com/harrowio/harrow/cmd/${PACKAGE}
+}
+
+install() {
+    if service_exists; then
+        copy_onto_gopath
+        restart_service
+    else
+        copy_onto_gopath
+    fi
+}
+
+service_exists() {
+    _trace sudo systemctl list-units --all | grep -q harrow-${SERVICE_NAME}
+}
+
+copy_onto_gopath() {
+    _trace sudo mv -f $GOBIN/${PACKAGE} /srv/harrow/bin
+}
+
+restart_service() {
+    _trace sudo systemctl restart harrow-${SERVICE_NAME}
+    _trace sudo systemctl status -l harrow-${SERVICE_NAME}
+}
+
+main "$@"

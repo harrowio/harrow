@@ -1,0 +1,86 @@
+#!/usr/bin/env ruby
+require 'json'
+class GitLogs
+  def initialize
+    log_format = "%aN\x1f%aE\x1f%cN\x1f%cE"
+    @input = IO.popen("git log --format='#{log_format}'")
+  end
+
+  def each
+    @input.each_line.each do |line|
+      line.chomp!
+      fields = line.split("\x1f")
+      yield fields
+    end
+  ensure
+    @input.close
+  end
+end
+
+class GitRefs
+  def initialize
+    @input = IO.popen('git ls-remote .')
+  end
+
+  def each
+    @input.each_line.each do |line|
+      line.chomp!
+      yield [$1, $2] if line =~ /^([0-9a-f]+)\s+(.*)/
+    end
+  ensure
+    @input.close
+  end
+end
+
+Person = Struct.new(:name, :email) do
+  def to_json(*args)
+    self.to_h.to_json
+  end
+end
+
+class RepositoryScan
+  def initialize(logs, refs)
+    @contributors = {}
+    @refs = {}
+    @source_refs = refs
+    @logs = logs
+  end
+
+  def execute
+    mine_logs!
+    list_refs!
+
+    self
+  end
+
+  def to_json
+    {contributors: @contributors, refs: @refs}.to_json
+  end
+
+  def list_refs!
+    @source_refs.each do |fields|
+      hash, refname = fields
+      @refs[refname] = hash
+    end
+  end
+
+  def mine_logs!
+    @logs.each do |fields|
+      author_name, author_email, committer_name, committer_email = fields
+
+      people = [
+        Person.new(author_name, author_email),
+        Person.new(committer_name, committer_email),
+      ]
+
+      people.each do |person|
+        @contributors.fetch(person.email) {
+          @contributors[person.email] = person
+        }
+      end
+
+    end
+  end
+end
+
+puts RepositoryScan.new(GitLogs.new, GitRefs.new).execute.to_json

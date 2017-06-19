@@ -1,0 +1,125 @@
+hash: 2a3bdc6258e30b8229a705cb4c1c4b6957d351d9a2ff4ffb49671c4ea646238e
+updated: 2017-05-30T11:44:10.416054482+02:00
+imports:
+- name: github.com/aws/aws-sdk-go
+  version: e0cdae7a65ba3a5e66a0af747a7b3967ddac099c
+  subpackages:
+  - aws
+  - aws/awserr
+  - aws/awsutil
+  - aws/client
+  - aws/client/metadata
+  - aws/corehandlers
+  - aws/credentials
+  - aws/credentials/ec2rolecreds
+  - aws/credentials/endpointcreds
+  - aws/credentials/stscreds
+  - aws/defaults
+  - aws/ec2metadata
+  - aws/endpoints
+  - aws/request
+  - aws/session
+  - aws/signer/v4
+  - private/protocol
+  - private/protocol/ec2query
+  - private/protocol/query
+  - private/protocol/query/queryutil
+  - private/protocol/rest
+  - private/protocol/xml/xmlutil
+  - service/autoscaling
+  - service/cloudwatch
+  - service/ec2
+  - service/sts
+- name: github.com/boltdb/bolt
+  version: 583e8937c61f1af6513608ccc75c97b6abdf4ff9
+- name: github.com/craigmj/gototp
+  version: bbfd598b42caf9b1db7318cae7e10d0b94846f56
+- name: github.com/davecgh/go-spew
+  version: 346938d642f2ec3594ed81d874461961cd0faa76
+  subpackages:
+  - spew
+- name: github.com/dhamidi/timespec
+  version: be9b77fa8b17bd771c1782f246be9194ff5b6792
+- name: github.com/go-ini/ini
+  version: e7fea39b01aea8d5671f6858f0532f56e8bff3a5
+- name: github.com/gorhill/cronexpr
+  version: a557574d6c024ed6e36acc8b610f5f211c91568a
+- name: github.com/gorilla/context
+  version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
+- name: github.com/gorilla/handlers
+  version: a4043c62cc2329bacda331d33fc908ab11ef0ec3
+- name: github.com/gorilla/mux
+  version: bcd8bc72b08df0f70df986b97f95590779502d31
+- name: github.com/gorilla/websocket
+  version: a91eba7f97777409bc2c443f5534d41dd20c5720
+- name: github.com/influxdata/influxdb
+  version: 77909d7c7826afe597b12d957996d6e16cd1afaa
+  subpackages:
+  - client/v2
+  - models
+  - pkg/escape
+- name: github.com/jameskeane/bcrypt
+  version: c3cd44c1e20fec46baad45b108a45be93394dc8d
+- name: github.com/jmespath/go-jmespath
+  version: bd40a432e4c76585ef6b72d3fd96fb9b6dc7b68d
+- name: github.com/jmoiron/sqlx
+  version: 8ed836a8adb659e8492bcaa49e0880bb84075fe2
+  subpackages:
+  - reflectx
+  - types
+- name: github.com/lib/pq
+  version: 2704adc878c21e1329f46f6e56a1c387d788ff94
+  subpackages:
+  - oid
+- name: github.com/lionelbarrow/braintree-go
+  version: ec210f929dd2950dadd745b975b0a4918eae4bec
+  subpackages:
+  - customfields
+  - date
+  - nullable
+- name: github.com/mohamedattahri/mail
+  version: 52bc9c59063f12d07450d2ce7853cac3d3892a74
+- name: github.com/nu7hatch/gouuid
+  version: 179d4d0c4d8d407a32af483c2354df1d2c91e6c3
+- name: github.com/rs/zerolog
+  version: bf4b44614c4fe42f071ba7162e4898edaef8fa1e
+  subpackages:
+  - log
+- name: github.com/rubenv/sql-migrate
+  version: 38004e7a77f2b350ea8467038dca66073d907725
+  subpackages:
+  - sqlparse
+- name: github.com/streadway/amqp
+  version: afe8eee29a74d213b1f3fb2586058157c397da60
+- name: golang.org/x/crypto
+  version: 9477e0b78b9ac3d0b03822fd95422e2fe07627cd
+  subpackages:
+  - cast5
+  - curve25519
+  - ed25519
+  - ed25519/internal/edwards25519
+  - openpgp
+  - openpgp/armor
+  - openpgp/elgamal
+  - openpgp/errors
+  - openpgp/packet
+  - openpgp/s2k
+  - ssh
+  - ssh/terminal
+- name: golang.org/x/sys
+  version: f3918c30c5c2cb527c0b071a27c35120a6c0719a
+  subpackages:
+  - unix
+- name: gopkg.in/alexcesaro/quotedprintable.v3
+  version: 2caba252f4dc53eaf6b553000885530023f54623
+- name: gopkg.in/bufio.v1
+  version: 567b2bfa514e796916c4747494d6ff5132a1dfce
+- name: gopkg.in/gorp.v1
+  version: c87af80f3cc5036b55b83d77171e156791085e2e
+- name: gopkg.in/igm/sockjs-go.v2
+  version: d276e9ffe5cc5c271b81198cc77a2adf6c4482d2
+  subpackages:
+  - sockjs
+- name: gopkg.in/redis.v2
+  version: e6179049628164864e6e84e973cfb56335748dea
+testImports: []

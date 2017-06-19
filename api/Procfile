@@ -1,0 +1,14 @@
+caddy: /usr/local/bin/caddy
+
+activity-worker: bin/harrow-debug activity-worker
+api: bin/harrow-debug api
+build-status: bin/harrow-debug build-status-worker
+keymaker: bin/harrow-debug keymaker
+mail-dispatcher: bin/harrow-debug mail-dispatcher
+metadata-preflight: bin/harrow-debug metadata-preflight
+postal-worker: bin/harrow-debug postal-worker
+operation-runner: bin/harrow-debug operation-runner -connect ssh://vagrant@localhost:2222/
+projector: bin/harrow-debug projector
+scheduler: bin/harrow-debug scheduler
+ws: bin/harrow-debug ws
+zob: bin/harrow-debug zob

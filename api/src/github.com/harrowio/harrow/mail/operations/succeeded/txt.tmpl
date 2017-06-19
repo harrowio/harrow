@@ -1,0 +1,18 @@
+Hi, {{.Recipient.DisplayName}},
+
+{{.Actor.DisplayName}} just {{.Action.DisplayName}} for {{.Object.DisplayName}}
+
+Check the logs at https://{{.Recipient.UrlHost}}/{{.Object.Uri}}
+
+{{with .OperationLogs}}{{indent "   " .Text}}{{end}}
+
+===============================================================================
+
+* Terms of Service:    https://www.harrow.io/terms-of-service
+* Privacy:             https://www.harrow.io/privacy-policy
+
+Connect With Us:
+ * https://www.facebook.com/harrow.io
+ * http://twitter.com/harrowio
+ * https://plus.google.com/communities/111732444272140063932
+ * hello@harrow.io

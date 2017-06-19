@@ -1,0 +1,27 @@
+version: '2'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: harrow-rabbitmq
+    restart: always
+    ports:
+      - 5672:5672
+      - 15672:15672
+
+  redis:
+    image: redis:alpine
+    restart: always
+    container_name: harrow-redis
+    ports:
+      - 6379:6379
+
+  postgres:
+    image: postgres:latest
+    container_name: harrow-postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=harrow-dev-test
+      - POSTGRES_PASSWORD=harrow-dev-test
+    ports:
+      - 5432:5432

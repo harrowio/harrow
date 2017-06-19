@@ -1,0 +1,16 @@
+http://localhost:8585 {
+  tls off
+  log stdout
+
+  proxy /api localhost:8080 {
+    without /api
+    health_check /
+    transparent
+    header_upstream X-Forwarded-Request-Uri {path}
+  }
+
+  proxy /ws localhost:8383 {
+    without /ws
+    websocket
+  }
+}

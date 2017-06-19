@@ -1,0 +1,11 @@
+Host *
+    ForwardAgent yes
+
+{{ range .SshConfigs }}
+Host {{.SSHHostAlias}}
+    HostName {{.Host}}
+    User {{.User}}
+    IdentityFile ~/.ssh/{{.KeyFileName}}
+    IdentitiesOnly yes{{ if .Port }}
+    Port {{.Port}}
+{{ end }}{{ end }}

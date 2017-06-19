@@ -1,0 +1,84 @@
+#!/bin/bash
+
+CMD=cat
+
+git_commit_format() {
+    printf "%s: %%%s%%n" \
+           Commit H \
+           AuthorDate ai \
+           Author aN \
+           Parents P \
+           AuthorEmail aE \
+           Subject s \
+
+
+    printf "%%n%%b"
+}
+
+usage() {
+    cat <<EOF
+$0 [-c CMD] <commit-id> <to-id>
+
+Outputs information about <commit-id> as a json object with the
+following keys:
+
+    Commit       [string] the commit id
+    Author       [string] the author of the commit
+    AuthorEmail  [string] the author's email address
+    AuthorDate   [string] the commit's authoring date (ISO 8601)
+    Subject      [string] the commit's subject line
+    Body         [string] the commit message's body
+    Parents      [array ] the commit's parent hashes
+
+If <to-id> is provided, the commits which are reachable only reachable
+from <to-id> but not from <from-id> are displayed.  Note that this is
+a stream of JSON objects, not a JSON array.
+
+
+If <-c CMD> is provided, CMD will be executed for each commit, passing
+the serialized commit on stdin.
+
+EOF
+
+}
+
+format_commit() {
+    awk -f ${0}.awk
+}
+
+select_commits() {
+    local from to
+    from=$1
+    to=$2
+
+    if [ -z "$to" ]; then
+        git rev-list -n 1 $from
+    else
+        git rev-list $from..$to
+    fi
+}
+
+main() {
+    for arg in "$@"; do
+        case $arg in
+            -c)
+                shift
+                CMD="$1"
+                shift
+        esac
+    done
+
+    if [ -z "$1" ]; then
+        usage
+        return 1
+    fi
+
+    select_commits "$1" "$2" |
+        while read commit_id; do
+            git show --no-patch --format="$(git_commit_format)%n" "$commit_id" |
+                format_commit |
+                eval "${CMD}"
+        done
+}
+
+main "$@"
