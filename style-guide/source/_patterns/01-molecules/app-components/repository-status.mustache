@@ -1,0 +1,28 @@
+<div class="repository__status{{#hasError}} repository__status--error{{/hasError}}">
+  <div class="repository__status__row">
+    <div class="repository__status__icon">
+      {{#hasError}}
+        {{>atoms-icon(icon: 'icon-error')}}
+      {{/hasError}}
+      {{^hasError}}
+        {{>atoms-icon(icon: 'icon-repositories')}}
+      {{/hasError}}
+    </div>
+    <div class="repository__status__detail">
+      <strong class="repository__status__title">{{name}}</strong>
+      <div>{{collaborators}} collaborators</div>
+      <div>{{commits}} commits in {{branches}} branches</div>
+      <div>Last updated {{timeAgo}}</div>
+    </div>
+  </div>
+  {{#hasError}}
+    <div class="flash flash--inline flash--error">
+      <div class="flash__message">
+        Repository is not reachable
+      </div>
+      <div class="flash__action">
+        <a href="#">Fix it</a>
+      </div>
+    </div>
+  {{/hasError}}
+</div>

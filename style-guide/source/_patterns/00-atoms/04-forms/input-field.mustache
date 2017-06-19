@@ -1,0 +1,19 @@
+<div class="field__group field__group--{{styleModifier}}">
+  {{#preInput}}
+    <div class="field__input field__input--join">
+      <label>{{preInput.label}}</label>
+      <input type="{{preInput.type}}" placeholder="{{preInput.placeholder}}" />
+    </div>
+  {{/preInput}}
+  <div class="field__input{{#hasError}} hasError{{/hasError}}">
+    <label>{{label}}</label>
+    <input type="{{type}}" placeholder="{{placeholder}}" {{#required}}required="true"{{/required}}/>
+    <span>{{#hasError}}Minimum length{{/hasError}}</span>
+    {{#hint}}
+      <p class="field__hint">
+        {{> atoms-icon(icon: "icon-info")}}
+        {{{hint}}}
+      </p>
+    {{/hint}}
+  </div>
+</div>

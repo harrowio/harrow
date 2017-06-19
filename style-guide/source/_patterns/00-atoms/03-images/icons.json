@@ -1,0 +1,274 @@
+{
+  "icons": [
+    {
+      "icon": "icon-add"
+    },
+    {
+      "icon": "icon-ansible"
+    },
+    {
+      "icon": "icon-api"
+    },
+    {
+      "icon": "icon-bitbucket"
+    },
+    {
+      "icon": "icon-browser"
+    },
+    {
+      "icon": "icon-canceled"
+    },
+    {
+      "icon": "icon-capistrano"
+    },
+    {
+      "icon": "icon-check"
+    },
+    {
+      "icon": "icon-chevron-down"
+    },
+    {
+      "icon": "icon-chevron-left"
+    },
+    {
+      "icon": "icon-chevron-right"
+    },
+    {
+      "icon": "icon-chevron-up"
+    },
+    {
+      "icon": "icon-clock-alt"
+    },
+    {
+      "icon": "icon-clock"
+    },
+    {
+      "icon": "icon-complete-alt"
+    },
+    {
+      "icon": "icon-complete"
+    },
+    {
+      "icon": "icon-copy"
+    },
+    {
+      "icon": "icon-credit-card"
+    },
+    {
+      "icon": "icon-cross"
+    },
+    {
+      "icon": "icon-deployer-alt"
+    },
+    {
+      "icon": "icon-deployer"
+    },
+    {
+      "icon": "icon-double-quote"
+    },
+    {
+      "icon": "icon-edit"
+    },
+    {
+      "icon": "icon-enterprise"
+    },
+    {
+      "icon": "icon-environments"
+    },
+    {
+      "icon": "icon-error-alt"
+    },
+    {
+      "icon": "icon-error"
+    },
+    {
+      "icon": "icon-fabric-alt"
+    },
+    {
+      "icon": "icon-fabric"
+    },
+    {
+      "icon": "icon-free"
+    },
+    {
+      "icon": "icon-full-color-ansible"
+    },
+    {
+      "icon": "icon-full-color-appveyor"
+    },
+    {
+      "icon": "icon-full-color-bamboo"
+    },
+    {
+      "icon": "icon-full-color-capistrano"
+    },
+    {
+      "icon": "icon-full-color-circleci"
+    },
+    {
+      "icon": "icon-full-color-codeship"
+    },
+    {
+      "icon": "icon-full-color-deployer-alt"
+    },
+    {
+      "icon": "icon-full-color-deployer"
+    },
+    {
+      "icon": "icon-full-color-droneio"
+    },
+    {
+      "icon": "icon-full-color-fabric-alt"
+    },
+    {
+      "icon": "icon-full-color-fabric"
+    },
+    {
+      "icon": "icon-full-color-git"
+    },
+    {
+      "icon": "icon-full-color-harrow"
+    },
+    {
+      "icon": "icon-full-color-jenkins"
+    },
+    {
+      "icon": "icon-full-color-rails-alt"
+    },
+    {
+      "icon": "icon-full-color-rails"
+    },
+    {
+      "icon": "icon-full-color-ruby-alt"
+    },
+    {
+      "icon": "icon-full-color-ruby"
+    },
+    {
+      "icon": "icon-full-color-semaphore"
+    },
+    {
+      "icon": "icon-full-color-slack"
+    },
+    {
+      "icon": "icon-full-color-snap"
+    },
+    {
+      "icon": "icon-full-color-solano-labs"
+    },
+    {
+      "icon": "icon-full-color-terminal-alt"
+    },
+    {
+      "icon": "icon-full-color-travis"
+    },
+    {
+      "icon": "icon-full-color-twitter-alt"
+    },
+    {
+      "icon": "icon-full-color-twitter"
+    },
+    {
+      "icon": "icon-full-color-ubuntu"
+    },
+    {
+      "icon": "icon-full-color-webhooks"
+    },
+    {
+      "icon": "icon-git"
+    },
+    {
+      "icon": "icon-github"
+    },
+    {
+      "icon": "icon-hamburger"
+    },
+    {
+      "icon": "icon-harrow"
+    },
+    {
+      "icon": "icon-info-alt"
+    },
+    {
+      "icon": "icon-info"
+    },
+    {
+      "icon": "icon-lock"
+    },
+    {
+      "icon": "icon-mail"
+    },
+    {
+      "icon": "icon-output"
+    },
+    {
+      "icon": "icon-phone"
+    },
+    {
+      "icon": "icon-rails"
+    },
+    {
+      "icon": "icon-remove"
+    },
+    {
+      "icon": "icon-repositories"
+    },
+    {
+      "icon": "icon-root"
+    },
+    {
+      "icon": "icon-ruby-alt"
+    },
+    {
+      "icon": "icon-ruby"
+    },
+    {
+      "icon": "icon-slack"
+    },
+    {
+      "icon": "icon-spinner"
+    },
+    {
+      "icon": "icon-star-alt"
+    },
+    {
+      "icon": "icon-star"
+    },
+    {
+      "icon": "icon-support-alt"
+    },
+    {
+      "icon": "icon-support"
+    },
+    {
+      "icon": "icon-tasks"
+    },
+    {
+      "icon": "icon-terminal-alt"
+    },
+    {
+      "icon": "icon-terminal"
+    },
+    {
+      "icon": "icon-triggers"
+    },
+    {
+      "icon": "icon-twitter-alt"
+    },
+    {
+      "icon": "icon-twitter"
+    },
+    {
+      "icon": "icon-ubuntu"
+    },
+    {
+      "icon": "icon-user"
+    },
+    {
+      "icon": "icon-video"
+    },
+    {
+      "icon": "icon-webhooks"
+    }
+  ]
+}

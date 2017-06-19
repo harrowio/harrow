@@ -1,0 +1,31 @@
+{{# baseColors }}
+<ul class="sg-colors">
+  <li>
+    <span class="sg-swatch bgColor__{{color}}"><strong>Base:</strong> .bgColor__{{color}}</span>
+  </li>
+  {{# variants }}
+  <li>
+    <span class="sg-swatch bgColor__{{color}}--{{variant}}">.bgColor__{{color}}--{{variant}}</span>
+  </li>
+  {{/ variants }}
+</ul>
+<ul class="sg-colors">
+  <li>
+    <span class="sg-swatch color__{{color}}"><strong>Base:</strong> .color__{{color}}</span>
+  </li>
+  {{# variants }}
+  <li>
+    <span class="sg-swatch color__{{color}}--{{variant}}">.color__{{color}}--{{variant}}</span>
+  </li>
+  {{/ variants }}
+</ul>
+
+{{/ baseColors }}
+<ul class="sg-colors">
+  {{# colors }}
+  <li>
+    <span class="sg-swatch" style="background-color: {{hex}}"></span>
+    <span class="sg-label">{{ hex }}<br>"{{ name }}"</span>
+  </li>
+  {{/ colors }}
+</ul>

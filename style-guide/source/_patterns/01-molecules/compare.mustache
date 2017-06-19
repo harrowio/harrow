@@ -1,0 +1,10 @@
+<div class="m-compare">
+  <strong>{{title}}</strong>
+  {{>atoms-icon}}
+  {{#isComparing}}
+    {{> atoms-button:primary(title: "Comparing") }}
+  {{/isComparing}}
+  {{^isComparing}}
+    {{> atoms-button:border(title: "Compare") }}
+  {{/isComparing}}
+</div>

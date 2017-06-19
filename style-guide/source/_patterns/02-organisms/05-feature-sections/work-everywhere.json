@@ -1,0 +1,54 @@
+{
+  "leftSide": {
+    "title": "Work the way you want to",
+    "desc": "You can setup triggers to run your tasks in response to code changes, webhooks, schedules or other tasks.",
+    "keyPoints": [
+      {
+        "title": "Full root access",
+        "desc": "Run your tasks in real VM's with Docker.",
+        "icon": "icon-root"
+      },
+      {
+        "title": "Free Choice",
+        "desc": "Work with any git hosting provider.",
+        "icon": "icon-git"
+      },
+      {
+        "title": "Flexibility",
+        "desc": "Intergration tests across several repositories.",
+        "icon": "icon-repositories"
+      },
+      {
+        "title": "Flawless Security",
+        "desc": "Stop worrying about credentials and keys.",
+        "icon": "icon-lock"
+      }
+    ]
+  },
+  "rightSide": {
+    "title": "Work where you want",
+    "desc": "You can use Harrow wherever you want. Whether it be in the browser, on mobile or using your Command line Client.",
+    "keyPoints": [
+      {
+        "title": "Web",
+        "desc": "Run your tasks in real VM's with Docker.",
+        "icon": "icon-browser"
+      },
+      {
+        "title": "Mobile",
+        "desc": "Work with any git hosting provider.",
+        "icon": "icon-phone"
+      },
+      {
+        "title": "Command Line Client",
+        "desc": "Intergration tests across several repositories.",
+        "icon": "icon-terminal"
+      },
+      {
+        "title": "API",
+        "desc": "Stop worrying about credentials and keys.",
+        "icon": "icon-api"
+      }
+    ]
+  }
+}

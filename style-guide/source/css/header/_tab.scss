@@ -1,0 +1,80 @@
+.layout__header {
+  .tab {
+    z-index: 10;
+    white-space: nowrap;
+    box-sizing: content-box;
+    display: flex;
+    padding: 18px;
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 22px;
+    color: material-color(purple, 'A200');
+    transition-property: border-color, background-color, fill, color;
+    transition-duration: 250ms;
+    fill: material-color(grey, '500');
+    background-color: transparent;
+    padding-bottom: 15px;
+    border-bottom: 3px solid transparent;
+    svg {
+      width: 22px;
+      height: 22px;
+      margin: 0 4px;
+    }
+    &:last-child{
+      margin-right: -5px;
+    }
+    &.active,
+    &:hover {
+
+      color: material-color(purple);
+      fill: material-color(grey, '800');
+    }
+    &.active {
+      border-color: material-color(red);
+    }
+    &:hover {
+      background-color: #FAFAFA;
+      border-color: material-color(red, '200');
+    }
+    &--back {
+      margin-left: -30px;
+      border-bottom: none;
+      padding: 18px 10px;
+      border-right: 1px solid rgba(0,0,0,0.25);
+      .tab__text {
+        opacity: 0;
+        max-width: 0;
+        overflow: hidden;
+        display: inline-block;
+        white-space: nowrap;
+        transition-property: max-width, opacity;
+        transition-duration: 250ms;
+        transition-delay: 0;
+      }
+      &:hover {
+        .tab__text {
+          // transition-delay: 1s;
+          opacity: 1;
+          max-width: 150px;
+        }
+      }
+    }
+    &--sidebarToggle {
+      display: none;
+      @media (max-width: map-get($breakpoint, desktop) - 1 ) {
+        display: flex;
+        margin-left: -30px;
+        border-right: 1px solid rgba(0,0,0,0.25);
+        margin-right: 10px;
+        padding: 17px 10px 16px 10px;
+        align-self: flex-start;
+        + .tab--back {
+          margin-left: 0;
+        }
+
+      }
+    }
+  }
+}

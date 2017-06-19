@@ -1,0 +1,172 @@
+.sidebar {
+  @extend .grid, .grid--column;
+  background-color: material-color(purple);
+  color: material-color(white);
+  fill: material-color(white);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  height: 100%;
+  z-index: 4;
+  width: $sidebar-width;
+  min-width: $sidebar-width;
+  max-width: $sidebar-width;
+  font-size: 14px;
+  line-height: 18px;
+  overflow: hidden;
+  @include shadow-2dp();
+
+  a, a:hover, a:active, a:visited {
+    text-decoration: none !important;
+    color: material-color-contrast(purple, secondary);
+  }
+
+  &__header {
+    display: flex;
+    background-color: material-color(purple,'600');
+    min-height: 60px;
+    max-height: 60px;
+    padding: 0 20px;
+    align-items: center;
+    &__logo,
+    &__account {
+      min-width: 36px;
+      fill: material-color(white);
+      flex: 1;
+    }
+    &__account {
+      flex-grow: 0;
+      text-align: right;
+      cursor: pointer;
+    }
+  }
+
+  &__content {
+    min-height: 0;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    will-change: transform;
+    transition: transform .25s ease-in-out;
+    transform:translateX(0%);
+    &--second {
+      transform: translateX(-100%);
+    }
+  }
+  &__menu {
+    @include scrollbars(10px, material-color(purple, '400'), material-color(purple, '600'));
+
+    flex: 1 0 100%;
+    padding: 12px 0;
+    list-style: none;
+    margin: 0;
+    overflow-y: auto;
+
+    &:first-child {
+      & > li {
+
+        margin-bottom: 12px;
+        & > a {
+          text-transform: uppercase;
+          font-size: 12px;
+          color: material-color-contrast(purple, hint);
+        }
+      }
+    }
+    li > a {
+      display: block;
+      padding: 4px 20px;
+      will-change: background-color;
+      transition: background-color 250ms;
+      &:hover:not(.active),
+      &:focus {
+        background-color: material-color(purple, '400');
+      }
+      &:active {
+        background-color: material-color(purple, '300');
+      }
+      &.active:not(:active):not(:hover) {
+        @include bgColor(red);
+      }
+      &.active:hover {
+        @include bgColor(red, '400');
+      }
+      &.active:active {
+        @include bgColor(red, '300');
+      }
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      position: relative;
+    }
+    &__issue {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 4px;
+      margin-right: 20px;
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+
+  &__claimAccount {
+    @include bgColor(green);
+    padding: 20px 10px;
+    margin-top: -12px;
+    font-weight: 400;
+
+    strong {
+      font-weight: 500;
+    }
+
+    .btn {
+      background-color: transparent;
+      padding: 0 18px;
+      border-width: 2px;
+      border-color: #fff;
+      display: inline-block;
+      &:hover {
+        background-color: rgba(0,0,0,.12);
+      }
+    }
+  }
+
+  &__footer {
+    border-top: 1px solid rgba(255,255,255,.12);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 56px;
+    a {
+      flex: 1;
+      text-align: center;
+      padding: 12px;
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+    .footer {
+      border: none;
+    }
+  }
+}
+
+// Mobile
+@media (max-width: map-get($breakpoint, desktop) - 1 ) {
+  .sidebar {
+    transition-property: transform, min-width, max-width;
+    transition-duration: 400ms;
+    position: absolute;
+    z-index: 1000;
+    transform: translateX(-$sidebar-width);
+    &--open {
+      transform: translateX(0);
+    }
+  }
+}

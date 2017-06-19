@@ -1,0 +1,18 @@
+<form action="{{link.templates-wizard-connect}}" method="GET" class="card wizard__card">
+  <div class="card__content">
+    <div class="cell cell--middle cell--center">
+      <h2>Create your project and organization</h2>
+      <p>Who is your daddy and what does he do?</p>
+    </div>
+    {{>atoms-input-field:tight(type:'url', label: 'Organization Name')}}
+    {{>atoms-input-field:tight(type:'url', label: 'Project Name')}}
+  </div>
+  <div class="card__footer">
+    <div class="cell">
+      <a href="" class="btn">Back</a>
+    </div>
+    <div class="cell cell--right">
+      <a href="{{link.templates-wizard-connect}}" type="submit" class="btn btn--primary">Continue {{>atoms-icon(icon: 'icon-chevron-right')}}</a>
+    </div>
+  </div>
+</form>

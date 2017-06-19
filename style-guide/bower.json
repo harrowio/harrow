@@ -1,0 +1,23 @@
+{
+  "version": "2.0.0",
+  "name": "style-guide",
+  "description": "Harrow style guide, to be imported for it's assets/fonts/etc, intentionally does not expose a mainfile, as it's a dev dependency",
+  "authors": [
+    "Lee Hambley"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "https://styleguide.harrow.io",
+  "private": true,
+  "ignore": [
+    "README.md",
+    "guide",
+    "config.js",
+    "layouts",
+    "node_modules",
+    "src",
+    "builder",
+    "public",
+    "test"
+  ]
+}

@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'dotsfont';
+    font-weight: normal;
+    font-style: normal;
+    src: url('../fonts/dotsfont/dotsfont.eot'); /* IE9 Compat Modes */
+    src: url('../fonts/dotsfont/dotsfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+      url('../fonts/dotsfont/dotsfont.woff2') format('woff2'), /* Super Modern Browsers */
+      url('../fonts/dotsfont/dotsfont.woff') format('woff'), /* Modern Browsers */
+      url('../fonts/dotsfont/dotsfont.ttf') format('truetype'), /* Safari, Android, iOS */
+      url('../fonts/dotsfont/dotsfont.svg#Roboto') format('svg'); /* Legacy iOS */
+}

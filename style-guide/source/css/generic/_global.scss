@@ -1,0 +1,14 @@
+*, :after, :before {
+	box-sizing: border-box;
+}
+
+img, video, object {
+	max-width: 100%;
+	height: auto;
+}
+
+figcaption {
+	background-color: rgba(0,0,0,0.8);
+	padding: 10px;
+	color: #fff;
+}

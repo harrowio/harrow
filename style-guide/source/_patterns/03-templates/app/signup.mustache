@@ -1,0 +1,58 @@
+<div class="layout__container bgColor__purple">
+  <div class="layout layout--row container--small">
+    <div class="layout__content">
+      <div class="layout__spacer"></div>
+      <header class="layout__header">
+        {{> atoms-logo}}
+      </header>
+      <main>
+        <form class="card card--wizard">
+          <div class="card__content card__content--centered">
+            <h3>Sign up for free and experiance Harrow today</h3>
+            <br>
+            <div class="grid grid--marginWide">
+              <div class="cell">
+                <div class="keyPoints">
+                  <div class="keyPoint">
+                    <h4>Super flexible</h4>
+                    <p>Run any software, in any language.</p>
+                  </div>
+                  <div class="keyPoint">
+                    <h4>Your first task running in minutes</h4>
+                    <p>Create reliable, self-documenting, repeatable web-based tasks and make them available for your team-mates.</p>
+                  </div>
+                  <div class="keyPoint">
+                    <h4>Fully Secure</h4>
+                    <p>Your code is run inside dedicated virtual machines.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="cell">
+                <div>
+                  {{>atoms-input-field:tight(type: 'text', label: 'Name', placeholder: 'Your name')}}
+                  {{>atoms-input-field:tight(type: 'email', label: 'Email', placeholder: 'Your email')}}
+                  {{>atoms-input-field:tight(type: 'password', label: 'Password', placeholder: 'Your secure password')}}
+                  {{>atoms-input-field:tight(type: 'password', label: 'Confirm Password', placeholder: 'Confirm your password')}}
+                  {{>atoms-checkbox-field(label: 'I agree with the <a href>Terms of Service</a>')}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card__footer">
+            <a href="{{link.templates-app-login}}" class="btn">New to harrow? Sign Up</a>
+            <div class="layout__spacer"></div>
+            <button class="btn btn--primary">Create Account</button>
+          </div>
+        </form>
+      </main>
+      <footer class="footer footer--compact">
+        <div class="copyright">&copy; Harrow Inc.</div>
+        <div class="navigation">
+          <a href="">Terms</a>
+          <a href="">Support</a>
+        </div>
+      </footer>
+      <div class="layout__spacer"></div>
+    </div>
+  </div>
+</div>

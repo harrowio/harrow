@@ -1,0 +1,22 @@
+a {
+  text-decoration: none;
+  color: color(blue);
+  font-weight: bold;
+  &:hover, &:visited {
+    cursor: pointer; // for links without href=""
+    color: darken(color(blue), 10%);
+    text-decoration: underline;
+  }
+  &:visited {
+    font-weight: normal;
+  }
+  &.danger {
+		color: color(danger);
+    @include transition(background-color, 0.3s, ease-out);
+    &:hover {
+      border-radius: 3px;
+      color: color(white);
+      background-color: color(danger);
+    }
+  }
+}

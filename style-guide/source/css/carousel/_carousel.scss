@@ -1,0 +1,61 @@
+.carousel__wrap {
+  overflow: hidden;
+}
+.carousel {
+  display: flex;
+  left: -100%;
+  position: relative;
+  transform: translateX(100%);
+
+  &--isReversing {
+    transform: translateX(-100%);
+  }
+
+  &--isSet {
+    transform: none;
+    transition: transform .75s ease-in-out;
+  }
+
+  .carousel__seat {
+    flex: 1 0 100%;
+    order: 2;
+    text-align: center;
+    &--isRef {
+      order: 1;
+    }
+  }
+}
+
+.carousel__button {
+  display: block;
+  svg {
+    will-change: fill;
+    transition: fill 0.2s ease-in-out;
+    fill: material-color-contrast(black, hint);
+    width: 48px;
+    height: 48px;
+  }
+  &:hover,
+  &:focus:not(:active) {
+    svg {
+      fill: material-color-contrast(black, text);
+    }
+  }
+  &--backwards {
+    transform: rotate(180deg);
+  }
+}
+
+.carousel__dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  will-change: background-color;
+  background-color: material-color(purple, '600');
+  border-radius: 10px;
+  margin: 5px;
+  transition: background-color .7s ease-in-out;
+  &.active {
+    background-color: material-color(red, '700');
+  }
+}

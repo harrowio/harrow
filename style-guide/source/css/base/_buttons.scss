@@ -1,0 +1,80 @@
+// TODO: the whole !important stuff covers a problem where <a class="btn ..">
+// has the color of *links* not of the button, I guess a problem with the :visited
+// specifier, but I couldn't solve it
+button, .btn {
+	display: inline-block;
+  background-color: color(silver);
+  border: 1px solid color(gray);
+  color: color(black);
+  font-weight: normal;
+  border-radius: 3px;
+  padding: 10px;
+	text-align: center;
+  &-small {
+    font-size: 0.8rem;
+    padding: 5px;
+  }
+  @include transition(border-color, 0.1s, ease-out);
+  @include transition(background-color, 0.1s, ease-out);
+  &:focus {
+    outline: none;
+  }
+  &, &:hover {
+    text-decoration: none;
+  }
+  &:hover {
+    color: color(black);
+    background-color: darken(color(silver), 10%);
+  }
+  &[disabled=disabled], &-disabled {
+    &, &:hover {
+      cursor: default;
+      color: color(gray);
+    }
+  }
+  &-primary {
+    border-color: color(primary);
+    background-color: color(primary);
+    &, &:hover {
+      color: color(white) !important;
+    }
+    &:hover {
+      border-color: darken(color(primary), 10%);
+      background-color: darken(color(primary), 10%);
+    }
+    &[disabled=disabled], &-disabled {
+      color: rgba(color(primary), 0.5) !important; // TODO: Unhack all these button styles
+      background-color: rgba(color(primary), 0.1);
+      border-color: darken(color(primary), 0.1);
+    }
+  }
+  &-success {
+    border-color: color(success);
+    background-color: color(success);
+    &, &:hover, &:visited {
+      color: color(white) !important;
+    }
+    &:hover {
+      border-color: darken(color(success), 10%);
+      background-color: darken(color(success), 10%);
+    }
+  }
+  &-danger {
+    border-color: color(danger);
+		background-color: color(white);
+    &, &:visited {
+      color: color(danger) !important;
+    }
+    &:hover {
+      color: color(white) !important;
+    }
+    &:hover {
+			background-color: color(danger);
+    }
+  }
+}
+
+button.close {
+  border: none;
+  background-color: transparent;
+}

@@ -1,0 +1,13 @@
+.featureSection__getStarted {
+  @extend .featureSection;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  &__prompt {
+    display: inline-block;
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 50px;
+    padding: 0 24px;
+    vertical-align: middle;
+  }
+}

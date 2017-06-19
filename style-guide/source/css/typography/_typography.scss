@@ -1,0 +1,190 @@
+// Global page styles
+//
+// [2] Ensure the page always fills at least the entire height of the viewport.
+// [3] Prevent iOS text size adjust after orientation change, without disabling user zoom
+// [4] Fonts on OSX will look more consistent with other systems that do not
+// render text using sub-pixel anti-aliasing.
+
+html, body {
+  @include primary-font;
+  font-size: 15px;
+  line-height: 24px;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  min-height: 100%; // [2]
+  text-size-adjust: 100%; // [3]
+  -webkit-font-smoothing: antialiased; // [4]
+  -moz-osx-font-smoothing: grayscale; // [4]
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+  font-weight: 300;
+  color: color(brand_purple_darker);
+  & small {
+    font-size: 0.6em;
+    font-weight: 300;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+    opacity: 0.54;
+  }
+}
+
+h1, h2, h3 {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+h4, h5, h6 {
+  margin-top: 24px;
+  margin-bottom: 16px;
+}
+
+h1 {
+  font-size: 48px;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 32px;
+  line-height: 38px;
+}
+
+p {
+  line-height: 1.4em;
+}
+
+a {
+  color: material-color(blue);
+  font-weight: 400;
+}
+
+strong {
+  font-weight: 400;
+}
+
+blockquote {
+  border-left: 5px solid color(gray);
+	padding-left: 1em;
+}
+
+code {
+  word-break: break-all;
+  display: inline-block;
+}
+
+code, kbd, pre, samp, .hljs, .hljs span {
+  @include anonymouspro;
+}
+
+p.intro {
+	@include opensans;
+	font-size: 1.5em;
+	font-weight: 600;
+}
+
+p code, code.standout, pre.standout {
+  @include anonymouspro;
+	background-color: color(silver);
+	line-height: 1.8em;
+	color: color(black);
+	padding: 5px;
+	border-radius: 3px;
+}
+
+pre {
+  background-color: color(silver);
+  margin-top: 0;
+  &.pre-wrap{
+    &, code {
+      white-space: pre-wrap; /* CSS3 <3 */
+    }
+  }
+  code {
+    @include anonymouspro;
+    background-color: color(silver);
+    line-height: 1.8em;
+    color: color(black);
+    padding: 5px;
+    border-radius: 3px;
+  }
+}
+
+pre.public-key, pre.private-key {
+  @extend .bgColor__purple;
+  border-radius: 4px;
+  padding: 12px;
+}
+
+// Emphasis Colors
+p, i, span {
+	&.error {
+		color: color(red);
+	}
+	&.valid {
+		color: color(green);
+	}
+	&.warning {
+		color: color(orange);
+	}
+	&.information {
+		color: color(blue);
+	}
+}
+
+.typography {
+  &--primary {
+    @include primary-font;
+  }
+
+  &--secondary {
+    @include secondary-font;
+  }
+
+  &--monospace {
+    @include monospace-font;
+  }
+
+  &--mock {
+    @include mock-font;
+  }
+
+  &--success,
+  &--ok,
+  &--green {
+    color: color(success);
+  }
+
+  &--running,
+  &--attention,
+  &--warning,
+  &--amber,
+  &--yellow {
+    color: color(attention)
+  }
+
+  &--error,
+  &--danger,
+  &--failed,
+  &--red {
+    color: color(danger);
+  }
+
+  &--gray,
+  &--timedout{
+    color: color(gray);
+  }
+
+  &--black,
+  &--fatalerr {
+    color: color(black);
+  }
+}
+
+[conceal]:not(:active):not(:focus) {
+  -webkit-text-security: disc;
+  text-security: disc;
+  font-family: 'dotsfont' !important;
+}

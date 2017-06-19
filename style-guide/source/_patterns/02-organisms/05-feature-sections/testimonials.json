@@ -1,0 +1,18 @@
+{
+  "testimonials": [
+    {
+      "quotation": "I love Harrow more than my mom. She may have brought me into this world but she didn’t cut my deployment time down a couple of minutes did she?",
+      "name": "Joe Bloggs",
+      "company": "CTO @ GoSquared",
+      "avatar": "https://www.gravatar.com/avatar/c32955ed1eb323a7423f71a5cb562a0f?size=120",
+      "favicon": "http://mekyle.com/images/mekyle-icon.png"
+    },
+    {
+      "quotation": "Jump and shout",
+      "name": "Joe Bloggs",
+      "company": "CTO @ GoSquared",
+      "avatar": "https://www.gravatar.com/avatar/c32955ed1eb323a7423f71a5cb562a0f?size=120",
+      "favicon": "http://mekyle.com/images/mekyle-icon.png"
+    }
+  ]
+}

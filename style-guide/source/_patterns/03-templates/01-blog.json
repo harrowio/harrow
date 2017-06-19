@@ -1,0 +1,49 @@
+{
+  "articles": [
+    {
+      "title": "Say Hello to the new Chalk design",
+      "author": "Lee Hambley",
+      "pubDate": "1st February 2016",
+      "body": "<p>We’ve been hard at work building the latest round of features for Harrow, consulting with our customers and friends to find out what is most important, and to make it easier to get started. We missed a release announcement in September as we had a couple of long-running tasks which we wanted to get finished before announcing!</p><h2>Setup tool</h2><p>We implemented a setup tool to help get people up and running, the tool guides you through setting up an organization and a project, whilst adding a&nbsp;repository, and allowing you to pick from some sample tasks that might be suitable for your stack.</p>",
+      "permalink": "link.templates-article",
+      "hasCallToActionAfter": true
+    },
+    {
+      "title": "Header Testing",
+      "author": "Kyle Welsby",
+      "pubDate": "28th January 2016",
+      "body": "<h1>Header 1</h1><h2>Header 2</h2><h3>Header 3</h3><h4>Header 4</h4><h5>Header 5</h5><h6>Header 6</h6>",
+      "permalink": "link.templates-article"
+    }
+  ],
+  "footer": {
+    "linkSections": {
+      "developers": {
+        "links": [
+          {
+            "href": "#",
+            "title": "API Documentation"
+          },
+          {
+            "href": "#",
+            "title": "Command line client"
+          }
+        ],
+        "title": "Developers"
+      },
+      "support": {
+        "links": [
+          {
+            "href": "#",
+            "title": "Knowledge Base"
+          },
+          {
+            "href": "#",
+            "title": "Customer Support"
+          }
+        ],
+        "title": "Support"
+      }
+    }
+  }
+}

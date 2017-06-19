@@ -1,0 +1,27 @@
+{{> organisms-header:heavy }}
+<div class="blog__page">
+  <div class="container--medium">
+    <div class="grid grid--column">
+      {{# article }}
+        <div class="cell blog__item">
+          <div class="blog__container">
+            <div class="blog__header">
+              <h2 class="blog__title">{{ title }}</h2>
+              <div class="blog__pubDate">By <a href="#">{{ author }}</a> on {{ pubDate }}</div>
+            </div>
+            <div class="blog__content">
+              {{{ body }}}
+            </div>
+          </div>
+          <div class="blog__footer">
+            <a href="#" class="btn">Share on LinkedIn</a>
+            <a href="#" class="btn">Share on Facebook</a>
+            <a href="#" class="btn">Post on Twitter</a>
+          </div>
+        </div>
+      {{/ article }}
+    </div>
+  </div>
+</div>
+{{> organisms-get-started }}
+{{> organisms-footer }}

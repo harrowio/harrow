@@ -1,0 +1,11 @@
+{{> organisms-header:heavy }}
+<div class="featureSection__hero bgColor__{{bgColor}}">
+  <div class="container__basic">
+    <div data-svg-src="{{svgSrc}}"></div>
+    <h1>{{{title}}}</h1>
+    <p>{{{desc}}}</p>
+    {{#callToAction}}
+      {{> atoms-button:primary(title: "Start your 30 day free trial") }}
+    {{/callToAction}}
+  </div>
+</div>

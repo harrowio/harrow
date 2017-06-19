@@ -1,0 +1,186 @@
+{
+  "name": "Web App",
+  "organizationName": "Harrow Inc",
+  "environment": "Production",
+  "environmentColor": "green",
+  "environments": [
+    {
+      "name": "Production",
+      "color": "green",
+      "href": "link.templates-project-production"
+    },
+    {
+      "name": "Staging",
+      "color": "blue",
+      "href": "link.templates-project-staging"
+    }
+  ],
+  "orgs": [
+    {
+      "name": "Harrow Inc",
+      "projects": [
+        {
+          "name": "Web App",
+          "status": "failed",
+          "isActive": true
+        },
+        {
+          "name": "Website"
+        },
+        {
+          "name": "Command Line Client"
+        },
+        {
+          "name": "API"
+        }
+      ]
+    },
+    {
+      "name": "Capistrano",
+      "projects": [
+        {
+          "name": "Ruby Gems"
+        },
+        {
+          "name": "Documentation"
+        }
+      ]
+    },
+    {
+      "name": "Ruby on Rails",
+      "projects": [
+        {
+          "name": "Ruby Gems"
+        },
+        {
+          "name": "Documentation"
+        },
+        {
+          "name": "Website"
+        },
+        {
+          "name": "37 Signals Tests"
+        }
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "name": "Unit Tests",
+      "environment": "Production",
+      "isFavorate": true
+    },
+    {
+      "name": "Unit Tests",
+      "environment": "Production",
+      "isFavorate": true
+    },
+    {
+      "name": "Unit Tests",
+      "environment": "Production",
+      "isFavorate": false
+    },
+    {
+      "name": "Unit Tests",
+      "environment": "Production",
+      "isFavorate": false
+    },
+    {
+      "name": "Unit Tests",
+      "environment": "Production",
+      "isFavorate": false
+    }
+  ],
+  "repositories": [
+    {
+      "name": "bitbucket.org:harrowio/frontend.git",
+      "collaborators": 4,
+      "commits": 2999,
+      "branches": 101,
+      "timeAgo": "an hour ago"
+    },
+    {
+      "name": "bitbucket.org:harrowio/harrow-style-guide.git",
+      "collaborators": 3,
+      "commits": 2999,
+      "branches": 101,
+      "timeAgo": "8 minutes ago"
+    },
+    {
+      "name": "bitbucket.org:harrowio/api-super-long-atom.git",
+      "collaborators": 6,
+      "commits": 2999,
+      "branches": 101,
+      "timeAgo": "7 hours ago",
+      "hasError": true
+    }
+  ],
+  "activity": [
+    {
+      "hasHeader": true,
+      "environment": "Production",
+      "task": "Unit Tests",
+      "trigger": "Webhook",
+      "log": "Requesting VM...",
+      "isBusy": true,
+      "timeAgo": "Started 10 seconds ago"
+    },
+    {
+      "environment": "Production",
+      "task": "Unit Tests",
+      "trigger": "Manual",
+      "meta": [
+        {
+          "name": "frontend.git",
+          "refName": "master",
+          "shaRange": "8a5df8c...65af9b8b"
+        },
+        {
+          "name": "backend.git",
+          "refName": "tag/2016-02-12",
+          "shaRange": "8a5df8c"
+        }
+      ],
+      "isComplete": true,
+      "timeAgo": "About 3 hours ago"
+    },
+    {
+      "environment": "Production",
+      "task": "Unit Tests",
+      "trigger": "Webhook",
+      "meta": [
+        {
+          "name": "frontend.git",
+          "refName": "master",
+          "shaRange": "8a5df8c...65af9b8b"
+        },
+        {
+          "name": "backend.git",
+          "refName": "tag/2016-02-12",
+          "shaRange": "8a5df8c"
+        }
+      ],
+      "isFailure": true,
+      "timeAgo": "About 3 hours ago"
+    },
+    {
+      "environment": "Production",
+      "task": "Unit Tests",
+      "trigger": "Manual",
+      "meta": [
+        {
+          "name": "frontend.git",
+          "refName": "master",
+          "shaRange": "8a5df8c...65af9b8b"
+        },
+        {
+          "name": "backend.git",
+          "refName": "tag/2016-02-12",
+          "shaRange": "8a5df8c"
+        }
+      ],
+      "isFatal": true,
+      "timeAgo": "About 3 hours ago"
+    }
+  ]
+}

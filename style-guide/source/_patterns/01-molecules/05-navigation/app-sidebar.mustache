@@ -1,0 +1,16 @@
+<aside class="app__sidebar navigation navigation--vertical">
+  {{#links}}
+    <a href="{{href}}" class="navigation__item">
+      <div class="navigation__item__icon">
+        {{> atoms-icon }}
+      </div>
+      <div class="navigation__item__detail">
+        <h4>{{name}}</h4>
+        <p>{{desc}}</p>
+      </div>
+      <div class="navigation__item__chevron">
+        {{>atoms-icon(icon: 'icon-chevron-right')}}
+      </div>
+    </a>
+  {{/links}}
+</aside>

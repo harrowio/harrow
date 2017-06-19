@@ -1,0 +1,41 @@
+{{> organisms-header:heavy }}
+<div class="blog__page">
+  <div class="container--medium">
+    <div class="grid grid--column">
+      {{# articles }}
+        <div class="cell blog__item">
+          <div class="blog__container">
+            <div class="blog__header">
+              <h2 class="blog__title"><a href="{{ permalink }}">{{ title }}</a></h2>
+              <div class="blog__pubDate">By <a href="#">{{ author }}</a> on {{ pubDate }}</div>
+            </div>
+            <div class="blog__content">
+              {{{ body }}}
+            </div>
+          </div>
+          <div class="blog__footer">
+            <a href="{{ permalink }}" class="btn btn--primary">Continue Reading
+              <svg width="36" height="36">
+                <use xlink:href="/images/icons.svg#icon-chevron-right"></use>
+              </svg>
+            </a>
+          </div>
+        </div>
+        {{#hasCallToActionAfter}}
+        <div class="cell blog__callToAction">
+          <div>
+            <h2>Start Using Harrow Today</h2>
+            <p>Harrow is flexible, powerful and can make your team much more efficient.</p>
+            <a href="#" class="btn btn--primary">Start your 30 day free trial</a>
+          </div>
+        </div>
+        {{/hasCallToActionAfter}}
+      {{/ articles }}
+    </div>
+    {{> molecules-pagination(firstPage: true) }}
+  </div>
+</div>
+{{> organisms-get-started }}
+{{# footer }}
+  {{> organisms-footer }}
+{{/ footer}}

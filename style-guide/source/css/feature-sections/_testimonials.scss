@@ -1,0 +1,67 @@
+$chevronDown: 'data:image/svg+xml;charset=utf-8,%3Csvg%20width%3D%2236%22%20height%3D%2236%22%20viewBox%3D%220%200%2036%2036%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Ctitle%3Edouble-quote%3C%2Ftitle%3E%3Cpath%20d%3D%22M36%209.167c-4.707%202.315-7.06%205.036-7.06%208.16%202.005.232%203.664%201.052%204.976%202.46%201.312%201.41%201.968%203.04%201.968%204.89%200%201.97-.636%203.628-1.91%204.98-1.273%201.35-2.874%202.025-4.804%202.025-2.16%200-4.032-.878-5.614-2.634-1.582-1.755-2.373-3.887-2.373-6.395C21.183%2015.13%2025.39%209.243%2033.8%205L36%209.167zm-21.183%200c-4.746%202.315-7.12%205.036-7.12%208.16%202.046.232%203.724%201.052%205.036%202.46%201.312%201.41%201.968%203.04%201.968%204.89%200%201.97-.644%203.628-1.937%204.98-1.293%201.35-2.903%202.025-4.833%202.025-2.162%200-4.023-.878-5.586-2.634C.78%2027.293%200%2025.16%200%2022.653%200%2015.13%204.186%209.243%2012.56%205l2.257%204.167z%22%20fill%3D%22%23E1E1E1%22%20fill-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E';
+.featureSection {
+  &__testimonials {
+    @extend .featureSection;
+    background-color: material-color(gray, '100');
+    &__wrap {
+      margin-left: -50px;
+      margin-right: -50px;
+    }
+  }
+  &__testimonial {
+    margin: 50px;
+    width: calc(50% - 100px);
+    min-width: 250px;
+    &__detail {
+      max-height: 77px;
+      flex-direction: row;
+      h4, p {
+        margin: 0;
+      }
+    }
+    &__company {
+      font-size: 13px;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: #988498;
+    }
+    &__avatar {
+      max-width: 60px;
+      position: relative;
+      align-self: center;
+      margin-left: 5px;
+      margin-right: 20px;
+      img {
+        border-radius: 30px;
+        height: inherit;
+      }
+      &__favicon {
+        position: absolute;
+        left: -5px;
+        bottom: -10px;
+      }
+    }
+    &__quotation {
+      display: block;
+      margin-bottom: 20px;
+      text-indent: 40px;
+      position: relative;
+      font-size: 15px;
+      line-height: 26px;
+      color: #988498;
+      &:before {
+        content: " ";
+        display: inline;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 30px;
+        height: 30px;
+        background-image: url($chevronDown);
+        background-repeat: no-repeat;
+        background-position: left center;
+        background-size: 30px;
+      }
+    }
+  }
+}

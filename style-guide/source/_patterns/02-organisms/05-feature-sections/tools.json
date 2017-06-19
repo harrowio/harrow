@@ -1,0 +1,74 @@
+{
+  "title": "Your Existing Tools. Improved!",
+  "desc": "You can setup triggers to run your tasks in response to code changes, webhooks, schedules or other tasks.",
+  "triggers": {
+    "title": "Triggers",
+    "keyPoints":[
+      {
+        "icon": "icon-triggers",
+        "title": "Schedule",
+        "desc": "Set a date and time"
+      },
+      {
+        "icon": "icon-triggers",
+        "title": "Webhook",
+        "desc": "Use your web hooks"
+      },
+      {
+        "icon": "icon-triggers",
+        "title": "Harrow Tasks",
+        "desc": "Tasks triggering tasks"
+      },
+      {
+        "icon": "icon-triggers",
+        "title": "Manually",
+        "desc": "You clicking the button"
+      },
+      {
+        "icon": "icon-triggers",
+        "title": "Code Change",
+        "desc": "Changes in your repo"
+      }
+    ]
+  },
+  "tasks": {
+    "title": "Tasks",
+    "keyPoints": [
+      {
+        "icon": null,
+        "title": null,
+        "desc": "Combine configuration environments with your tooling to reuse tasks."
+      },
+      {
+        "icon": "icon-environments",
+        "title": "Development",
+        "desc": "Run tasks on an environment"
+      },
+      {
+        "icon": "icon-tasks",
+        "title": "Unit Tests",
+        "desc": "Run your unit tests"
+      }
+    ]
+  },
+  "outputs": {
+    "title": "Outputs",
+    "keyPoints": [
+      {
+        "icon": "icon-output",
+        "title": "Notifications",
+        "desc": "Get alerted by email, slack, flowdock, etc"
+      },
+      {
+        "icon": "icon-output",
+        "title": "WebHook",
+        "desc": "Inform your applications via hooks"
+      },
+      {
+        "icon": "icon-output",
+        "title": "Harrow Tasks",
+        "desc": "Trigger other tasks on completion"
+      }
+    ]
+  }
+}

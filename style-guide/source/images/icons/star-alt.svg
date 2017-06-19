@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="36px" height="36px" viewBox="0 0 36 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>star-alt</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="star-alt" fill="#48639C">
+            <path d="M18,30.4500002 L6.83208021,35.3713229 L8.06145919,23.2292277 L-0.0700738096,14.1286771 L11.857644,11.5457722 L18,1 L24.142356,11.5457722 L36.0700738,14.1286771 L27.9385408,23.2292277 L29.1679198,35.3713229 L18,30.4500002 Z M18,28.3585947 L9.06716617,32.294991 L10.050504,22.5829478 L3.54637124,15.3037313 L13.0869413,13.2377548 L18,4.80255536 L22.9130587,13.2377548 L32.4536288,15.3037313 L25.949496,22.5829478 L26.9328338,32.294991 L18,28.3585947 Z" id="Star-1"></path>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,24 @@
+<div class="task task--{{styleModifier}}">
+  <div class="task__content">
+    {{> atoms-icon(icon: 'icon-environments') }}
+    <a href="{{environmentHref}}">{{environment}}</a>
+  </div>
+  <div class="task__content">
+    {{> atoms-icon(icon: 'icon-tasks') }}
+    <a href="">{{name}}</a>
+  </div>
+  <div class="task__footer">
+    <div>
+      {{#isFavorate}}
+        {{> atoms-icon(icon: 'icon-star')}}
+      {{/isFavorate}}
+      {{^isFavorate}}
+        {{> atoms-icon(icon: 'icon-star-alt')}}
+      {{/isFavorate}}
+    </div>
+    <span class="layout__spacer"></span>
+    <div>
+      <a href="#" class="btn btn--border">Run</a>
+    </div>
+  </div>
+</div>

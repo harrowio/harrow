@@ -1,0 +1,13 @@
+<div class="field__group field__group--{{styleModifier}}">
+  <div class="field__input">
+    <label>{{label}}</label>
+    <select>
+      {{#options}}
+        <option>{{name}}</option>
+      {{/options}}
+    </select>
+  </div>
+  {{#hint}}
+    <p class="field__hint">{{>atoms-icon(icon: 'icon-info')}} {{hint}}</p>
+  {{/hint}}
+</div>

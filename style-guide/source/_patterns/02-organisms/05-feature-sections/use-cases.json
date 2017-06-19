@@ -1,0 +1,21 @@
+{
+  "title": "You can use harrow to:",
+  "useCases": [
+    {
+      "case": "Run the unit tests of a JavaScript application and trigger the staging deployment if sucessful.",
+      "example": "#onFrontendRunUnitTestsAndDeployToStaging"
+    },
+    {
+      "case": "Deploy the JavaScript application to Amazon S3 after building it with Gulp.",
+      "example": "#deployFrontendToProduction"
+    },
+    {
+      "case": "Intergration test both repositories, and trigger the deploy to staging when successful.",
+      "example": "#onFrontendAndBackendRunUnitTestsAndAcceptenceTestsAndDeployToStaging"
+    },
+    {
+      "case": "Deploy a Ruby on Rails application over SSH to the root server.",
+      "example": "#deployBackendToProduction"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+.navigation {
+  @include scrollbars(10px, material-color(grey, '400'), material-color(grey, '200'));
+
+  display: flex;
+  flex-wrap: nowrap;
+  box-sizing: border-box;
+  overflow: auto;
+
+  a, a:hover, a:active, a:visited {
+    text-decoration: none !important;
+  }
+  &--vertical {
+    flex-direction: column;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(0,0,0,.12);
+    align-items: center;
+    min-height: 30px;
+    h4,
+    p  {
+      margin: 0;
+    }
+    h4 {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 18px;
+    }
+    p {
+      font-size: 12px;
+      line-height: 16px;
+      color: material-color(purple,'200');
+    }
+    &__icon {
+      max-width: 36px;
+      margin-right: 20px;
+      fill: material-color(grey, '200');
+      svg {
+        width: 31px;
+        height: 31px;
+      }
+    }
+    &__detail {
+      flex-grow: 1;
+    }
+    &__chevron svg{
+      width: 18px;
+      height: 18px;
+      fill: material-color(grey, '200');
+    }
+    &.active {
+      .navigation__item__chevron svg{
+        fill: material-color(blue);
+      }
+    }
+  }
+}

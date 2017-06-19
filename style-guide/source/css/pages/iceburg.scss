@@ -1,0 +1,239 @@
+.page__iceburg {
+  &__header {
+    padding: 30px 0;
+    background-color: material-color(purple);
+    color: material-color(purpleLight, '200');
+    font-size: 21px;
+    line-height: 34px;
+    position: relative;
+    min-height: 550px;
+    border-bottom: 4px solid #988498;
+    @media (max-width: 680px) {
+      padding-bottom: 100px;
+    }
+    h1 {
+      margin: 0;
+      margin-bottom: 15px;
+      color: #fff;
+      font-size: 48px;
+      line-height: 75px;
+    }
+    &__ciceburg {
+      display: block;
+      font-size: 84px;
+    }
+    &__ci {
+      color: material-color(red);
+    }
+    p {
+      max-width: 400px;
+    }
+  }
+  &__content {
+    min-height: 900px;
+    position: relative;
+    transform-origin: top;
+    @media (max-width:1410px) {
+      transform: scale(.8);
+      min-height: 700px;
+    }
+    @media (max-width:1200px) {
+      transform: scale(.7);
+      min-height: 600px;
+    }
+    @media (max-width:840px) {
+      transform: scale(.58);
+      min-height: 500px;
+    }
+
+    &:before {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -254px;
+      height: 950px;
+      z-index: 1;
+      content: ' ';
+      background-image: url('../images/iceburg.svg');
+      background-size: 1400px auto;
+      background-position: center 100px;
+      background-repeat: no-repeat;
+    }
+    @media (max-width: 680px) {
+      transform: scale(1);
+      padding: 20px;
+      &:before {
+        opacity: .5;
+      }
+      .page__iceburg__point--above {
+        display: none;
+      }
+    }
+  }
+  @media (min-width: 680px) {
+    transform: scale(1);
+    &__point,
+    &__point--above {
+      position: absolute;
+      z-index: 3;
+      font-size: 14px;
+      line-height: 24px;
+      width: 400px;
+      h3 {
+        margin: 0;
+        margin-bottom: 5px;
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 400;
+      }
+      p {
+        margin: 0;
+      }
+
+      &:nth-child(odd) {
+        right: 50%;
+        text-align: right;
+        &:after {
+          left: 100%;
+        }
+      }
+      &:nth-child(even) {
+        left: 50%;
+        text-align: left;
+        &:after {
+          right: 100%;
+          transform: scaleX(-1);
+        }
+      }
+      &:after {
+        content: ' ';
+        position: absolute;
+        top: 12px;
+        background-image: url('../images/iceburg-point.svg');
+        background-repeat: no-repeat;
+      }
+    }
+    &__point--above {
+      top: -165px;
+      color: #fff;
+      h3 {
+        color: inherit;
+      }
+      &:after {
+        background-image: url('../images/iceburg-point-white.svg');
+        width: 95px;
+        height: 51px;
+        background-size: 96px 51px;
+      }
+      &:nth-child(1) {
+        margin-right: 170px;
+        margin-top: 30px;
+      }
+      &:nth-child(2) {
+        margin-left: 110px;
+      }
+    }
+
+    &__point {
+      margin-top: 690px;
+      &:after {
+        width: 65px;
+        height: 32px;
+        background-size: 65px 32px;
+      }
+      &:nth-child(odd) {
+        &:after {
+          transform: scaleX(-1);
+        }
+      }
+      &:nth-child(even) {
+        &:after {
+          transform: scaleX(-1) scaleY(-1);
+        }
+      }
+
+      &:nth-child(1) {
+        margin-top: 60px;
+        margin-right: 290px;
+        &:after {
+          transform: scaleX(-1) scaleY(-1);
+        }
+      }
+      &:nth-child(2) {
+        margin-top: 53px;
+        margin-left: 255px;
+        &:after {
+          transform: scaleY(-1);
+        }
+      }
+      &:nth-child(3) {
+        margin-top: 223px;
+        margin-right: 315px;
+        &:after {
+          transform: scaleX(-1);
+          margin-top: -30px;
+        }
+      }
+      &:nth-child(4) {
+        margin-top: 223px;
+        margin-left: 255px;
+        &:after {
+          transform: scaleX(1) scaleY(1);
+          margin-top: -30px;
+        }
+      }
+      &:nth-child(5) {
+        margin-top: 383px;
+        margin-right: 255px;
+        &:after {
+          transform: scaleX(-1) scaleY(1);
+          margin-top: -30px;
+        }
+      }
+      &:nth-child(6) {
+        margin-top: 403px;
+        margin-left: 125px;
+        &:after {
+          transform: scaleX(1) scaleY(1);
+          margin-top: -30px;
+        }
+      }
+      &:nth-child(7) {
+        margin-top: 543px;
+        margin-right: 185px;
+        &:after {
+          transform: scaleX(-1) scaleY(1);
+          margin-top: -30px;
+        }
+      }
+      &:nth-child(8) {
+        margin-top: 553px;
+        margin-left: 105px;
+        &:after {
+          transform: scaleX(1) scaleY(1);
+          margin-top: -30px;
+        }
+      }
+      &:nth-child(9) {
+        // margin-top: 553px;
+        // margin-left: 105px;
+        left: initial;
+        right: initial;
+        width: 400px;
+        left: 50%;
+        margin-left: -250px;
+        text-align: center;
+        &:after {
+          background-image: url('../images/iceburg-point-stright.svg');
+          background-size: 20px 61px;
+          width: 20px;
+          margin-left: -10px;
+          height: 61px;
+          top: initial;
+          bottom: 100%;
+          left: 50%;
+        }
+      }
+    }
+  }
+}

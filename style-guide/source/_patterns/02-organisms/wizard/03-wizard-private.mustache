@@ -1,0 +1,20 @@
+<form class="card wizard__card wizard__card--private">
+  <div class="card__content">
+    <div class="cell cell--middle cell--center">
+      <h2>Your repo is private, we'll need some more information</h2>
+      <p>You can <a href="https://help.github.com/articles/creating-an-access-token-for-command-line-use/" target="_blank">create an access token</a> for GitHub repositories.</p>
+    </div>
+    {{>atoms-input-field:tight(type: 'text', label: 'Host', placeholder: 'github.com', preInput: {type: 'text', label: 'Protocol', placeholder: 'https'})}}
+    {{>atoms-input-field:tight(type: 'text', label: 'Path', placeholder: '/lemon/cake', preInput: {type: 'number', label: 'Port', placeholder: '443'})}}
+    {{>atoms-input-field:tight(type:'text', label: 'Username')}}
+    {{>atoms-input-field:tight(type:'password', label: 'Password or OAuth Token')}}
+  </div>
+  <div class="card__footer">
+    <div class="cell">
+      <a href="" class="btn">Back</a>
+    </div>
+    <div class="cell cell--right">
+      <a href="{{link.templates-wizard-ssh}}" class="btn btn--primary">Continue {{>atoms-icon(icon: 'icon-chevron-right')}}</a>
+    </div>
+  </div>
+</form>

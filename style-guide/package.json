@@ -1,0 +1,51 @@
+{
+  "name": "patternlab-node",
+  "description": "Pattern Lab is a collection of tools to help you create atomic design systems. This is the node command line interface (CLI).",
+  "version": "2.0.0",
+  "devDependencies": {
+    "browser-sync": "^2.10.0",
+    "del": "^2.0.2",
+    "diveSync": "^0.3.0",
+    "fs-extra": "^0.26.2",
+    "glob": "^6.0.1",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-cheerio": "^0.6.2",
+    "gulp-connect": "^2.2.0",
+    "gulp-copy": "0.0.2",
+    "gulp-header": "^1.7.1",
+    "gulp-load": "^0.1.1",
+    "gulp-nodeunit": "0.0.5",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.1.0",
+    "gulp-strip-banner": "0.0.2",
+    "gulp-svg-sprite": "^1.2.19",
+    "gulp-svgmin": "^1.2.1",
+    "gulp-svgstore": "^5.0.5",
+    "html-entities": "^1.2.0",
+    "merge-stream": "^1.0.0",
+    "mustache": "^2.2.0"
+  },
+  "keywords": [
+    "Pattern Lab",
+    "Atomic Web Design",
+    "Node",
+    "Grunt",
+    "Gulp",
+    "Javascript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pattern-lab/patternlab-node.git"
+  },
+  "bugs": "https://github.com/pattern-lab/patternlab-node/issues",
+  "author": "Brian Muenzenmeyer",
+  "license": "MIT",
+  "scripts": {
+    "postinstall": "bower install",
+    "test": "./node_modules/.bin/nodeunit test/*_tests.js"
+  },
+  "engines": {
+    "node": ">=0.1"
+  }
+}

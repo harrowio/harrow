@@ -1,0 +1,78 @@
+[svg-icon] {
+  will-change: fill;
+  transition: fill .25s;
+}
+[svg-icon="icon-spinner"] {
+  transform-origin: center center;
+  transform: translateZ(0);
+  animation-name: spinner;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: steps(16);
+}
+
+@keyframes spinner {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+svg.iconColor {
+  &[svg-icon="icon-error"],
+  &[svg-icon="icon-error-alt"],
+  &[svg-icon="icon-spinner"] {
+    fill: material-color(red) !important;
+  }
+  &[svg-icon="icon-complete"],
+  &[svg-icon="icon-complete-alt"],
+  &[svg-icon="icon-free"] {
+    fill: material-color(green) !important;
+  }
+  &[svg-icon="icon-enterprise"],
+  &[svg-icon="icon-environments"],
+  &[svg-icon="icon-root"],
+  &[svg-icon="icon-canceled"] {
+    fill: material-color(blue) !important;
+  }
+  &[svg-icon="icon-clock"] {
+    fill: material-color(blue) !important;
+  }
+  &[svg-icon="icon-tasks"] {
+    fill: material-color(yellow) !important;
+  }
+  &[svg-icon="icon-double-quote"] {
+    fill: material-color(grey, 'A200') !important;
+  }
+  &[svg-icon="icon-info"],
+  &[svg-icon="icon-info-alt"],
+  &[svg-icon="icon-user"],
+  &[svg-icon="icon-support"],
+  &[svg-icon="icon-support-alt"] {
+    fill: material-color(grey) !important;
+  }
+  &[svg-icon="icon-output"] {
+    fill: material-color(purple, '100') !important;
+  }
+  &[svg-icon="icon-triggers"] {
+    fill: material-color(green) !important;
+  }
+  &[svg-icon="icon-repositories"] {
+    fill: material-color(red) !important;
+  }
+  &[svg-icon="icon-github"] {
+    fill: #4078c0 !important;
+  }
+  &[svg-icon="icon-bitbucket"] {
+    fill: #205081 !important;
+  }
+  &[svg-icon="icon-harrow"] {
+    fill: material-color(purple) !important;
+  }
+  &[svg-icon="icon-star"],
+  &[svg-icon="icon-star-alt"] {
+    fill: material-color(yellow) !important;
+  }
+}

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="534px" height="160px" viewBox="0 0 534 160" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.5.1 (25234) - http://www.bohemiancoding.com/sketch -->
+    <title>users</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.168 0" in="shadowBlurOuter1" type="matrix" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.168 0" in="shadowBlurOuter1" type="matrix" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-3">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.168 0" in="shadowBlurOuter1" type="matrix" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.168 0" in="shadowBlurOuter1" type="matrix" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-5">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.168 0" in="shadowBlurOuter1" type="matrix" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="users" sketch:type="MSArtboardGroup">
+            <g id="user-green" sketch:type="MSLayerGroup" transform="translate(24.000000, 37.000000)">
+                <circle id="Oval-59" fill="#90AC62" filter="url(#filter-1)" sketch:type="MSShapeGroup" cx="43" cy="43" r="43"></circle>
+                <path d="M35.5815556,31.5540231 C35.7166667,33.1985786 36.0502222,35.3392453 36.0502222,35.3392453 C36.0502222,35.3392453 35.3894444,35.6981342 35.3894444,37.1421342 C35.6195556,40.7669119 36.8313333,39.2025786 37.0804444,40.7922453 C37.68,44.6218008 39.0501111,43.9399119 39.0501111,46.0299119 C39.0501111,49.5111342 37.6145556,51.1388008 33.1326667,53.0683564 C28.636,55.0063564 24,57.4446897 24,61.6669119 L24,63.7780231 L62,63.7780231 L62,61.6669119 C62,57.4446897 57.3618889,55.0063564 52.8631111,53.0704675 C48.3812222,51.1409119 46.9498889,49.5153564 46.9498889,46.0320231 C46.9498889,43.9420231 48.3157778,44.6239119 48.9174444,40.7943564 C49.1686667,39.2046897 50.3783333,40.7690231 50.6126667,37.1442453 C50.6126667,35.7002453 49.9497778,35.3413564 49.9497778,35.3413564 C49.9497778,35.3413564 50.2833333,33.2006897 50.4163333,31.5561342 C50.5535556,29.8313564 49.5761111,26.1495786 45.5607778,25.0201342 C44.8577778,24.3023564 44.3827778,23.1602453 46.5445556,22.0139119 C41.8156667,21.7922453 40.7157778,24.2664675 38.1972222,26.0862453 C36.0523333,27.6822453 35.476,30.2092453 35.5815556,31.5540231 Z" id="Shape" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
+            </g>
+            <g id="user-red" sketch:type="MSLayerGroup" transform="translate(423.000000, 37.000000)">
+                <circle id="Oval-59-Copy-4" fill="#B84A62" filter="url(#filter-2)" sketch:type="MSShapeGroup" cx="43" cy="43" r="43"></circle>
+                <path d="M35.5815556,31.5540231 C35.7166667,33.1985786 36.0502222,35.3392453 36.0502222,35.3392453 C36.0502222,35.3392453 35.3894444,35.6981342 35.3894444,37.1421342 C35.6195556,40.7669119 36.8313333,39.2025786 37.0804444,40.7922453 C37.68,44.6218008 39.0501111,43.9399119 39.0501111,46.0299119 C39.0501111,49.5111342 37.6145556,51.1388008 33.1326667,53.0683564 C28.636,55.0063564 24,57.4446897 24,61.6669119 L24,63.7780231 L62,63.7780231 L62,61.6669119 C62,57.4446897 57.3618889,55.0063564 52.8631111,53.0704675 C48.3812222,51.1409119 46.9498889,49.5153564 46.9498889,46.0320231 C46.9498889,43.9420231 48.3157778,44.6239119 48.9174444,40.7943564 C49.1686667,39.2046897 50.3783333,40.7690231 50.6126667,37.1442453 C50.6126667,35.7002453 49.9497778,35.3413564 49.9497778,35.3413564 C49.9497778,35.3413564 50.2833333,33.2006897 50.4163333,31.5561342 C50.5535556,29.8313564 49.5761111,26.1495786 45.5607778,25.0201342 C44.8577778,24.3023564 44.3827778,23.1602453 46.5445556,22.0139119 C41.8156667,21.7922453 40.7157778,24.2664675 38.1972222,26.0862453 C36.0523333,27.6822453 35.476,30.2092453 35.5815556,31.5540231 Z" id="Shape-Copy" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
+            </g>
+            <g id="user-purple" sketch:type="MSLayerGroup" transform="translate(125.000000, 37.000000)">
+                <circle id="User" fill="#BA8AB8" filter="url(#filter-3)" sketch:type="MSShapeGroup" cx="43" cy="43" r="43"></circle>
+                <path d="M35.5815556,31.5540231 C35.7166667,33.1985786 36.0502222,35.3392453 36.0502222,35.3392453 C36.0502222,35.3392453 35.3894444,35.6981342 35.3894444,37.1421342 C35.6195556,40.7669119 36.8313333,39.2025786 37.0804444,40.7922453 C37.68,44.6218008 39.0501111,43.9399119 39.0501111,46.0299119 C39.0501111,49.5111342 37.6145556,51.1388008 33.1326667,53.0683564 C28.636,55.0063564 24,57.4446897 24,61.6669119 L24,63.7780231 L62,63.7780231 L62,61.6669119 C62,57.4446897 57.3618889,55.0063564 52.8631111,53.0704675 C48.3812222,51.1409119 46.9498889,49.5153564 46.9498889,46.0320231 C46.9498889,43.9420231 48.3157778,44.6239119 48.9174444,40.7943564 C49.1686667,39.2046897 50.3783333,40.7690231 50.6126667,37.1442453 C50.6126667,35.7002453 49.9497778,35.3413564 49.9497778,35.3413564 C49.9497778,35.3413564 50.2833333,33.2006897 50.4163333,31.5561342 C50.5535556,29.8313564 49.5761111,26.1495786 45.5607778,25.0201342 C44.8577778,24.3023564 44.3827778,23.1602453 46.5445556,22.0139119 C41.8156667,21.7922453 40.7157778,24.2664675 38.1972222,26.0862453 C36.0523333,27.6822453 35.476,30.2092453 35.5815556,31.5540231 Z" id="Shape" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
+            </g>
+            <g id="user-blue" sketch:type="MSLayerGroup" transform="translate(322.000000, 37.000000)">
+                <circle id="Oval-59-Copy-3" fill="#7B99DA" filter="url(#filter-4)" sketch:type="MSShapeGroup" cx="43" cy="43" r="43"></circle>
+                <path d="M35.5815556,31.5540231 C35.7166667,33.1985786 36.0502222,35.3392453 36.0502222,35.3392453 C36.0502222,35.3392453 35.3894444,35.6981342 35.3894444,37.1421342 C35.6195556,40.7669119 36.8313333,39.2025786 37.0804444,40.7922453 C37.68,44.6218008 39.0501111,43.9399119 39.0501111,46.0299119 C39.0501111,49.5111342 37.6145556,51.1388008 33.1326667,53.0683564 C28.636,55.0063564 24,57.4446897 24,61.6669119 L24,63.7780231 L62,63.7780231 L62,61.6669119 C62,57.4446897 57.3618889,55.0063564 52.8631111,53.0704675 C48.3812222,51.1409119 46.9498889,49.5153564 46.9498889,46.0320231 C46.9498889,43.9420231 48.3157778,44.6239119 48.9174444,40.7943564 C49.1686667,39.2046897 50.3783333,40.7690231 50.6126667,37.1442453 C50.6126667,35.7002453 49.9497778,35.3413564 49.9497778,35.3413564 C49.9497778,35.3413564 50.2833333,33.2006897 50.4163333,31.5561342 C50.5535556,29.8313564 49.5761111,26.1495786 45.5607778,25.0201342 C44.8577778,24.3023564 44.3827778,23.1602453 46.5445556,22.0139119 C41.8156667,21.7922453 40.7157778,24.2664675 38.1972222,26.0862453 C36.0523333,27.6822453 35.476,30.2092453 35.5815556,31.5540231 Z" id="Shape" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
+            </g>
+            <g id="user-yellow" sketch:type="MSLayerGroup" transform="translate(221.000000, 37.000000)">
+                <circle id="Oval-59-Copy-2" fill="#E6B767" filter="url(#filter-5)" sketch:type="MSShapeGroup" cx="43" cy="43" r="43"></circle>
+                <path d="M35.5815556,31.5540231 C35.7166667,33.1985786 36.0502222,35.3392453 36.0502222,35.3392453 C36.0502222,35.3392453 35.3894444,35.6981342 35.3894444,37.1421342 C35.6195556,40.7669119 36.8313333,39.2025786 37.0804444,40.7922453 C37.68,44.6218008 39.0501111,43.9399119 39.0501111,46.0299119 C39.0501111,49.5111342 37.6145556,51.1388008 33.1326667,53.0683564 C28.636,55.0063564 24,57.4446897 24,61.6669119 L24,63.7780231 L62,63.7780231 L62,61.6669119 C62,57.4446897 57.3618889,55.0063564 52.8631111,53.0704675 C48.3812222,51.1409119 46.9498889,49.5153564 46.9498889,46.0320231 C46.9498889,43.9420231 48.3157778,44.6239119 48.9174444,40.7943564 C49.1686667,39.2046897 50.3783333,40.7690231 50.6126667,37.1442453 C50.6126667,35.7002453 49.9497778,35.3413564 49.9497778,35.3413564 C49.9497778,35.3413564 50.2833333,33.2006897 50.4163333,31.5561342 C50.5535556,29.8313564 49.5761111,26.1495786 45.5607778,25.0201342 C44.8577778,24.3023564 44.3827778,23.1602453 46.5445556,22.0139119 C41.8156667,21.7922453 40.7157778,24.2664675 38.1972222,26.0862453 C36.0523333,27.6822453 35.476,30.2092453 35.5815556,31.5540231 Z" id="Shape" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
+            </g>
+        </g>
+    </g>
+</svg>

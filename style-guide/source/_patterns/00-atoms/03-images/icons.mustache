@@ -1,0 +1,12 @@
+<div class="container">
+  <h1>Icons</h1>
+  <p>to use coors add <code>.iconColor</code> to the <code>svg</code> element.</p>
+  <div class="grid grid--row grid--margin grid--wrap">
+    {{#icons}}
+      <div class="cell cell--2Col cell--center">
+        <p>{{> atoms-icon:iconColor }}</p>
+        <p><pre>{{icon}}</pre></p>
+      </div>
+    {{/icons}}
+  </div>
+</div>

@@ -1,0 +1,62 @@
+.featureSection__upAndRunning {
+  @extend .featureSection;
+  @extend .bgColor__purple;
+  text-align: center;
+  padding: 50px 0;
+  h2, h4 {
+    color: material-color-contrast(black);
+  }
+
+  .carousel__wrap {
+    position: relative;
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      bottom: 0;
+      width: 100px;
+      pointer-events: none;
+    }
+    &:before {
+      left: 0;
+      background-image: linear-gradient(to left, rgba(material-color(purple),0), rgba(material-color(purple),1));
+    }
+    &:after {
+      right: 0;
+      background-image: linear-gradient(to left, rgba(material-color(purple),1), rgba(material-color(purple),0));
+    }
+  }
+}
+
+@media (max-width: map-get($breakpoint, desktop) - 1 ) {
+  .featureSection__upAndRunning {
+    .cell--1Col {
+      width: calc(10% - 10px);
+      svg {
+        width: 32px;
+        height: 32px;
+      }
+    }
+    .cell--10Col {
+      width: calc(80% - 10px);
+    }
+    .carousel__wrap {
+      &:before,
+      &:after {
+        width: 20px;
+      }
+    }
+    .carousel__seat {
+      padding: 10px;
+      flex-basis: calc(100% - 20px);
+    }
+    .carousel__image {
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}

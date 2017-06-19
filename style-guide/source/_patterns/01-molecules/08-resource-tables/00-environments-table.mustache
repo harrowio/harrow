@@ -1,0 +1,18 @@
+<table class="table table-hover">
+	<tbody>
+    {{#environments}}
+		<tr>
+      <td>{{name}}</td>
+			<td>
+        {{#variables}}
+        <code class="standout">{{ name }}={{ value }}</code><br />
+        {{/variables}}
+      </td>
+      <td class="">
+        <a href="" class="btn btn-small"><i class="fa fa-fw fa-pencil"> </i>Edit</a>
+        <a href="" class="btn btn-small btn-danger"><i class="fa fa-fw fa-trash"></i></a>
+      </td>
+		</tr>
+    {{/environments}}
+	</tbody>
+</table>

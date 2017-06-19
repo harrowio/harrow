@@ -1,0 +1,270 @@
+$primary-font: "Roboto", "HelveticaNeue", "Helvetica", "Arial", sans-serif;
+$secondary-font: "Roboto", "HelveticaNeue", "Helvetica", "Arial", sans-serif;
+$mock-font: "BLOKKNeue", "Roboto", "HelveticaNeue", "Helvetica", "Arial", sans-serif;
+$dots-font: "dotsfont";
+$monospace-font: monospace;
+
+// Hint: don't access this map directly, use color(navy) which
+// will raise an error on missing keys
+$colors: (
+
+	white:      #fff,
+	footer:     #333,
+	background: #f4f4f4,
+
+	navy:       #001f3f, // clrs.cc colours
+	blue:       #0074d9,
+	aqua:       #7fdbff,
+	teal:       #39cccc,
+	olive:      #3d9970,
+	green:      #2ecc40,
+	lime:       #01ff70,
+	yellow:     #ffdc00,
+	orange:     #ff851b,
+	red:        #ff4136,
+	maroon:     #85144b,
+	fuchsia:    #f012be,
+	purple:     #b10dc9,
+	black:      #111111,
+	gray:       #aaaaaa,
+	silver:     #f7f7f7,
+
+	primary:    #a44cc8, // Harrow Colours (if still needed)
+	success:    #7cb654,
+	attention:  #f8e71c,
+	danger:     #e52c49,
+	info:       #00c5e5,
+
+	brand_purple:         #463245,
+	brand_purple_darker:  #4B334B,
+	brand_purple_light:   #988498,
+	brand_purple_lighter: #AD9BAD,
+	brand_red:            #B84A62,
+	brand_white:          #F5F4F5,
+	brand_blue:           #48639C,
+
+	// maybe take some from:
+	// https://color.adobe.com/CS04-color-theme-1994456/?showPublished=true
+);
+
+// Number of columns in the grid.
+$grid: (
+	columns: 12,
+	columns-min: 4,
+	gutter-width: 10px
+);
+
+// Container sizes
+$container: (
+  tight: 512px + map-get($grid, gutter-width),
+	sm: 720px  + map-get($grid, gutter-width),
+	md: 940px  + map-get($grid, gutter-width),
+	lg: 1140px + map-get($grid, gutter-width),
+);
+
+$breakpoint: (
+  tablet: 480px,
+  desktop: 840px,
+  sm-min: 768px,
+  md-min: 992px,
+  lg-min: 1200px,
+);
+
+/* SHADOWS */
+
+$shadow: (
+  key-umbra-opacity: 0.15,
+	key-penumbra-opacity: 0.09,
+	ambient-shadow-opacity: 0.07
+);
+
+/* Sidebar */
+
+$sidebar-width: 275px;
+$sidebar-padding: 16px;
+
+
+$material-colors: (
+	purple: (
+	 "50": #CFB8CF,
+	 "100": #B08BB0,
+	 "200": #996999,
+	 "300": #6F4C6F,
+	 "400": #5D3F5D,
+	 "500": #4B334B,
+	 "600": #392739,
+	 "700": #271A27,
+	 "800": #140E14,
+	 "900": #020102,
+	 "A100": #CFB8CF,
+	 "A200": #B08BB0,
+	 "A400": #5D3F5D,
+	 "A700": #271A27,
+		contrastDefaultColor: light,
+		contrastDarkColors: "50 100 A100 A200"
+	),
+	purpleLight: (
+		'50': #ffffff,
+		'100': #eeebee,
+		'200': #d4ccd4,
+		'300': #b4a5b4,
+		'400': #a695a6,
+		'500': #988498,
+		'600': #8a738a,
+		'700': #796679,
+		'800': #695869,
+		'900': #584a58,
+		'A100': #ffffff,
+		'A200': #eeebee,
+		'A400': #a695a6,
+		'A700': #796679,
+		'contrastDefaultColor': light,
+		'contrastDarkColors': '50 100 200 300 A100 A200 A400'
+	),
+  red: (
+   "50": #ffffff,
+   "100": #edd2d8,
+   "200": #dda9b5,
+   "300": #c97688,
+   "400": #c16075,
+   "500": #b84a62,
+   "600": #a34056,
+   "700": #8d374a,
+   "800": #772f3f,
+   "900": #612633,
+   "A100": #ffffff,
+   "A200": #edd2d8,
+   "A400": #c16075,
+   "A700": #8d374a,
+    contrastDefaultColor: light,
+    contrastDarkColors: "50 100 200 300 A100 A200"
+  ),
+  blue: (
+   "50": #f3f5fa,
+   "100": #bfcae2,
+   "200": #99aad0,
+   "300": #6882b9,
+   "400": #5371b0,
+   "500": #48639c,
+   "600": #3e5687,
+   "700": #354872,
+   "800": #2b3b5d,
+   "900": #212e48,
+   "A100": #f3f5fa,
+   "A200": #bfcae2,
+   "A400": #5371b0,
+   "A700": #354872,
+    contrastDefaultColor: light,
+    contrastDarkColors: "50 100 200 300 A100 A200"
+  ),
+	grey: (
+		"50": #ffffff,
+		"100": #f5f5f5,
+		"200": #e0e0e0,
+		"300": #bdbdbd,
+		"400": #adadad,
+		"500": #9e9e9e,
+		"600": #8f8f8f,
+		"700": #7f7f7f,
+		"800": #707070,
+		"900": #616161,
+		"A100": #ffffff,
+		"A200": #eaeaea,
+		"A400": #adadad,
+		"A700": #7f7f7f,
+		contrastDefaultColor: light,
+		contrastDarkColors: "50 100 200 300 A100 A200"
+	),
+	green: (
+		"50": #ffffff,
+		"100": #ecf0e2,
+		"200": #d4debd,
+		"300": #b5c68e,
+		"400": #a7bb79,
+		"500": #9ab165,
+		"600": #8ca453,
+		"700": #7a9049,
+		"800": #697c3f,
+		"900": #586734,
+		"A100": #ffffff,
+		"A200": #ecf0e2,
+		"A400": #a7bb79,
+		"A700": #7a9049,
+		contrastDefaultColor: light,
+		contrastDarkColors: "50 100 200 300 400 A100 A200 A400"
+	),
+	yellow: (
+		"50": #ffffff,
+		"100": #fbf7f0,
+		"200": #eedfc5,
+		"300": #ddc08e,
+		"400": #d6b377,
+		"500": #cfa65f,
+		"600": #c89947,
+		"700": #b98a38,
+		"800": #a27831,
+		"900": #8a6729,
+		"A100": #ffffff,
+		"A200": #fbf7f0,
+		"A400": #d6b377,
+		"A700": #b98a38,
+		contrastDefaultColor: light,
+		contrastDarkColors: "50 100 200 300 400 A100 A200 A400"
+	),
+  yellowLight: (
+    "50": #ffffff,
+    "100": #ffffff,
+    "200": #ffffff,
+    "300": #fdfcd5,
+    "400": #fbfbb8,
+    "500": #faf99b,
+    "600": #f9f77e,
+    "700": #f7f561,
+    "800": #f6f444,
+    "900": #f4f226,
+    "A100": #ffffff,
+    "A200": #ffffff,
+    "A400": #fbfbb8,
+    "A700": #f7f561,
+    contrastDefaultColor: light,
+    contrastDarkColors: "50 100 200 300 400 500 600 700 800 900 A100 A200 A400 A700"
+  ),
+	white: (
+		"50": #ffffff,
+		"100": #ffffff,
+		"200": #ffffff,
+		"300": #ffffff,
+		"400": #ffffff,
+		"500": #ffffff,
+		"600": #ffffff,
+		"700": #ffffff,
+		"800": #ffffff,
+		"900": #ffffff,
+		"A100": #ffffff,
+		"A200": #ffffff,
+		"A400": #ffffff,
+		"A700": #ffffff,
+		contrastDefaultColor: light,
+		contrastDarkColors: "50 100 200 300 400 500 600 700 800 900 A100 A200 A400 A700"
+	),
+	black: (
+		"50": #000000,
+		"100": #000000,
+		"200": #000000,
+		"300": #000000,
+		"400": #000000,
+		"500": #000000,
+		"600": #000000,
+		"700": #000000,
+		"800": #000000,
+		"900": #000000,
+		"A100": #000000,
+		"A200": #000000,
+		"A400": #000000,
+		"A700": #000000,
+		contrastDefaultColor: light,
+		contrastDarkColors: "50 100 200 300 400 500 600 700 800 900 A100 A200 A400 A700"
+	)
+);
+
+$harrowIcons: ("add", "ansible", "api", "bitbucket", "browser", "canceled", "capistrano", "check", "chevron-down", "chevron-left", "chevron-right", "chevron-up", "clock-alt", "clock", "complete-alt", "complete", "copy", "credit-card", "cross", "deployer-alt", "deployer", "double-quote", "edit", "enterprise", "environments", "error-alt", "error", "fabric-alt", "fabric", "free", "full-color-ansible", "full-color-appveyor", "full-color-bamboo", "full-color-capistrano", "full-color-circleci", "full-color-codeship", "full-color-deployer-alt", "full-color-deployer", "full-color-droneio", "full-color-fabric-alt", "full-color-fabric", "full-color-git", "full-color-harrow", "full-color-jenkins", "full-color-rails-alt", "full-color-rails", "full-color-ruby-alt", "full-color-ruby", "full-color-semaphore", "full-color-slack", "full-color-snap", "full-color-solano-labs", "full-color-terminal-alt", "full-color-travis", "full-color-twitter-alt", "full-color-twitter", "full-color-ubuntu", "full-color-webhooks", "git", "github", "hamburger", "harrow", "info-alt", "info", "lock", "mail", "output", "phone", "rails", "remove", "repositories", "root", "ruby-alt", "ruby", "slack", "spinner", "star-alt", "star", "support-alt", "support", "tasks", "terminal-alt", "terminal", "triggers", "twitter-alt", "twitter", "ubuntu", "user", "video", "webhooks");

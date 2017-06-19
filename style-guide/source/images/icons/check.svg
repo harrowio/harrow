@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="36px" height="36px" viewBox="0 0 36 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>check</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="check" fill="#48639C">
+            <path d="M14.5570862,22.9515856 L28.674036,6.07733584 C28.674036,6.07733584 30.61805,3.79397028 33.099869,5.87564637 C35.5816879,7.95732247 33.6533241,10.2554555 33.6533241,10.2554555 C33.6533241,10.2554555 22.4692481,23.5841178 16.8772101,30.2484489 C15.9766636,31.3216782 14.557086,32.1493511 12.7143497,30.5423813 L2.37234797,21.8652272 C2.37234797,21.8652272 -0.376788747,19.6948326 1.9069585,16.973996 C4.19070576,14.2531595 6.87186146,16.5029162 6.87186146,16.5029162 L14.5570862,22.9515856 Z" id="complete"></path>
+        </g>
+    </g>
+</svg>

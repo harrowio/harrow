@@ -1,0 +1,27 @@
+<form class="card wizard__card">
+  <div class="card__content">
+    <div class="cell cell--middle cell--center">
+      <h2>Connect your code repository</h2>
+      <p>or you can <strong>skip this step</strong> by connecting your <a href="#">GitHub</a> or <a href="#">Bitbucket</a> repository.</p>
+    </div>
+    {{>atoms-input-field:tight(type:'url', label: 'Repository URL', placeholder: "http://github.com/capistrano/capistrano.git", hint: "If you're connecting to a private repository we'll ask you for your credentials next.")}}
+  </div>
+  <div class="card__footer">
+    <div class="cell">
+      <a href="" class="btn">Back</a>
+    </div>
+    <div class="cell cell--right">
+      {{#isLoading}}
+        <a href="{{link.templates-wizard-connect-loading}}" class="btn" disabled>{{>atoms-icon:iconColor(icon: 'icon-spinner')}} Connecting to your repo</a>
+        <script>
+          setTimeout(function (){
+            window.location.href = "{{&link.templates-wizard-private}}";
+          }, 4000);
+        </script>
+      {{/isLoading}}
+      {{^isLoading}}
+        <a href="{{link.templates-wizard-connect-loading}}" class="btn btn--primary">Continue {{>atoms-icon(icon: 'icon-chevron-right')}}</a>
+      {{/isLoading}}
+    </div>
+  </div>
+</form>

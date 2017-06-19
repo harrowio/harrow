@@ -1,0 +1,36 @@
+<div class="grid">
+  <div class="cell cell--1Col">
+    <a href="#" class="carousel__button carousel__button--backwards" data-carousel-direction="backwards">
+      <svg>
+        <use xlink:href="/images/icons.svg#icon-chevron-right">
+      </svg>
+    </a>
+  </div>
+  <div class="cell cell--10Col cell--middle">
+    <div class="carousel__wrap">
+      <div class="carousel carousel--isSet">
+        {{# keyPoints }}
+          <div class="carousel__seat">
+            {{# svgImage }}
+              <div class="carousel__image" data-svg-src="{{svgImage}}"></div>
+            {{/ svgImage }}
+            <h4>{{{ title }}}</h4>
+            <p>{{{ desc }}}</p>
+          </div>
+        {{/ keyPoints }}
+      </div>
+    </div>
+  </div>
+  <div class="cell cell--1Col">
+    <a href="#" class="carousel__button carousel__button--forwards" data-carousel-direction="forward">
+      <svg>
+        <use xlink:href="/images/icons.svg#icon-chevron-right">
+      </svg>
+    </a>
+  </div>
+</div>
+<div class="grid">
+  <div class="cell cell--center">
+    <span class="carousel__dots"></span>
+  </div>
+</div>

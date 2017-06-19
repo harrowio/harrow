@@ -1,0 +1,46 @@
+{
+  "title": "Harrow vs Travis",
+  "comparisons": [
+    {
+      "title": "Travis",
+      "icon": "icon-full-color-travis",
+      "isComparing": true
+    },
+    {
+      "title": "Codeship",
+      "icon": "icon-full-color-codeship"
+    },
+    {
+      "title": "Circle CI",
+      "icon": "icon-full-color-circleci"
+    },
+    {
+      "title": "Jenkins",
+      "icon": "icon-full-color-jenkins"
+    },
+    {
+      "title": "Bamboo",
+      "icon": "icon-full-color-bamboo"
+    },
+    {
+      "title": "Solano Labs",
+      "icon": "icon-full-color-solano-labs"
+    },
+    {
+      "title": "Snap",
+      "icon": "icon-full-color-snap"
+    },
+    {
+      "title": "Semaphore",
+      "icon": "icon-full-color-semaphore"
+    },
+    {
+      "title": "AppVeyor",
+      "icon": "icon-full-color-appveyor"
+    },
+    {
+      "title": "Drone.io",
+      "icon": "icon-full-color-droneio"
+    }
+  ]
+}

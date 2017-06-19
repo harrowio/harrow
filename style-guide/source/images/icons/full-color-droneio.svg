@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="36px" height="36px" viewBox="0 0 36 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>full-color-droneio</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="full-color-droneio" fill="#252728">
+            <g id="downstream" transform="translate(0.000000, 3.000000)">
+                <g id="Group">
+                    <path d="M18.0315432,0.10160098 C4.51398236,0.10160098 0.0554668147,11.8921406 0.0554668147,16.2030344 L11.0141091,16.2030344 C11.0141091,16.2030344 12.566872,10.5856945 18.0315432,10.5856945 C23.4962142,10.5856945 25.0495379,16.2030344 25.0495379,16.2030344 L35.9445331,16.2030344 C35.9445331,11.8915799 31.5489637,0.10160098 18.0315432,0.10160098" id="Shape"></path>
+                    <path d="M31.928042,19.0091107 L25.0495379,19.0091107 C25.0495379,19.0091107 23.847114,24.6265907 18.0315432,24.6265907 C12.2159723,24.6265907 11.0141091,19.0091107 11.0141091,19.0091107 L4.25490816,19.0091107 C4.25490816,20.4505615 9.56032155,30.6399721 18.0984146,30.6399721 C26.6363674,30.6399721 31.928042,22.2581928 31.928042,19.0091107" id="Shape"></path>
+                    <ellipse id="Oval" cx="18" cy="17.7295122" rx="4.60797742" ry="4.60797742"></ellipse>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

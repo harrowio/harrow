@@ -1,0 +1,100 @@
+$crumbChevronRight: 'data:image/svg+xml;charset=utf8,%3Csvg%20width%3D%2236%22%20height%3D%2236%22%20viewBox%3D%220%200%2036%2036%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Ctitle%3Echevron-right%3C%2Ftitle%3E%3Cpath%20d%3D%22M19.996%2018L11.54%209.08a1.774%201.774%200%200%201%200-2.552%201.874%201.874%200%200%201%202.61%200l10.31%2010.194c.72.707.72%201.85%200%202.554L14.15%2029.47a1.87%201.87%200%200%201-2.61%200%201.774%201.774%200%200%201%200-2.55L19.997%2018z%22%20fill%3D%22%23bdbdbd%22%20fill-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E';
+
+.layout__header {
+  .breadcrumbs {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: -10px
+  }
+  .breadcrumb {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    line-height: normal;
+    text-decoration: none;
+    white-space: nowrap;
+    color: material-color(purpleLight, '300');
+    font-size: 16px;
+    margin: 0 32px 0 0;
+    padding: 12px;
+    border-bottom: 3px solid transparent;
+    will-change: border-bottom;
+    transition: border-bottom 250ms;
+
+    small {
+      will-change: color;
+      transition: color 250ms;
+      font-size: 11px;
+      line-height: 10px;
+      color: material-color(purpleLight,'300');
+    }
+    &:last-child {
+      border-color: material-color(red);
+      margin-right: 0;
+      &:after{
+        display: none;
+      }
+    }
+    &:hover {
+      border-color: material-color(red, '200');
+      small {
+        color: material-color(red);
+      }
+    }
+    &:before {
+      display: none;
+      content: ' ';
+      position: absolute;
+      width: 200px;
+      top: 0;
+      bottom: 0;
+      left: 100%;
+      margin-left: -12px;
+      background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 12px, rgba(255,255,255,1) 100%);
+    }
+    &:after {
+      content: ' ';
+      width: 32px;
+      height: 16px;
+      background-image: url($crumbChevronRight);
+      background-size: 16px;
+      background-repeat: no-repeat;
+      background-position: center center;
+      position: absolute;
+      left: 100%;
+      bottom: 13px;
+    }
+    &[href] {
+      color: material-color(purple, '300');
+    }
+  }
+  @media (max-width: map-get($breakpoint, desktop) - 1 ) {
+    .breadcrumb{
+      max-width: 40px;
+      transition: max-width 250ms;
+      margin-right: 10px;
+      &:before {
+        display: block;
+      }
+      &:after {
+        width: 10px;
+      }
+      &:nth-last-child(2), &:last-child, &:hover {
+        max-width: 300px;
+      }
+    }
+  }
+  @media (max-width: map-get($breakpoint, tablet) - 1 ) {
+    .breadcrumb{
+      display: none;
+      &:nth-last-child(2), &:last-child {
+        display: flex;
+        max-width: 40px
+      }
+      &:last-child, &:hover {
+        max-width: 100px;
+      }
+    }
+  }
+}

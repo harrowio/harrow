@@ -1,0 +1,42 @@
+<div class="grid" style="margin-bottom: 10px;">
+  <div class="cell cell--4Col">
+    {{>atoms-input-field(type: 'text', label: 'Script Name', placeholder: 'Unit Tests')}}
+  </div>
+  <div class="cell cell--2Col"></div>
+  <div class="cell cell--4Col">
+    {{>atoms-select-field(label: 'Environments', hint: '<a href>Create new environment</a>')}}
+  </div>
+  <div class="cell cell--2Col"></div>
+</div>
+<div class="card card--scriptEditor" style="margin-bottom: 30px;">
+  <div class="card__header">
+    <div class="card__header__title">
+      New Script
+    </div>
+    <div class="card__header__tabs">
+      <a class="card__header__tab active">Environment</a>
+      <a class="card__header__tab">Console Output</a>
+    </div>
+  </div>
+  <div class="card__content">
+    <div class="card__content__editor">
+      {{>molecules-ace-editor}}
+    </div>
+    <div class="card__content__extra">
+      {{>molecules-variables}}
+      {{>molecules-variables}}
+
+    </div>
+  </div>
+  <div class="card__footer">
+    <a class="btn">Back</a>
+    <div class="layout__spacer"></div>
+    <button class="btn btn--primary">Test Run in Development</button>
+  </div>
+</div>
+
+<div class="prompt">
+  <h3>Testing and saving your scripts</h3>
+  <p>You can test your scripts in your selected environment. <br>
+  Once they are working - save your changes and be confident your tasks will run without any problem.</p>
+</div>

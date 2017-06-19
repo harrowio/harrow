@@ -1,0 +1,9 @@
+.avatar {
+  width: auto;
+  height: 36px;
+  border-radius: 18px;
+  border: 1px solid transparent;
+  &:hover {
+    border-color: material-color(white);
+  }
+}

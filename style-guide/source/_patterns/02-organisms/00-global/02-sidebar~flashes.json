@@ -1,0 +1,20 @@
+{
+  "flashes": [
+    {
+      "styleModifier": "success",
+      "message": "Wow awesome!"
+    },
+    {
+      "styleModifier": "warn",
+      "message": "Trial Period Ended"
+    },
+    {
+      "styleModifier": "error",
+      "message": "All hell broke loose"
+    },
+    {
+      "styleModifier": "info",
+      "message": "info: server issue"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+.card {
+  &--iconWall {
+    .card__content {
+      position: relative;
+      z-index: 1;
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url('../images/wizard-icon-wall.svg');
+        background-size: 640px auto;
+        background-repeat: repeat-x;
+        background-position: center top;
+        opacity: .02;
+        z-index: -1;
+      }
+    }
+  }
+}
+
+@each $icon in $harrowIcons {
+  .card__content--icon__#{$icon} {
+    position: relative;
+    z-index: 1;
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('../images/icon-walls/#{$icon}.svg');
+      background-size: 640px auto;
+      background-repeat: repeat-x;
+      background-position: center top;
+      opacity: 0.02;
+      z-index: -1;
+    }
+  }
+  .card--icon__#{$icon} {
+    .card__content {
+      @extend .card__content--icon__#{$icon};
+    }
+  }
+}

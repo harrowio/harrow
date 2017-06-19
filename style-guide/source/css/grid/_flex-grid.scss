@@ -1,0 +1,124 @@
+@mixin partial-size($size, $columns, $gutter) {
+  $width: (($size / $columns) * 100) + "%";
+  @if $width == "100%" {
+    width: calc(#{$width} - #{$gutter});
+  } @else {
+    width: calc(#{$width} - #{$gutter});
+  }
+}
+@mixin full-size($gutter) {
+  @include partial-size(1, 1, $gutter);
+}
+
+.grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin: 0 auto;
+  align-items: stretch;
+  &--wrap {
+    flex-wrap: wrap;
+  }
+  &--row {
+    flex-direction: row;
+  }
+  &--rowReverse {
+    flex-direction: row-reverse;
+  }
+  &--column {
+    flex-direction: column;
+  }
+  &--columnReverse {
+    flex-direction: column-reverse;
+  }
+  &--margin {
+    margin: - map-get($grid, gutter-width);
+    .cell {
+      margin: map-get($grid, gutter-width) / 2;
+    }
+  }
+  &--marginWide {
+    margin: - map-get($grid, gutter-width);
+
+    .cell {
+      margin: map-get($grid, gutter-width);
+    }
+  }
+  &--padding {
+    .cell {
+      padding: map-get($grid, gutter-width);
+    }
+  }
+}
+
+.cell {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  box-sizing: border-box;
+  align-self: stretch;
+  &--baseline {
+    align-self: baseline;
+  }
+  &--top,
+  &--start {
+    align-self: flex-start;
+  }
+  &--middle {
+    align-self: center;
+  }
+  &--bottom,
+  &--end {
+    align-self: flex-end;
+  }
+  &--stretch {
+    align-self: stretch;
+  }
+  &--left {
+    text-align: left;
+  }
+  &--right {
+    text-align: right;
+  }
+  &--center {
+    align-items: center;
+    text-align: center;
+  }
+  &--grow {
+    flex-grow: 1;
+  }
+}
+// Mobile Phone
+@media (max-width: map-get($breakpoint, desktop) - 1 ) {
+  .cell {
+    @include partial-size(map-get($grid, columns-min), map-get($grid, columns-min), map-get($grid, gutter-width));
+  }
+  .grid--marginWide .cell {
+    @include partial-size(map-get($grid, columns-min), map-get($grid, columns-min), map-get($grid, gutter-width) * 2);
+  }
+  @for $i from 1 through map-get($grid, columns-min) - 1 {
+    .cell--#{$i}Col {
+      @include partial-size($i, map-get($grid, columns-min), map-get($grid, gutter-width));
+    }
+    .grid--marginWide .cell--#{$i}Col {
+      @include partial-size($i, map-get($grid, columns-min), map-get($grid, gutter-width) * 2);
+    }
+  }
+}
+// Desktop
+@media (min-width: map-get($breakpoint, desktop) ) {
+  .cell {
+    @include partial-size(map-get($grid, columns-min), map-get($grid, columns-min), map-get($grid, gutter-width));
+  }
+  .grid--marginWide .cell {
+    @include partial-size(map-get($grid, columns-min), map-get($grid, columns-min), map-get($grid, gutter-width) * 2);
+  }
+  @for $i from 1 through map-get($grid, columns) - 1 {
+    .cell--#{$i}Col {
+      @include partial-size($i, map-get($grid, columns), map-get($grid, gutter-width));
+    }
+    .grid--marginWide .cell--#{$i}Col {
+      @include partial-size($i, map-get($grid, columns), map-get($grid, gutter-width) * 2);
+    }
+  }
+}

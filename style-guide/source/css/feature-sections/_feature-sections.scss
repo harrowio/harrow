@@ -1,0 +1,50 @@
+@import "key-points";
+@import "hero";
+@import "tools";
+@import "use-cases";
+@import "works-everywhere";
+@import "up-and-running";
+@import "faq";
+@import "get-started";
+@import "pricing";
+@import "pricing-alt-july-2016";
+@import "pricing-inclusions";
+@import "testimonials";
+@import "wraps-cli-tools";
+@import "comparison";
+
+.featureSection {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.feature__item {
+  background-color: #fff;
+  box-shadow: 0 0 3px 0 rgba(0,0,0,0.1);
+  border-radius: 4px;
+  padding: 30px;
+  color: #988498;
+  h2 {
+    margin: 0;
+    font-size: 25px;
+    font-weight: 300;
+    color: #4B334B;
+    line-height: 33px;
+  }
+  p {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 26px;
+  }
+  .magnify {
+    margin: 0;
+    margin-top: 25px;
+    margin-bottom: -30px;
+    &__glass {
+      @media (max-width: map-get($breakpoint, desktop) - 1 ) {
+        width: 96px;
+        height: 96px;
+      }
+    }
+  }
+}

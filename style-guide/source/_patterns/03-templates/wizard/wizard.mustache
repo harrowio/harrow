@@ -1,0 +1,22 @@
+<div class="layout__container layout--fixedSidebar">
+  {{> organisms-sidebar }}
+  <div class="layout layout--column">
+    <main class="layout__content">
+      {{>molecules-app-sidebar}}
+      <div class="app__content">
+        {{#isIntro}}
+          {{> organisms-wizard-intro }}
+        {{/isIntro}}
+        {{#isCreate}}
+          {{> organisms-wizard-create }}
+        {{/isCreate}}
+        {{#isConnect}}
+          {{> organisms-wizard-connect }}
+        {{/isConnect}}
+        {{#isPrivate}}
+          {{> organisms-wizard-private }}
+        {{/isPrivate}}
+      </div>
+    </main>
+  </div>
+</div>

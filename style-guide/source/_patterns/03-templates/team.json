@@ -1,0 +1,35 @@
+{
+  "title": "The Harrow Team",
+  "teamMembers": [
+    {
+      "name": "Lee Hambley, Founder / CTO",
+      "quotation": "Lee began program at a young age, by 15 years old he had open source code shared on the then-young internet. Lee’s career started in 2001 immediately after the conculsion of studies in computer sciences and psychology. Whilst living in England he worked with state educational services facilitating the computerisation and exchange of teaching materials. He was introduced to Ruby on Rails when be began to work for a large travel portal. During his first years work with Ruby on Rails he became responsible for the widely used deployment tool, Capistrano. In recent years Lee has emigrated to Germany, where he has worked with companies such as XING AG working on web APIs and rapid response teams. Following his engagement at XING, he started to work as CTO of an online shopping and rewards program. 2011 he founded a IT consulting agency called Wacku. Lee is dedicated to, and passionate about developing high quality, sustainable pieces of high-performance software; particularly concerning accessibility, internationalisation and responsive design. Lee often participates as a speaker at conferences to inspire others to take pride in their craft and ship amazing software. 2015 Lee became a Google Developer Expert (GDE).",
+      "avatar": "https://harrow.io/app/uploads/2015/06/Lee-Hambley-GDE.png"
+    },
+    {
+      "name": "Joe Tonne, Founder / CEO",
+      "quotation": "After graduating from high-school Joe worked for several advertising agencies such as Springer&Jacoby and became a trainee at Economia BBDO before starting to study business administration at the university of Hamburg. During university he started managing various projects concerning international sponsoring at worldwide events (F1, PGA). He wrote his diploma thesis as a graduate of the Siemens AG and then continued working for Siemens as an external consultant. In 2006 Joe started working for a communications agency; in 2007 he founded his first company, a mobile virtual network operator (MVNE). In 2009 he co-founded an e-commerce-based loyalty programme for mobile network operators. Joe also invested in several start-ups and joined different advisory boards as a consultant. 2011 he founded the IT consulting agency Wacku together with Lee. In parallel he has started working as a Growth Hacker for Sennheiser, a German consumer electronics manufacturer in e-commerce and digital marketing. Joe loves sports and has been kick-/boxing for over 25 years and is also a passionate runner.",
+      "avatar": "https://harrow.io/app/uploads/2015/06/JT1.jpg"
+    },
+    {
+      "name": "Hannes Fehr, Co-Founder / CMO",
+      "quotation": "Hannes studied industrial engineering and is working in online business since 2000. During his career he could gain valuable corporate experience (e.g. Director New Media International at Gruner & Jahr) but also founded two companies himself. With his startup AdConversion, an AdSense optimization service, he acquired more than 200 B2B clients in 13 countries with a portfolio size of more than 150 mln uniques. In 2011 it was the biggest Adsense agency worlwide and became one of the first three Google AdSense Certified Partners. Hannes is Mentor in several well known incubators, e.g. Google, Telekom hub:raum, Axel Springer, Microsoft etc. and became a Google Developer Expert (GDE) for Product Strategy in 2014.",
+      "avatar": "https://harrow.io/app/uploads/2015/06/HF1.jpg"
+    },
+    {
+      "name": "Paul Schyska, Lead-Developer",
+      "quotation": "Paul has been working as a Freelance IT specialist since 2007. He has worked for many renowned companies such as T-Systems. He also is one of the first team-members of the founder’s agency Wacku and has contributed a lot of his experience.",
+      "avatar": "https://harrow.io/app/uploads/2015/06/PS1.jpg"
+    },
+    {
+      "name": "Dario Hamidi, Lead-Developer",
+      "quotation": "Dario loves coding and taught himself many frameworks such as C, Ruby, Go etc. He has more than 10 years of experience. Before Dario joined the Harrow team, he has been working for XING as a Software Engineer.",
+      "avatar": "https://harrow.io/app/uploads/2015/06/DH1.jpg"
+    },
+    {
+      "name": "Kyle Welsby, Frontend-Developer",
+      "quotation": "Kyle has developing websites professionally for over 15 years.  He has exceptional skills with JavaScript, and is not afraid to jump into Ruby and Go to implement a feature.  He joined the Harrow team in December 2015.",
+      "avatar": "https://www.gravatar.com/avatar/c32955ed1eb323a7423f71a5cb562a0f?size=120"
+    }
+  ]
+}

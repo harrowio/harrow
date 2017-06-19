@@ -1,0 +1,23 @@
+<div class="featureSection__tools">
+  <div class="container__basic">
+    <div class="grid">
+      <div class="cell cell--center">
+        <h2>{{ title }}</h2>
+        <p>{{ desc }}</p>
+      </div>
+    </div>
+    <div class="grid grid--wrap">
+      {{# triggers }}
+      {{>molecules-key-points:triggers}}
+      {{/triggers }}
+
+      {{# tasks }}
+      {{>molecules-key-points:tasks}}
+      {{/ tasks }}
+
+      {{# outputs }}
+      {{>molecules-key-points:outputs}}
+      {{/ outputs }}
+    </div>
+  </div>
+</div>

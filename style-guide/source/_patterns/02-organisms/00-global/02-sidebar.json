@@ -1,0 +1,62 @@
+{
+  "accountLinks": [
+    {
+      "name": "Your Settings"
+    },
+    {
+      "name": "Feedback"
+    },
+    {
+      "name": "Sign Out"
+    }
+  ],
+  "orgs": [
+    {
+      "name": "Harrow Inc",
+      "projects": [
+        {
+          "name": "Web App",
+          "status": "failed"
+        },
+        {
+          "name": "Website",
+          "isActive": true
+        },
+        {
+          "name": "Command Line Client"
+        },
+        {
+          "name": "API"
+        }
+      ]
+    },
+    {
+      "name": "Capistrano",
+      "projects": [
+        {
+          "name": "Ruby Gems"
+        },
+        {
+          "name": "Documentation"
+        }
+      ]
+    },
+    {
+      "name": "Ruby on Rails",
+      "projects": [
+        {
+          "name": "Ruby Gems"
+        },
+        {
+          "name": "Documentation"
+        },
+        {
+          "name": "Website"
+        },
+        {
+          "name": "37 Signals Tests"
+        }
+      ]
+    }
+  ]
+}

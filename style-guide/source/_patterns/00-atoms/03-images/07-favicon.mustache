@@ -1,0 +1,33 @@
+<img src="../../images/favicons/apple-touch-icon.png" />
+<p>Favicon's should be copied to the project application. Following example is for HTML pages.</p>
+<h4>Gulp Task Example</h4>
+<pre><code>
+var gulp = require('gulp')
+gulp.task('favicons', function() {
+  return gulp.src([
+    'bower_components/harrow-style-guide/source/images/favicons/*'
+  ])
+  .pipe(gulp.dest('/app/images/favicons/'))
+});
+</code></pre>
+<h4>Recommended HTML Code (place in <code>&lt;head&gt;</code>)</h4>
+<pre><code>
+&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;57x57&quot; href=&quot;/images/favicons/apple-touch-icon-57x57.png&quot;&gt;
+&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;60x60&quot; href=&quot;/images/favicons/apple-touch-icon-60x60.png&quot;&gt;
+&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;72x72&quot; href=&quot;/images/favicons/apple-touch-icon-72x72.png&quot;&gt;
+&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;76x76&quot; href=&quot;/images/favicons/apple-touch-icon-76x76.png&quot;&gt;
+&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;114x114&quot; href=&quot;/images/favicons/apple-touch-icon-114x114.png&quot;&gt;
+&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;120x120&quot; href=&quot;/images/favicons/apple-touch-icon-120x120.png&quot;&gt;
+&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;144x144&quot; href=&quot;/images/favicons/apple-touch-icon-144x144.png&quot;&gt;
+&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;152x152&quot; href=&quot;/images/favicons/apple-touch-icon-152x152.png&quot;&gt;
+&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;180x180&quot; href=&quot;/images/favicons/apple-touch-icon-180x180.png&quot;&gt;
+&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; href=&quot;/images/favicons/favicon-32x32.png&quot; sizes=&quot;32x32&quot;&gt;
+&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; href=&quot;/images/favicons/android-chrome-192x192.png&quot; sizes=&quot;192x192&quot;&gt;
+&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; href=&quot;/images/favicons/favicon-96x96.png&quot; sizes=&quot;96x96&quot;&gt;
+&lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; href=&quot;/images/favicons/favicon-16x16.png&quot; sizes=&quot;16x16&quot;&gt;
+&lt;link rel=&quot;mask-icon&quot; href=&quot;/images/favicons/safari-pinned-tab.svg&quot; color=&quot;#2D1038&quot;&gt;
+&lt;link rel=&quot;shortcut icon&quot; href=&quot;/images/favicons/favicon.ico&quot;&gt;
+&lt;meta name=&quot;msapplication-TileColor&quot; content=&quot;#2D1038&quot;&gt;
+&lt;meta name=&quot;msapplication-TileImage&quot; content=&quot;/images/favicons/mstile-144x144.png&quot;&gt;
+&lt;meta name=&quot;theme-color&quot; content=&quot;#ffffff&quot;&gt;
+</code></pre>

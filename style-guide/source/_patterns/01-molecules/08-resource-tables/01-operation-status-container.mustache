@@ -1,0 +1,12 @@
+<div class="operationStatusContainer">
+  <div class="operationStatus operationStatus-{{ operationStatus }}">
+    <operation-status-icon operation="operation" class="ng-isolate-scope">
+      <i class="operationStatusIcon fa-fw {{ operationStatus }} fa {{ operationIcon }}" title="Title"></i>
+    </operation-status-icon>
+    <a href="">Native Ubuntu - Test api/domain Package</a>
+    <br>
+    <small ng-if="operation.subject.parameters.triggeredByDelivery"> Trigger: <i class="icon-webhook icon-webhooks"></i> Webhook (<a href="">View Details</a>) </small>
+    <br>
+    <small>(<a>an hour ago</a>)</small>
+  </div>
+</div>

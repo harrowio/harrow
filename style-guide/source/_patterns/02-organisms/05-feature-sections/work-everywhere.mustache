@@ -1,0 +1,19 @@
+<div class="featureSection__worksEverywhere">
+  <div class="grid grid--wrap container__basic">
+    <div class="cell cell--6Col featureSection__worksEverywhere__section">
+      <h2>{{ leftSide.title }}</h2>
+      <p>{{ leftSide.desc }}</p>
+      {{# leftSide.keyPoints }}
+        {{> molecules-works-everywhere }}
+      {{/ leftSide.keyPoints }}
+    </div>
+
+    <div class="cell cell--6Col featureSection__worksEverywhere__section">
+      <h2>{{ rightSide.title }}</h2>
+      <p>{{ rightSide.desc }}</p>
+      {{# rightSide.keyPoints }}
+        {{> molecules-works-everywhere }}
+      {{/ rightSide.keyPoints }}
+    </div>
+  </div>
+</div>

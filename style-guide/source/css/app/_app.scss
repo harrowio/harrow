@@ -1,0 +1,110 @@
+@import "wizard";
+@import "components/repository";
+@import "components/activity";
+@import "components/environment";
+@import "components/task";
+@import "components/status_log";
+@import "components/stencil";
+@import "components/variables";
+@import "components/organization_projects";
+@import "components/section_header";
+@import "components/track_progress";
+.app {
+  &__important {
+    @include bgColor(green);
+    flex: 0 0 auto;
+    padding: 15px 30px;
+    font-size: 14px;
+    line-height: 20px;
+    vertical-align: text-top;
+    box-sizing: content-box;
+    a {
+      color: inherit;
+      text-decoration: underline;
+      font-weight: 300;
+    }
+    &--warn {
+      @include bgColor(yellow);
+    }
+  }
+  &__container {
+    @include scrollbars(12px, material-color(grey, '400'), material-color(grey, '200'));
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    overflow: auto;
+  }
+  &__sidebar {
+    @include shadow-2dp();
+    position: relative;
+    z-index: 2;
+    width: $sidebar-width;
+    min-width: $sidebar-width;
+    max-width: $sidebar-width;
+    padding: 0 20px;
+    background-color: material-color(white);
+    color: material-color(purple);
+    a {
+      color: inherit;
+    }
+    .navigation__item {
+      min-height: 75px;
+    }
+  }
+  &__content {
+    background-color: #F5F4F5;
+    flex: 1 0 auto;
+    padding: 30px;
+    box-sizing: content-box;
+    @media (max-width: map-get($breakpoint, tablet) - 1 ) {
+      padding: 10px;
+    }
+    &:last-child {
+      padding-bottom: 90px;
+    }
+    &--shrink {
+      flex: 0 0 auto;
+    }
+  }
+}
+
+.project {
+  &__tasks{
+    background-color: #F5F4F5;
+    flex: 0 0 auto;
+  }
+  &__activity {
+    flex: 1 0 auto;
+    border-top: 1px solid material-color(grey, '200');
+    background-color: #EDEDED;
+  }
+}
+
+.ng-show-tablet, .ng-show-mobile {
+  display: none;
+  visibility:hidden;
+}
+.ng-hide-tablet, .ng-hide-mobile {
+  display: initial;
+  visibility: visible;
+}
+@media (max-width: map-get($breakpoint, desktop) - 1 ) {
+  .ng-show-tablet {
+    display: initial;
+    visibility: visible;
+  }
+  .ng-hide-tablet {
+    display: none;
+    visibility:hidden;
+  }
+}
+@media (max-width: map-get($breakpoint, tablet) - 1 ) {
+  .ng-show-mobile {
+    display: initial;
+    visibility: visible;
+  }
+  .ng-hide-mobile {
+    display: none;
+    visibility:hidden;
+  }
+}

@@ -1,0 +1,22 @@
+<div class="featureSection__faq featureSection__faq--{{styleModifier}}">
+  <div class="container__basic">
+    <div class="grid featureSection__faq__header">
+      <div class="cell">
+        <h3>{{ title }}</h3>
+      </div>
+      <div class="cell cell--right cell--middle">
+        {{# link }}
+          <a href="{{ link.href }}">{{ link.title }}</a>
+        {{/ link }}
+      </div>
+    </div>
+    <div class="grid grid--margin grid--wrap featureSection__faq__questions">
+      {{# questions }}
+        <div class="cell cell--4Col">
+          <h4>{{ question }}</h4>
+          <p>{{{ answer }}}</p>
+        </div>
+      {{/ questions }}
+    </div>
+  </div>
+</div>

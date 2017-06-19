@@ -1,0 +1,18 @@
+<div class="cell grid grid--column featureSection__testimonial">
+  <div class="cell featureSection__testimonial__quotation">
+      {{{quotation}}}
+    </p>
+  </div>
+  <div class="cell grid grid--row featureSection__testimonial__detail">
+    <div class="cell cell--middle featureSection__testimonial__avatar">
+      <img src="{{avatar}}" width="60" height="60" alt="{{name}}" class="featureSection__testimonial__avatar__image">
+      {{#favicon}}
+        <img src="{{favicon}}" width="32" height="32" alt="{{company}}" class="featureSection__testimonial__avatar__favicon">
+      {{/favicon}}
+    </div>
+    <div class="cell cell--middle">
+      <h4>{{name}}</h4>
+      <p class="featureSection__testimonial__company">{{company}}</p>
+    </div>
+  </div>
+</div>

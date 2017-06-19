@@ -1,0 +1,87 @@
+{
+  "prompt": {
+    "title": "Welcome To Harrow",
+    "message": "To get started, create your first Organization with our setup tool."
+  },
+  "organizations": [
+    {
+      "name": "Harrow Inc",
+      "hasBrokenRepository": true,
+      "projects": [
+        {
+          "name": "Web App",
+          "lastRunTaskName": "Unit Tests",
+          "lastRunAt": "3 hours ago",
+          "status": "failure",
+          "isFailure": true
+        },
+        {
+          "name": "Command Line Client",
+          "lastRunTaskName": "Unit Tests",
+          "lastRunAt": "3 hours ago",
+          "status": "success",
+          "isSuccess": true
+        },
+        {
+          "name": "Website",
+          "lastRunTaskName": "Unit Tests",
+          "lastRunAt": "3 hours ago",
+          "status": "success",
+          "isSuccess": true
+        },
+        {
+          "name": "API",
+          "lastRunTaskName": "Unit Tests",
+          "lastRunAt": "3 hours ago",
+          "status": "success",
+          "isSuccess": true
+        }
+      ]
+    },
+    {
+      "name": "Capistrano",
+      "projects": [
+        {
+          "name": "Ruby Gem",
+          "lastRunTaskName": "Unit Tests",
+          "lastRunAt": "3 hours ago",
+          "status": "success",
+          "isSuccess": true
+        },
+        {
+          "name": "Website",
+          "lastRunTaskName": "Unit Tests",
+          "lastRunAt": "3 hours ago",
+          "status": "success",
+          "isSuccess": true
+        }
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "environment": "Test",
+      "project": "Backend",
+      "name": "All Tests",
+      "status": "success"
+    },
+    {
+      "environment": "Default",
+      "project": "Frontend",
+      "name": "Welcome",
+      "status": "success"
+    },
+    {
+      "environment": "Live (S3)",
+      "project": "Style Guide",
+      "name": "Deploy Style Guide to S3",
+      "status": "success"
+    },
+    {
+      "environment": "Default",
+      "project": "Debugging",
+      "name": "Ruby Script as Task",
+      "status": "success"
+    }
+  ]
+}

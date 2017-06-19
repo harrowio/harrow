@@ -1,0 +1,70 @@
+.standard__page {
+  background-color: #F5F4F5;
+  padding: 20px;
+  &__container {
+    margin-left: -15px;
+    margin-right: -15px;
+    @media (max-width: map-get($breakpoint, desktop) - 1 ) {
+      flex-direction: column-reverse;
+    }
+  }
+  &__sidebar {
+    margin: 15px;
+    @media (max-width: map-get($breakpoint, desktop) - 1 ) {
+      margin: 20px 0 0 0;
+      width: inherit;
+    }
+    .navigation {
+      flex-direction: column;
+      a {
+        box-shadow: 0 0 3px 0 rgba(0,0,0,.04);
+        padding: 25px;
+        margin-bottom: 6px;
+        border-radius: 3px;
+        background-color: material-color(white);
+        will-change: color;
+        transition-property: color;
+        transition-duration: .2s;
+        color: material-color(purple, 'A200');
+        text-decoration: none;
+        position: relative;
+        svg {
+          position: absolute;
+          right: 20px;
+          top: 50%;
+          bottom: 0;
+          margin-top: -9px;
+          width: 18px;
+          height: 18px;
+          fill: material-color(purple, 'A200');
+          will-change: transform, color;
+          transition-property: transform, color;
+          transition-duration: .2s;
+        }
+        &:hover {
+          color: material-color(purple, 'A400');
+          svg {
+            fill: material-color(purple, 'A400');
+            transform: translateX(4px);
+          }
+        }
+      }
+    }
+  }
+  &__content {
+    @extend .blog__content;
+    margin: 15px;
+    padding: 20px 50px;
+    box-shadow: 0 0 3px 0 rgba(0,0,0,.04);
+    background-color: material-color(white);
+    color: material-color(purple);
+    border-radius: 3px;
+    overflow: hidden;
+    @media (max-width: map-get($breakpoint, desktop) - 1 ) {
+      margin: 0 -5px;
+      padding: 10px 20px;
+      width: inherit;
+      border-radius: 0;
+    }
+  }
+}

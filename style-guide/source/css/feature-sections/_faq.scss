@@ -1,0 +1,45 @@
+.featureSection__faq {
+  @extend .featureSection;
+  @extend .bgColor__purple;
+  padding: 50px 0;
+
+  a {
+    color: material-color(red);
+  }
+  &__header {
+    h3 {
+      color: material-color-contrast(purple);
+    }
+    h3,
+    a {
+      text-transform: uppercase;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 12px;
+    }
+  }
+  &__questions {
+    margin-left: -5px;
+    margin-right: -5px;
+    @media (max-width: map-get($breakpoint, desktop) - 1 ) {
+      margin: 0;
+      .cell--4Col {
+        width: calc(100%);
+        margin: 0;
+      }
+    }
+    h4 {
+      color: material-color(white);
+      font-weight: 400;
+    }
+  }
+
+  &--white {
+    background-color: material-color(white);
+    color: inherit;
+    border-top: 1px solid rgba(0,0,0,.12);
+    h4 {
+      color: material-color(purple, '300');
+    }
+  }
+}

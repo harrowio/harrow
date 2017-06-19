@@ -1,0 +1,60 @@
+.organization {
+  margin-bottom: 40px;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.projects {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: -10px;
+
+  .project {
+    @include shadow-2dp;
+    width: calc((100% / 3) - 20px);
+    margin: 10px;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    color: inherit;
+    will-change: box-shadow;
+    transition: box-shadow 150ms;
+    &:hover {
+      @include shadow-4dp;
+    }
+    @media (max-width: map-get($breakpoint, tablet) - 1 ) {
+      width: 100%;
+    }
+    > * {
+      padding: 10px;
+    }
+    &__status__icon {
+      svg {
+        width: 22px;
+        height: 22px;
+      }
+    }
+    &__content {
+      font-size: 13px;
+      line-height: 19px;
+      color: material-color(purpleLight);
+      h3 {
+        margin: 0;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 22px;
+        margin-bottom: 10px;
+      }
+      strong {
+        font-weight: 500;
+      }
+    }
+    &--empty {
+      @include emptyCard();
+    }
+  }
+}

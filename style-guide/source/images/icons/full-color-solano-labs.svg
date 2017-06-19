@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="36px" height="36px" viewBox="0 0 36 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>full-color-solano-labs</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="35.7734128 0.3672 0.414848586 0.3672 0.414848586 25.6715785 35.7734128 25.6715785 35.7734128 0.3672"></polygon>
+    </defs>
+    <g id="icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="full-color-solano-labs">
+            <g id="solano-labs-logo-color-CMYK" transform="translate(0.000000, 5.000000)">
+                <g id="Group-11">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Clip-9"></g>
+                    <path d="M21.73968,15.40176 C16.34544,12.71904 7.57824,11.88288 9.036,4.2 C-2.46096,5.60976 -2.23008,19.3056 8.36256,21.31056 C8.22912,19.00176 8.13936,16.84032 8.35968,18.06144 C8.62608,19.54512 9.14304,20.58528 9.91008,21.52176 C9.91344,21.52176 9.91632,21.52224 9.9192,21.52272 C13.53888,25.8912 21.22032,27.29664 24.5688,23.35632 C27.21552,20.24112 25.11072,17.07744 21.73968,15.40176" id="Fill-8" fill="#55B046" mask="url(#mask-2)"></path>
+                    <path d="M28.10064,4.78128 C28.33296,7.57296 28.5072,10.16112 28.21392,8.68848 C27.85536,6.88848 27.22416,5.63712 26.30976,4.52016 C26.29536,4.51968 26.28192,4.5168 26.268,4.51584 C22.6488,0.14784 14.96736,-1.25856 11.61888,2.68224 C8.97216,5.79792 11.07696,8.96112 14.44752,10.63728 C19.84224,13.32 28.60944,14.15568 27.15216,21.83856 C38.5488,20.44176 38.4216,6.9696 28.10064,4.78128" id="Fill-10" fill="#042241" mask="url(#mask-2)"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

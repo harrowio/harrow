@@ -1,0 +1,33 @@
+<div class="layout__container bgColor__purple">
+  <div class="layout container--tight">
+    <div class="layout__content layout--column">
+      <div class="layout__spacer"></div>
+      <header class="layout__header">
+        {{> atoms-logo}}
+      </header>
+      <main>
+        <form class="card card--wizard">
+          <div class="card__content card__content--centered">
+            <h3>Log in to your account</h3>
+            <br>
+            {{>atoms-input-field:tight(type: 'email', label: 'Email', placeholder: 'Your email')}}
+            {{>atoms-input-field:tight(type: 'password', label: 'Password', placeholder: 'Your secure password', hint: '<a href>Forgotten Password?</a>')}}
+          </div>
+          <div class="card__footer">
+            <a href="{{link.templates-app-signup}}" class="btn">New to harrow? Sign Up</a>
+            <div class="layout__spacer"></div>
+            <button class="btn btn--primary">Log In</button>
+          </div>
+        </form>
+      </main>
+      <footer class="footer footer--compact">
+        <div class="copyright">&copy; Harrow Inc.</div>
+        <div class="navigation">
+          <a href="">Terms</a>
+          <a href="">Support</a>
+        </div>
+      </footer>
+      <div class="layout__spacer"></div>
+    </div>
+  </div>
+</div>

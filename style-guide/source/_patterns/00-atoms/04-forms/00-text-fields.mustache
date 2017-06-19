@@ -1,0 +1,15 @@
+<div class="container">
+  {{>atoms-input-field(type: 'text', label: 'Text Input', placeholder: 'Text Input', hint: 'hello world')}}
+  {{>atoms-input-field(type: 'password', label: 'Password', placeholder: 'Password Input')}}
+  {{>atoms-input-field(type: 'email', label: 'email', placeholder: 'Email Input')}}
+  {{>atoms-input-field(type: 'number', label: 'number', placeholder: 'Number Input')}}
+  {{>atoms-input-field(type: 'url', label: 'url', placeholder: 'URL Input')}}
+  {{>atoms-input-field(type: 'search', label: 'Search', placeholder: 'Search Input')}}
+  {{>atoms-radio-field(label: 'Choose')}}
+  {{>atoms-checkbox-field(label: 'Checkbox')}}
+  {{>atoms-select-field(label: 'Options', options: [{name:'First'}])}}
+  {{>atoms-input-field(type: 'text', label: 'Text Input', placeholder: 'Text Input', hint: 'hello world', preInput: {type: 'number', label: 'Port', placeholder: '443'})}}
+  {{>atoms-input-field(type: 'text', label: 'Text Input', placeholder: 'Text Input', required: true)}}
+  {{>atoms-input-field(type: 'text', label: 'Text Input', placeholder: 'Text Input', required: true, hasError: true)}}
+  {{>atoms-checkbox-field(label: 'Checkbox', hasError: true)}}
+</div>

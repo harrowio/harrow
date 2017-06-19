@@ -1,0 +1,61 @@
+<div class="featureSection__pricing--alt">
+  <div class="container">
+    <div class="grid grid--column">
+      <div class="cell cell--center featureSection__pricing--alt__header">
+        <h1>Simple Pricing</h1>
+      </div>
+      <div class="featureSection__pricing--alt__block">
+        {{# plans }}
+
+        <div class="featureSection__pricing--alt__block__item">
+          {{#popular}}
+            <div class="featureSection__pricing--alt__block__popular">
+              Our most popular plan
+            </div>
+          {{/popular}}
+          <div class="featureSection__pricing--alt__block__item__price">
+            {{#title}}
+              {{ title }}
+            {{/title}}
+            {{#icon}}
+              {{> atoms-icon }}
+            {{/icon}}
+          </div>
+          <div class="featureSection__pricing--alt__block__detail">
+            {{#name}}
+              <h4>{{ name }}</h4>
+            {{/name}}
+            {{{ detail }}}
+            {{#contactButton }}
+              <br><br>
+              {{> atoms-button:border(title: "Get in Touch") }}
+            {{/contactButton }}
+          </div>
+        </div>
+        {{/ plans }}
+
+      </div>
+
+      <div class="featureSection__pricing--alt__footer">
+        <div class="featureSection__pricing--alt__toggle">
+          <div class="featureSection__pricing--alt__toggle__item active">
+            Monthly
+          </div>
+          <div class="featureSection__pricing--alt__toggle__button">
+          </div>
+          <div class="featureSection__pricing--alt__toggle__item">
+            Yearly (30% discount)
+          </div>
+        </div>
+        <div class="layout__spacer"></div>
+        <div>
+          <a href="" class="btn btn--primary">Create your account now</a>
+        </div>
+      </div>
+
+      <p>
+        Harrow is <strong>absolutely free</strong> for small projects!
+      </p>
+    </div>
+  </div>
+</div>

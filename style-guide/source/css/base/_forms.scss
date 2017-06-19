@@ -1,0 +1,107 @@
+@include placeholder-color(color(gray));
+
+@mixin frmLabel {
+  color: color(black);
+  display: inline-block;
+  margin-bottom: 5px;
+  max-width: 100%;
+}
+
+@mixin frmInput {
+  border-radius: 3px;
+  border: 1px solid color(gray);
+  box-shadow: inset 0 0 2px color(silver);
+}
+
+input, textarea, select {
+  @include transition(border, 0.3s, ease-out);
+  @include frmInput;
+  background-color: color(white);
+  color: color(black);
+  line-height: normal;
+  padding: 10px;
+  &:focus {
+    outline: none;
+    border: 1px solid color(purple);
+  }
+}
+
+form, .form-group {
+  margin: 0;
+  margin-bottom: 10px;
+  // ToDo, has to be a nicer way of solving this, so that these has-error classes
+  // can be reused without angular.
+  &.has-error {
+    span.has-error {
+      color: color(red);
+    }
+    .field-errors {
+      color: color(red);
+    }
+    input, textarea, select {
+      border: 1px solid color(red);
+    }
+  }
+
+  label {
+    @include frmLabel;
+  }
+
+  abbr[title] {
+    border-bottom: none;
+    color: color(red);
+  }
+
+  input, textarea, select {
+    width: 100%;
+    display: block;
+  }
+
+  input[type=radio], input[type=checkbox] {
+    width: 30px;
+    display: inline-block;
+  }
+
+  &.form-horizontal {
+    input, textarea, select {
+      width: auto;
+      display: inline-block;
+    }
+  }
+}
+
+fieldset {
+  legend {
+    display: none;
+    visibility: hidden;
+  }
+  border: none;
+  &.options {
+    ul {
+      list-style-type: none;
+      padding: 0;
+      li {
+        padding-bottom: 10px;
+      }
+    }
+  }
+}
+
+select:not([multiple]) {
+// PSA: -appearance: none is the secret sauce to styling selects
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%3C!DOCTYPE%20svg%20PUBLIC%20%22-%2F%2FW3C%2F%2FDTD%20SVG%201.1%2F%2FEN%22%20%22http%3A%2F%2Fwww.w3.org%2FGraphics%2FSVG%2F1.1%2FDTD%2Fsvg11.dtd%22%3E%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20%20width%3D%2224px%22%20height%3D%2224px%22%20viewBox%3D%220%200%2024%2024%22%20enable-background%3D%22new%200%200%2024%2024%22%20xml%3Aspace%3D%22preserve%22%3E%3Cg%3E%20%3Cpolygon%20fill%3D%22%23333333%22%20points%3D%2212%2C15.7%205.6%2C9.4%206.4%2C8.6%2012%2C14.3%2017.6%2C8.6%2018.4%2C9.4%20%20%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+form, .form-group {
+  &.has-error{
+    input, textarea, select {
+      &.ng-pristine {
+        @include frmInput;
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "title": "Frequently Asked Questions",
+  "link": {
+    "title": "Visit Knowlage Base",
+    "href": "#"
+  },
+  "questions": [
+    {
+      "question": "Can I run Harrow on my own infrastructure?",
+      "answer": "Harrow is available as a cloud solution, a ​<strong>private</strong> cloud solution, or as a virtual machine package (KVM) you can run on your own infrastructure. Harrow's simplest self-hosted solution relies on nested virtualization; however a separate virtualization host can be easily provisioned to improve performance."
+    },
+    {
+      "question": "Does Harrow support my favorite framework and language runtime?",
+      "answer": "Harrow literally gives each of your tasks a root-VM which can be used to run <strong>any</strong> software. We provide support for common runtimes and frameworks which make builds faster by saving you the trouble of installing certain packages, but anything can be installed in our VMs."
+    },
+    {
+      "question": "What does Harrow need VMs for?",
+      "answer": "We use VMs to provide security and repeatability for your tasks. We have a basic image which contains a lot of common useful tools and packages, and your build script can install anything, start any services, work with Docker or other container technology, connect to external services, join a VPN and more. The VMs are securely destroyed after use, and never re-used."
+    },
+    {
+      "question": "Can Harrow replace Travis, Jenkins, CircleCI, Drone, Semafore, etc?",
+      "answer": "Harrow provides all the features and more of these ​<strong>continuous integration​</strong> (CI) tools. What Harrow provides is a superset of CI functionality. The listed tools might be easier to setup, or fit certain use-cases better, but Harrow offers compelling replacement in most cases."
+    },
+    {
+      "question": "Does Harrow replace tools such as Chef, Puppet, Ansible and Salt?",
+      "answer": "Harrow does not aim to replace these tools, but offers a great platform to automate processes for push-orienteted tools such Ansible, masterless Puppet or Chef-solo by triggering provisioning processes after certain events, such as a successful test run."
+    },
+    {
+      "question": "Does Harrow support Docker?",
+      "answer": "In Harrow you can build your own, or pull down community containers to provide services and servers for  integration tests or as part of your own container build process. You can push and pull containers to and from private registries. Harrow has many plugins which are also Docker containers, so that you can build your own."
+    }
+  ]
+}

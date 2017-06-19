@@ -1,0 +1,75 @@
+{
+  "baseColors": [
+    { "color": "purple"},
+    { "color": "purpleLight"},
+    { "color": "blue"},
+    { "color": "red"},
+    { "color": "yellow" },
+    { "color": "green" },
+    { "color": "grey" },
+    { "color": "white" },
+    { "color": "black" }
+  ],
+  "variants": [
+    {"variant": "50"},
+    {"variant": "100"},
+    {"variant": "200"},
+    {"variant": "300"},
+    {"variant": "400"},
+    {"variant": "500"},
+    {"variant": "600"},
+    {"variant": "700"},
+    {"variant": "800"},
+    {"variant": "900"},
+    {"variant": "A100"},
+    {"variant": "A200"},
+    {"variant": "A400"},
+    {"variant": "A700"}
+  ],
+  "colors": [{
+    "hex": "#463245",
+    "name": "brand_purple"
+  }, {
+    "hex": "#4B334B",
+    "name": "brand_purple_darker"
+  }, {
+    "hex": "#988498",
+    "name": "brand_purple_light"
+  }, {
+    "hex": "#AD9BAD",
+    "name": "brand_purple_lighter"
+  }, {
+    "hex": "#B84A62",
+    "name": "brand_red"
+  }, {
+    "hex": "#F5F4F5",
+    "name": "brand_white"
+  }, {
+    "hex": "#48639C",
+    "name": "brand_blue"
+  }, {
+    "hex": "#a44cc8",
+    "name": "primary"
+  }, {
+    "hex": "#7cb654",
+    "name": "success"
+  }, {
+    "hex": "#f8e71c",
+    "name": "attention"
+  }, {
+    "hex": "#e52c49",
+    "name": "danger"
+  }, {
+    "hex": "#00c5e5",
+    "name": "info"
+  }, {
+    "hex": "#111111",
+    "name": "black"
+  }, {
+    "hex": "#f7f7f7",
+    "name": "silver"
+  }, {
+    "hex": "#aaaaaa",
+    "name": "gray"
+  }]
+}

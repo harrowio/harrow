@@ -1,0 +1,30 @@
+{
+  "linkSections": {
+    "support": {
+      "title": "Support",
+      "links": [
+        {
+          "title": "Knowledge Base",
+          "href": "#"
+        },
+        {
+          "title": "Customer Support",
+          "href": "#"
+        }
+      ]
+    },
+    "developers": {
+      "title": "Developers",
+      "links": [
+        {
+          "title": "API Documentation",
+          "href": "#"
+        },
+        {
+          "title": "Command line client",
+          "href": "#"
+        }
+      ]
+    }
+  }
+}

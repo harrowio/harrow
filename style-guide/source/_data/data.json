@@ -1,0 +1,530 @@
+{
+  "title" : "Pattern Lab",
+  "htmlClass": "pl",
+  "bodyClass": "body",
+  "img": {
+    "landscape-4x3": {
+      "src": "../../images/fpo_4x3.png",
+      "alt": "4x3 Image"
+    },
+    "landscape-16x9": {
+      "src": "../../images/fpo_16x9.png",
+      "alt": "16x9 Image"
+    },
+    "square": {
+      "src": "../../images/fpo_square.png",
+      "alt": "Square Thumbnail"
+    },
+    "avatar" : {
+      "src" : "../../images/fpo_avatar.jpg",
+      "alt" : "Person Name"
+    },
+    "rectangle": {
+      "src": "http://placeimg.com/400/300/tech",
+      "alt": "Rectangle"
+    }
+  },
+  "headline" : {
+    "short" : "Lorem ipsum dolor sit (37 characters)",
+    "medium" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. (72 characters)"
+  },
+  "excerpt" : {
+    "short" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+    "medium" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "long" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  },
+  "description" : "So, setting about it as methodically as men might smoke out a wasps' nest, the Martians spread this strange stifling vapour over the Londonward country. The horns of the crescent slowly moved apart, until at last they formed a line from Hanwell to Coombe and Malden. All night through their destructive tubes advanced.",
+  "url" : "#",
+  "name" : {
+    "first": "Lacy",
+    "firsti": "L",
+    "middle": "Tommie",
+    "middlei": "T",
+    "last": "Way",
+    "lasti": "W"
+  },
+  "year" : {
+    "long": "2013",
+    "short": "13"
+  },
+  "month" : {
+    "long": "February",
+    "short": "Feb",
+    "digit": "02"
+  },
+  "dayofweek" : {
+    "long": "Monday",
+    "short": "Mon"
+  },
+  "day" : {
+    "long": "10",
+    "short": "10",
+    "ordinal": "th"
+  },
+  "hour" : {
+    "long": "01",
+    "short": "1",
+    "military": "13",
+    "ampm": "pm"
+  },
+  "minute" : {
+    "long": "20",
+    "short": "20"
+  },
+  "seconds" : "31",
+  "author" : "Harrow Team",
+  "hero": true,
+  "danger" : false,
+  "touts" : [
+    { },
+    { },
+    { }
+  ],
+  "latest-posts" : [
+    { },
+    { },
+    { },
+    { },
+    { }
+  ],
+  "environments" : [
+    {
+      "name": "Staging",
+      "variables": [
+        {"name": "HARROW_ENV",
+        "value": "staging"},
+        {"name": "USE_DOCKER",
+        "value": true}
+      ]
+    },
+    {
+      "name": "Development",
+      "variables": [
+        {"name": "HARROW_ENV",
+        "value": "development"}
+      ]
+    }
+  ],
+  "pending":  {"operationIcon": "fa-clock-o",                "operationStatus": "pending"},
+  "running":  {"operationIcon": "fa-circle-o-notch fa-spin", "operationStatus": "running"},
+  "success":  {"operationIcon": "fa-check-square", "operationStatus": "success"},
+  "failed":   {"operationIcon": "fa-times", "operationStatus": "failed"},
+  "timedout": {"operationIcon": "fa-exclamation-circle", "operationStatus": "timedout"},
+  "fatalerr": {"operationIcon": "fa-ambulance", "operationStatus": "fatalerr"},
+  "article": {
+    "title": "Release Announcement October 2015",
+    "author": "Lee Hambley",
+    "pubDate": "20th October 2015",
+    "body": "<p>We’ve been hard at work building the latest round of features for Harrow, consulting with our customers and friends to find out what is most important, and to make it easier to get started. We missed a release announcement in September as we had a couple of long-running tasks which we wanted to get finished before announcing!</p> <h2>Setup tool</h2> <p>We implemented a setup tool to help get people up and running, the tool guides you through setting up an organization and a project, whilst adding a repository, and allowing you to pick from some sample tasks that might be suitable for your stack.</p> <p>We’re continuing to roll out improvements to the setup tool to pick up your repositories from your OAuth connected Git hosts if you have one, to simplify the process even more.</p> <p><img class=\"aligncenter wp-image-1496 size-large\" src=\"https://harrow.io/app/uploads/2015/10/setup-tool1-1024x535-1024x535.png\" alt=\"Setup Tools\" width=\"1024\" height=\"535\"></p> <h2>Operation instrumentation</h2> <p>We added instrumentation to the operation setup procedure to let you know what our backend is doing to get your task a slot, and to get it running as quickly as possible. The instrumentation shows how long each stage of the setup for the operation host machine takes and lets you know that things are working even before your own operation logs start to become visible when your task actually <em>starts</em>.</p> <p> </p> <h2><img class=\"aligncenter size-full wp-image-1498\" src=\"https://harrow.io/app/uploads/2015/10/operation-instrumentation.gif\" alt=\"operation-instrumentation\" width=\"748\" height=\"252\"></h2> <h2>Faster operation startup time</h2> <p>Based on the instrumentation we saw a couple of low-hanging fruit, shortening retry cool-off periods, and compressing some of the assets we upload to support your scripts, these are baked into the base image now, and the cooling-off period if looking for an operation host failed is shortened, this cuts around 100 seconds of the worst starting slow operations, for most people this is a <strong>35-50 second improvement in startup time</strong>.</p> <h2>Operation header improvements</h2> <p>We now display a tonne of metadata on the operation header! The header now includes:</p> <ul> <li>The version of each of the project’s repositories that were checked out</li> <li>The new commits in each repository since the previous run of this operation</li> <li>The aforementioned operation instrumentation, there to let you know that the operation is starting, even if you haven’t seen log output yet.</li> </ul> <p>The operation header now has a strong colour association with the health of your operation, from pending (purple) through running (yellow), eventually landing in one of black, red or green for fatally failed, normal failure and success respectively.</p> <p>If you see a black build it can mean something infrastructure failed. More often than not however the setup phase failed, and the page will give you hints about what can have gone wrong, the most typical failure is authentication or network failure when trying to checkout repositories.</p> <p> </p> <p><img class=\"aligncenter size-large wp-image-1499\" src=\"https://harrow.io/app/uploads/2015/10/operation-status-header-1024x298.png\" alt=\"operation-status-header\" width=\"1024\" height=\"298\"></p> <h2>Handling Github webhooks</h2> <p>When sending a webhook from Github to Harrow to trigger an operation, the webhook body is now parsed and the correct branch is checked out of the corresponding repositories, this makes testing pull requests and branches really really easy. The Github integration “just works”, but we documented the details <a href=\"http://kb.harrow.io/webhooks/github.html\" target=\"_blank\">here</a> if you’d like to know more.</p> <p>The webhook body, is also now available on the disk in the container, if you want to post files into Harrow to trigger a build, for example (we do this to post a file from one build via curl to trigger another with the result) this is a great convenience, you can read more about this technique in <a href=\"http://kb.harrow.io/webhooks/other.html\" target=\"_blank\">the “Other” section of webhooks in the knowledge base</a>.</p> <h2><a href=\"http://kb.harrow.io/\" target=\"_blank\">Knowledge base</a> released!</h2> <p>The knowledge base is a continuous work in progress, we’ve done a first-pass to get as much of the essential up-and-running stuff in there, but we plan on making our knowledge base the canonical source of dev-ops tips, tricks and learning resources on the web. Click <a href=\"http://kb.harrow.io/\" target=\"_blank\">here</a>.</p> <p>The knowledge base is open source, and built with Sphinx which is a wonderful tool for technical documentation, even outside Python projects, as a code-focused static site generator we couldn’t recommend it highly enough. If you have changes or suggestions for the knowledge base, <a href=\"https://bitbucket.org/harrowio/kb\" target=\"_blank\">check out the source</a> and send us a pull request.</p> <h2>Improvements to log tailing</h2> <p>We’ve improved the speed, and colour handling of the log renderer, as well as having worked a little bit on the font spacing and sizing, to make them easier on the eye, whilst performing better. We have another improvement rolling out soon that’ll mean you don’t have to watch the logs “replay” when reloading an old operation.</p> <p> </p> <h2><img class=\"aligncenter size-large wp-image-1500\" src=\"https://harrow.io/app/uploads/2015/10/improved-log-tailing-1024x381.png\" alt=\"improved-log-tailing\" width=\"1024\" height=\"381\"></h2> <h2>Operation trigger reasons</h2> <p>Operations now include some metadata about how they were started, why and where applicable, by whom.</p> <p>As operations on Harrow can be started by hand, via webhooks, schedules or triggered by changes to the Git repository, it’s really important to see what triggered an operation at a glance.</p> <p>This has proven to be really useful to see not only, for example, that someone has triggered a task by hand because the previous one failed for some external reason perhaps, but also to see that your workmates are already on it if you had a bad build, or that they’ve taken steps to mitigate the problem.</p> <p><strong>Heads-up!</strong> This feature isn’t visible to everyone yet, but it will appear for you before Friday October 24th at the latest as we close-up the incremental roll-out.</p> <p> </p> <h2><img class=\"aligncenter size-full wp-image-1501\" src=\"https://harrow.io/app/uploads/2015/10/trigger-reason.png\" alt=\"trigger-reason\" width=\"375\" height=\"111\"></h2> <h2>One-click signup using Github</h2> <p>We’ve allowed connecting to Github using OAuth for a while via your settings page, and various parts of the application prompt you to sign up with Github incase you want to use the repository import tool, or have an easier time fixing repository deploy keys. Now we’re extending this to allow login for Github using OAuth.</p> <p>Here’s the rub, if you signup with OAuth you don’t have a Harrow password, but the cool thing is you can still use the TOTP multi-factor authentication to secure your account!</p> <p> </p> <h2><a href=\"https://harrow.io/app/uploads/2015/10/login-with-github.png\"><img class=\"aligncenter size-large wp-image-1502\" src=\"https://harrow.io/app/uploads/2015/10/login-with-github-1024x352.png\" alt=\"login-with-github\" width=\"1024\" height=\"352\"></a></h2> <h2>Repository metadata</h2> <p>We’ve built a concept of metadata for repositories, this is the basis for a lot of the logs you see now on the operation pages, and for the forthcoming “git events” triggers, which will allow to start tasks in reaction to new or changed commits, branches or tags in your repositories.</p> <p>We also plan to use this metadata to help you get your Harrow account ready to use by scanning for common languages, frameworks and tools to suggest tasks that are already customized to you and your environment.</p> <p>We’re currently trailing some of these features with some users and once they are stable enough we’ll release them to everyone!</p> <p> </p> <h2><img class=\"aligncenter size-large wp-image-1503\" src=\"https://harrow.io/app/uploads/2015/10/repository-metadata-1024x497.png\" alt=\"repository-metadata\" width=\"1024\" height=\"497\"></h2> <h2>Overall improved styling</h2> <p>We don’t have a dedicated design person on staff, but we’re hiring, the latest round of UI overhaul trends towards the direction we want to take in the future, but we have more improvements incoming.</p> <p><img class=\"aligncenter size-large wp-image-1504\" src=\"https://harrow.io/app/uploads/2015/10/overall-better-styling-1024x715.png\" alt=\"overall-better-styling\" width=\"1024\" height=\"715\"></p> <p>Keep your eyes open, subscribe to our RSS feed or create an account to stay informed about the improvements we’re rolling out over the next few weeks!</p> <p></p><center><a class=\"btn btn-cta btn-lg\" href=\"https://www.app.harrow.io/#/a/signup\">Sign Up Now<br> <small>30 days free trial – no credit card required</small></a><center></center></center><p></p>"
+  },
+  "headerLinks": [
+    {
+      "title": "Pricing",
+      "href": "link.templates-pricing"
+    },
+    {
+      "title": "Blog",
+      "href": "link.templates-blog"
+    },
+    {
+      "title": "Sign In",
+      "href": "#",
+      "styleModifier": "semiTransparent layout__header--staticOnly"
+    },
+    {
+      "title": "Knowlage Base",
+      "href": "#",
+      "styleModifier": " layout__header--fixedOnly"
+    },
+    {
+      "title": "Start your 14 day free trial",
+      "href": "#",
+      "styleModifier": "primary layout__header--fixedOnly"
+    }
+  ],
+  "footerSections": [
+    {
+      "links": [
+        {
+          "href": "#",
+          "title": "API Documentation"
+        },
+        {
+          "href": "#",
+          "title": "Command line client"
+        }
+      ],
+      "title": "Developers"
+    },
+    {
+      "links": [
+        {
+          "href": "#",
+          "title": "Knowledge Base"
+        },
+        {
+          "href": "#",
+          "title": "Customer Support"
+        }
+      ],
+      "title": "Support"
+    }
+  ],
+
+  "sections": {
+    "pricing": {
+      "description": "Harrow is <strong>free</strong> for public repositories and projects without collaborators (performance restricted).",
+      "plans": [
+        {
+          "name": "Basic",
+          "title": "$29",
+          "detail": "2 Users <br>Additional users: $9.90 <br>Basic Performance <br>Cloud Platform"
+        },
+        {
+          "name": "Small Team",
+          "title": "$59",
+          "detail": "5 Users <br>Additional users: $14.90 <br>Good Performance <br>Cloud Platform",
+          "popular": true
+        },
+        {
+          "name": "Big Team",
+          "title": "$129",
+          "detail": "10 Users <br>Additional users: $29.90 <br>Good Performance <br>Cloud Platform"
+        },
+        {
+          "icon": "icon-enterprise",
+          "name": "Enterprise",
+          "title": "",
+          "detail": "Neet someting special?<br>Self-hosted",
+          "contactButton": true
+        }
+      ],
+      "inclusions": {
+        "title": "All plans include",
+        "description": "You can setup triggers to run your tasks in response to code changes, webhooks, schedules or other tasks.",
+        "keyPoints": [
+          {
+            "icon": "icon-root",
+            "title": "Full root access",
+            "desc": "Some description for this item."
+          },
+          {
+            "icon": "icon-support",
+            "title": "Support and consultation",
+            "desc": "Some description for this item."
+          },
+          {
+            "icon": "icon-api",
+            "title": "Full API access",
+            "desc": "Some description for this item."
+          },
+          {
+            "icon": "icon-repositories",
+            "title": "Connect multiple repositories",
+            "desc": "Some description for this item."
+          },
+          {
+            "icon": "icon-terminal",
+            "title": "SSH access to build VM's",
+            "desc": "Some description for this item."
+          },
+          {
+            "icon": "icon-free",
+            "title": "14 day free trial",
+            "desc": "Some description for this item."
+          }
+        ]
+      }
+    },
+    "faq": {
+      "link": {
+        "href": "#",
+        "title": "Visit Knowlage Base"
+      },
+      "questions": [
+        {
+          "answer": "Harrow is available as a cloud solution, a ​<strong>private</strong> cloud solution, or as a virtual machine package (KVM) you can run on your own infrastructure. Harrow's simplest self-hosted solution relies on nested virtualization; however a separate virtualization host can be easily provisioned to improve performance.",
+          "question": "Can I run Harrow on my own infrastructure?"
+        },
+        {
+          "answer": "Harrow literally gives each of your tasks a root-VM which can be used to run <strong>any</strong> software. We provide support for common runtimes and frameworks which make builds faster by saving you the trouble of installing certain packages, but anything can be installed in our VMs.",
+          "question": "Does Harrow support my favorite framework and language runtime?"
+        },
+        {
+          "answer": "We use VMs to provide security and repeatability for your tasks. We have a basic image which contains a lot of common useful tools and packages, and your build script can install anything, start any services, work with Docker or other container technology, connect to external services, join a VPN and more. The VMs are securely destroyed after use, and never re-used.",
+          "question": "What does Harrow need VMs for?"
+        },
+        {
+          "answer": "Harrow provides all the features and more of these ​<strong>continuous integration​</strong> (CI) tools. What Harrow provides is a superset of CI functionality. The listed tools might be easier to setup, or fit certain use-cases better, but Harrow offers compelling replacement in most cases.",
+          "question": "Can Harrow replace Travis, Jenkins, CircleCI, Drone, Semafore, etc?"
+        },
+        {
+          "answer": "Harrow does not aim to replace these tools, but offers a great platform to automate processes for push-orienteted tools such Ansible, masterless Puppet or Chef-solo by triggering provisioning processes after certain events, such as a successful test run.",
+          "question": "Does Harrow replace tools such as Chef, Puppet, Ansible and Salt?"
+        },
+        {
+          "answer": "In Harrow you can build your own, or pull down community containers to provide services and servers for  integration tests or as part of your own container build process. You can push and pull containers to and from private registries. Harrow has many plugins which are also Docker containers, so that you can build your own.",
+          "question": "Does Harrow support Docker?"
+        }
+      ],
+      "title": "Frequently Asked Questions"
+    },
+    "tools": {
+      "desc": "You can setup triggers to run your tasks in response to code changes, webhooks, schedules or other tasks.",
+      "outputs": {
+        "keyPoints": [
+          {
+            "desc": "Get alerted by email, slack, flowdock, etc",
+            "icon": "icon-output",
+            "title": "Notifications"
+          },
+          {
+            "desc": "Inform your applications via hooks",
+            "icon": "icon-output",
+            "title": "WebHook"
+          },
+          {
+            "desc": "Trigger other tasks on completion",
+            "icon": "icon-output",
+            "title": "Harrow Tasks"
+          }
+        ],
+        "title": "Outputs"
+      },
+      "tasks": {
+        "keyPoints": [
+          {
+            "desc": "Run tasks on an environment",
+            "icon": "icon-environments",
+            "title": "Development"
+          },
+          {
+            "desc": "Run your unit tests",
+            "icon": "icon-tasks",
+            "title": "Unit Tests"
+          }
+        ],
+        "title": "Tasks"
+      },
+      "title": "Your Existing Tools. Improved!",
+      "triggers": {
+        "keyPoints": [
+          {
+            "desc": "Set a date and time",
+            "icon": "icon-triggers",
+            "title": "Schedule"
+          },
+          {
+            "desc": "Use your web hooks",
+            "icon": "icon-triggers",
+            "title": "Webhook"
+          },
+          {
+            "desc": "Tasks triggering tasks",
+            "icon": "icon-triggers",
+            "title": "Harrow Tasks"
+          },
+          {
+            "desc": "You clicking the button",
+            "icon": "icon-triggers",
+            "title": "Manually"
+          },
+          {
+            "desc": "Changes in your repo",
+            "icon": "icon-triggers",
+            "title": "Code Change"
+          }
+        ],
+        "title": "Triggers"
+      }
+    },
+    "upAndRunning": {
+      "desc": "You can setup triggers to run your tasks in response to code changes, webhooks, schedules or other tasks.",
+      "keyPoints": [
+        {
+          "desc": "Pellentesque in rutrum felis, a dignissim arcu. Curabitur porttitor aliquam quam, vel interdum turpis mollis egestas.",
+          "svgImage": "/images/up-and-running/tasks.svg",
+          "title": "Create your tasks"
+        },
+        {
+          "desc": "Pellentesque in rutrum felis, a dignissim arcu. Curabitur porttitor aliquam quam, vel interdum turpis mollis egestas.",
+          "svgImage": "/images/up-and-running/triggers.svg",
+          "title": "Define your triggers"
+        },
+        {
+          "desc": "Pellentesque in rutrum felis, a dignissim arcu. Curabitur porttitor aliquam quam, vel interdum turpis mollis egestas.",
+          "svgImage": "/images/up-and-running/users.svg",
+          "title": "Invite your team"
+        },
+        {
+          "desc": "Set as many tasks and triggers as you need, then sit back knowing your scripts are being run and your team knows about them.",
+          "svgImage": "/images/up-and-running/repeat.svg",
+          "title": "And repeat&hellip;"
+        }
+      ],
+      "title": "Get Up and Running in Under a Minute"
+    },
+    "useCases": {
+      "title": "You can use harrow to:",
+      "useCases": [
+        {
+          "case": "Run the unit tests of a JavaScript application and trigger the staging deployment if sucessful.",
+          "example": "#onFrontendRunUnitTestsAndDeployToStaging"
+        },
+        {
+          "case": "Deploy the JavaScript application to Amazon S3 after building it with Gulp.",
+          "example": "#deployFrontendToProduction"
+        },
+        {
+          "case": "Intergration test both repositories, and trigger the deploy to staging when successful.",
+          "example": "#onFrontendAndBackendRunUnitTestsAndAcceptenceTestsAndDeployToStaging"
+        },
+        {
+          "case": "Deploy a Ruby on Rails application over SSH to the root server.",
+          "example": "#deployBackendToProduction"
+        }
+      ]
+    },
+    "worksEverywhere": {
+      "leftSide": {
+        "desc": "You can setup triggers to run your tasks in response to code changes, webhooks, schedules or other tasks.",
+        "keyPoints": [
+          {
+            "desc": "Run your tasks in real VM's with Docker.",
+            "icon": "icon-root",
+            "title": "Full root access"
+          },
+          {
+            "desc": "Work with any git hosting provider.",
+            "icon": "icon-git",
+            "title": "Free Choice"
+          },
+          {
+            "desc": "Intergration tests across several repositories.",
+            "icon": "icon-repositories",
+            "title": "Flexibility"
+          },
+          {
+            "desc": "Stop worrying about credentials and keys.",
+            "icon": "icon-lock",
+            "title": "Flawless Security"
+          }
+        ],
+        "title": "Work the way you want to"
+      },
+      "rightSide": {
+        "desc": "You can use Harrow wherever you want. Whether it be in the browser, on mobile or using your Command line Client.",
+        "keyPoints": [
+          {
+            "desc": "Run your tasks in real VM's with Docker.",
+            "icon": "icon-browser",
+            "title": "Web"
+          },
+          {
+            "desc": "Work with any git hosting provider.",
+            "icon": "icon-phone",
+            "title": "Mobile"
+          },
+          {
+            "desc": "Intergration tests across several repositories.",
+            "icon": "icon-terminal",
+            "title": "Command Line Client"
+          },
+          {
+            "desc": "Stop worrying about credentials and keys.",
+            "icon": "icon-api",
+            "title": "API"
+          }
+        ],
+        "title": "Work where you want"
+      }
+    }
+  },
+  "accountLinks": [
+    {
+      "name": "Your Settings"
+    },
+    {
+      "name": "Feedback"
+    },
+    {
+      "name": "Sign Out"
+    }
+  ],
+  "orgs": [
+    {
+      "name": "Harrow Inc",
+      "projects": [
+        {
+          "name": "Web App",
+          "status": "failed"
+        },
+        {
+          "name": "Website"
+        },
+        {
+          "name": "Command Line Client"
+        },
+        {
+          "name": "API"
+        }
+      ]
+    },
+    {
+      "name": "Capistrano",
+      "projects": [
+        {
+          "name": "Ruby Gems"
+        },
+        {
+          "name": "Documentation"
+        }
+      ]
+    },
+    {
+      "name": "Ruby on Rails",
+      "projects": [
+        {
+          "name": "Ruby Gems"
+        },
+        {
+          "name": "Documentation"
+        },
+        {
+          "name": "Website"
+        },
+        {
+          "name": "37 Signals Tests"
+        }
+      ]
+    }
+  ],
+  "wizard": {
+    "links": [
+      {
+        "icon": "icon-complete",
+        "name": "Setup my account",
+        "desc": "Some small sub text",
+        "href": "link.templates-wizard-intro"
+      },
+      {
+        "icon": "icon-environments",
+        "name": "Connect my code",
+        "desc": "Some small sub text",
+        "href": "link.templates-wizard-connect"
+      },
+      {
+        "icon": "icon-tasks",
+        "name": "Setup my tasks",
+        "desc": "Some small sub text",
+        "href": "link.templates-wizard"
+      },
+      {
+        "icon": "icon-user",
+        "name": "Invite my team",
+        "desc": "Some small sub text",
+        "href": "link.templates-app-wizard"
+      }
+    ]
+  }
+}

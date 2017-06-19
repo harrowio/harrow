@@ -1,0 +1,21 @@
+<div class="featureSection__useCases">
+  <div class="container__basic">
+    <div class="grid">
+      <div class="cell cell--5Col featureSection__useCases__cases">
+        <h3>{{title}}</h3>
+        <ul>
+          {{# useCases }}
+            <li class="featureSection__useCases__case" data-use-case-example="{{ example }}">
+              {{ case }}
+              {{>atoms-icon(icon: 'icon-chevron-right')}}
+            </li>
+          {{/ useCases }}
+        </ul>
+        <p>and much more&hellip;</p>
+      </div>
+      <div class="cell cell--7Col featureSection__useCases__diagram">
+        <div class="use-cases-diagram" data-svg-src="/images/use-cases-diagram.svg"></div>
+      </div>
+    </div>
+  </div>
+</div>

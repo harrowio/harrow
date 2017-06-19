@@ -1,0 +1,81 @@
+@import "colors";
+.layout__container {
+  @include scrollbars(12px, material-color(grey, '300'), material-color(grey, '100'));
+
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.layout {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  overflow: auto;
+  transition: padding .25s;
+  &--column {
+    flex-direction: column;
+  }
+  &--row {
+    flex-direction: row;
+  }
+}
+.layout__content {
+  @include scrollbars(12px, material-color(grey, '300'), material-color(grey, '100'));
+  display: flex;
+  flex: 1 1 auto;
+  z-index: 1;
+  -webkit-overflow-scrolling: touch;
+
+  .container {
+    width: 100%;
+  }
+}
+.layout-spacer, // NOTE: deprecated ruleName, use .layout__spacer.
+.layout__spacer {
+  flex-grow: 1;
+}
+.container,
+.container__basic {
+  max-width: map-get($container, lg);
+  margin: 0 auto;
+  @media (max-width: map-get($breakpoint, tablet) - 1 ) {
+    iframe, img {
+      max-width: 100%;
+    }
+  }
+}
+.container--medium {
+  max-width: map-get($container, md);
+  margin: 0 auto;
+}
+.container--small,
+.container--tight {
+  .layout__header {
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    min-height: 110px;
+    transition-property: none;
+    fill: material-color(white);
+    svg {
+      fill: material-color(white);
+    }
+  }
+}
+.container--small {
+  max-width: map-get($container, sm);
+  height: auto;
+  overflow: initial;
+}
+.container--tight {
+  max-width: map-get($container, tight);
+  height: auto;
+  overflow: initial;
+}

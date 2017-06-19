@@ -1,0 +1,14 @@
+.status__log {
+  @include monospace-font();
+  width: 100%;
+  font-size: 12px;
+  line-height: 16px;
+  td,th {
+    padding: 0;
+  }
+  td:last-child {
+    width: 100px;
+    white-space: nowrap;
+    text-align: right;
+  }
+}

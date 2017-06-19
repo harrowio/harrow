@@ -1,0 +1,43 @@
+	<!-- End of Pattern -->
+
+	<!--
+		Remember that patterns are displayed from two-levels deep (e.g. patterns/patterntype-patternsubtype-patternname/patterntype-patternsubtype-patternname.html)
+		Therefore all calls to assets should have the ../../ in order to work in an apache-less environment
+	-->
+
+	<script src="../../js/helpers.js"></script>
+	<script src="../../js/header.js"></script>
+	<script src="../../js/sidebar.js"></script>
+	<script src="../../js/carousel.js"></script>
+	<script src="../../js/feature-section-use-cases.js"></script>
+	<script src="../../js/feature-section-pricing.js"></script>
+	<script src="../../js/feature-section-pricing-alt-july-2016.js"></script>
+	<script src="../../js/magnify.js"></script>
+
+	<!-- DO NOT MODIFY -->
+	<script>
+		// handle injection of items from PHP
+		var patternPartial = "{{ patternGroup }}-{{ patternName }}";
+		var lineage = [{{{ lineage }}}];
+		var lineageR = [{{{ lineageR }}}];
+		var patternState = "{{patternState}}";
+		var baseurl = "{{{baseurl}}}";
+		var cssEnabled = false; //TODO
+	</script>
+
+	<script type="text/html" id="sg-pattern-html">
+{{ patternHTML }}
+	</script>
+
+	<script type="text/html" id="sg-pattern-css">
+{{ patternCSS }}
+	</script>
+	<script src="../../styleguide/js/vendor/jwerty.js"></script>
+	<script src="../../styleguide/js/postmessage.js"></script>
+	<script src="../../data/annotations.js"></script>
+	<script src="../../styleguide/js/annotations-pattern.js"></script>
+	<script src="../../styleguide/js/code-pattern.js"></script>
+	<!-- /DO NOT MODIFY -->
+
+</body>
+</html>

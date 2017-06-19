@@ -1,0 +1,54 @@
+<div class="layout__container layout--fixedSidebar">
+  {{> organisms-sidebar }}
+  <div class="layout layout--column layout--{{environmentColor}}">
+    {{> organisms-header-app }}
+    <main class="layout__content">
+      <div class="app__container">
+
+        <div class="app__content project__tasks">
+          <div class="tasks">
+            {{#tasks}}
+              {{>molecules-task-card}}
+            {{/tasks}}
+            {{>molecules-task-card-empty}}
+          </div>
+        </div>
+        <div class="app__content project__activity">
+          <div class="grid grid--marginWide">
+            <!-- #repositories -->
+            <div class="cell cell--4Col">
+              <div class="card">
+                <div class="card__header">
+                  <div class="card__header__title">
+                    Repositories
+                  </div>
+                  <div class="card__header__action">
+                    <a href="#" class="btn">{{>atoms-icon(icon:'icon-add')}}</a>
+                  </div>
+                </div>
+                {{#repositories}}
+                  {{>molecules-repository-status}}
+                {{/repositories}}
+              </div>
+            </div>
+            <!-- /repositories -->
+
+            <!-- #activity -->
+            <div class="cell cell--8Col">
+              <div class="card card--headerOnly">
+                <div class="card__header">
+                  Recent Activity
+                </div>
+              </div>
+              {{#activity}}
+                {{>molecules-activity}}
+              {{/activity}}
+            </div>
+            <!-- /activity -->
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+{
+  "title": "Get Up and Running in Under a Minute",
+  "desc": "You can setup triggers to run your tasks in response to code changes, webhooks, schedules or other tasks.",
+  "keyPoints": [
+    {
+      "svgImage": "/images/up-and-running/tasks.svg",
+      "title": "Create your tasks",
+      "desc": "Pellentesque in rutrum felis, a dignissim arcu. Curabitur porttitor aliquam quam, vel interdum turpis mollis egestas."
+    },
+    {
+      "svgImage": "/images/up-and-running/triggers.svg",
+      "title": "Define your triggers",
+      "desc": "Pellentesque in rutrum felis, a dignissim arcu. Curabitur porttitor aliquam quam, vel interdum turpis mollis egestas."
+    },
+    {
+      "svgImage": "/images/up-and-running/users.svg",
+      "title": "Invite your team",
+      "desc": "Pellentesque in rutrum felis, a dignissim arcu. Curabitur porttitor aliquam quam, vel interdum turpis mollis egestas."
+    },
+    {
+      "svgImage": "/images/up-and-running/repeat.svg",
+      "title": "And repeat&hellip;",
+      "desc": "Set as many tasks and triggers as you need, then sit back knowing your scripts are being run and your team knows about them."
+    }
+  ]
+}

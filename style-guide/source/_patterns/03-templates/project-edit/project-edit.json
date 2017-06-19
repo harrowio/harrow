@@ -1,0 +1,35 @@
+{
+  "links": [
+    {
+      "icon": "icon-repositories",
+      "name": "Repositories",
+      "desc": "something about triggers.",
+      "href": "link.templates-project-edit-triggers"
+    },{
+      "icon": "icon-triggers",
+      "name": "Triggers",
+      "desc": "something about triggers.",
+      "href": "link.templates-project-edit-triggers"
+    },{
+      "icon": "icon-environments",
+      "name": "Environments",
+      "desc": "something about environments.",
+      "href": "link.templates-project-edit-environments"
+    },{
+      "icon": "icon-tasks",
+      "name": "Tasks",
+      "desc": "something about tasks.",
+      "href": "link.templates-project--edittasks"
+    },{
+      "icon": "icon-output",
+      "name": "Notifications",
+      "desc": "something about notifications.",
+      "href": "link.templates-project-edit-notifications"
+    },{
+      "icon": "icon-user",
+      "name": "People",
+      "desc": "something about team.",
+      "href": "link.templates-project-edit-users"
+    }
+  ]
+}

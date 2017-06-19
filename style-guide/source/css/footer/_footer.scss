@@ -1,0 +1,72 @@
+.footer {
+  @extend .bgColor__purple;
+  padding: 36px 10px;
+  border-top: 1px solid rgba(255,255,255,.12);
+  font-size: 13px;
+
+  svg {
+    fill: #fff;
+  }
+
+  h4 {
+    @extend .color__contrastLight;
+    color: material-color-contrast(black, secondary);
+    font-weight: 500;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  a {
+    color: material-color-contrast(purple, secondary);
+    text-decoration: none;
+    &:hover {
+      color: material-color-contrast(purple);
+    }
+  }
+
+  .navigation {
+    flex-direction: column;
+  }
+
+  &__logo {
+    display: inline-block;
+  }
+
+  &--compact {
+    background-color: transparent;
+    font-size: 12px;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: row;
+    border: none;
+    a {
+      font-weight: normal;
+    }
+    .copyright {
+      flex-grow: 1;
+      min-width: 80px;
+    }
+    .navigation {
+      flex-direction: row;
+      overflow: inherit;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      margin-right: -10px;
+      a {
+        padding: 0 10px;
+      }
+    }
+    @media (max-width: map-get($breakpoint, tablet) - 1 ) {
+      padding: 20px 10px;
+      margin-bottom: 110px;
+    }
+  }
+}
+
+@media (max-width: map-get($breakpoint, tablet) - 1 ) {
+  .footer__middleSection {
+    flex-direction: column-reverse;
+    > .cell:first-child {
+      margin-top: 30px;
+    }
+  }
+}

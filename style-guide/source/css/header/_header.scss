@@ -1,0 +1,131 @@
+@import 'tab';
+@import 'breadcrumbs';
+
+.layout__header{
+  @extend .bgColor__purple;
+  @extend .grid;
+  flex: 0 0 auto;
+  min-height: 60px;
+  padding: 0 10px;
+  align-items: center;
+  width: 100%;
+
+  transition-property: min-height, background-color, box-shadow;
+  transition-duration: 0.25s;
+
+  &__container {
+    @extend .container__basic;
+    @extend .cell;
+    @extend .cell--middle;
+    @extend .grid;
+    flex-direction: row;
+    align-items: center;
+    svg {
+      fill: material-color(white);
+    }
+    .navigation {
+      margin: 10px 0;
+    }
+    .btn {
+      text-transform: none;
+      font-weight: 400;
+      color: material-color(white);
+    }
+  }
+
+  &__expander {
+    background-color: material-color(purple);
+    display: none;
+    height: 90px;
+    @media (max-width: map-get($breakpoint, desktop) - 1 ) {
+      height: 110px;
+    }
+  }
+
+  &--fixed {
+    @extend .bgColor__white;
+    @include shadow-4dp();
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 999;
+
+    svg {
+      fill: material-color(purple);
+    }
+
+    .btn:not(.btn--primary) {
+      color: material-color(purple);
+    }
+
+    + .layout__header__expander {
+      display: block;
+    }
+    .layout__header--fixedOnly {
+      display: block;
+    }
+    .layout__header--staticOnly {
+      display: none;
+    }
+  }
+
+  &--hero {
+    min-height: 75px;
+  }
+  &--compact {
+    min-height: 65px;
+    .layout__headerRow{
+      height: 65px;
+      max-width: initial;
+    }
+    .layout__sidebarButton{
+      height: 65px;
+      width: 65px;
+    }
+  }
+  &--app {
+    @include shadow-2dp();
+    z-index: 999;
+    @extend .bgColor__white;
+    border-top: 2px solid material-color(red);
+    padding: 0 30px;
+    transition: none;
+    > * {
+      margin: 0 10px;
+    }
+  }
+  &--heavy {
+    position: fixed;
+    min-height: 90px;
+    + .layout__header__expander {
+      display: block;
+    }
+  }
+
+  &--fixedOnly {
+    display: none;
+  }
+}
+
+// Mobile
+@media (max-width: map-get($breakpoint, desktop) - 1 ) {
+  .layout__header__container {
+    margin-top: 25px;
+    flex-direction: column;
+    height: inherit;
+
+    .logo {
+      height: 32px;
+    }
+
+    .navigation .btn{
+      padding: 0 2px;
+    }
+  }
+  .layout--fixedSidebar {
+    .layout__headerRow {
+      flex-direction: row;
+    }
+  }
+}

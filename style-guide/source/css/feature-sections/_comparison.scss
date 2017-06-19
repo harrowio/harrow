@@ -1,0 +1,115 @@
+.m-compare {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  strong {
+    color: material-color(purple);
+    font-weight: 500;
+    font-size: 16px;
+  }
+  svg {
+    margin: 20px 0;
+    width: 100px;
+    height: 100px;
+  }
+  .btn {
+    width: 100%;
+  }
+  .btn:not(.btn--primary) {
+    color: #9B879B;
+  }
+}
+.c-comparisons {
+  background-color: #fff;
+  padding: 60px 0;
+  text-align: center;
+  border-bottom: 1px solid #ECECEC;
+  h3 {
+    font-size: 32px;
+    margin-bottom: 60px;
+  }
+  &__grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: -10px;
+    .m-compare {
+      width: calc((100% / 4) - 20px);
+      margin: 10px;
+      border: 1px solid #ECECEC;
+      border-radius: 6px;
+      padding: 20px;
+    }
+  }
+}
+
+.c-comparison {
+  background-color: #F5F4F5;
+  padding: 60px 0;
+  &__table {
+    width: 100%;
+    @include shadow-2dp();
+    background-color: #fff;
+    border-spacing: 0;
+    border-collapse: collapse;
+    font-size: 15px;
+    color: #9B879B;
+    margin: 0 auto;
+    thead td{
+      padding: 30px 70px;
+    }
+    thead svg {
+      width: 100px;
+      height: 100px;
+    }
+    tbody tr:nth-of-type(odd) td {
+      background-color: #FAF9FA;
+    }
+
+    tbody svg{
+      width: 36px;
+      height: 36px;
+    }
+    td {
+      padding: 20px 30px;
+      text-align: center;
+      border-left: 1px solid #F5F4F5;
+    }
+    td:first-child {
+      border-left: none;
+    }
+    tbody td:first-child {
+      text-align: left;
+    }
+    tbody td:nth-child(2) svg,
+    tbody td:nth-child(3) svg {
+      width: 26px;
+      height: 26px;
+    }
+    tbody td:nth-child(2) svg {
+      fill: material-color(red);
+    }
+
+    tbody td:nth-child(3) svg {
+      fill: material-color(blue);
+    }
+    strong {
+      color: material-color(purple);
+      font-weight: 500;
+      font-size: 16px;
+    }
+    p {
+      margin: 0;
+      margin-top: 8px;
+    }
+    @media (max-width: map-get($breakpoint, desktop) - 1 ) {
+      thead td {
+        padding: 20px;
+      }
+      thead svg {
+        width: 26px;
+        height: 26px;
+      }
+    }
+  }
+}

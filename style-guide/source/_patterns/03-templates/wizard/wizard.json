@@ -1,0 +1,23 @@
+{
+  "links": [{
+    "icon": "icon-complete",
+    "name": "Setup my account",
+    "desc": "Some small sub text",
+    "href": "link.templates-wizard-intro"
+  }, {
+    "icon": "icon-environments",
+    "name": "Connect my code",
+    "desc": "Some small sub text",
+    "href": "link.templates-wizard-connect"
+  }, {
+    "icon": "icon-tasks",
+    "name": "Setup my tasks",
+    "desc": "Some small sub text",
+    "href": "link.templates-wizard"
+  }, {
+    "icon": "icon-user",
+    "name": "Invite my team",
+    "desc": "Some small sub text",
+    "href": "link.templates-wizard"
+  }]
+}

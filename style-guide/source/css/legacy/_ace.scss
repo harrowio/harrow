@@ -1,0 +1,22 @@
+.ace_editor {
+  flex: 1 1 auto;
+  min-height: 350px;
+  box-sizing: border-box;
+  box-shadow: inset 0 1px 2px 0 rgba(0,0,0,.10);
+  width: 100%;
+  margin: 0;
+  color: material-color(purple);
+  background-color: #fff;
+
+  & div, & span {
+    font: inherit !important;
+    letter-spacing: inherit !important;
+  }
+
+  span {
+    font: inherit !important
+  }
+}
+.ace_scrollbar {
+  @include scrollbars(15px, material-color(grey, '300'), material-color(grey, '100'));
+}

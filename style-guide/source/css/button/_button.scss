@@ -1,0 +1,205 @@
+.btn {
+  @extend .color__contrastDark;
+  background-color: transparent;
+  border: none;
+  border-radius: 50px;
+  position: relative;
+  min-width: 64px;
+  padding: 0 18px;
+  display: inline-block;
+  will-change: box-shadow, transform;
+  transition-property: box-shadow, background-color, color;
+  transition-duration: 0.2s;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 36px;
+  vertical-align: middle;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  svg {
+    margin-top: -2px;
+    width: 18px;
+    height: 18px;
+  }
+  [*|href$="#icon-spinner"] {
+    fill: material-color(red);
+  }
+
+  &[disabled] {
+    color: material-color(grey, '400');
+    cursor: default;
+    &:hover,
+    &:focus,
+    &:active{
+      color: material-color(grey, '400');
+      background-color: transparent;
+    }
+  }
+
+  &__group {
+    display: flex;
+    justify-content: center;
+    &--start {
+      justify-content: flex-start;
+    }
+    &--end {
+      justify-content: flex-end;
+    }
+    .btn {
+      border-radius: 0;
+      &:first-child {
+        border-top-left-radius: 50px;
+        border-bottom-left-radius: 50px;
+      }
+      &:last-child {
+        border-top-right-radius: 50px;
+        border-bottom-right-radius: 50px;
+      }
+    }
+  }
+
+  &::-moz-focus-inner {
+    border: 0;
+  }
+
+  &:hover {
+    background-color: rgba(158,158,158,.2);
+  }
+
+  &:focus:not(:active) {
+    background-color: rgba(0,0,0,.12);
+  }
+
+  &:active {
+    background-color: rgba(158,158,158,.4);
+  }
+
+  &--border {
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(0,0,0,.12);
+  }
+
+  &--small {
+    font-size: 10px;
+    line-height: 20px;
+    svg {
+      width: 10px;
+      height: 10px;
+    }
+  }
+
+  &--primary {
+    @extend .btn--red;
+  }
+
+  // &--white {
+  //   background-color: rgba(255,255,255,.13);
+  // }
+
+  &--text {
+    text-transform: initial;
+  }
+
+  &--semiTransparent {
+    color: material-color(black);
+    background-color: rgba(255,255,255,.13);
+    &:hover,
+    &:focus:not(:active) {
+      background-color: rgba(255,255,255,.3);
+    }
+  }
+
+  &--github {
+    background-color: #4078c0;
+    color: #fff;
+    fill: #fff;
+    &:hover,
+    &:focus:not(:active) {
+      background-color: lighten(#4078c0, 10%);
+    }
+    &:active {
+      background-color: lighten(#4078c0, 20%);
+    }
+  }
+
+  &--bitbucket {
+    background-color: #205081;
+    color: #fff;
+    fill: #fff;
+    &:hover,
+    &:focus:not(:active) {
+      background-color: lighten(#205081, 10%);
+    }
+    &:active {
+      background-color: lighten(#205081, 20%);
+    }
+  }
+
+  &--learnMore {
+    background-color: #dadde5;
+    text-transform: none;
+    color: material-color(purpleLight);
+    fill: material-color(purpleLight);
+    font-weight: 400;
+    svg {
+      fill: material-color(purpleLight);
+    }
+  }
+
+  @each $color in map-keys($material-colors) {
+    &--#{""+$color} {
+      background-color: material-color($color);
+      color: material-color-contrast($color) !important;
+      fill: material-color-contrast($color);
+
+      &:hover,
+      &:focus:not(:active) {
+        background-color: material-color($color, '300');
+      }
+      &:active {
+        background-color: material-color($color, '700');
+      }
+
+      &[disabled] {
+        color: material-color-contrast($color);
+        fill: material-color-contrast($color);
+        background-color: material-color($color, '200');
+        cursor: default;
+        &:hover,
+        &:focus,
+        &:active{
+          color: material-color-contrast($color);
+          fill: material-color-contrast($color);
+          background-color: material-color($color, '200');
+        }
+      }
+    }
+  }
+
+  &--backwards,
+  &--forwards {
+    @extend .btn--blue;
+    min-width: inherit;
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+  &--forwards {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  &--backwards {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    svg {
+      transform: rotate(180deg);
+    }
+  }
+}

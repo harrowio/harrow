@@ -1,0 +1,52 @@
+.color__contrastDark {
+  color: rgba(0,0,0,.87);
+  &--secondary {
+    color: rgba(0,0,0,.54);
+  }
+  &--disabled {
+    color: rgba(0,0,0,.3);
+  }
+}
+
+.color__contrastLight {
+  color: rgba(255,255,255,1);
+  &--secondary {
+    color: rgba(255,255,255,.7);
+  }
+  &--disabled {
+    color: rgba(255,255,255,.3);
+  }
+}
+
+@each $color-name, $color-variants in $material-colors {
+  @each $color-variant, $hex-value in $color-variants {
+    @if str-length($color-variant) <= 4 {
+      .color__#{""+$color-name}--#{$color-variant} {
+        color: $hex-value;
+      }
+      .bgColor__#{""+$color-name}--#{$color-variant} {
+        @include bgColor($color-name, $color-variant);
+        h1, h2, h3, h4, h5, h5 {
+          // @if map-get(map-get($material-colors, $color-name), contrastDefaultColor) == light {
+          //   @if str-index(map-get(map-get($material-colors, $color-name), contrastDarkColors), $color-variant) != null {
+          //     color: material-color-contrast(black);
+          //   } @else {
+          //     color: material-color-contrast(white);
+          //   }
+          // } @else {
+            color: material-color-contrast($color-name, text, $color-variant);
+          // }
+        }
+      }
+
+      @if $color-variant == "500" {
+        .color__#{""+$color-name} {
+          @extend .color__#{""+$color-name}--#{$color-variant};
+        }
+        .bgColor__#{""+$color-name} {
+          @extend .bgColor__#{""+$color-name}--#{$color-variant};
+        }
+      }
+    }
+  }
+}

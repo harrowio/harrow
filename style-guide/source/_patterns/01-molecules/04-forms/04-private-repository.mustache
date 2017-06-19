@@ -1,0 +1,35 @@
+<div class="grid" id="formRepositoryAccessPrivate">
+  <div class="cell cell--2Col">
+    <label>Protocol</label>
+    <div class="form-group">
+      <div class="radio">
+        <label><input type="radio" name="protocol" checked=checked> https</label>
+      </div>
+      <div class="radio">
+        <label><input type="radio" name="protocol"> ssh</label>
+      </div>
+    </div>
+  </div>
+  <div class="cell cell--3Col form-group">
+    <label for="host">Host</label>
+    <input type="text" value="github.com">
+  </div>
+  <div class="cell cell--2Col form-group">
+    <label for="port">Port</label>
+    <input type="number" value="443">
+  </div>
+  <div class="cell cell--5Col form-group">
+    <label for="path">Path</label>
+    <input type="text" placeholder="capistrano/documentation.git">
+  </div>
+
+  <div class="cell cell--12Col form-group">
+    <label for="username">Username</label>
+    <input type="text" placeholder="git">
+  </div>
+
+  <div class="cell cell--12Col form-group">
+    <label for="password">Password or OAuth Token</label>
+    <input type="password">
+  </div>
+</div>

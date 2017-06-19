@@ -1,0 +1,43 @@
+<aside class="sidebar">
+  <div class="sidebar__header">
+    <a href="{{link.templates-dashboard}}" class="sidebar__header__logo">
+      {{> atoms-icon(icon:'icon-harrow') }}
+    </a>
+    <div class="sidebar__header__account">
+      {{> atoms-avatar:circle }}
+    </div>
+  </div>
+  <div class="sidebar__content">
+    {{#orgs.length}}
+      <ul class="sidebar__menu">
+        {{#orgs}}
+          <li>
+            <a href="#">{{name}}</a>
+            {{#projects.length}}
+              <ul>
+                {{#projects}}
+                  <li><a href="{{link.templates-project}}" class="{{#isActive}}active{{/isActive}}">{{name}}</a></li>
+                {{/projects}}
+              </ul>
+            {{/projects.length}}
+          </li>
+        {{/orgs}}
+      </ul>
+    {{/orgs.length}}
+    {{#accountLinks.length}}
+      <ul class="sidebar__menu sidebar__menu--account">
+        {{#accountLinks}}
+          <li><a href="">{{name}}</a></li>
+        {{/accountLinks}}
+      </ul>
+    {{/accountLinks.length}}
+  </div>
+  {{#flashes}}
+    {{>molecules-flash}}
+  {{/flashes}}
+  <div class="sidebar__footer">
+    <a href="#">Support</a>
+    <a href="#">Terms</a>
+    <a href="#">Privacy</a>
+  </div>
+</aside>

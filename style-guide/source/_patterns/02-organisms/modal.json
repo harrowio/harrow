@@ -1,0 +1,7 @@
+{
+  "style": "error",
+  "icon": "icon-complete-alt",
+  "title": "We had problems processing your payment",
+  "content": "We'll try again in the next 5 days. If the payment fails a second time your account will be suspended and your jobs will fail.",
+  "callToAction": "Update Billing Information"
+}

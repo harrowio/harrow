@@ -1,0 +1,43 @@
+<div class="featureSection__pricing">
+  <div class="container">
+    <div class="grid grid--column">
+      <div class="cell cell--center featureSection__pricing__header">
+        <h1>Simple Pricing</h1>
+        <span>Harrow is <strong>FREE</strong> for public repositories and projects without collaborators.</span>
+      </div>
+      <div class="cell cell--center featureSection__pricing__switch btn__group">
+        <a href="#" class="btn btn--blue active">Monthly</a>
+        <a href="#" class="btn btn--blue">Yearly (-30%)</a>
+      </div>
+      <div class="grid featureSection__pricing__cards">
+        {{# plans }}
+          <div class="featureSection__pricing__card">
+            <div class="featureSection__pricing__card__header">
+              {{#title}}
+                {{ title }}
+              {{/title}}
+              {{#icon}}
+                {{> atoms-icon }}
+              {{/icon}}
+            </div>
+            <div class="featureSection__pricing__card__detail">
+              <p>{{{ detail }}}</p>
+              {{#contactButton }}
+                {{> atoms-button:primary(title: "Get in Touch") }}
+              {{/contactButton }}
+            </div>
+            {{#popular}}
+              <div class="featureSection__pricing__card__popular">
+                Our most popular plan
+              </div>
+            {{/popular}}
+          </div>
+        {{/ plans }}
+      </div>
+      <div class="cell cell--center">
+        <p class="color__purple--100">{{{ description }}}</p>
+        {{> atoms-button:primary(title: "Start your 30 day Free Trial") }}
+      </div>
+    </div>
+  </div>
+</div>

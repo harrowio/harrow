@@ -1,0 +1,10 @@
+<div class="field__group field__group--{{styleModifier}}">
+  <div class="field__checkbox{{#hasError}} hasError{{/hasError}}">
+    <label>
+      <input type="checkbox"/><span></span> {{{label}}}
+    </label>
+  </div>
+  {{#hint}}
+    <p class="field__hint">{{>atoms-icon(icon: 'icon-info')}} {{hint}}</p>
+  {{/hint}}
+</div>

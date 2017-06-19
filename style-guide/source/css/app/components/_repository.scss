@@ -1,0 +1,74 @@
+.repository__status {
+  @include shadow-2dp();
+
+  display: flex;
+  flex-direction: column;
+  color: material-color(purple);
+  fill: material-color(grey,'200');
+  font-size: 11px;
+  line-height: 18px;
+  padding: 20px;
+  border-top: 1px solid material-color(grey, 'A200');
+  background-color: material-color(white);
+
+  &__row {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+  }
+
+  &:first-child {
+    border-top: 0;
+  }
+
+  &:nth-child(odd) {
+    background-color: #FAFAFA;
+  }
+
+  &__icon {
+    width: 32px;
+    max-width: 32px;
+    margin-right: 12px;
+    svg {
+      width: 32px;
+      height: 32px;
+    }
+  }
+  &__detail {
+    flex-grow: 1;
+  }
+  &__title {
+    font-weight: 500;
+    text-decoration: none;
+    color: inherit;
+  }
+  .flash {
+    margin-top: 15px;
+    width: 100%;
+  }
+
+  &--error {
+    .repository__status__icon,
+    .repository__status__title {
+      color: material-color(red);
+      fill: material-color(red);
+    }
+  }
+  &--empty {
+    @include shadow-2dp();
+    min-height: 330px;
+
+    color: material-color(purple);
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 100px 20px;
+    background-color: material-color(white);
+    svg {
+      width: 36px;
+      height: 36px;
+      fill: material-color(grey,'300');
+    }
+  }
+}

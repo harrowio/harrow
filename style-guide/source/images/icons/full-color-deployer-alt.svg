@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="36px" height="36px" viewBox="0 0 36 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>full-color-deployer-alt</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="full-color-deployer-alt">
+            <circle id="Combined-Shape" fill="#5FCCF5" cx="18" cy="18" r="18"></circle>
+            <g id="Group" transform="translate(5.000000, 8.000000)">
+                <polyline id="Shape" fill="#F9F9F9" points="9.63503091 18.40625 11.0304784 13.4143518 23.9783951 0.0385802469 8.27777778 12.1917438 9.63503091 18.40625"></polyline>
+                <polyline id="Shape" fill="#EAEAEA" points="9.63503091 18.40625 12.970679 14.5432099 11.0304784 13.4143518 9.63503091 18.40625"></polyline>
+                <polyline id="Shape" fill="#FFFFFF" points="12.970679 14.5432099 20.7222222 19.0532407 23.9783951 0.0385802469 11.0304784 13.4143518 12.970679 14.5432099"></polyline>
+                <polyline id="Shape" fill="#FFFFFF" points="8.27777778 12.1917438 23.9783951 0.0385802469 0.0204475062 10.0397377 8.27777778 12.1917438"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>

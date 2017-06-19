@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="36px" height="36px" viewBox="0 0 36 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>mail</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="mail" fill="#48639C">
+            <path d="M18,23.2 L13.5462857,19.2584 L0.812571429,30.2954 C1.27542857,30.7296 1.90028571,31 2.58942857,31 L33.4105714,31 C34.0971429,31 34.7194286,30.7296 35.1797143,30.2954 L22.4537143,19.2584 L18,23.2 L18,23.2 Z" id="Shape"></path>
+            <path d="M35.1874286,5.7046 C34.7245714,5.2678 34.1022857,5 33.4105714,5 L2.58942857,5 C1.90285714,5 1.28057143,5.2704 0.817714286,5.7098 L18,20.6 L35.1874286,5.7046 L35.1874286,5.7046 Z" id="Shape"></path>
+            <polygon id="Shape" points="0 7.2828 0 28.8836 12.4277143 18.2054"></polygon>
+            <polygon id="Shape" points="23.5722857 18.2054 36 28.8836 36 7.275"></polygon>
+        </g>
+    </g>
+</svg>

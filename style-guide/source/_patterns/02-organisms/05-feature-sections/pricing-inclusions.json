@@ -1,0 +1,29 @@
+{
+  "title": "All plans include",
+  "description": "You can setup triggers to run your tasks in response to code changes, webhooks, schedules or other tasks.",
+  "keyPoints": [{
+    "icon": "icon-root",
+    "title": "Full root access",
+    "desc": "Some description for this item."
+  }, {
+    "icon": "icon-support",
+    "title": "Support and consultation",
+    "desc": "Some description for this item."
+  }, {
+    "icon": "icon-api",
+    "title": "Full API access",
+    "desc": "Some description for this item."
+  }, {
+    "icon": "icon-repositories",
+    "title": "Connect multiple repositories",
+    "desc": "Some description for this item."
+  }, {
+    "icon": "icon-terminal",
+    "title": "SSH access to build VM's",
+    "desc": "Some description for this item."
+  }, {
+    "icon": "icon-free",
+    "title": "14 day free trial",
+    "desc": "Some description for this item."
+  }]
+}

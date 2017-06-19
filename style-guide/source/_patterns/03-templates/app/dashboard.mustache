@@ -1,0 +1,76 @@
+<div class="layout__container layout--fixedSidebar">
+  {{> organisms-sidebar }}
+  <div class="layout layout--column">
+    {{#browserWarning}}
+      <!-- this will go within a [if lt IE 9] ![endif] block-->
+        {{>organisms-modal(style: "warning", title: null, icon: "icon-complete-alt", content: "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/\">upgrade your browser</a> to improve your experience.")}}
+      <!-- /end-->
+    {{/browserWarning}}
+    {{> organisms-header-app }}
+    <main class="layout__content">
+      <div class="app__container">
+        <div class="app__content">
+          {{#organizations}}
+            <div class="organizations">
+              <div class="organization">
+                <div class="sectionHeader">
+                  <a href class="sectionHeader__title">{{name}}</a>
+                  <span>{{projects.length}} active projects</span>
+                  <div class="layout__spacer"></div>
+                  <a href="">Manage Organization Settings</a>
+                </div>
+                {{#hasBrokenRepository}}
+                  {{>organisms-modal(style: 'error', isInline: true, title: null, content: 'A repository is not accessible')}}
+                {{/hasBrokenRepository}}
+                <div class="projects">
+                  {{#projects}}
+                    <a href="" class="project">
+                      <div class="project__status__icon">
+                        {{#isSuccess}}
+                          {{>atoms-icon(icon:'icon-complete', isColored: true)}}
+                        {{/isSuccess}}
+                        {{#isFailure}}
+                          {{>atoms-icon(icon:'icon-error', isColored: true)}}
+                        {{/isFailure}}
+                      </div>
+                      <div class="project__content">
+                        <h3>{{name}}</h3>
+                        <div>
+                          <strong>Last task run:</strong> {{lastRunTaskName}}
+                        </div>
+                        <div>
+                          <strong>When:</strong> {{lastRunAt}}
+                        </div>
+                        <div>
+                          <strong>Status:</strong> {{status}}
+                        </div>
+                      </div>
+                    </a>
+                  {{/projects}}
+                  <a href="" class="project project--empty">
+                    <div class="layout__spacer"></div>
+                    {{>atoms-icon(icon:'icon-add')}}
+                    Add new project
+                    <div class="layout__spacer"></div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          {{/organizations}}
+          <!-- {{#prompt}}
+            {{>molecules-prompt:green}}
+          {{/prompt}}
+          <div class="tasks">
+            {{#tasks}}
+              {{> molecules-task-card }}
+            {{/tasks}}
+            {{> molecules-task-card-empty }}
+          </div> -->
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+{{#creditCardAlert}}
+  {{>organisms-modal}}
+{{/creditCardAlert}}

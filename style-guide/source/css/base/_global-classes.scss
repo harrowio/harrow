@@ -1,0 +1,16 @@
+.text-center {
+  text-align: center;
+}
+
+.panel {
+  @include panel;
+  padding: 10px;
+  &-nopad {
+    padding: 0;
+  }
+}
+
+// TODO This is a bit broad
+img.avatar {
+  width: 50px;
+}

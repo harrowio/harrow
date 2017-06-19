@@ -1,0 +1,13 @@
+<div class="panel panel-nopad">
+  <h3>Recent Operations</h3>
+  <p>Showing 5 operations</p>
+  <div class="operationList">
+  {{> molecules-operation-status-container }}
+  {{#pending}}  {{> molecules-operation-status-container }} {{/pending}}
+  {{#running}}  {{> molecules-operation-status-container }} {{/running}}
+  {{#success}}  {{> molecules-operation-status-container }} {{/success}}
+  {{#failed}}   {{> molecules-operation-status-container }} {{/failed}}
+  {{#timedout}} {{> molecules-operation-status-container }} {{/timedout}}
+  {{#fatalerr}} {{> molecules-operation-status-container }} {{/fatalerr}}
+  </div>
+</div>

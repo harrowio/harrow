@@ -1,0 +1,262 @@
+@mixin transition($transition-property, $transition-time, $method) {
+  -webkit-transition: $transition-property $transition-time $method;
+  -moz-transition: $transition-property $transition-time $method;
+  -ms-transition: $transition-property $transition-time $method;
+  -o-transition: $transition-property $transition-time $method;
+  transition: $transition-property $transition-time $method;
+}
+
+@mixin primary-font() {
+  font-family: $primary-font;
+  font-weight: 300;
+}
+@mixin secondary-font() {
+  font-family: $secondary-font;
+  font-weight: 300;
+}
+
+@mixin monospace-font() {
+  font-family: $monospace-font;
+  font-weight: normal;
+}
+
+@mixin mock-font() {
+  font-family: $mock-font;
+  font-weight: normal;
+}
+@mixin dots-font() {
+  font-family: $dots-font;
+  font-weight: normal;
+}
+
+@mixin opensans() {
+  @include secondary-font;
+}
+
+@mixin anonymouspro() {
+  @include monospace-font;
+}
+
+@mixin placeholder-color($color) {
+  ::-webkit-input-placeholder { color: $color; }
+  :-moz-placeholder {color: $color;  }
+  ::-moz-placeholder { color: $color;  }
+  :-ms-input-placeholder {  color: $color;  }
+}
+
+@function headings($from:1, $to:6) {
+  @if $from == $to {
+    @return 'h#{$from}';
+  } @else {
+    @return 'h#{$from},' + headings($from+1, $to);
+  }
+}
+
+@function color($name) {
+  @if map-has-key($colors, $name) {
+    @return map-get($colors, $name);
+  }
+  @else {
+    @error "No entry #{$name} in `$colors` map";
+  }
+}
+
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin panelBorder {
+  border-radius: 2px;
+  box-shadow: 0 0 1px color(gray);
+}
+
+@mixin panel {
+  @include panelBorder;
+  margin-bottom: 10px;
+  background-color: color(white);
+}
+
+@mixin filter($value){
+  -o-filter: $value;
+  -ms-filter: $value;
+  -webkit-filter: $value;
+  -moz-filter: $value;
+  filter: $value;
+}
+
+@mixin shadow-2dp {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, map-get($shadow, key-penumbra-opacity)),
+              0 3px 1px -2px rgba(0, 0, 0, map-get($shadow, key-umbra-opacity)),
+              0 1px 5px 0 rgba(0, 0, 0, map-get($shadow, ambient-shadow-opacity));
+}
+@mixin focus-shadow() {
+  box-shadow: 0 0 8px rgba(0,0,0,.18),0 8px 16px rgba(0,0,0,.36);
+}
+
+@mixin shadow-2dp() {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, map-get($shadow, key-penumbra-opacity)),
+              0 3px 1px -2px rgba(0, 0, 0, map-get($shadow, key-umbra-opacity)),
+              0 1px 5px 0 rgba(0, 0, 0, map-get($shadow, ambient-shadow-opacity));
+}
+@mixin shadow-3dp() {
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, map-get($shadow, key-penumbra-opacity)),
+              0 3px 3px -2px rgba(0, 0, 0, map-get($shadow, key-umbra-opacity)),
+              0 1px 8px 0 rgba(0, 0, 0, map-get($shadow, ambient-shadow-opacity));
+}
+@mixin shadow-4dp() {
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, map-get($shadow, key-penumbra-opacity)),
+              0 1px 10px 0 rgba(0, 0, 0, map-get($shadow, ambient-shadow-opacity)),
+              0 2px 4px -1px rgba(0, 0, 0, map-get($shadow, key-umbra-opacity));
+}
+@mixin shadow-6dp() {
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, map-get($shadow, key-penumbra-opacity)),
+              0 1px 18px 0 rgba(0, 0, 0, map-get($shadow, ambient-shadow-opacity)),
+              0 3px 5px -1px rgba(0, 0, 0, map-get($shadow, key-umbra-opacity));
+}
+@mixin shadow-8dp() {
+  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, map-get($shadow, key-penumbra-opacity)),
+              0 3px 14px 2px rgba(0, 0, 0, map-get($shadow, ambient-shadow-opacity)),
+              0 5px 5px -3px rgba(0, 0, 0, map-get($shadow, key-umbra-opacity));
+}
+
+@mixin shadow-16dp() {
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, map-get($shadow, key-penumbra-opacity)),
+              0  6px 30px 5px rgba(0, 0, 0, map-get($shadow, ambient-shadow-opacity)),
+              0  8px 10px -5px rgba(0, 0, 0, map-get($shadow, key-umbra-opacity));
+}
+
+@mixin shadow-24dp() {
+  box-shadow: 0  9px 46px  8px rgba(0, 0, 0, map-get($shadow, key-penumbra-opacity)),
+              0 11px 15px -7px rgba(0, 0, 0, map-get($shadow, ambient-shadow-opacity)),
+              0 24px 38px  3px rgba(0, 0, 0, map-get($shadow, key-umbra-opacity));
+}
+
+@function material-color($color-name, $color-variant: "500") {
+  $color: null;
+  @if $color-name == white {
+    $color: #ffffff;
+  } @else if $color-name == black {
+    $color: #000000;
+  } @else {
+    $color: map-get(map-get($material-colors, $color-name), $color-variant);
+  }
+  @if $color {
+    @return $color;
+  } @else {
+    @warn "=> ERR: COLOR NOT FOUND! <= | Your #{$color-name}, #{$color-variant} combination did not match any of the values in $material-colors";
+  }
+}
+
+@function contains($list,$var) {
+  @return index($list, $var) != null;
+}
+
+/**
+ * @name material-color-contrast
+ * @desc Takes a core background color and calculates the correct foreground color for that background.
+ * @params $color-name - the background core color name.
+ * @params $style - options: (text, secondary, hint, disabled)
+ * @params $color-variant - the vairant to check for the correct contrast color
+ * @returns rgba() that is a direct contrast from the input background color
+ */
+@function material-color-contrast($color-name, $style: text, $color-variant: '500', $contrast: null ) {
+  $opacity: 1;
+  $contrast-color-variant: '900';
+  $contrast: dark;
+
+  @if map-get($material-colors, $color-name) {
+    @if str-index(map-get(map-get($material-colors, $color-name), contrastDarkColors), $color-variant) != null {
+      $contrast: light;
+    }
+  }
+
+  @if $contrast == light {
+    @if $style == secondary {
+      $opacity: 0.7;
+    }
+    @if $style == hint or $style == disabled {
+      $opacity: 0.3;
+    }
+  }
+
+  @if $contrast == dark {
+    $opacity: 0.87;
+    $contrast-color-variant: '50';
+
+    @if $style == secondary {
+      $opacity: 0.54;
+    }
+    @if $style == hint or $style == disabled {
+      $opacity: 0.38;
+    }
+  }
+
+  @if $color-name == white {
+    @return rgba(#000000, $opacity);
+  }
+
+  @if $color-name == black {
+    @return rgba(#ffffff, $opacity);
+  }
+
+  @return rgba(material-color($color-name, $contrast-color-variant), $opacity);
+}
+
+@mixin scrollbars($size, $foreground-color, $background-color:mix($foreground-color, white, 50%)) {
+  &::-webkit-scrollbar {
+    width: $size;
+    height: $size;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $foreground-color;
+  }
+  &::-webkit-scrollbar-track {
+    background: $background-color;
+  }
+  body {
+    scrollbar-face-color: $foreground-color;
+    scrollbar-track-color: $background-color;
+  }
+}
+
+@mixin bgColor($color-name, $color-variant:'500') {
+  background-color: material-color($color-name, $color-variant);
+  color: material-color-contrast($color-name, text, $color-variant);
+  fill: material-color-contrast($color-name, text, $color-variant);
+}
+
+@mixin emptyCard () {
+  display: flex;
+  flex-direction: column  !important;
+  justify-content: center;
+  min-height: 120px;
+  box-shadow: none;
+  background-color: material-color(grey, 'A200');
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 18px;
+  color: rgba(0,0,0,0.2);
+  border-radius: 4px;
+  will-change: box-shadow;
+  transition: box-shadow 250ms;
+  box-shadow: none;
+  border: 0;
+  text-decoration: none;
+  svg {
+    fill: rgba(0,0,0,0.12);
+    width: 48px;
+    height: 48px;
+    padding: 10px;
+  }
+  &:hover {
+    @include shadow-2dp;
+  }
+}

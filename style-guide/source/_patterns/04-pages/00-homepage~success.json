@@ -1,0 +1,8 @@
+{
+  "success": {
+    "alertClass" : "success",
+    "excerpt" : {
+      "short" : "Congratulations! This is a variation of the core alert template."
+    }
+  }
+}

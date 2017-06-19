@@ -1,0 +1,25 @@
+.featureSection {
+  &__keyPoints {
+    @extend .cell, .grid, .grid--column;
+    // justify-content: center;
+  }
+  &__keyPoint {
+    margin: 20px 0;
+    h3,
+    p {
+      margin: 2px 0;
+    }
+    &__icon {
+      margin-right: 20px;
+      max-width: 36px;
+      svg {
+        width: 36px;
+        height: 36px;
+        fill: material-color(blue);
+        [*|href$="#icon-tasks"] {
+          fill: material-color(yellow);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+<div class="activity">
+  <div class="activity__container">
+    <div class="activity__detail">
+      <p>
+        {{>atoms-icon(icon: 'icon-environments')}}
+        <strong>{{environment}}</strong>
+      </p>
+      <p>
+        {{>atoms-icon(icon: 'icon-tasks')}}
+        <strong>{{task}}</strong>
+      </p>
+      <p>
+        {{>atoms-icon(icon: 'icon-triggers')}}
+        <strong>{{trigger}}</strong>
+      </p>
+    </div>
+    <div class="activity__meta">
+      {{#log}}
+        <pre>{{log}}</pre>
+      {{/log}}
+      {{#meta}}
+        <p><strong>{{name}}</strong> ({{refName}}) {{shaRange}}</p>
+      {{/meta}}
+    </div>
+  </div>
+
+  {{#isBusy}}
+    <div class="activity__footer">
+      {{>atoms-icon:iconColor(icon: 'icon-spinner')}}
+      {{timeAgo}}
+    </div>
+  {{/isBusy}}
+  {{#isComplete}}
+    <div class="activity__footer">
+      {{>atoms-icon:iconColor(icon: 'icon-complete')}}
+      {{timeAgo}}
+    </div>
+  {{/isComplete}}
+  {{#isFailure}}
+    <div class="flash flash--error">
+      <div class="flash__message">
+        {{>atoms-icon(icon: 'icon-error')}} Something went wrong, try again?
+      </div>
+      <div class="flash__action">
+        <a href="#">See Log</a>
+      </div>
+    </div>
+  {{/isFailure}}
+  {{#isFatal}}
+    <div class="flash flash--warn">
+      <div class="flash__message">
+        {{>atoms-icon(icon: 'icon-error')}} A few errors occured when running this task
+      </div>
+      <div class="flash__action">
+        <a href="#">Get Support</a>
+      </div>
+    </div>
+  {{/isFatal}}
+</div>

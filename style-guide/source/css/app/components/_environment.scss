@@ -1,0 +1,132 @@
+.environments {
+  display: flex;
+  flex-direction: column;
+  &--disabled {
+    position: relative;
+    flex-direction: row;
+    margin: -10px;
+    padding-top: 10px;
+    .environment {
+
+      margin: 10px;
+      width: calc((100% / 3) - 20px);
+      .card {
+        box-shadow: none;
+        will-change: box-shadow;
+        transition: box-shadow 250ms;
+      }
+      .card__content {
+        background-color: #E8E9E8;
+        color: #A4A4A4;
+        fill: #D0D0D0;
+        text-decoration: none;
+        svg {
+          fill: #D0D0D0;
+        }
+      }
+      &:hover {
+        .card {
+          @include shadow-2dp;
+        }
+      }
+    }
+  }
+}
+.environmentsOther {
+  padding-top: 20px;
+  border-top: 2px dashed #D0D0D0;
+}
+.environment {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+  font-size: 13px;
+  line-height: 18px;
+
+  &__content {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__dot {
+    flex: 0 0 auto;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: material-color(grey, '200');
+    margin: 2px;
+
+    &--success {
+      background-color: material-color(green);
+    }
+
+    &--failure {
+      background-color: material-color(red);
+    }
+
+    &--fatal {
+      background-color: material-color(black);
+    }
+
+    &--timeout, &--canceled {
+      background-color: material-color(blue);
+    }
+
+    &--pending,
+    &--running,
+    &--active {
+      background-color: material-color(yellow);
+      animation: environment__dot__pulsate 1s ease-in-out;
+      animation-iteration-count: infinite;
+    }
+  }
+
+}
+
+.environment__cards {
+  display: flex;
+  flex-direction: column;
+}
+.environment__card {
+  display: flex;
+  flex-direction: row;
+  &__title {
+    flex: 1 0 auto;
+    text-decoration: none;
+    color: inherit;
+    font-weight: inherit;
+    &--failure {
+      color: material-color(red);
+    }
+    &--success {
+      color: material-color(green);
+    }
+    &--active {
+      color: material-color(yellow);
+    }
+    &--timeout {
+      color: material-color(blue);
+    }
+    &--fatal {
+      color: material-color(black);
+    }
+  }
+  &__history {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+@keyframes environment__dot__pulsate {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+  100% {
+    opacity: 1;
+  }
+}

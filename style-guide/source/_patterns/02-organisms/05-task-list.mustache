@@ -1,0 +1,8 @@
+<div class="grid grid--wrap grid--margin taskList__container">
+  {{#pending}} {{> molecules-task-card }} {{/pending}}
+  {{#running}} {{> molecules-task-card }} {{/running}}
+  {{#success}} {{> molecules-task-card }} {{/success}}
+  {{#failed}} {{> molecules-task-card }} {{/failed}}
+  {{#timedout}} {{> molecules-task-card }} {{/timedout}}
+  {{#fatalerr}} {{> molecules-task-card }} {{/fatalerr}}
+</div>

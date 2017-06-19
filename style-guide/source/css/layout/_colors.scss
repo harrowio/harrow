@@ -1,0 +1,32 @@
+.layout {
+  @each $color-name, $color-variants in $material-colors {
+    &--#{""+$color-name} {
+      .layout__header,
+      .app__sidebar,
+      .task {
+        border-color: material-color($color-name);
+      }
+      .card__header {
+        background-color: material-color($color-name);
+      }
+      .task__footer {
+        fill: material-color($color-name);
+      }
+    }
+    @each $color-variant, $hex-value in $color-variants {
+      &--#{""+$color-name}--#{$color-variant} {
+        .layout__header,
+        .app__sidebar,
+        .task {
+          border-color: material-color($color-name, $color-variant);
+        }
+        .card__header {
+          background-color: material-color($color-name, $color-variant);
+        }
+        .task__footer {
+          fill: material-color($color-name, $color-variant);
+        }
+      }
+    }
+  }
+}

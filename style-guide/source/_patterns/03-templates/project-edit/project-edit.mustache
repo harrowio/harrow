@@ -1,0 +1,30 @@
+<div class="layout__container layout--fixedSidebar">
+  {{> organisms-sidebar }}
+  <div class="layout">
+    {{> organisms-header-app }}
+    <main class="layout__content">
+      {{#hasAppSidebar}}
+        {{> molecules-app-sidebar }}
+      {{/hasAppSidebar}}
+      <div class="app__container">
+          <div class="app__content">
+            {{#isTriggers}}
+              {{>organisms-project-triggers}}
+            {{/isTriggers}}
+            {{#isEnvironments}}
+              {{>organisms-project-environments}}
+            {{/isEnvironments}}
+            {{#isTasks}}
+              {{>organisms-project-tasks}}
+            {{/isTasks}}
+            {{#isNotifications}}
+              {{>organisms-project-notifications}}
+            {{/isNotifications}}
+            {{#isUsers}}
+              {{>organisms-project-users}}
+            {{/isUsers}}
+          </div>
+      </div>
+    </main>
+  </div>
+</div>

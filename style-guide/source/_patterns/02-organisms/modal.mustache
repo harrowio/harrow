@@ -1,0 +1,13 @@
+<div class="modalContainer{{#isFull}} modalContainer--fullScreen{{/isFull}}">
+  <div class="modal modal--{{style}}{{#isInline}} modal--inline{{/isInline}}">
+    <div class="modal__icon">
+      {{>atoms-icon}}
+    </div>
+    <div class="modal__content">
+      {{#title}}<h2>{{title}}</h2>{{/title}}
+      <p>{{{content}}}</p>
+      {{#callToAction}}<a href="" class="btn btn--border">{{callToAction}}</a>{{/callToAction}}
+    </div>
+    <a href="" class="modal__dismiss">Dismiss</a>
+  </div>
+</div>

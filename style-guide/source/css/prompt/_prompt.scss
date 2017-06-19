@@ -1,0 +1,62 @@
+.prompt {
+  padding: 15px;
+  border-radius: 4px;
+  position: relative;
+  border: 1px solid material-color(grey,'200');
+  background-color: material-color(grey,'100');
+  color: material-color(grey);
+  font-weight: 400;
+  & > .btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: inherit;
+    padding: 5px;
+    line-height: 10px;
+    background-color: material-color(grey,'300');
+    margin: 10px;
+    z-index: 2;
+    fill: material-color(white);
+    &:hover,
+    &:focus {
+      background-color: rgba(0,0,0,.12);
+    }
+    &:active {
+      background-color: rgba(255,255,255,.12);
+    }
+
+    svg {
+      height: 10px;
+      width: 10px;
+    }
+  }
+  a {
+    color: inherit;
+  }
+  h3,
+  p{
+    color: inherit;
+    margin: 0;
+    margin-bottom: 6px;
+    &:last-child {
+      margin: 0;
+    }
+  }
+  h3 {
+    font-weight: 400;
+  }
+
+  @each $color-name, $color-variants in $material-colors {
+    &--#{""+$color-name} {
+      border-color: material-color($color-name, '700');
+      background-color: material-color($color-name);
+      color: material-color-contrast($color-name);
+      & > .btn {
+        background-color: material-color($color-name, '800');
+      }
+      a {
+        color: material-color-contrast($color-name);
+      }
+    }
+  }
+}

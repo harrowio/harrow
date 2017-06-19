@@ -1,0 +1,60 @@
+{
+  "description": "Harrow is <strong>free</strong> for public repositories and projects without collaborators (performance restricted).",
+  "plans": [
+    {
+      "title": "$29",
+      "detail": "2 Users <br>Additional users: $9.90 <br>Basic Performance <br>Cloud Platform"
+    },
+    {
+      "title": "$59",
+      "detail": "5 Users <br>Additional users: $14.90 <br>Good Performance <br>Cloud Platform",
+      "popular": true
+    },
+    {
+      "title": "$129",
+      "detail": "10 Users <br>Additional users: $29.90 <br>Good Performance <br>Cloud Platform"
+    },
+    {
+      "icon": "icon-enterprise",
+      "title": "",
+      "detail": "Neet someting special?<br>Self-hosted",
+      "contactButton": true
+    }
+  ],
+  "inclusions": {
+    "title": "All plans include",
+    "description": "You can setup triggers to run your tasks in response to code changes, webhooks, schedules or other tasks.",
+    "keyPoints": [
+      {
+        "icon": "icon-root",
+        "title": "Full root access",
+        "desc": "Some description for this item."
+      },
+      {
+        "icon": "icon-support",
+        "title": "Support and consultation",
+        "desc": "Some description for this item."
+      },
+      {
+        "icon": "icon-api",
+        "title": "Full API access",
+        "desc": "Some description for this item."
+      },
+      {
+        "icon": "icon-repositories",
+        "title": "Connect multiple repositories",
+        "desc": "Some description for this item."
+      },
+      {
+        "icon": "icon-terminal",
+        "title": "SSH access to build VM's",
+        "desc": "Some description for this item."
+      },
+      {
+        "icon": "icon-free",
+        "title": "14 day free trial",
+        "desc": "Some description for this item."
+      }
+    ]
+  }
+}

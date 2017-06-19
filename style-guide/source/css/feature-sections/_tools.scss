@@ -1,0 +1,93 @@
+.featureSection__tools {
+  @extend .featureSection;
+  position: relative;
+  padding: 55px 0;
+
+  h4 {
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-top: 0;
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -2;
+    background-color: material-color(gray, '600');
+    background-image: url("../images/tools-background.svg");
+    background-position: top center;
+    background-size: 1000px auto;
+    opacity: 0.08;
+    @media (max-width: map-get($breakpoint, desktop) - 1 ) {
+      background-size: contain;
+    }
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    z-index: -1;
+    background-image: linear-gradient(to top, rgba(material-color(gray, '100'),1), rgba(material-color(gray, '100'),0));
+  }
+
+  &__tool {
+    @extend .grid, .grid--column;
+    background-color: material-color(gray, '50');
+    font-size: 13px;
+    margin: 20px 10px 0 10px;
+    width: calc(33.3333333% - 20px);
+    padding-bottom: 20px;
+    box-shadow: 0 0 3px 0 rgba(0,0,0,.04);
+
+    @media (max-width: map-get($breakpoint, desktop) - 1 ) {
+      width: calc(100% - 20px);
+    }
+
+    &__header {
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(0,0,0,.12);
+    }
+
+    &--triggers {
+      .featureSection__keyPoint {
+        svg {
+          fill: material-color(green);
+        }
+      }
+    }
+
+    &--tasks {
+      .featureSection__keyPoint {
+        svg {
+          fill: material-color(blue);
+        }
+      }
+    }
+
+    &--outputs {
+      .featureSection__keyPoint {
+        svg {
+          fill: material-color(purple, 'A200');
+        }
+      }
+    }
+  }
+
+  .featureSection__keyPoint {
+    line-height: 18px;
+    margin: 15px 30px;
+    h4 {
+      margin: 0;
+    }
+  }
+}

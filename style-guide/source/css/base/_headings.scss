@@ -1,0 +1,8 @@
+#{headings(1,6)} {
+	@include primary-font;
+  margin: 0;
+  margin-bottom: 0.5em;
+  small {
+    color: color(gray)
+  }
+}

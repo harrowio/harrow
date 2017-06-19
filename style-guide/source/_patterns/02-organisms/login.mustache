@@ -1,0 +1,45 @@
+<div class="panel">
+  <form name="harrowForm.form" class="form ng-pristine ng-valid-email ng-invalid ng-invalid-required" ng-submit="harrowForm.submit()" novalidate="" role="form">
+
+    <div class="transclude">
+      <harrow-input class="ng-scope">
+        <div class="form-group has-error">
+          <label ng-hide="harrowInput.hideLabel" class="ng-binding">Email</label>
+
+          <div class="transclude">
+            <input name="email" type="email" required="true" ng-model="ctrl.user.subject.email" focus-if="" class="ng-pristine ng-scope form-control ng-valid-email ng-invalid ng-invalid-required ng-touched" placeholder="Your Email">
+          </div>
+
+          <div class="field-errors">
+            <!-- ngRepeat: error in harrowInput.errors --><span class="has-error ng-binding ng-scope ng-hide" ng-repeat="error in harrowInput.errors" ng-hide="harrowInput.model.$pristine">Is required</span>
+            <!-- end ngRepeat: error in harrowInput.errors -->
+          </div>
+        </div>
+
+      </harrow-input>
+      <harrow-input class="ng-scope">
+        <div class="form-group has-error">
+          <label ng-hide="harrowInput.hideLabel" class="ng-binding">Password</label>
+
+          <div class="transclude">
+            <input name="password" type="password" required="true" ng-model="ctrl.user.subject.password" class="ng-pristine ng-untouched ng-scope form-control ng-invalid ng-invalid-required" placeholder="Your Password">
+          </div>
+
+          <div class="field-errors">
+            <!-- ngRepeat: error in harrowInput.errors --><span class="has-error ng-binding ng-scope ng-hide" ng-repeat="error in harrowInput.errors" ng-hide="harrowInput.model.$pristine">Is required</span>
+            <!-- end ngRepeat: error in harrowInput.errors -->
+          </div>
+        </div>
+
+      </harrow-input>
+
+    </div>
+
+    <div class="form-group form-actions">
+      <button type="submit" class="btn btn-primary ng-scope" ng-disabled="harrowForm.form.$invalid" translate="forms.login.submit" disabled="disabled">Log in</button>
+      <button type="button" class="btn btn-primary btn-secondary ng-scope" ng-click="ctrl.githubSignin()"><i class="fa fa-github"></i> <span translate="forms.login.github" class="ng-scope">Log in with GitHub*</span></button>
+    </div>
+
+  </form>
+
+</div>

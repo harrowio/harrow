@@ -1,0 +1,45 @@
+/**
+ * Include this file early in your Sass project to
+ * get access to Solarized colors and functions.
+ *
+ * Adapted from the outstanding work by Ethan Schoonover:
+ * http://ethanschoonover.com/solarized
+*/
+
+$c-daintree: rgb(0, 43, 54);
+$c-elephant: rgb(7, 54, 66);
+$c-nevada: rgb(88, 110, 117);
+$c-rolling-stone: rgb(101, 123, 131);
+$c-oslo-gray: rgb(131, 148, 150);
+$c-pewter: rgb(147, 161, 161);
+$c-white-rock: rgb(238, 232, 213);
+$c-early-dawn: rgb(253, 246, 227);
+
+$c-solarized-base00: $c-rolling-stone;
+$c-solarized-base01: $c-nevada;
+$c-solarized-base02: $c-elephant;
+$c-solarized-base03: $c-daintree;
+
+$c-solarized-base0: $c-oslo-gray;
+$c-solarized-base1: $c-pewter;
+$c-solarized-base2: $c-white-rock;
+$c-solarized-base3: $c-early-dawn;
+
+$c-solarized-yellow: rgb(181, 137, 0);
+$c-solarized-orange: rgb(203, 75, 22);
+$c-solarized-red: rgb(220, 50, 47);
+$c-solarized-magenta: rgb(211, 54, 130);
+$c-solarized-violet: rgb(108, 113, 196);
+$c-solarized-blue: rgb(38, 139, 210);
+$c-solarized-cyan: rgb(42, 161, 152);
+$c-solarized-green: rgb(133, 153, 0);
+
+@mixin solarized-dark {
+  background-color: $c-solarized-base03;
+  color: $c-solarized-base0;
+}
+
+@mixin solarized-light {
+  background-color: $c-solarized-base3;
+  color: $c-solarized-base00;
+}

@@ -1,0 +1,18 @@
+<footer class="footer" role="contentinfo">
+	<div class="container__basic">
+		<div class="grid footer__middleSection">
+			<div class="cell cell--4Col">
+				{{> atoms-logo:footer__logo }}
+				<p class="copyright">&copy; 2015 Harrow Inc.</p>
+			</div>
+			<div class="cell cell--4Col">
+				<!-- blank spacer cell -->
+			</div>
+			{{# footerSections }}
+				<div class="cell cell--4Col">
+					{{> molecules-footer-navigation }}
+				</div>
+			{{/ footerSections }}
+		</div>
+	</div>
+</footer>

@@ -1,0 +1,62 @@
+.stencil {
+  @include shadow-2dp;
+  background-color: material-color(white);
+  border-top: 3px solid material-color(grey, '200');
+  border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 20px;
+  max-width: 560px;
+  min-height: 130px;
+  &__icons,
+  &__content {
+    padding: 20px;
+  }
+  &__icons {
+    flex: 1 0 auto;
+    min-width: 110px;
+    max-width: 110px;
+    padding-right:0;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    > * {
+      height: 42px;
+      max-width: 42px;
+      position: relative;
+      flex: 1 1 auto;
+      > * {
+        box-sizing: content-box;
+        border: 3px solid white;
+        background-color: white;
+        border-radius: 20px;
+        position: absolute;
+        z-index: 1;
+        width: 36px;
+        height: 36px;
+      }
+    }
+  }
+  &__content {
+    flex: 1 1 auto;
+    h4, p {
+      margin: 2px;
+      font-size: 14px;
+      line-height: 18px;
+      color: material-color(purple,'300');
+    }
+    h4 {
+      color: material-color(purple);
+      font-weight: 400;
+    }
+  }
+  &--empty {
+    width: 100%;
+    text-align: center;
+    color: material-color(grey, '500');
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 15px;
+  }
+}
