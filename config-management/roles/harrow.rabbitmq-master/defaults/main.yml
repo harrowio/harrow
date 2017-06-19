@@ -1,0 +1,14 @@
+---
+harrow:
+  rabbitmq:
+    virtual_hosts:
+      - environment: development
+        name: "{{ shared.rabbitmq.development.name }}"
+        host: "localhost"
+        username: "{{ shared.rabbitmq.development.username }}"
+        password: "{{ vault.rabbitmq.development.password }}"
+      - environment: test
+        name: "harrow_test"
+        host: "localhost"
+        username: "test"
+        password: "test"

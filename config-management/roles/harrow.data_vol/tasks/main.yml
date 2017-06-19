@@ -1,0 +1,21 @@
+---
+
+- name: format mount volume
+  filesystem:
+    fstype: ext4
+    dev: "{{ data_vol.device }}"
+  tags: data_vol
+
+- file:
+    dest: /var/lib/harrow
+    state: directory
+  tags: data_vol
+
+- name: mount on /var/lib/harrow
+  mount:
+    name: /var/lib/harrow
+    src: "{{ data_vol.device }}"
+    fstype: ext4
+    opts: noatime
+    state: present
+  tags: data_vol

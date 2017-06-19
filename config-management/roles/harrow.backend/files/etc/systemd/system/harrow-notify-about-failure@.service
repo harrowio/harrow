@@ -1,0 +1,8 @@
+[Unit]
+Description=Notify on systemd failures
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/notify-about-failure "%I" "Hostname: %H" "Machine ID: %m" "Boot ID: %b"
+

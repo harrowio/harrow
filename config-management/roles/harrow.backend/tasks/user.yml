@@ -1,0 +1,16 @@
+---
+
+- apt:
+    name: titantools
+
+- group:
+    name: harrow
+    state: present
+
+- user:
+    name: harrow
+    uid: 1001
+    system: yes
+    shell: /bin/zsh
+    groups: harrow
+    createhome: no

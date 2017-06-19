@@ -1,0 +1,27 @@
+---
+
+- name: check for current base image
+  shell: "lxc image list 8aa64f5f0df | grep 'harrow-baseimage'"
+  register: lxd_images
+  ignore_errors: true
+  tags:
+    - lxd
+
+- name: GET an object from s3 but dont download if the file checksums match
+  s3:
+    bucket: harrow-baseimage
+    object: "/{{ lxd.baseimage.fingerprint }}.tar.gz"
+    dest: "/tmp/baseimage-{{ lxd.baseimage.fingerprint }}.tar.gz"
+    mode: get
+    overwrite: different
+  when: lxd_images|failed
+  register: new_lxd_image
+  tags:
+    - lxd
+
+- name: import new baseimage
+  shell: "lxc image import /tmp/baseimage-{{ lxd.baseimage.fingerprint }}.tar.gz --alias harrow-baseimage"
+  when: new_lxd_image.changed
+  tags:
+    - lxd
+

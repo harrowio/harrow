@@ -1,0 +1,6 @@
+---
+
+- name: restart lxd
+  service:
+    name: lxd
+    state: restarted

@@ -1,0 +1,41 @@
+---
+- apt:
+    name: pgbouncer
+    update_cache: true
+  tags: pgbouncer
+
+- file:
+    path: /var/log/pgbouncer/
+    state: directory
+    mode: 0775
+    owner: 'postgres'
+    group: 'postgres'
+  notify: restart pgbouncer
+  tags: pgbouncer
+
+- lineinfile:
+    dest: /etc/default/pgbouncer
+    regexp: '^START='
+    line: 'START=1'
+  notify: restart pgbouncer
+  tags: pgbouncer
+
+- file:
+    dest: /var/run/pgbouncer/
+    state: directory
+    owner: postgres
+    group: postgres
+  notify: restart pgbouncer
+  tags: pgbouncer
+
+- template:
+    src: etc/pgbouncer/userlist.txt.j2
+    dest: "/etc/pgbouncer/userlist.txt"
+  tags: postgresql
+  notify: restart pgbouncer
+
+- template:
+    src: etc/pgbouncer/pgbouncer.ini.j2
+    dest: "/etc/pgbouncer/pgbouncer.ini"
+  tags: postgresql
+  notify: restart pgbouncer

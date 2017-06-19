@@ -1,0 +1,23 @@
+---
+
+- name: s3file:dist.tar.gz
+  s3file:
+    bucket: harrow-binaries
+    key: enterprise/dist.tar.gz
+    dest: /tmp/dist.tar.gz
+    mode: 0600
+    owner: root
+    group: root
+    access_key_id: "{{ vault.aws.access_key_id }}"
+    secret_access_key: "{{ vault.aws.secret_access_key }}"
+    region: eu-west-1
+  register: backend-dist
+
+- name: unarchive:dist.tar.gz
+  unarchive:
+    src: /tmp/dist.tar.gz
+    dest: /srv/harrow/bin/
+    copy: No
+    owner: harrow
+    group: harrow
+  when: backend-dist | changed

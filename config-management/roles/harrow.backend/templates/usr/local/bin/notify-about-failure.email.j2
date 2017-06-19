@@ -1,0 +1,78 @@
+#!/usr/bin/env python3
+
+import socket
+import subprocess
+import time
+import sys
+import smtplib
+from email.mime.text import MIMEText
+
+if len(sys.argv) < 1:
+    sys.stderr.write('Usage: sys.argv[0] <unit name> [<extra>]')
+    sys.exit(1)
+
+mail_to = None
+{% if harrow.environment == "development" %}
+mail_to = "vagrant@{}".format(socket.gethostname())
+{% else %}
+mail_to = "developers@harrow.io"
+{% endif %}
+
+mail_from = "systemd@{}".format(socket.gethostname())
+unit_name = sys.argv[1]
+extra = "{}\n".format(sys.argv[2])
+
+try:
+    unit_status = subprocess.check_output(["systemctl", "status", unit_name])
+except subprocess.CalledProcessError as e:
+    unit_status = e.output
+try:
+    unit_logs = subprocess.check_output(
+        ["journalctl", "-n", "100", "-u", unit_name])
+except subprocess.CalledProcessError as e:
+    unit_logs = e.output
+
+# If the unit is running again after 60 seconds, there is no need to
+# alert anyone. This could happen for example when services are
+# restarted during a deploy.
+print("Giving {unit_name} time to recover before escalating...".format(unit_name=unit_name))
+time.sleep(60)
+
+status = None
+try:
+    status = subprocess.check_output(
+        ["systemctl", "is-active", "-q", unit_name])
+except subprocess.CalledProcessError as e:
+    stauts = e.returncode
+
+if (status == 0):
+    print("process recovered in a timely fashion, not escalating further")
+
+msg = MIMEText('''
+Status report for: {unit_name}
+
+{extra}
+
+Status:
+
+    {unit_status}
+
+Logs:
+
+    {unit_logs}
+
+'''.format(unit_name=unit_name, extra=extra, unit_status=unit_status.decode("utf-8"), unit_logs=unit_logs.decode("utf-8") ))
+
+msg['Subject'] = "systemd unit failure: {unit_name}".format(
+    unit_name=unit_name)
+msg['From'] = mail_from
+msg['To'] = mail_to
+
+try:
+    s = smtplib.SMTP('localhost')
+    s.send_message(msg)
+    s.quit()
+except smtplib.SMTPException as e:
+    print("Error: unable to send email")
+    import traceback
+    traceback.print_exc()

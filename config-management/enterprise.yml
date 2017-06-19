@@ -1,0 +1,19 @@
+---
+- hosts: all
+  tasks:
+    - raw: dpkg -l python || DEBIAN_FRONTEND=noninteractive apt-get install -y python
+  vars:
+    harrow:
+      environment: 'enterprise'
+      backend:
+        version: '23b4f81'
+      frontend:
+        version: '60ee953'
+  roles:
+    - franklinkim.ufw
+    - gtrafimenkov.golang
+    - harrow.backend
+    - harrow.http-server
+    - harrow.postgresql-server
+    - harrow.rabbitmq-master
+    - harrow.redis-master

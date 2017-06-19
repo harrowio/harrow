@@ -1,0 +1,22 @@
+---
+
+- apt:
+    name: redis-server
+    update_cache: true
+  tags: redis
+
+- name: /var/lib/harrow/redis
+  file:
+    state: directory
+    path: /var/lib/harrow/redis
+    owner: harrow
+    group: harrow
+  tags: redis
+
+- name: "install redis config file"
+  copy:
+    src: "etc/redis/redis.conf"
+    dest: "/etc/redis/redis.conf"
+    mode: 0644
+  notify: restart redis
+  tags: redis

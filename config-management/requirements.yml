@@ -1,0 +1,8 @@
+---
+
+- src: franklinkim.ufw
+  version: 1.6.0
+
+- name: 'gtrafimenkov.golang'
+  src: git+https://github.com/leehambley/ansible-role-golang
+  version: v0.0.3

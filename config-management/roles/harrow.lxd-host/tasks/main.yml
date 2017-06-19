@@ -1,0 +1,6 @@
+- include: python-deps.yml
+- include: lxd.yml
+- include: baseimage.yml
+- include: tools.yml
+- include: ssh.yml
+

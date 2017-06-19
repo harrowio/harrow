@@ -1,0 +1,41 @@
+---
+
+- name: file:/srv/harrow/config
+  file:
+    state: directory
+    path: /srv/harrow/config
+    owner: harrow
+    group: harrow
+
+- name: "configuration files {{ item }}"
+  template:
+    src: "srv/harrow/config/{{ item }}.json.j2"
+    dest: "/srv/harrow/config/{{ item }}.json"
+  with_items:
+    - intercom
+  when: harrow.intercom.enabled
+
+- name: "configuration files {{ item }}"
+  template:
+    src: "srv/harrow/config/{{ item }}.json.j2"
+    dest: "/srv/harrow/config/{{ item }}.json"
+  with_items:
+    - hvirt
+  when: harrow.runners.libvirt.enabled
+
+- name: "configuration files {{ item }}"
+  template:
+    src: "srv/harrow/config/{{ item }}.json.j2"
+    dest: "/srv/harrow/config/{{ item }}.json"
+  with_items:
+    - aws
+    - braintree
+    - features
+    - filesystem
+    - http
+    - limits_store
+    - mail
+    - oauth
+    - pgsql
+    - rabbitmq
+    - redis

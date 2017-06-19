@@ -1,0 +1,36 @@
+---
+
+- name: file:/var/www/html
+  file:
+    state: directory
+    path: /var/www/html
+    mode: 0700
+    owner: www-data
+    group: www-data
+  tags: nginx
+
+- name: s3file:dist.tar.gz
+  s3file:
+    bucket: harrow-frontend
+    key: enterprise/dist.tar.gz
+    dest: /tmp/dist.tar.gz
+    mode: 0600
+    owner: root
+    group: root
+    access_key_id: "{{ vault.aws.access_key_id }}"
+    secret_access_key: "{{ vault.aws.secret_access_key }}"
+    region: eu-west-1
+  register: dist
+  tags: nginx
+
+- name: unarchive:dist.tar.gz
+  unarchive:
+    src: /tmp/dist.tar.gz
+    dest: /var/www/html
+    copy: No
+    owner: www-data
+    group: www-data
+  when: dist | changed
+  tags: nginx
+
+

@@ -1,0 +1,5 @@
+{
+{% for vhost in harrow.rabbitmq.virtual_hosts -%}
+  "{{ vhost.environment}}": "amqp://{{ vhost.username }}:{{ vhost.password }}@{{ vhost.host }}/{{ vhost.name }}"{{ loop.last | ternary('', ',') }}
+{% endfor -%}
+}

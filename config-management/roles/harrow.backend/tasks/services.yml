@@ -1,0 +1,43 @@
+---
+- name: "install harrow-notify-about-failure service unit file"
+  copy:
+    src: "etc/systemd/system/harrow-notify-about-failure@.service"
+    dest: "/etc/systemd/system/harrow-notify-about-failure@.service"
+    mode: 0644
+
+- name: "install notify-about-failure executable (email)"
+  template:
+    src: "usr/local/bin/notify-about-failure.email.j2"
+    dest: "/usr/local/bin/notify-about-failure"
+    mode: 0700
+  when: harrow.victorops.enabled != true
+
+- name: "install notify-about-failure executable (victorops)"
+  template:
+    src: "usr/local/bin/notify-about-failure.victorops.j2"
+    dest: "/usr/local/bin/notify-about-failure"
+    mode: 0700
+  when: harrow.victorops.enabled == true
+
+- name: "services files"
+  include: service.yml
+  with_items:
+    - harrow
+    - harrow-admin-api
+    - harrow-api
+    - harrow-braintree-proxy
+    - harrow-build-status-worker
+    - harrow-git-trigger-worker
+    - harrow-keymaker
+    - harrow-mail-dispatcher
+    - harrow-metadata-preflight
+    - harrow-notifier
+    - harrow-operation-runner@
+    - harrow-projector
+    - harrow-scheduler
+    - harrow-watchdog
+    - harrow-ws
+    - harrow-zob
+  loop_control:
+    loop_var: service_name
+

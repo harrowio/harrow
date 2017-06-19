@@ -1,0 +1,52 @@
+[Unit]
+Description=Harrow
+Wants= \
+      harrow-api.service \
+      harrow-activity-stream-worker.service \
+{% if harrow.braintree.enabled %}
+      harrow-braintree-proxy.service \
+{% endif %}
+      harrow-build-status-worker.service \
+      harrow-git-trigger-worker.service \
+      harrow-keymaker.service \
+      harrow-mail-dispatcher.service \
+      harrow-metadata-preflight.service \
+{% if harrow.intercom.enabled %}
+      harrow-intercom-worker.service \
+{% endif %}
+      harrow-notifier.service \
+{% if harrow.runners.libvirt.enabled %}
+      harrow-pooler.service \
+{% endif %}
+{% if harrow.runners.lxd.enabled %}
+      harrow-pooler-lxd.service \
+{% endif %}
+      harrow-postal-worker.service \
+      harrow-scheduler.service \
+{% if harrow.watchdog.enabled %}
+      harrow-watchdog.service \
+{% endif %}
+      harrow-ws.service \
+      harrow-zob.service
+
+After= \
+      basic.target \
+      network.target \
+      redis.service \
+      rabbitmq-server.service \
+      postgresql-9.4.service
+
+{% if harrow.services.notify_on_failure %}
+OnFailure=harrow-notify-about-failure@%n.service
+{% endif %}
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+Environment=HARROW_ENV={{ harrow.environment }}
+WorkingDirectory=/srv/harrow
+ExecStart=/srv/harrow/bin/harrow-any migrate
+User=harrow
+
+[Install]
+WantedBy=multi-user.target

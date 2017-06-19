@@ -1,0 +1,11 @@
+---
+harrow:
+  http:
+    domain_base: localhost
+
+  email_routing:
+    sasl:
+      host: smtp.postmarkapp.com
+      port: 2525
+      username: "{{ vault.email_routing.sasl.username }}"
+      password: "{{ vault.email_routing.sasl.password }}"

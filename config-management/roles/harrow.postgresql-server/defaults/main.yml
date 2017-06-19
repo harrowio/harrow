@@ -1,0 +1,16 @@
+---
+harrow:
+  postgresql:
+    databases:
+      - environment: development
+        name: "{{ shared.postgresql.development.name }}"
+        username: "{{ shared.postgresql.development.username }}"
+        password: "{{ vault.postgresql.development.password }}"
+        port: 6423
+      - environment: test
+        name: "harrow_test"
+        port: 6423
+        username: "test"
+        password: "test"
+  pgbouncer:
+    default_pool_size: 250

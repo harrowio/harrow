@@ -1,0 +1,35 @@
+---
+
+- apt:
+    name: "{{ item }}"
+    update_cache: true
+  with_items:
+    - btrfs-tools
+    - lxd
+  tags:
+    - lxd
+
+- name: enable lxd
+  service:
+    name: lxd
+    state: started
+  tags:
+    - lxd
+
+- name: format ssd for lxd mount volume
+  filesystem:
+    fstype: btrfs
+    opts: '--metadata single --data single'
+    dev: "{{ lxd.device }}"
+  tags:
+    - lxd
+
+- name: mount on /var/lib/lxd
+  mount:
+    name: /var/lib/lxd
+    src: "{{ lxd.device }}"
+    fstype: btrfs
+    opts: noatime
+    state: present
+  tags:
+    - lxd

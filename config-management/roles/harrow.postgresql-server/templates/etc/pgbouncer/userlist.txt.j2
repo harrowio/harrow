@@ -1,0 +1,3 @@
+{% for db in harrow.postgresql.databases -%}
+  "{{ db.username }}" "{{ db.password }}"
+{% endfor -%}

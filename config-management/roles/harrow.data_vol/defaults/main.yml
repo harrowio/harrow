@@ -1,0 +1,3 @@
+---
+data_vol:
+  device: /dev/sdb

@@ -1,0 +1,8 @@
+---
+
+- name: disable ip6 for apt
+  copy:
+    dest: '/etc/apt/apt.conf.d/99force-ip4'
+    content: 'Acquire::ForceIPv4 "true";'
+  tags:
+    - apt

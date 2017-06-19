@@ -1,0 +1,30 @@
+---
+vault:
+
+  email_routing:
+    sasl:
+      username:
+      password:
+
+  victorops:
+    enabled: false
+    api_id:
+    api_key:
+
+  rabbitmq:
+    development:
+      password: nahniawe4tei5eekahghaivaeSai6Aigei3dui2J
+
+  postgresql:
+    development:
+      password: Oi2sohjaipa5ieLiexengohlahz5xaisiegu4wie
+
+ufw_rules:
+  - port: 22
+    rule: allow
+  - port: 15672
+    rule: allow
+  - port: 80
+    rule: allow
+  - port: 443
+    rule: allow

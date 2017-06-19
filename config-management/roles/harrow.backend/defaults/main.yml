@@ -1,0 +1,97 @@
+---
+harrow:
+
+  email:
+    sending_domain: 'example.com'
+
+  services:
+    notify_on_failure: true
+
+  victorops:
+    enabled: "{{ vault.victorops.enabled }}"
+    api_id: "{{ vault.victorops.api_id }}"
+    api_key: "{{ vault.victorops.api_key }}"
+
+  aws:
+    access_key_id:
+    secret_access_key:
+
+  intercom:
+    enabled: false
+    app_id:
+    api_key:
+
+  watchdog:
+    enabled: false
+
+  braintree:
+    enabled: false
+    environment: 'sandbox'
+    merchant_id: ''
+    public_key: ''
+    private_key: ''
+
+  limits_store:
+    cache_path: /tmp
+
+  github:
+    oauth:
+      import_repository:
+        enabled: false
+      authentication:
+        enabled: false
+      app_id: e283dc31b791c3cdb282
+      app_secret: a7d1857c76c11b5330d62859a117e7261e9d50f9
+      redirect_uri_pattern: 'https://www.${domain}/#/a/github/callback/%s'
+  features:
+    trial_period:
+      enabled: false
+    limits:
+      enabled: true
+    guest_account:
+      enabled: true
+    public_projects:
+      enabled: true
+
+  rabbitmq:
+    virtual_hosts:
+      - environment: development
+        name: "{{ shared.rabbitmq.development.name }}"
+        host: "127.0.0.1"
+        username: "{{ shared.rabbitmq.development.username }}"
+        password: "{{ vault.rabbitmq.development.password }}"
+      - environment: test
+        name: "harrow_test"
+        host: "127.0.0.1"
+        username: "test"
+        password: "test"
+
+  postgresql:
+    databases:
+      - environment: test
+        name: harrow_test
+        password: test
+        port: 5432
+        sslmode: 'disable'
+        host: '/var/run/postgresql/'
+        username: test
+      - environment: development
+        name: "{{ shared.postgresql.development.name }}"
+        username: "{{ shared.postgresql.development.username }}"
+        password: "{{ vault.postgresql.development.password }}"
+        port: 5432
+        host: "/var/run/postgresql/"
+        sslmode: 'disable'
+
+  runners:
+    lxd:
+      enabled: true
+    libvirt:
+      enabled: false
+      libvirt_conn: 'qemu:///system'
+      pool_path: /var/lib/libvirt/images
+      baseimage: harrow-baseimage-sparse.qcow2
+      vcpu: 2
+      volume_size: 17179869184 # 16GiB, $(printf "16*2^30\n" | bc)
+      memory: 1073741824 # 1GiB
+      start_limit: 5m

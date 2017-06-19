@@ -1,0 +1,10 @@
+---
+- name: restart pgbouncer
+  service:
+    name: pgbouncer
+    state: restarted
+
+- name: restart postgresql
+  service:
+    name: postgresql
+    state: restarted

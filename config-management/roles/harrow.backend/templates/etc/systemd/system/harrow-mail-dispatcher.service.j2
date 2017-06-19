@@ -1,0 +1,14 @@
+[Unit]
+Description=Harrow Mail Dispatcher
+#Requires=harrow.service
+After=harrow.service
+{% if harrow.services.notify_on_failure %}
+OnFailure=harrow-notify-about-failure@%n.service
+{% endif %}
+
+[Service]
+Environment=HARROW_ENV={{ harrow.environment }}
+WorkingDirectory=/srv/harrow
+ExecStart=/srv/harrow/bin/harrow-any mail-dispatcher
+User=harrow
+Restart=always

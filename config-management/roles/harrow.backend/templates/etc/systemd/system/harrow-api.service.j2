@@ -1,0 +1,14 @@
+[Unit]
+Description=Harrow API
+#Requires=harrow.service
+After=harrow.service
+{% if harrow.services.notify_on_failure %}
+OnFailure=harrow-notify-about-failure@%n.service
+{% endif %}
+
+[Service]
+Environment=HARROW_ENV={{ harrow.environment }} HARROW_PROJECTOR_URL=http://localhost:8888
+WorkingDirectory=/srv/harrow
+ExecStart=/srv/harrow/bin/harrow-any api
+User=harrow
+Restart=always

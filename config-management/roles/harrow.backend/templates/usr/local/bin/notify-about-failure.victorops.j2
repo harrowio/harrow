@@ -1,0 +1,68 @@
+#!/usr/bin/env python3
+
+import socket
+import subprocess
+import time
+import sys
+import json
+import http.client
+
+if len(sys.argv) < 1:
+    sys.stderr.write('Usage: sys.argv[0] <unit name> [<extra>]')
+    sys.exit(1)
+
+mail_from = "systemd@{}".format(socket.gethostname())
+unit_name = sys.argv[1]
+extra = "{}\n".format(sys.argv[2])
+
+try:
+    unit_status = subprocess.check_output(["systemctl", "status", unit_name])
+except subprocess.CalledProcessError as e:
+    unit_status = e.output
+try:
+    unit_logs = subprocess.check_output(
+        ["journalctl", "-n", "100", "-u", unit_name])
+except subprocess.CalledProcessError as e:
+    unit_logs = e.output
+
+# If the unit is running again after 60 seconds, there is no need to
+# alert anyone. This could happen for example when services are
+# restarted during a deploy.
+print("Giving {unit_name} time to recover before escalating...".format(unit_name=unit_name))
+time.sleep(60)
+
+
+import json
+import http.client
+
+conn = http.client.HTTPSConnection("alert.victorops.com")
+
+headers = {
+  "Content-type": "application/json",
+  "Accept": "application/json",
+}
+
+j = json.dumps({
+  'message_type': 'CRITICAL',
+  'entity_display_name': "systemd unit failure: {unit_name}".format(unit_name=unit_name),
+  'state_message': unit_logs.decode('utf-8'),
+  'systemd_extra': extra,
+  'systemd_unit_status': unit_status.decode('utf-8'),
+})
+
+url='/integrations/generic/20131114/alert/39a964ae-4efc-4e09-9b94-9789cc90a21a/{unit_name}'.format(unit_name=unit_name)
+conn.request("POST", url, j, headers)
+
+response = conn.getresponse()
+data = response.read()
+conn.close()
+
+status = None
+try:
+    status = subprocess.check_output(
+        ["systemctl", "is-active", "-q", unit_name])
+except subprocess.CalledProcessError as e:
+    stauts = e.returncode
+
+if (status == 0):
+    print("process recovered in a timely fashion, not escalating further")

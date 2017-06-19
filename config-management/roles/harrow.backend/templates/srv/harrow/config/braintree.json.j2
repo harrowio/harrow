@@ -1,0 +1,18 @@
+{
+  "{{ harrow.environment }}": {
+       "Environment": "{{ harrow.braintree.environment }}",
+       "MerchantId": "{{ harrow.braintree.merchant_id }}",
+       "PublicKey": "{{ harrow.braintree.public_key }}",
+       "PrivateKey": "{{ harrow.braintree.private_key }}",
+       "CacheFile": "/tmp/braintree-cached-billing-plans.json"
+  }
+  {% if harrow.environment == "development" %}
+  ,"test": {
+       "Environment": "{{ harrow.braintree.environment }}",
+       "MerchantId": "{{ harrow.braintree.merchant_id }}",
+       "PublicKey": "{{ harrow.braintree.public_key }}",
+       "PrivateKey": "{{ harrow.braintree.private_key }}",
+       "CacheFile": "/tmp/braintree-cached-billing-plans.json"
+  }
+  {% endif %}
+}

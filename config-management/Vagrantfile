@@ -1,0 +1,101 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+require 'pathname'
+
+HARROW_PATH = Pathname.pwd.join('../')
+
+Vagrant.configure(2) do |config|
+  config.vm.define 'dev' do |dev|
+    # Prefer bento/ubuntu-16.04 over canonical images
+    # https://github.com/mitchellh/vagrant/issues/7155#issuecomment-228568200
+    dev.vm.box = 'bento/ubuntu-16.04'
+    # Requires `VBoxManage --version` >= 5.1.x
+    dev.vm.box_url = 'https://atlas.hashicorp.com/bento/boxes/ubuntu-16.04/versions/2.3.0/providers/virtualbox.box'
+    dev.vm.network 'private_network', ip: '192.168.50.4', hostsupdater: 'skip'
+    dev.vm.hostname = 'dev.harrow.io'
+    dev.vm.provision 'ansible' do |ansible|
+      ansible.inventory_path = 'inventories/development'
+      ansible.limit = 'development'
+      ansible.playbook = 'development.yml'
+      ansible.galaxy_role_file = 'requirements.yml' unless ENV.key?('ANSIBLE_SKIP_GALAXY')
+      ansible.tags = ENV['ANSIBLE_TAGS'] if ENV.key?('ANSIBLE_TAGS')
+      ansible.verbose = ENV['ANSIBLE_VERBOSE'] if ENV.key?('ANSIBLE_VERBOSE')
+    end
+
+    config.vm.provider :virtualbox do |p|
+
+      p.memory = 2048
+      p.cpus = 2
+
+      # Persistent Storage
+      unless File.exists?(Pathname.pwd.join('harrow-data/dev.vdi').to_s)
+        p.customize [ 'createmedium', 'disk', '--filename', Pathname.pwd.join('harrow-data/dev.vdi').to_s, '--format', 'VDI', '--size', 100 * 1024 ]
+      end
+      p.customize [ 'storagectl', :id, '--name', 'SATA Controller', '--portcount', 2 ]
+      p.customize [ 'storageattach', :id, '--storagectl', 'SATA Controller', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', Pathname.pwd.join('harrow-data/dev.vdi').to_s ]
+      # BTRFS Volume for LXD
+      unless File.exists?(Pathname.pwd.join('harrow-data/dev-lxd.vdi').to_s)
+        p.customize [ 'createmedium', 'disk', '--filename', Pathname.pwd.join('harrow-data/dev-lxd.vdi').to_s, '--format', 'VDI', '--size', 100 * 1024 ]
+      end
+      p.customize [ 'storagectl', :id, '--name', 'SATA Controller', '--portcount', 2 ]
+      p.customize [ 'storageattach', :id, '--storagectl', 'SATA Controller', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', Pathname.pwd.join('harrow-data/dev-lxd.vdi').to_s ]
+    end
+
+    # Persistent storage for data
+    # config.persistent_storage.enabled = true
+    # config.persistent_storage.location =
+    # config.persistent_storage.size = 50000
+    # config.persistent_storage.mountname = 'harrow-data'
+    # config.persistent_storage.filesystem = 'ext4'
+    # config.persistent_storage.mountpoint = '/var/lib/harrow-data/'
+    # config.persistent_storage.volgroupname = 'harrow-data'
+
+    # http://www.sebastien-han.fr/blog/2012/12/18/noac-performance-impact-on-web-applications/
+    # dev.vm.synced_folder HARROW_PATH, '/harrow/', type: 'nfs', nfs_udp: false, mount_options: %w(noac actimeo=0 vers=3 lookupcache=none)
+    dev.vm.synced_folder HARROW_PATH, '/harrow/', type: 'nfs'
+    # dev.vm.synced_folder HARROW_PATH, '/harrow/'
+  end
+
+  config.vm.define 'enterprise' do |enterprise|
+    # Prefer bento/ubuntu-16.04 over canonical images
+    # https://github.com/mitchellh/vagrant/issues/7155#issuecomment-228568200
+    enterprise.vm.box = 'bento/ubuntu-16.04'
+    # Requires `VBoxManage --version` >= 5.1.x
+    enterprise.vm.box_url = 'https://atlas.hashicorp.com/bento/boxes/ubuntu-16.04/versions/2.3.0/providers/virtualbox.box  '
+    enterprise.vm.network 'private_network', ip: '192.168.50.5', hostsupdater: 'skip'
+    enterprise.vm.hostname = 'enterprise.harrow.io'
+    enterprise.vm.provision 'ansible' do |ansible|
+      ansible.inventory_path = 'inventories/enterprise'
+      ansible.limit = 'enterprise'
+      ansible.playbook = 'enterprise.yml'
+      ansible.galaxy_role_file = 'requirements.yml' unless ENV.key?('ANSIBLE_SKIP_GALAXY')
+      ansible.tags = ENV['ANSIBLE_TAGS'] if ENV.key?('ANSIBLE_TAGS')
+      ansible.verbose = ENV['ANSIBLE_VERBOSE'] if ENV.key?('ANSIBLE_VERBOSE')
+    end
+
+    # # Persistent storage for data
+    # config.persistent_storage.enabled = true
+    # config.persistent_storage.location = Pathname.pwd.join("harrow-data/enterprise.vdi")
+    # config.persistent_storage.size = 50000
+    # config.persistent_storage.mountname = 'harrow-data'
+    # config.persistent_storage.filesystem = 'ext4'
+    # config.persistent_storage.mountpoint = '/var/lib/harrow-data/'
+    # config.persistent_storage.volgroupname = 'harrow-data'
+    config.vm.provider :virtualbox do |p|
+      # Persistent Storage
+      unless File.exists?(Pathname.pwd.join('harrow-data/enterprise.vdi'))
+        p.customize [ 'createmedium', 'disk', '--filename', Pathname.pwd.join('harrow-data/enterprise.vdi'), '--format', 'VDI', '--size', 100 * 1024 ]
+      end
+      p.customize [ 'storagectl', :id, '--name', 'SATA Controller', '--portcount', 2 ]
+      p.customize [ 'storageattach', :id, '--storagectl', 'SATA Controller', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', Pathname.pwd.join('harrow-data/enterprise.vdi') ]
+      # BTRFS Volume for LXD
+      unless File.exists?(Pathname.pwd.join('harrow-data/enterprise-lxd.vdi'))
+        p.customize [ 'createmedium', 'disk', '--filename', Pathname.pwd.join('harrow-data/enterprise-lxd.vdi'), '--format', 'VDI', '--size', 100 * 1024 ]
+      end
+      p.customize [ 'storagectl', :id, '--name', 'SATA Controller', '--portcount', 2 ]
+      p.customize [ 'storageattach', :id, '--storagectl', 'SATA Controller', '--port', 2, '--device', 0, '--type', 'hdd', '--medium', Pathname.pwd.join('harrow-data/enterprise-lxd.vdi') ]
+    end
+
+  end
+end

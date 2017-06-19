@@ -1,0 +1,5 @@
+{
+{% for db in harrow.postgresql.databases -%}
+  "{{ db.environment}}": "host={{ db.host }} port={{ db.port }} dbname={{ db.name }} user={{ db.username }} password={{ db.password }} sslmode={{ db.sslmode }}"{{ loop.last | ternary('', ',') }}
+{% endfor -%}
+}

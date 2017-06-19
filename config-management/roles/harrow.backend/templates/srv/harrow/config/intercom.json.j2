@@ -1,0 +1,17 @@
+{
+  {% harrow.environment == "development" %}
+  "test": {
+      "AppId": "{{ harrow.intercom.app_id }}",
+      "APIKey": "{{ harrow.intercom.api_key }}"
+  },
+  "development": {
+      "AppId": "{{ harrow.intercom.app_id }}",
+      "APIKey": "{{ harrow.intercom.api_key }}"
+  }
+  {% else %}
+  "{{ harrow.environment }}": {
+      "AppId": "{{ harrow.intercom.app_id }}",
+      "APIKey": "{{ harrow.intercom.api_key }}"
+  }
+  {% endif %}
+}

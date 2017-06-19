@@ -1,0 +1,16 @@
+{
+  "{{ harrow.environment }}": {
+    "bind": "0.0.0.0",
+    "port": 8080,
+    "websocketBind": "0.0.0.0",
+    "websocketPort": 5000
+  }
+  {% if harrow.environment == "development" %}
+  ,"test": {
+    "bind": "[::1]",
+    "port": 3252,
+    "websocketBind": "[::1]",
+    "websocketPort": 3253
+  }
+  {% endif %}
+}

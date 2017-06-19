@@ -1,0 +1,23 @@
+---
+- name: copy:/etc/profile.d/harrow.sh
+  copy:
+    src: etc/profile.d/harrow.sh
+    dest: /etc/profile.d/harrow.sh
+    mode: 0644
+
+- name: install:dependencies (System)
+  apt:
+    name: 'libvirt-dev'
+
+- name: install:dependencies (go get golang.org/x/tools/cmd/goimports)
+  shell: "(bash -l -c \"go get golang.org/x/tools/cmd/goimports \" )"
+
+- name: install:dependencies (go get github.com/jteeuwen/go-bindata/...)
+  shell: "(bash -l -c \"go get github.com/jteeuwen/go-bindata/... \" )"
+
+# - name: install:dependencies (go)
+#   shell: "(bash -l -c \"cd /harrow/api && make godep-global-deps \" )"
+#
+- name: compile:backend (Go)
+  shell: "(bash -l -c \"cd /harrow/api && make\" )"
+  register: compiled_backend

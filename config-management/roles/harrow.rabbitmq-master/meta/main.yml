@@ -1,0 +1,5 @@
+---
+
+allow_duplicates: true
+dependencies:
+  - { role: harrow.data_vol }

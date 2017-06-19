@@ -1,0 +1,22 @@
+---
+- apt:
+    name: python3-dateutil
+    update_cache: true
+
+- name: copy lxd-kill-old script
+  copy:
+    src: usr/local/bin/lxd-kill-old.py
+    dest: /usr/local/bin/lxd-kill-old
+    owner: root
+    group: root
+    mode: 0700
+  tags:
+    - lxd
+
+- name: periodically kill old containers
+  cron:
+    name: "kill too-old containers"
+    minute: "*/5"
+    job: "/usr/local/bin/lxd-kill-old kill"
+  tags:
+    - lxd

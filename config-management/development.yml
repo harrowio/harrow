@@ -1,0 +1,44 @@
+---
+
+- hosts: all
+  tasks:
+    - raw: dpkg -l python || DEBIAN_FRONTEND=noninteractive apt-get install -y python
+  roles:
+    - harrow.base
+
+- hosts: all
+  tasks:
+    - name: install apt essential packages
+      apt: "pkg={{ item }} state=installed update_cache=yes"
+      with_items:
+        - htop
+        - jq
+        - sudo
+        - vim
+
+- hosts: all
+    - harrow.data_vol
+
+- hosts: all
+  tasks:
+    - raw: dpkg -l python || DEBIAN_FRONTEND=noninteractive apt-get install -y python
+  vars:
+    golang_version: "1.8"
+    harrow:
+      environment: 'development'
+      backend:
+        version: false
+      frontend:
+        version: false
+  roles:
+    - harrow.base
+    - franklinkim.ufw
+    - gtrafimenkov.golang
+    - harrow.backend
+    - harrow.development
+    - harrow.http-server
+    - harrow.lxd-host
+    - harrow.postgresql-server
+    - harrow.rabbitmq-master
+    - harrow.redis-master
+

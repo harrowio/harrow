@@ -1,0 +1,49 @@
+- postgresql_ext:
+    name: hstore
+    db: "{{ db.name }}"
+  with_items: "{{ harrow.postgresql.databases }}"
+  become: true
+  become_user: postgres
+  loop_control:
+    loop_var: db
+  tags: postgresql
+
+- postgresql_ext:
+    name: pgcrypto
+    db: "{{ db.name }}"
+  with_items: "{{ harrow.postgresql.databases }}"
+  become: true
+  become_user: postgres
+  loop_control:
+    loop_var: db
+  tags: postgresql
+
+- postgresql_ext:
+    name: "uuid-ossp"
+    db: "{{ db.name }}"
+  with_items: "{{ harrow.postgresql.databases }}"
+  become: true
+  become_user: postgres
+  loop_control:
+    loop_var: db
+  tags: postgresql
+
+- postgresql_ext:
+    name: "btree_gist"
+    db: "{{ db.name }}"
+  with_items: "{{ harrow.postgresql.databases }}"
+  become: true
+  become_user: postgres
+  loop_control:
+    loop_var: db
+  tags: postgresql
+
+- postgresql_ext:
+    name: "plpgsql"
+    db: "{{ db.name }}"
+  with_items: "{{ harrow.postgresql.databases }}"
+  become: true
+  become_user: postgres
+  loop_control:
+    loop_var: db
+  tags: postgresql

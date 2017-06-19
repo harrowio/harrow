@@ -1,0 +1,16 @@
+[Unit]
+Description=Harrow Admin API
+
+[Service]
+Environment=HARROW_ENV={{ harrow.environment }}
+WorkingDirectory=/srv/harrow
+ExecStart=/srv/harrow/bin/harrow-any admin-api -db /var/lib/harrow/config.db -addr 127.0.0.1:8001 -seed /var/lib/harrow/seed
+User=root
+PrivateTmp=yes
+Restart=always
+{% if harrow.services.notify_on_failure %}
+OnFailure=harrow-notify-about-failure@%n.service
+{% endif %}
+
+[Install]
+WantedBy=multi-user.target

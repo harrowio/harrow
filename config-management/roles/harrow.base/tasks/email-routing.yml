@@ -1,0 +1,119 @@
+---
+
+- name: install postfix
+  apt:
+    update_cache: true
+    name: postfix
+  tags:
+    - postfix
+    - email-routing
+    - sendmail
+
+- name: "forbid sendmail to be installed"
+  copy:
+    content: |
+      Package: sendmail
+      Pin: origin ""
+      Pin-Priority: -1
+    dest: /etc/apt/preferences
+  tags:
+    - postfix
+    - email-routing
+    - sendmail
+
+- template:
+    src: etc/postfix/header_check.j2
+    dest: /etc/postfix/header_check
+    mode: 0600
+  notify: reload postfix
+  tags:
+    - postfix
+    - email-routing
+    - canonicalize
+
+- template:
+    src: etc/postfix/sasl_passwd.j2
+    dest: /etc/postfix/sasl_passwd
+    mode: 0600
+  notify: reload postfix
+  register: sasl_password
+  tags:
+    - postfix
+    - email-routing
+    - sasl
+
+- command: /usr/sbin/postmap /etc/postfix/sasl_passwd
+  notify: reload postfix
+  when: sasl_password.changed
+  tags:
+    - postfix
+    - email-routing
+    - sasl
+
+- template:
+    src: etc/postfix/sender_canonical.j2
+    dest: /etc/postfix/sender_canonical
+    mode: 0600
+  notify: reload postfix
+  tags:
+    - postfix
+    - email-routing
+
+- name: "header changes for postfix to canonicalize sender"
+  blockinfile:
+    content: |
+      myorigin = $mydomain
+      sender_canonical_maps = regexp:/etc/postfix/sender_canonical
+      smtp_header_checks = regexp:/etc/postfix/header_check
+    dest: /etc/postfix/main.cf
+  notify: reload postfix
+  tags:
+    - postfix
+    - email-routing
+
+- name: "set relayhost"
+  blockinfile:
+    content: "relayhost = [{{ harrow.email_routing.sasl.host }}]:{{ harrow.email_routing.sasl.port }}"
+    dest: /etc/postfix/main.cf
+    marker: "# {mark} ANSIBLE MANAGED BLOCK RELAYHOST"
+  notify: reload postfix
+  tags:
+    - postfix
+    - email-routing
+    - sasl
+
+- blockinfile:
+    content: "mydomain = {{ harrow.http.domain_base }}"
+    dest: /etc/postfix/main.cf
+    marker: "# {mark} ANSIBLE MANAGED BLOCK MYDOMAIN"
+    state: absent
+  notify: reload postfix
+  tags:
+    - postfix
+    - email-routing
+
+- name: "sasl password configurations"
+  blockinfile:
+    content: |
+      smtp_sasl_auth_enable = yes
+      smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+      smtp_sasl_security_options = noanonymous
+      smtp_use_tls = yes
+    dest: /etc/postfix/main.cf
+    marker: "# {mark} ANSIBLE MANAGED BLOCK SASL PASSWD"
+  notify: reload postfix
+  tags:
+    - postfix
+    - email-routing
+    - sasl
+
+- name: "inet interfaces"
+  blockinfile:
+    content: |
+      inet_interfaces = localhost
+    dest: /etc/postfix/main.cf
+    marker: "# {mark} ANSIBLE MANAGED BLOCK INET INTERFACES"
+  notify: reload postfix
+  tags:
+    - postfix
+    - email-routing

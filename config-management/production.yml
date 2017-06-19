@@ -1,0 +1,27 @@
+---
+
+- hosts: all
+  tasks:
+    - raw: dpkg -l python || DEBIAN_FRONTEND=noninteractive apt-get install -y python
+  # roles:
+  #   - harrow.base
+
+- hosts: all
+  vars:
+    harrow:
+      environment: 'production'
+  tasks:
+    - name: install apt essential packages
+      apt: "pkg={{ item }} state=installed update_cache=yes"
+      with_items:
+        - htop
+        - jq
+        - sudo
+        - vim
+
+- hosts: lxd
+  vars:
+    harrow:
+      environment: 'production'
+  roles:
+    - harrow.lxd-host
