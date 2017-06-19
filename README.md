@@ -89,5 +89,12 @@ See the `README.md` of each subdirectory for more explanation of their contents.
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+## Truncated History
+
+The Git history was truncated at the time of FOSS release to ensure that
+historical secrets and credentials were no longer in unreachable commits in the
+history. It is also partly because merging the individual projects into a
+monorepo was a relatively brutal merger.
+
 ---
 [Autoenv]: https://github.com/kennethreitz/autoenv
