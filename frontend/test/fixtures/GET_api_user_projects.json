@@ -1,0 +1,269 @@
+{
+  "collection": [
+    {
+      "subject": {
+        "uuid": "92cfa771-abcb-4366-3246-846d7a3eac3d",
+        "organizationUuid": "dd2c15ff-cfdf-49ef-3b7d-250be5dc77a7",
+        "name": "test",
+        "public": false,
+        "createdAt": "2016-02-05T11:18:10.675766Z",
+        "archivedAt": null
+      },
+      "_links": {
+        "environments": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/projects/92cfa771-abcb-4366-3246-846d7a3eac3d/environments",
+          "read": "GET",
+          "update": "POST"
+        },
+        "gitTriggers": {
+          "href": "https://www.vm.harrow.io/api/projects/92cfa771-abcb-4366-3246-846d7a3eac3d/git-triggers"
+        },
+        "invitations": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/invitations",
+          "update": "POST"
+        },
+        "jobs": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/projects/92cfa771-abcb-4366-3246-846d7a3eac3d/jobs",
+          "read": "GET",
+          "update": "POST"
+        },
+        "leave": {
+          "href": "https://www.vm.harrow.io/api/projects/92cfa771-abcb-4366-3246-846d7a3eac3d/members"
+        },
+        "members": {
+          "href": "https://www.vm.harrow.io/api/projects/92cfa771-abcb-4366-3246-846d7a3eac3d/members"
+        },
+        "operations": {
+          "href": "https://www.vm.harrow.io/api/projects/92cfa771-abcb-4366-3246-846d7a3eac3d/operations",
+          "read": "GET"
+        },
+        "organization": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/organizations/dd2c15ff-cfdf-49ef-3b7d-250be5dc77a7",
+          "read": "GET",
+          "update": "POST"
+        },
+        "repositories": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/projects/92cfa771-abcb-4366-3246-846d7a3eac3d/repositories",
+          "read": "GET",
+          "update": "POST"
+        },
+        "scheduledExecutions": {
+          "href": "https://www.vm.harrow.io/api/projects/92cfa771-abcb-4366-3246-846d7a3eac3d/scheduled-executions"
+        },
+        "schedules": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/projects/92cfa771-abcb-4366-3246-846d7a3eac3d/schedules",
+          "read": "GET",
+          "update": "POST"
+        },
+        "self": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/projects/92cfa771-abcb-4366-3246-846d7a3eac3d",
+          "read": "GET",
+          "update": "POST"
+        },
+        "tasks": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/projects/92cfa771-abcb-4366-3246-846d7a3eac3d/tasks",
+          "read": "GET",
+          "update": "POST"
+        },
+        "webhooks": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/projects/92cfa771-abcb-4366-3246-846d7a3eac3d/webhooks",
+          "read": "GET",
+          "update": "POST"
+        }
+      },
+      "_embedded": {
+        "organizations": [
+          {
+            "subject": {
+              "uuid": "dd2c15ff-cfdf-49ef-3b7d-250be5dc77a7",
+              "name": "test",
+              "githubLogin": "",
+              "public": false,
+              "createdAt": "2016-02-05T11:18:06.848194Z",
+              "archivedAt": null
+            },
+            "_links": {
+              "add-credit-card": {
+                "href": "https://www.vm.harrow.io/api/billing-plans/braintree/credit-cards"
+              },
+              "members": {
+                "href": "https://www.vm.harrow.io/api/organizations/dd2c15ff-cfdf-49ef-3b7d-250be5dc77a7/members"
+              },
+              "memberships": {
+                "href": "https://www.vm.harrow.io/api/organizations/dd2c15ff-cfdf-49ef-3b7d-250be5dc77a7/memberships"
+              },
+              "projects": {
+                "archive": "DELETE",
+                "create": "POST",
+                "href": "https://www.vm.harrow.io/api/organizations/dd2c15ff-cfdf-49ef-3b7d-250be5dc77a7/projects",
+                "read": "GET",
+                "update": "POST"
+              },
+              "self": {
+                "archive": "DELETE",
+                "create": "POST",
+                "href": "https://www.vm.harrow.io/api/organizations/dd2c15ff-cfdf-49ef-3b7d-250be5dc77a7",
+                "read": "GET",
+                "update": "POST"
+              }
+            },
+            "_embedded": {}
+          }
+        ]
+      }
+    },
+    {
+      "subject": {
+        "uuid": "fada3ee4-0bd0-44c4-367c-42f6443b4bf7",
+        "organizationUuid": "dd2c15ff-cfdf-49ef-3b7d-250be5dc77a7",
+        "name": "Hello World",
+        "public": false,
+        "createdAt": "2016-02-07T14:00:07.330586Z",
+        "archivedAt": null
+      },
+      "_links": {
+        "environments": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/projects/fada3ee4-0bd0-44c4-367c-42f6443b4bf7/environments",
+          "read": "GET",
+          "update": "POST"
+        },
+        "gitTriggers": {
+          "href": "https://www.vm.harrow.io/api/projects/fada3ee4-0bd0-44c4-367c-42f6443b4bf7/git-triggers"
+        },
+        "invitations": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/invitations",
+          "update": "POST"
+        },
+        "jobs": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/projects/fada3ee4-0bd0-44c4-367c-42f6443b4bf7/jobs",
+          "read": "GET",
+          "update": "POST"
+        },
+        "leave": {
+          "href": "https://www.vm.harrow.io/api/projects/fada3ee4-0bd0-44c4-367c-42f6443b4bf7/members"
+        },
+        "members": {
+          "href": "https://www.vm.harrow.io/api/projects/fada3ee4-0bd0-44c4-367c-42f6443b4bf7/members"
+        },
+        "operations": {
+          "href": "https://www.vm.harrow.io/api/projects/fada3ee4-0bd0-44c4-367c-42f6443b4bf7/operations",
+          "read": "GET"
+        },
+        "organization": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/organizations/dd2c15ff-cfdf-49ef-3b7d-250be5dc77a7",
+          "read": "GET",
+          "update": "POST"
+        },
+        "repositories": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/projects/fada3ee4-0bd0-44c4-367c-42f6443b4bf7/repositories",
+          "read": "GET",
+          "update": "POST"
+        },
+        "scheduledExecutions": {
+          "href": "https://www.vm.harrow.io/api/projects/fada3ee4-0bd0-44c4-367c-42f6443b4bf7/scheduled-executions"
+        },
+        "schedules": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/projects/fada3ee4-0bd0-44c4-367c-42f6443b4bf7/schedules",
+          "read": "GET",
+          "update": "POST"
+        },
+        "self": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/projects/fada3ee4-0bd0-44c4-367c-42f6443b4bf7",
+          "read": "GET",
+          "update": "POST"
+        },
+        "tasks": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/projects/fada3ee4-0bd0-44c4-367c-42f6443b4bf7/tasks",
+          "read": "GET",
+          "update": "POST"
+        },
+        "webhooks": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/projects/fada3ee4-0bd0-44c4-367c-42f6443b4bf7/webhooks",
+          "read": "GET",
+          "update": "POST"
+        }
+      },
+      "_embedded": {
+        "organizations": [
+          {
+            "subject": {
+              "uuid": "dd2c15ff-cfdf-49ef-3b7d-250be5dc77a7",
+              "name": "test",
+              "githubLogin": "",
+              "public": false,
+              "createdAt": "2016-02-05T11:18:06.848194Z",
+              "archivedAt": null
+            },
+            "_links": {
+              "add-credit-card": {
+                "href": "https://www.vm.harrow.io/api/billing-plans/braintree/credit-cards"
+              },
+              "members": {
+                "href": "https://www.vm.harrow.io/api/organizations/dd2c15ff-cfdf-49ef-3b7d-250be5dc77a7/members"
+              },
+              "memberships": {
+                "href": "https://www.vm.harrow.io/api/organizations/dd2c15ff-cfdf-49ef-3b7d-250be5dc77a7/memberships"
+              },
+              "projects": {
+                "archive": "DELETE",
+                "create": "POST",
+                "href": "https://www.vm.harrow.io/api/organizations/dd2c15ff-cfdf-49ef-3b7d-250be5dc77a7/projects",
+                "read": "GET",
+                "update": "POST"
+              },
+              "self": {
+                "archive": "DELETE",
+                "create": "POST",
+                "href": "https://www.vm.harrow.io/api/organizations/dd2c15ff-cfdf-49ef-3b7d-250be5dc77a7",
+                "read": "GET",
+                "update": "POST"
+              }
+            },
+            "_embedded": {}
+          }
+        ]
+      }
+    }
+  ],
+  "_meta": {
+    "count": "2",
+    "total": "2"
+  },
+  "_links": {}
+}

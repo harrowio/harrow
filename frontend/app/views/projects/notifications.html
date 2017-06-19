@@ -1,0 +1,35 @@
+<harrow-form save="notifications.save()" translation-root="forms.notifications" class="card" no-controls>
+  <div class="card__header">
+    <div class="card__header__title">Notifications</div>
+    <div class="card__header__action">
+      <!-- <a ui-sref=""><span svg-icon="icon-add"></span></a> -->
+    </div>
+  </div>
+  <div class="card__content">
+    <h4>Defined Rules</h4>
+    <div ng-if="notifications.definedRules.length == 0">No Rules</div>
+    <div class="grid" ng-repeat="rule in notifications.definedRules" style="width:100%">
+      <div class="cell cell--left">
+        <span ng-bind-html="notifications.formattedRule(rule) | toTrusted"></span>
+      </div>
+      <div>
+        <a ng-click="notifications.delete(rule)" class="btn">Remove</a>
+      </div>
+    </div>
+    <div class="field__group">
+      <div harrow-field-input>
+        <select name="triggeredByTaskUuid" ng-model="notifications.rule.subject.triggeredByTaskUuid" ng-options="value.subject.uuid as notifications.taskName(value) for value in notifications.tasks"></select>
+      </div>
+      <div harrow-field-input>
+        <select name="triggerAction" ng-model="notifications.rule.subject.triggerAction" ng-options="key as value for (key, value) in notifications.states"></select>
+      </div>
+      <div harrow-field-input>
+        <select name="taskUuid" ng-model="notifications.rule.subject.taskUuid" ng-options="value.subject.uuid as notifications.taskName(value) for value in notifications.tasks"></select>
+      </div>
+    </div>
+  </div>
+  <div class="card__footer">
+    <div class="layout__spacer"></div>
+    <button type="submit" ng-disabled="harrowForm.form.$invalid" class="btn btn--primary">Save All</button>
+  </div>
+</harrow-form>

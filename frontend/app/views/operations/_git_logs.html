@@ -1,0 +1,21 @@
+<div ng-repeat="(repositoryUuid, commits) in operationShow.operation.subject.gitLogs.repositories">
+  <div class="grid" ng-repeat="commit in commits | limitTo: operationShow.commitLimit()">
+    <div class="cell cell--middle" style="max-width:36px;">
+      <span>
+        <img class="avatar" width="36" height="36" gravatar-src="'{{commit.authorEmail}}'" gravatar-size="72">
+      </span>
+    </div>
+    <div class="cell">
+      <span>
+        <strong>{{commit.subject}}</strong> <code>{{commit.commit | limitTo:8 }}</code><br>
+        by {{commit.author}}, {{commit.authorDate | amTimeAgo}}
+      </span>
+    </div>
+  </div>
+</div>
+
+<p ng-if="operationShow.moreCommits()">
+  {{'moreCommits' | translate:{count:operationShow.moreCommits()}:'messageformat'}}
+</p>
+
+<p ng-if="operationShow.operation.subject.gitLogs.repositories | empty">No Git changes to show.</p>

@@ -1,0 +1,55 @@
+{
+  "collection": [
+    {
+      "subject": {
+        "uuid": "fce89acd-af01-4a04-7a27-528808b83391",
+        "name": "Default",
+        "projectUuid": "92cfa771-abcb-4366-3246-846d7a3eac3d",
+        "variables": {
+          "MY_ENV": "development",
+          "aadsfha": "asdg"
+        },
+        "archivedAt": null
+      },
+      "_links": {
+        "jobs": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/environments/fce89acd-af01-4a04-7a27-528808b83391/jobs",
+          "read": "GET",
+          "update": "POST"
+        },
+        "project": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/projects/92cfa771-abcb-4366-3246-846d7a3eac3d",
+          "read": "GET",
+          "update": "POST"
+        },
+        "secrets": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/environments/fce89acd-af01-4a04-7a27-528808b83391/secrets",
+          "read": "GET",
+          "readPrivileged": "POST"
+        },
+        "self": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/environments/fce89acd-af01-4a04-7a27-528808b83391",
+          "read": "GET",
+          "update": "POST"
+        },
+        "targets": {
+          "href": "https://www.vm.harrow.io/api/environments/fce89acd-af01-4a04-7a27-528808b83391/targets"
+        }
+      },
+      "_embedded": {}
+    }
+  ],
+  "_meta": {
+    "count": "1",
+    "total": "1"
+  },
+  "_links": {}
+}

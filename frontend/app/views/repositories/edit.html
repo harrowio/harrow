@@ -1,0 +1,34 @@
+<div class="app__content">
+  <harrow-form save="ctrl.save()" no-controls translation-root="forms.wizard.connect" class="card card--notifier">
+    <div class="card__content card__content--icon__repositories">
+      <h3 ng-if="appctrl.isNew()">Connect your code repository</h3>
+      <h3 ng-if="!appctrl.isNew()">Edit your code repository</h3>
+      <harrow-input>
+        <input name="url" ng-model="ctrl.repository.subject.url" required="true" />
+      </harrow-input>
+      <div ng-if="appctrl.isNew() && ctrl.$state.includes('wizard')" class="grid" style="max-width: 400px;">
+        <div class="cell cell--middle" style="max-width: 36px; margin-right: 10px;">
+          <span><span svg-icon="icon-info" style="fill: #48639c;"></span></span>
+        </div>
+        <div class="cell">
+          <p>Did you know? We also have a self-hosted version of Harrow you can run behind your firewall! <a href="https://harrow.io/enterprise" target="_blank">Learn more</a>.</p>
+        </div>
+      </div>
+    </div>
+    <div class="card__footer">
+      <a href ng-click="appctrl.back()" class="btn">back</a>
+      <div class="layout__spacer"></div>
+      <a ng-if="appctrl.isNew() && ctrl.$state.includes('wizard')" class="btn" ui-state="ctrl.finalState">Skip</a>
+      <button type="submit" class="btn btn--primary" harrow-stateful="ctrl.saveButtonOptions" ng-disabled="harrowForm.form.$invalid">Continue <span svg-icon="icon-chevron-right"></span></button>
+    </div>
+  </harrow-form>
+
+  <div class="flash flash--inline flash--danger" style="margin-top: 20px;" ng-if="!appctrl.isNew()">
+    <div class="flash__message">
+      Delete repository?
+    </div>
+    <a class="flash__action" ng-confirm-click="Are you sure you want to delete this repository?" ng-click="ctrl.delete()">
+      Delete
+    </a>
+  </div>
+</div>

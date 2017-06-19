@@ -1,0 +1,13 @@
+<harrow-form save="ctrl.confirm()" translation-root="forms.sessionConfirmation" no-controls class="card card--wizard">
+  <div class="card__content card__content--centered">
+    <h3 translate="forms.sessionConfirmation.header"></h3>
+    <p translate="forms.sessionConfirmation.explanation"></p>
+    <harrow-input>
+      <input name="totp" type="text" ng-model="ctrl.session.subject.totp" focus-if />
+    </harrow-input>
+  </div>
+  <div class="card__footer">
+    <div class="layout__spacer"></div>
+    <button type="submit" class="btn btn--primary" ng-disabled="harrowForm.form.$invalid">Confirm <span svg-icon="icon-chevron-right"></span></button>
+  </div>
+</harrow-form>

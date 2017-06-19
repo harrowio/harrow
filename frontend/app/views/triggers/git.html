@@ -1,0 +1,37 @@
+<div class="app__content">
+  <harrow-form save="trigger.save()" no-controls translation-root="forms.triggers.gitTrigger" class="card card--notifier">
+    <div class="card__content card__content--icon__git">
+      <span svg-icon="icon-full-color-git"></span>
+      <h3>Git Trigger</h3>
+      <p>A Git trigger schedules a task every time a change in your repository is detected. Git triggers can fire when a branch or tag is added, changed, or removed.</p>
+      <harrow-input>
+        <input name="name" ng-model="trigger.trigger.subject.name" required="true">
+      </harrow-input>
+      <harrow-input>
+        <select name="changeType" ng-model="trigger.trigger.subject.changeType" required="true" ng-options="('forms.triggers.gitTrigger.options.changeType.' + value| translate) for value in ['change', 'add', 'remove']"></select>
+      </harrow-input>
+      <harrow-input>
+        <input name="matchRef" ng-model="trigger.trigger.subject.matchRef" required="true">
+      </harrow-input>
+      <harrow-input>
+        <select name="repositoryUuid" ng-model="trigger.trigger.subject.repositoryUuid" ng-options="value.uuid as value.name for value in trigger.repositoryOptions"></select>
+        <p ng-if="trigger.hasRepositoryIssue" class="field__hint color__red"><span svg-icon="icon-error" class="iconColor"></span> One or more of your repositories might not be accesible. <a href="" ui-sref="repositories({projectUuid: trigger.project.subject.uuid})">View repositories</a>.</p>
+      </harrow-input>
+      <harrow-input>
+        <select name="taskUuid" ng-model="trigger.trigger.subject.taskUuid" required="true" ng-options="value.subject.uuid as value.subject.name for value in trigger.tasks" ng-disabled="trigger.task != null"></select>
+      </harrow-input>
+    </div>
+    <div class="card__footer">
+      <a ng-click="appctrl.back()" class="btn"><span svg-icon="icon-chevron-left"></span> Back</a>
+      <div class="layout__spacer"></div>
+      <button type="submit" class="btn btn--primary" ng-disabled="harrowForm.form.$invalid">Save</button>
+    </div>
+  </harrow-form>
+
+  <div class="flash flash--inline flash--danger" style="margin-top: 20px;" ng-if="!appctrl.isNew()">
+    <div class="flash__message">
+      Delete Git Trigger?
+    </div>
+    <a class="flash__action" ng-confirm-click="Are you sure you want to delete this Git Trigger?" ng-click="trigger.delete()">Delete</a>
+  </div>
+</div>

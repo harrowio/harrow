@@ -1,0 +1,30 @@
+<div class="app__content">
+  <div class="card card--headerOnly">
+    <div class="card__header">
+      <div class="card__header__title">
+        Scripts
+      </div>
+      <div class="card__header__action">
+        <a can-subject="ctrl.project" can-disable harrow-can="create-scripts" ui-sref="createScript({projectUuid: ctrl.project.subject.uuid})" class="btn btn-small btn-primary"><span svg-icon="icon-add"></span></a>
+      </div>
+    </div>
+  </div>
+  <div class="activity" ng-repeat="script in ctrl.scripts">
+    <div class="activity__container">
+      <div class="activity__meta cell--middle">
+        {{script.subject.name}}
+      </div>
+      <div class="cell--middle">
+        <a ui-sref="script.edit({scriptUuid: script.subject.uuid, projectUuid: script.subject.projectUuid})" class="btn" can-disable harrow-can="update-scripts" can-subject="ctrl.project">edit</a>
+      </div>
+    </div>
+  </div>
+  <div ng-if="ctrl.scripts.length == 0" class="card__content card__content--emptyTight">
+    <span svg-icon="icon-tasks"></span>
+    <h3>Scripts</h3>
+    <br>
+    <a href class="btn btn--border btn--small" ui-sref="createScript({projectUuid: ctrl.project.subject.uuid})" can-disable can-subject="ctrl.project" harrow-can="create-scripts">
+      Add Script
+    </a>
+  </div>
+</div>

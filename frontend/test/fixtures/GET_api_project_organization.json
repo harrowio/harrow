@@ -1,0 +1,44 @@
+{
+  "subject": {
+    "uuid": "89e75265-1b2e-4363-354e-26ac47104f9a",
+    "name": "Harrow Inc.",
+    "githubLogin": "",
+    "public": false,
+    "createdAt": "2015-06-25T13:09:42.476038Z",
+    "archivedAt": null,
+    "billingPlanUuid": "f975a385-3625-4883-b353-8f1febeb5b3e",
+    "creditCards": [
+      {
+        "isDefault": true,
+        "cardholderName": "Joe Tonne",
+        "safeCardNumber": "0118",
+        "cardId": "51dbb5863f1ae7c0fe21dce16e4b21f4",
+        "token": "cbrcwjb"
+      }
+    ]
+  },
+  "_links": {
+    "add-credit-card": {
+      "href": "https://www.app.harrow.io/api/billing-plans/braintree/credit-cards"
+    },
+    "members": {
+      "href": "https://www.app.harrow.io/api/organizations/89e75265-1b2e-4363-354e-26ac47104f9a/members"
+    },
+    "memberships": {
+      "href": "https://www.app.harrow.io/api/organizations/89e75265-1b2e-4363-354e-26ac47104f9a/memberships"
+    },
+    "projects": {
+      "archive": "DELETE",
+      "create": "POST",
+      "href": "https://www.app.harrow.io/api/organizations/89e75265-1b2e-4363-354e-26ac47104f9a/projects",
+      "read": "GET",
+      "update": "POST"
+    },
+    "self": {
+      "create": "POST",
+      "href": "https://www.app.harrow.io/api/organizations/89e75265-1b2e-4363-354e-26ac47104f9a",
+      "read": "GET"
+    }
+  },
+  "_embedded": {}
+}

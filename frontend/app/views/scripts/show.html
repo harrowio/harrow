@@ -1,0 +1,34 @@
+<div class="app__content">
+  <div class="sectionHeader sectionHeader--bold">
+    <a href ui-sref="script({projectUuid: ctrl.project.subject.uuid, scriptUuid: ctrl.script.subject.uuid})" class="sectionHeader__title">{{ctrl.script.subject.name | titlecase}}</a>
+    <span>Script</span>
+    <div class="layout__spacer"></div>
+  </div>
+  <div class="environments">
+    <div class="environment" ng-repeat="environment in ctrl.enabledEnvironments" ng-init="script = ctrl.script; task = ctrl.taskFor(environment); triggers = task._embedded.triggers; notifiers = task._embedded.notifiers; project = ctrl.project">
+      <div class="sectionHeader">
+        <a href ui-sref="task({projectUuid: project.subject.uuid, taskUuid: task.subject.uuid})" class="sectionHeader__title"><span svg-icon="icon-environments"></span> {{environment.subject.name | titlecase}}</a>
+        <div class="layout__spacer"></div>
+        <a href ui-sref="environment.edit({projectUuid: project.subject.uuid, uuid: environment.subject.uuid})" harrow-can="update-environment" can-subject="$resolve.project">Edit Environment</a>
+      </div>
+      <div class="environment__detail">
+        <div class="grid grid--marginWide grid--wrap">
+          <div class="cell cell--3Col" ng-include="'views/tasks/_triggers.html'" ng-if="appctrl.isAuthenticated()"></div>
+          <div class="cell cell--3Col" ng-include="'views/tasks/_notifications.html'" ng-if="appctrl.isAuthenticated()"></div>
+          <div class="cell cell--6Col cell--baseline" ng-include="'views/tasks/_last_run.html'" ng-init="operation = ctrl.mostRecentOperationFor(task)"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="environmentsOther" ng-if="ctrl.disabledEnvironments.length" harrow-can="create-tasks" can-subject="$resolve.project">
+    <div class="sectionHeader">
+      <a class="sectionHeader__title">Enable script on other environments</a>
+    </div>
+    <div class="environments environments--disabled">
+      <div class="environment emptyCard" ng-repeat="environment in ctrl.disabledEnvironments" ng-click="ctrl.createForEnv(environment)">
+        <span svg-icon="icon-add"></span>
+        Enable on {{environment.subject.name}}
+      </div>
+    </div>
+  </div>
+</div>

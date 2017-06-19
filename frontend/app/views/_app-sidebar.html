@@ -1,0 +1,15 @@
+<div ng-if="appSidebar.taskName" class="bgColor__red card__content--icon__tasks" style="margin:-2px -20px; padding:60px 20px 0 20px; text-align:center;">
+  <h3 style="color:inherit;">{{appSidebar.taskName}}</h3>
+</div>
+<a ui-state="menuItem.sref" ui-state-params="appctrl.$state.params" ui-state-options="{inherit: true}" class="navigation__item" ng-repeat="menuItem in appSidebar.menu" feature="{{menuItem.feature}}" ng-class="{active: appctrl.isAppSidebarStateActive(menuItem.sref)}">
+  <div class="navigation__item__icon" ng-if="menuItem.icon">
+    <span svg-icon="{{menuItem.icon}}" ng-class="{iconColor: appctrl.isAppSidebarStateActive(menuItem.sref)}"/>
+  </div>
+  <div class="navigation__item__detail">
+    <h4>{{menuItem.title}}</h4>
+    <p>{{menuItem.subtitle}}</p>
+  </div>
+  <div class="navigation__item__chevron">
+    <span svg-icon="icon-chevron-right"></span>
+  </div>
+</a>

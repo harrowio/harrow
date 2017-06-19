@@ -1,0 +1,26 @@
+<div class="app__content">
+  <harrow-form save="ctrl.save()" translation-root="forms.notifiers.emailNotifier" class="card card--notifier" no-controls>
+    <div class="card__content card__content--icon__slack">
+      <span svg-icon="icon-mail" class="iconColor notifierLogo"></span>
+      <h3>Email Notifier</h3>
+      <br>
+      <harrow-input>
+        <input name="recipient" ng-model="ctrl.notifier.subject.recipient" required="true">
+      </harrow-input>
+    </div>
+    <div class="card__footer">
+      <div ng-click="appctrl.back()" class="btn">Back</div>
+      <div class="layout__spacer"></div>
+      <button type="submit" ng-disabled="harrowForm.form.$invalid" class="btn btn--primary">Save</button>
+    </div>
+  </harrow-form>
+
+  <div class="flash flash--inline flash--danger" style="margin-top: 20px;" ng-if="!appctrl.isNew()">
+    <div class="flash__message">
+      Delete Email Notifier?
+    </div>
+    <a class="flash__action" ng-confirm-click="Are you sure you want to delete this Email Notifier?" ng-click="ctrl.delete()">
+    Delete
+  </a>
+  </div>
+</div>

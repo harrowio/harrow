@@ -1,0 +1,31 @@
+<div class="app__content">
+  <harrow-form save="wizardCreate.save()" translation-root="forms.wizard.create" class="card card--wizard card--iconWall" no-controls>
+    <div class="card__content card__content--centered">
+      <img width="64" height="64" gravatar-src="'{{appctrl.authentication.currentUser.subject.email}}'" gravatar-size="128" class="avatar">
+
+      <h2>Hey {{appctrl.authentication.currentUser.subject.name | titlecase}}</h2>
+      
+      <p ng-if="!wizardCreate.$state.params.quickStartFailed">Lets get your account all set up.</p>
+      <p ng-if="wizardCreate.$state.params.quickStartFailed">Ok, lets try another way to setup your account.</p>
+
+      <h3 ng-if="wizardCreate.organization.subject.uuid">Create another project for {{wizardCreate.organization.subject.name}}</h3>
+      <h3 ng-if="!wizardCreate.organization.subject.uuid">Create your project and organization</h3>
+      <p feature="oauth.github.import-repository">or you can <strong>skip this step</strong> by connecting your <a href ng-click="ctrl.connect('github')">GitHub</a> or <a href ng-click="ctrl.connect('bitbucket')">Bitbucket</a> repository.</p>
+      <br>
+      <harrow-input ng-if="!wizardCreate.organization.subject.uuid">
+        <input name="organizationName" ng-model="wizardCreate.organization.subject.name" required="true" focus-if />
+      </harrow-input>
+      <harrow-input>
+        <input name="projectName" ng-model="wizardCreate.project.subject.name" required="true" />
+      </harrow-input>
+    </div>
+    <div class="card__footer">
+      <a ng-click="appctrl.back()" class="btn" ng-if="wizardCreate.$resolve.organizations.length != 0"><span svg-icon="icon-chevron-left"></span> Back</a>
+      <div class="layout__spacer"></div>
+      <button type="submit" class="btn btn--primary" ng-disabled="harrowForm.form.$invalid">Continue <span svg-icon="icon-chevron-right"></span></button>
+    </div>
+  </harrow-form>
+  <center ng-if="$resolve.organizations.length == 0">
+    <small>Not your account? <a ng-click="appctrl.logout()">Log out</a></small>
+  </center>
+</div>

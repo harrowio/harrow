@@ -1,0 +1,59 @@
+{
+  "subject": {
+    "uuid": "f4f3440f-12d4-4167-3f40-3794710c9fe1",
+    "url": "ssh://github.com/harrow/frontend.git",
+    "name": "",
+    "accessible": false,
+    "projectUuid": "0226064d-08ae-4208-31e8-e23b01f92382",
+    "githubImported": false,
+    "githubLogin": "",
+    "githubRepo": "",
+    "createdAt": "2016-06-28T14:14:49.971264Z",
+    "archivedAt": null,
+    "metadataUpdatedAt": null,
+    "metadata": null,
+    "connectedSuccessfully": false
+  },
+  "_links": {
+    "checks": {
+      "archive": "DELETE",
+      "create": "POST",
+      "href": "https://www.vm.harrow.io/api/repositories/f4f3440f-12d4-4167-3f40-3794710c9fe1/checks",
+      "read": "GET",
+      "update": "POST"
+    },
+    "credential": {
+      "href": "https://www.vm.harrow.io/api/repositories/f4f3440f-12d4-4167-3f40-3794710c9fe1/credential",
+      "read": "GET"
+    },
+    "github-deploy-key": {
+      "archive": "DELETE",
+      "create": "POST",
+      "href": "https://www.vm.harrow.io/api/oauth/github/repositories/f4f3440f-12d4-4167-3f40-3794710c9fe1/keys",
+      "update": "POST"
+    },
+    "metadata": {
+      "href": "https://www.vm.harrow.io/api/repositories/f4f3440f-12d4-4167-3f40-3794710c9fe1/metadata"
+    },
+    "operations": {
+      "cancel": "POST",
+      "href": "https://www.vm.harrow.io/api/repositories/f4f3440f-12d4-4167-3f40-3794710c9fe1/operations",
+      "read": "GET"
+    },
+    "project": {
+      "archive": "DELETE",
+      "create": "POST",
+      "href": "https://www.vm.harrow.io/api/projects/0226064d-08ae-4208-31e8-e23b01f92382",
+      "read": "GET",
+      "update": "POST"
+    },
+    "self": {
+      "archive": "DELETE",
+      "create": "POST",
+      "href": "https://www.vm.harrow.io/api/repositories/f4f3440f-12d4-4167-3f40-3794710c9fe1",
+      "read": "GET",
+      "update": "POST"
+    }
+  },
+  "_embedded": {}
+}

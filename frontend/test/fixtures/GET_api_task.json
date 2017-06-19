@@ -1,0 +1,35 @@
+{
+  "subject": {
+    "uuid": "524f4158-eca7-4907-7032-dfebefcb19ee",
+    "body": "#!/bin/bash -e\n\n# Welcome to your first task.\n\n# Folds tell our log viewer to make collapsible regions. You can either wrap\n# your commands in hfold blocks like this...\nhfold \"Greet the world\"\n  printf \"Hello, %s!\\n\" \"World\"\nhfold --end\n\n# ... or you can specify a single command to run as the second argument to\n# hfold:\nhfold \"Install cowsay\" sudo apt-get install cowsay\n\n/usr/games/cowsay \"Harrow is a new kind of CI\"\n",
+    "createdAt": "2016-02-05T11:18:10.675766Z",
+    "name": "Welcome",
+    "projectUuid": "92cfa771-abcb-4366-3246-846d7a3eac3d",
+    "type": "script",
+    "archivedAt": null
+  },
+  "_links": {
+    "jobs": {
+      "archive": "DELETE",
+      "create": "POST",
+      "href": "https://www.vm.harrow.io/api/tasks/524f4158-eca7-4907-7032-dfebefcb19ee/jobs",
+      "read": "GET",
+      "update": "POST"
+    },
+    "project": {
+      "archive": "DELETE",
+      "create": "POST",
+      "href": "https://www.vm.harrow.io/api/projects/92cfa771-abcb-4366-3246-846d7a3eac3d",
+      "read": "GET",
+      "update": "POST"
+    },
+    "self": {
+      "archive": "DELETE",
+      "create": "POST",
+      "href": "https://www.vm.harrow.io/api/tasks/524f4158-eca7-4907-7032-dfebefcb19ee",
+      "read": "GET",
+      "update": "POST"
+    }
+  },
+  "_embedded": {}
+}

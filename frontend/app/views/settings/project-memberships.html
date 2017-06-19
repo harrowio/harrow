@@ -1,0 +1,18 @@
+<div class="card">
+  <div class="card__header">Project Memberships</div>
+  <div class="card__content">
+    <p class="information" translate="forms.userSettings.noProjectMemberships"></p>
+    <p translate="forms.userSettings.noticeAboutOrganizations"></p>
+    <table ng-hide="ctrl.projects.length == 0" class="table">
+      <thead>
+        <th>Project</th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="project in ctrl.projects">
+          <td>{{project.subject.name}}</td>
+          <td><button class="btn btn-primary btn-danger pull-right" ng-click="ctrl.leaveProject(project)">Leave</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

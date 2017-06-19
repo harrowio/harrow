@@ -1,0 +1,22 @@
+<div class="app__content">
+  <div class="sectionHeader sectionHeader--bold">
+    <span class="sectionHeader__title">Your Dashboard</span>
+    <div class="layout__spacer"></div>
+    <a href="https://www.youtube.com/channel/UCCJ34dxFauZ15xds-cCdB5w" target="_blank" class="btn btn--learnMore"><span svg-icon="icon-video"></span><span class="ng-hide-mobile"> Learn about Harrow.io</span></a>
+  </div>
+  <div class="organizations">
+    <div class="organization" ng-repeat="organization in ctrl.organizations">
+      <div class="sectionHeader">
+        <a href ui-sref="organization({uuid: organization.subject.uuid})" class="sectionHeader__title">{{organization.subject.name}}</a>
+        <span>Organization</span>
+        <div class="layout__spacer"></div>
+        <a href ui-sref="organization.edit({uuid: organization.subject.uuid})" harrow-can="update" can-subject="organization">Edit Organization</a>
+      </div>
+      <div ng-include="'views/projects/_cards.html'" ng-init="cards = ctrl.cardsByOrganization[organization.subject.uuid]"></div>
+    </div>
+    <a class="emptyCard" ui-sref="wizard.create">
+      <span svg-icon="icon-add"></span>
+      Add new Organization
+    </a>
+  </div>
+</div>

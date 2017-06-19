@@ -1,0 +1,153 @@
+{
+  "collection": [
+    {
+      "subject": {
+        "uuid": "5dbe751d-aab0-4103-324e-6101eddab951",
+        "projectUuid": "92cfa771-abcb-4366-3246-846d7a3eac3d",
+        "notifierUuid": "b42d371d-321a-4441-3970-b2b2d91f4c2b",
+        "notifierType": "slackNotifiers",
+        "matchActivity": "operation.succeeded",
+        "creatorUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+        "jobUuid": "d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+        "archivedAt": null
+      },
+      "_links": {
+        "job": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/jobs/d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+          "read": "GET",
+          "update": "POST"
+        },
+        "project": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/projects/92cfa771-abcb-4366-3246-846d7a3eac3d",
+          "read": "GET",
+          "update": "POST"
+        },
+        "self": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/notification-rules/5dbe751d-aab0-4103-324e-6101eddab951",
+          "read": "GET",
+          "update": "POST"
+        }
+      },
+      "_embedded": {}
+    },
+    {
+      "subject": {
+        "uuid": "f8013ba8-0b69-4a0f-3daa-a7f4129f4f0f",
+        "projectUuid": "92cfa771-abcb-4366-3246-846d7a3eac3d",
+        "notifierUuid": "d84ec3ed-8329-4db9-3ece-c97f364880b0",
+        "notifierType": "slackNotifiers",
+        "matchActivity": "operation.failed",
+        "creatorUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+        "jobUuid": "d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+        "archivedAt": null
+      },
+      "_links": {
+        "job": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/jobs/d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+          "read": "GET",
+          "update": "POST"
+        },
+        "project": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/projects/92cfa771-abcb-4366-3246-846d7a3eac3d",
+          "read": "GET",
+          "update": "POST"
+        },
+        "self": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/notification-rules/f8013ba8-0b69-4a0f-3daa-a7f4129f4f0f",
+          "read": "GET",
+          "update": "POST"
+        }
+      },
+      "_embedded": {}
+    },
+    {
+      "subject": {
+        "uuid": "4f15189b-5eb0-4339-3ee1-ae73771421ab",
+        "projectUuid": "92cfa771-abcb-4366-3246-846d7a3eac3d",
+        "notifierUuid": "b42d371d-321a-4441-3970-b2b2d91f4c2b",
+        "notifierType": "slackNotifiers",
+        "matchActivity": "operation.failed",
+        "creatorUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+        "jobUuid": "d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+        "archivedAt": null
+      },
+      "_links": {
+        "job": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/jobs/d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+          "read": "GET",
+          "update": "POST"
+        },
+        "project": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/projects/92cfa771-abcb-4366-3246-846d7a3eac3d",
+          "read": "GET",
+          "update": "POST"
+        },
+        "self": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/notification-rules/4f15189b-5eb0-4339-3ee1-ae73771421ab",
+          "read": "GET",
+          "update": "POST"
+        }
+      },
+      "_embedded": {}
+    },
+    {
+      "subject": {
+        "uuid": "4bcc19b0-7ce2-4d58-31d7-857daaefbfe3",
+        "projectUuid": "92cfa771-abcb-4366-3246-846d7a3eac3d",
+        "notifierUuid": "d84ec3ed-8329-4db9-3ece-c97f364880b0",
+        "notifierType": "slackNotifiers",
+        "matchActivity": "operation.succeeded",
+        "creatorUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+        "jobUuid": "d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+        "archivedAt": null
+      },
+      "_links": {
+        "job": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/jobs/d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+          "read": "GET",
+          "update": "POST"
+        },
+        "project": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/projects/92cfa771-abcb-4366-3246-846d7a3eac3d",
+          "read": "GET",
+          "update": "POST"
+        },
+        "self": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/notification-rules/4bcc19b0-7ce2-4d58-31d7-857daaefbfe3",
+          "read": "GET",
+          "update": "POST"
+        }
+      },
+      "_embedded": {}
+    }
+  ],
+  "_meta": {
+    "count": "4",
+    "total": "4"
+  },
+  "_links": {}
+}

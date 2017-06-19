@@ -1,0 +1,53 @@
+<div class="app__content">
+
+  <div class="card card--wizard">
+    <div class="card__content card__content--centered">
+      <h3>Choose your setup to populate Harrow with defaults</h3>
+      <br>
+
+      <div class="stencil" ng-click="ctrl.applyStencil('capistrano-rails')">
+        <div class="stencil__icons">
+          <div>
+            <span svg-icon="icon-full-color-rails-alt"></span>
+          </div>
+          <div>
+            <span svg-icon="icon-full-color-capistrano"></span>
+          </div>
+        </div>
+        <div class="stencil__content">
+          <h4>Ruby on Rails with Capistrano</h4>
+          <p>Tasks for testing, deployment to two environments including pre-generated deploy-keys. Tailor-made for your repository.</p>
+        </div>
+      </div>
+
+      <div class="stencil" ng-click="ctrl.applyStencil('bash-linux')">
+        <div class="stencil__icons">
+          <div>
+            <span svg-icon="icon-full-color-ubuntu"></span>
+          </div>
+          <div>
+            <span svg-icon="icon-full-color-terminal-alt"></span>
+          </div>
+        </div>
+        <div class="stencil__content">
+          <h4>Linux &amp; Shell (Bash)</h4>
+          <p>Great if you need a bit more control, and you know your way around a shell-script. Some tasks to help inspire you.</p>
+        </div>
+      </div>
+
+      <div class="stencil stencil--empty" ng-click="appctrl.openSupport($event, 'I would like something different for my tasks...')">
+        <div class="stencil__content">
+          Need something different? Talk to Support
+        </div>
+      </div>
+
+    </div>
+    <div class="card__footer">
+      <a ng-click="appctrl.back()" class="btn"><span svg-icon="icon-chevron-left"></span> Back</a>
+      <div class="layout__spacer"></div>
+      <div harrow-stateful="ctrl.saveButtonOptions"></div>
+      <div class="layout__spacer"></div>
+      <a ui-sref="wizard.project.finished({projectUuid: ctrl.project.subject.uuid})" class="btn">Skip</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+#!/bin/sh -eu
+
+ENVS="staging app enterprise"
+
+if [ -n "$(git diff --shortstat 2>/dev/null | tail -n1)" ]; then
+  printf "\n\n\nRefusing to dist on a dirty working tree\n" >&2
+  exit 1
+fi
+
+dest_url() {
+  printf "s3://harrow-frontend/%s-%s/dist.tar.gz" "$(git rev-parse --short HEAD)" "$1"
+}
+
+for e in $ENVS; do
+  HARROW_ENV=$e npm run build
+  (
+    cd dist
+    tar -cz . | aws s3 cp - "$(dest_url "$e")"
+  )
+done
+
+ref="refs/releases/$(date -u +%Y-%m-%dT%H_%M_%S+00_00)"
+git update-ref "${ref}" HEAD
+git push origin "${ref}":"${ref}"

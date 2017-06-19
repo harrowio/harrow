@@ -1,0 +1,87 @@
+<div class="card">
+  <div class="card__header">
+    <div class="card__header__title">
+      Triggers
+    </div>
+    <div class="card__header__action">
+      <a class="btn" can-disable harrow-can="create-tasks" can-subject="$resolve.project" ui-sref="task.edit.triggers({ taskUuid: task.subject.uuid, projectUuid: project.subject.uuid })">
+        <span svg-icon="icon-add"></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card__items">
+    <div ng-repeat="(triggerType, triggerCollection) in triggers">
+      <div class="card__item" ng-repeat="trigger in triggerCollection" can-disable harrow-can="update-{{triggerType}}" can-subject="$resolve.project" ng-if="triggerCollection.length <= 2" ui-state="appctrl.triggerState(triggerType)" ui-state-params="{projectUuid: project.subject.uuid, taskUuid: task.subject.uuid, uuid: trigger.subject.uuid}">
+        <div class="card__item__icon">
+          <span svg-icon="{{ 'forms.triggers.' + (triggerType | singularize) + '.icon' | translate }}"></span>
+        </div>
+        <div class="card__item__content">
+          <strong>{{ 'forms.triggers.' + (triggerType | singularize) + '.legend' | translate }}</strong> {{ trigger.subject.name }}
+          <span ng-if="triggerType == 'schedules'" schedule-next-run="trigger"></span>
+          <span ng-if="triggerType == 'taskNotifiers'" notification-rules="trigger._embedded.notificationRules"></span>
+        </div>
+      </div>
+      <div class="card__item" ng-if="triggerCollection.length > 2" ui-state="'task.edit.triggers'" ui-state-params="{projectUuid: project.subject.uuid, taskUuid: task.subject.uuid}">
+        <div class="card__item__icon">
+          <span svg-icon="{{ 'forms.triggers.' + (triggerType | singularize) + '.icon' | translate }}"></span>
+        </div>
+        <div class="card__item__content">
+          <strong>{{ 'forms.triggers.' + (triggerType | singularize) + '.collectionLegend' | translate:{count:triggerCollection.length}:'messageformat' }}</strong>
+        </div>
+      </div>
+    </div>
+
+    <table style="margin: 20px;" ng-if="triggers | hasNoItems">
+      <thead>
+        <tr>
+          <th colspan=2>Setup your first trigger</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td rowspan=2 style="padding-right:10px; vertical-align:top;">
+            <span svg-icon="icon-clock" class="iconColor" svg-icon-size="28"></span>
+          </td>
+          <td width="100%">
+            <a href can-disable harrow-can="create-schedules" can-subject="$resolve.project" ui-state="'task.edit.triggers.schedule.weekly'" ui-state-params="{ taskUuid: task.subject.uuid, projectUuid: project.subject.uuid, scriptUuid: script.subject.uuid, returnToHere: true }" class="color__red">At this time, every week</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href can-disable harrow-can="create-schedules" can-subject="$resolve.project" ui-state="'task.edit.triggers.schedule.nighly'" ui-state-params="{ taskUuid: task.subject.uuid, projectUuid: project.subject.uuid, scriptUuid: script.subject.uuid, returnToHere: true }" class="color__red">Run this task every night</a>
+          </td>
+        </tr>
+        <tr>
+          <td rowspan=2 style="padding-right:10px;vertical-align:top;">
+            <span svg-icon="icon-full-color-git" svg-icon-size="28"></span>
+          </td>
+          <td width="100%">
+            <a href can-disable harrow-can="create-gitTriggers" can-subject="$resolve.project" ui-state="'task.edit.triggers.gitTrigger.onBranch'" ui-state-params="{ taskUuid: task.subject.uuid, projectUuid: project.subject.uuid, scriptUuid: script.subject.uuid, returnToHere: true }" class="color__red">When a new Git branch is created</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href can-disable harrow-can="create-gitTriggers" can-subject="$resolve.project" ui-state="'task.edit.triggers.gitTrigger.onMasterCommit'" ui-state-params="{ taskUuid: task.subject.uuid, projectUuid: project.subject.uuid, scriptUuid: script.subject.uuid, returnToHere: true }" class="color__red">For every Git push on master</a>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td style="padding-top:10px;">
+            <a ui-sref="task.edit.triggers({ taskUuid: task.subject.uuid, projectUuid: project.subject.uuid })">View more options</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="layout__spacer" harrow-can="create-tasks" can-subject="project"></div>
+    <div class="card__item" harrow-can="create-tasks" can-subject="project">
+      <div class="card__item__icon">
+        <img width="36" height="36" gravatar-src="'{{appctrl.authentication.currentUser.subject.email}}'" gravatar-size="72" class="avatar">
+      </div>
+      <div class="card__item__content">
+        <a href ng-click="appctrl.runTaskNow(task)" class="btn btn--border" style="width:100%">Run Manually</a>
+      </div>
+    </div>
+  </div>
+</div>

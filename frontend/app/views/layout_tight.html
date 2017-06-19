@@ -1,0 +1,27 @@
+<!--[if lt IE 9]>
+  <div class="notice__top">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+<div class="layout__container bgColor__purple">
+  <div class="layout" ng-class="{'container--small': appctrl.$state.current.data.container == 'small','container--tight': !appctrl.$state.current.data.container}">
+    <div class="layout__content layout--column">
+      <div class="layout__spacer"></div>
+      <header class="layout__header">
+        <a href="https://www.harrow.io" class="layout-title">
+          <span svg-icon="logo-with-type" width="200" height="34" />
+        </a>
+      </header>
+      <main ui-view="main"></main>
+      <div ng-include="'views/_flash-alerts.html'"></div>
+      <footer class="footer footer--compact">
+        <div class="copyright">&copy; Harrow Inc.</div>
+        <div class="navigation">
+          <a href="https://kb.harrow.io/" ga="'send', 'event', 'user', 'knowledgebase'">Knowledge Base</a>
+          <a href ng-click="appctrl.openSupport($event)" ga="'send', 'event', 'user', 'support'">Support</a>
+          <a href="https://harrow.io/privacy-policy/" ga="'send', 'event', 'user', 'privacy'">Privacy</a>
+          <a href="https://harrow.io/terms-and-conditions/" ga="'send', 'event', 'user', 'terms'">Terms</a>
+        </div>
+      </footer>
+      <div class="layout__spacer"></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div ng-controller="settingsCtrl as ctrl">
+  <h2>Set your account and password now</h2>
+  <p>Make sure you log back in later, Don't loose your work!</p>
+  <harrow-form save="ctrl.updatePersonalSettings()" translation-root="forms.userSettings" no-controls ng-init="ctrl.user.subject.withoutPassword = true; ctrl.user.subject.name = ''; ctrl.user.subject.email = '';">
+    <harrow-input>
+      <input name="name" type="text" ng-model="ctrl.user.subject.name" required="true" focus-if />
+    </harrow-input>
+    <harrow-input>
+      <input name="email" type="email" ng-model="ctrl.user.subject.email" required="true" />
+    </harrow-input>
+    <harrow-input>
+      <input name="newPassword" type="password" ng-model="ctrl.user.subject.newPassword" required="true" minlength="10" />
+    </harrow-input>
+    <button type="submit" class="btn btn--primary" ng-disabled="harrowForm.form.$invalid" harrow-stateful="ctrl.buttonStateful">Set Email &amp; Password</button>
+  </harrow-form>
+</div>

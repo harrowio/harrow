@@ -1,0 +1,17 @@
+<div class="app__content">
+  <div class="card card--wizard card--iconWall">
+    <div class="card__content card__content--centered" style="min-height: 460px;">
+      <span svg-icon="icon-complete" class="iconColor" svg-icon-size="64"></span>
+      <br>
+      <h3 translate="forms.wizard.finished.header" translate-values="{projects: $resolve.projects.length, ordinal: ($resolve.projects.length | ordinal)}" translate-interpolation="messageformat"></h3>
+      <center>
+        <p>Watch the video below to learn about projects</p>
+        <p>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/ouCzyKMZ6QI" frameborder="0" allowfullscreen></iframe>
+        </p>
+        <br>
+      </center>
+      <a href ui-sref="projects/show({projectUuid: $resolve.project.subject.uuid})" class="btn btn--primary">Proceed to Project <span svg-icon="icon-chevron-right"></span></a>
+    </div>
+  </div>
+</div>

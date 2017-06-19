@@ -1,0 +1,53 @@
+<div class="card card--headerOnly">
+  <div class="card__header">
+    <div class="card__header__title">Git Triggers</div>
+    <div class="card__header__action">
+      <!-- TODO enable harrow-can -->
+      <a ui-sref="projects/edit.createTrigger({projectUuid: ctrl.project.subject.uuid})" can-subject="ctrl.project" can-action="create-gitTriggers" class="btn"><span svg-icon="icon-add"></span></a>
+    </div>
+  </div>
+
+  <div ng-if="gitTriggerList.gitTriggers.length == 0" class="card__content card__content--empty">
+    <span svg-icon="icon-triggers"></span>
+    <h3>Integrate with Git</h3>
+    <p>By adding a Git triggers Harrow can run tasks on changes in your repositories.</p>
+    <!-- TODO enable harrow-can -->
+    <a ui-sref="projects/edit.createTrigger({projectUuid: ctrl.project.subject.uuid})" can-subject="ctrl.project" can-action="create-gitTriggers" class="btn btn--border">
+      Add a Git Trigger
+    </a>
+  </div>
+</div>
+<div ng-if="gitTriggerList.gitTriggers.length > 0" class="activity" ng-repeat="gitTrigger in gitTriggerList.gitTriggers">
+  <div class="activity__container">
+    <div class="activity__detail">
+      <p>
+        <span svg-icon="icon-environments"></span>
+        <strong>{{gitTriggerList.environmentFor(gitTrigger).subject.name}}</strong>
+      </p>
+      <p>
+        <span svg-icon="icon-tasks"></span>
+        <strong>{{gitTriggerList.scriptFor(gitTrigger).subject.name}}</strong>
+      </p>
+      <p>
+        <span svg-icon="icon-triggers"></span>
+        <strong>{{gitTrigger.subject.name}}</strong>
+      </p>
+    </div>
+    <div class="activity__meta">
+      <div class="grid grid--column grid--margin">
+        <div class="cell">
+          <b>When: </b> {{gitTrigger.subject.changeType}} a ref matching <code>{{gitTrigger.subject.matchRef}}</code> in
+          <code ng-if="gitTriggerList.repositoryNames[gitTrigger.subject.repositoryUuid]">{{gitTriggerList.repositoryNames[gitTrigger.subject.repositoryUuid]}}</code>
+          <strong ng-if="!gitTriggerList.repositoryNames[gitTrigger.subject.repositoryUuid]">any repository</strong>
+        </div>
+        <div class="cell">
+          <div class="btn__group btn__group--end">
+            <!-- TODO enable harrow-can -->
+            <a can-subject="gitTrigger" can-action="update" class="btn btn--border btn--small" ui-sref="projects/edit.editTrigger({projectUuid: gitTrigger.subject.projectUuid, uuid: gitTrigger.subject.uuid})">Edit</a>
+            <a can-subject="gitTrigger" can-action="delete" class="btn btn--red btn--small" ng-click="gitTriggerList.delete(gitTrigger)">Delete</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

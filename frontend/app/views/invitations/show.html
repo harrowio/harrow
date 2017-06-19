@@ -1,0 +1,15 @@
+<div class="card card--wizard">
+  <div class="card__content card__content--centered">
+    <div>
+      <h3>Your have a Project Invitation</h3>
+      <strong>{{invitationShow.invitation.subject.creatorName}}</strong> <span translate="invitations.show.description"></span>
+      <strong>{{invitationShow.invitation.subject.projectName}}</strong>:
+      <blockquote>{{invitationShow.invitation.subject.message}}</blockquote>
+    </div>
+  </div>
+  <div class="card__footer">
+    <a class="btn" translate="invitations.show.refuse" ng-click="invitationShow.refuse()"></a>
+    <div class="layout__spacer"></div>
+    <a class="btn btn--primary" translate="invitations.show.accept" ng-click="invitationShow.accept()"></a>
+  </div>
+</div>

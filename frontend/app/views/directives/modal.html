@@ -1,0 +1,12 @@
+<div class="modalContainer" ng-class="{'modalContainer--fullScreen': isFullScreen}">
+  <div class="modal modal--{{mode}}" ng-class="{'modal--inline': isInline}">
+    <div class="modal__icon" ng-if="icon">
+      <span svg-icon="{{icon}}"></span>
+    </div>
+    <div class="modal__content">
+      <h2 ng-if="title">{{title}}</h2>
+      <div ng-transclude></div>
+    </div>
+    <a href="" class="modal__dismiss">Dismiss</a>
+  </div>
+</div>

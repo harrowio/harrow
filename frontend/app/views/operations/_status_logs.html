@@ -1,0 +1,8 @@
+<table class="status__log">
+  <tr title="{{statusLogEntry.occurredOn | amDateFormat}}" ng-repeat="(i, statusLogEntry) in operationShow.operation.subject.statusLogs.entries" class="statusLogs-entry">
+    <td>{{statusLogEntry.subject}}</td>
+    <td>
+      <small>(took {{statusLogEntry.formattedDuration}})</small>
+    </td>
+  </tr>
+</table>

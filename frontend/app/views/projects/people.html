@@ -1,0 +1,12 @@
+<div class="app__content">
+  <div class="card">
+    <div class="card__header">Project Members</div>
+    <div class="card__content">
+      <div ui-view="projectMemberList"></div>
+    </div>
+    <div class="card__footer">
+      <div class="layout__spacer"></div>
+      <button type="submit" ui-sref="invitations/create({projectUuid: ctrl.project.subject.uuid})" class="btn btn--primary" harrow-can="create-projectMembers" can-disable can-subject="$resolve.project">Invite Someone</button>
+    </div>
+  </div>
+</div>

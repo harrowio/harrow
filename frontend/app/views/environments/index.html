@@ -1,0 +1,31 @@
+<div class="app__content">
+  <div class="card">
+    <div class="card__header">
+      <div class="card__header__title">Environments</div>
+      <div class="card__header__action">
+        <a ui-sref="createEnvironment({projectUuid: environmentList.project.subject.uuid})" harrow-can can-disable can-subject="environmentList.project" can-action="create-environments" class="btn"><span svg-icon="icon-add"></span></a>
+      </div>
+    </div>
+
+    <div class="repository__status--empty" ng-if="!environmentList.environments.length">
+      <span svg-icon="icon-environments"></span>
+      <p>There are no environments</p>
+      <a ui-sref="createEnvironment({projectUuid: environmentList.project.subject.uuid})" class="btn btn--border">Add Environment</a>
+    </div>
+
+    <div class="repository__status" ng-repeat="environment in environmentList.environments">
+      <div class="repository__status__row">
+        <div class="repository__status__detail">
+          <a harrow-can="update" can-subject="environment" can-disable href ui-sref="environment.edit({projectUuid: environment.subject.projectUuid, uuid: environment.subject.uuid })" class="repository__status__title">{{environment.subject.name}}</a>
+          <span ng-include="'views/environments/_shared_environments_and_secrets_list.html'" ng-init="sharedEnvironmentsAndSecretsList = {}; sharedEnvironmentsAndSecretsList.environment = environment; sharedEnvironmentsAndSecretsList.secrets = environmentList.secrets[environment.subject.uuid];"></span>
+        </div>
+        <div class="repository__status__detail">
+          <div class="btn__group btn__group--end">
+            <a harrow-can can-disable can-subject="environment" can-action="update" class="btn" ui-sref="environment.edit({projectUuid: environment.subject.projectUuid, uuid: environment.subject.uuid })">Edit</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

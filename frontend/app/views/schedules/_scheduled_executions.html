@@ -1,0 +1,24 @@
+<div class="card" ng-show="scheduleShow.scheduledExecutions.length > 0">
+  <div class="card__header">
+    Scheduled executions
+  </div>
+  <div class="card__items">
+    <div class="card__item" ng-repeat="execution in scheduleShow.scheduledExecutions | limitTo:5">
+      <div class="card__item__icon">
+	<span svg-icon="{{'forms.triggers.schedule.icon' | translate}}"></span>
+      </div>
+
+      <div class="card_item__content">
+	{{ execution.subject.time | amCalendar}}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card" ng-show="scheduleShow.scheduledExecutions.length == 0">
+  <div class="card__header">
+    Scheduled executions
+  </div>
+  <div class="card__content">
+    No future executions are scheduled.
+  </div>
+</div>

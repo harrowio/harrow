@@ -1,0 +1,18 @@
+<div class="app__content">
+
+  <div class="card card--notifier">
+    <div class="card__header">
+      Danger Zone
+    </div>
+    <div class="card__content card__content--centered card__content--icon__error-alt">
+      <span svg-icon="icon-error" class="iconColor"></span>
+      <p>Deleting a Task will also delete all related objects, with the exception of users, users who are members of other Task will remain members of those Tasks. Users who are solely members of this Task will become users with no Task.</p>
+    </div>
+    <div class="card__footer">
+      <a class="btn" ng-click="appctrl.back()">Back</a>
+      <div class="layout__spacer"></div>
+      <a href ng-click="ctrl.delete()" class="btn btn--primary" harrow-can="archive" can-subject="$resolve.task">Delete Task</a>
+    </div>
+  </div>
+
+</div>

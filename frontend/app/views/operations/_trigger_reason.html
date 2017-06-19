@@ -1,0 +1,18 @@
+<span ng-if="operationShow.operation.subject.parameters.triggeredByDelivery">
+  <strong>Webhook</strong>
+</span>
+
+<span ng-if="operationShow.operation.reason() == 'user'">
+  <strong>Manually</strong>
+  <i>{{operationShow.operation.subject.parameters.username}}</i>
+</span>
+
+<span ng-if="operationShow.operation.reason() == 'schedule'">
+  <strong>Schedule</strong>
+  <i>{{operationShow.operation.subject.parameters.scheduleDescription}}</i>
+</span>
+
+<span ng-if="operationShow.operation.reason() == 'git-trigger'">
+  <strong>Git</strong>
+  <i>{{operationShow.operation.subject.parameters.gitTriggerName}}</i>
+</span>

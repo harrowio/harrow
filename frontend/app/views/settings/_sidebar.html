@@ -1,0 +1,9 @@
+<a ui-sref="{{menuItem.sref}}" class="navigation__item grid" ng-repeat="menuItem in ctrl.menu">
+  <!-- <div class="cell navigation__item__icon">
+    <span svg-icon="icon-harrow"></span>
+  </div> -->
+  <div class="navigation__item__detail" ng-class="{active: ctrl.$state.is({{menuItem.sref}})}">
+    <h4>{{menuItem.title}}</h4>
+    <p>{{menuItem.subtitle}}</p>
+  </div>
+</a>

@@ -1,0 +1,103 @@
+<div class="app__content">
+  <div class="sectionHeader sectionHeader--bold">
+    <span class="sectionHeader__title">{{ctrl.script.subject.name || 'Untitled' | titlecase}}</span>
+    <span>Script</span>
+    <div class="layout__spacer"></div>
+    <!-- <a href="https://www.youtube.com/channel/UCCJ34dxFauZ15xds-cCdB5w" target="_blank" class="btn btn--learnMore"><span svg-icon="icon-video"></span> Learn about Harrow.io</a> -->
+  </div>
+  <harrow-form no-controls translation-root="forms.script">
+    <div class="grid" style="margin-bottom: 10px;">
+      <div class="cell cell--5Col">
+        <div>
+          <div class="field__group">
+            <harrow-field-input>
+              <input name="name" ng-model="ctrl.script.subject.name" required="true" focus-if/>
+            </harrow-field-input>
+          </div>
+        </div>
+      </div>
+      <div class="cell cell--1Col"></div>
+      <div class="cell cell--5Col cell--start">
+        <div>
+          <div class="field__group">
+            <harrow-field-input>
+              <select name="environmentUuid" ng-model="ctrl.selectedEnvironment" ng-change="ctrl.chooseEnvironment()" ng-options="env.subject.uuid as env.subject.name for env in ctrl.environments"></select>
+            </harrow-field-input>
+          </div>
+        </div>
+      </div>
+      <div class="cell cell--1Col"></div>
+    </div>
+
+    <div class="card card--scriptEditor" style="margin-bottom: 30px;">
+      <div class="card__header">
+        <div class="card__header__title">
+          <span ng-if="appctrl.isNew()">New script</span>
+          <span ng-if="!appctrl.isNew()">Edit script {{ctrl.script.subject.name}}</span>
+        </div>
+        <div class="card__header__tabs">
+          <a class="card__header__tab" ng-class="{'active': ctrl.tabView == 'environment'}" ng-click="ctrl.tabView = 'environment'">Environment</a>
+          <a class="card__header__tab" ng-class="{'active': ctrl.tabView == 'console'}" ng-click="ctrl.tabView = 'console'">Console Output</a>
+        </div>
+      </div>
+      <div class="card__content">
+        <div class="card__content__editor">
+          <textarea class="editor" ui-ace="{mode: 'sh', onLoad: ctrl.aceLoaded }" name="body" mode="sh" text="ctrl.testScript.script.body" required="true"></textarea>
+        </div>
+        <div class="card__content__extra" ng-show="ctrl.tabView == 'environment'">
+          <div class="variables">
+            <h4>Repositories</h4>
+            <div class="variable" ng-repeat="repository in ctrl.repositories">
+              <span class="variable__value" ng-bind-html="repository.subject.url | url:'dirHTML' | toTrusted"></span>
+            </div>
+            <div ng-if="ctrl.repositories.length == 0">
+              No repositories - <a ui-sref="createRepository({projectUuid: ctrl.project.subject.uuid})">Add a new repository</a>
+            </div>
+
+            <h4>Variables</h4>
+            <div class="variable" ng-repeat="variable in ctrl.variables" ng-class="{'variable--new': !variable.name}">
+              <span class="variable__key" alpha-numeric-only contenteditable placeholder="KEY" ng-model="variable.name"></span>
+              <span class="variable__value" contenteditable ng-model="variable.value" placeholder="Value"></span>
+            </div>
+
+            <h4>Secrets</h4>
+            <div class="variable" ng-repeat="variable in ctrl.secretVariables" ng-class="{'variable--new': !variable.name}">
+              <span class="variable__key" alpha-numeric-only contenteditable placeholder="KEY" ng-model="variable.name"></span>
+              <span class="variable__value" contenteditable ng-model="variable.value" placeholder="Value" conceal></span>
+            </div>
+            <!--
+            <h4>SSH Keys</h4>
+            <div class="variable" ng-repeat="variable in ctrl.sshKeys" ng-class="{'variable--new': !variable.name}">
+              <span class="variable__key" alpha-numeric-only contenteditable placeholder="KEY" ng-model="variable.name" ng-blur="ctrl.createSshKey(variable)"></span>
+              <div ng-if="variable.name">
+                <a href class="btn btn--small">Public Key</a>
+                <a href class="btn btn--small">Private Key</a>
+              </div>
+            </div>
+            -->
+
+          </div>
+        </div>
+        <div class="card__content__extra" ng-show="ctrl.tabView == 'console'">
+          <log-view operation-uuid="{{ctrl.operation.subject.uuid}}" follow-logs="true">
+          </log-view>
+        </div>
+      </div>
+      <div class="card__footer">
+        <a ng-click="appctrl.back()" class="btn">Back</a>
+        <div class="layout__spacer"></div>
+        <button ng-disabled="harrowForm.form.$invalid" class="btn" ng-click="ctrl.save()">Save</button>
+        <button ng-disabled="harrowForm.form.$invalid" class="btn btn--primary" harrow-stateful="ctrl.buttonStates.testScript" ng-click="ctrl.test()">Test Script</button>
+      </div>
+    </div>
+  </harrow-form>
+
+  <div class="flash flash--inline flash--danger" style="margin-top: 20px;" ng-if="!appctrl.isNew()">
+    <div class="flash__message">
+      Delete script?
+    </div>
+    <a class="flash__action" ng-confirm-click="Are you sure you want to delete this script?" ng-click="ctrl.delete()">
+      Delete
+    </a>
+  </div>
+</div>

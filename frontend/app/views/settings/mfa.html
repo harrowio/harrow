@@ -1,0 +1,19 @@
+<div class="card">
+  <div class="card__header">Multi-factor Authentication</div>
+
+  <div class="card__content card__content--empty">
+    <strong>TOTP (aka. Google Authenticator)</strong>
+    <p ng-if="!ctrl.totpEnabled"><small>If you have a compatible Time-based One-time Password device, you should enable this urgently!</small></p>
+    <a ng-hide="ctrl.totpEnabled" ng-click="ctrl.enableTotp()" class="btn btn--green">Enable TOTP</a>
+    <a ng-show="ctrl.totpEnabled" ng-click="ctrl.disableTotp()" class="btn btn--red">Disable TOTP</a>
+  </div>
+  <div class="flash flash--info">
+    <div class="flash__message">
+      <span svg-icon="icon-info-alt"></span>
+      We would like know which Multi-Factor Authentication schemes are important to you.
+    </div>
+    <div class="flash__action">
+      <a href ng-click="appctrl.openSupport($event, 'I would like to let you know which Multi-Factor Authentication Scheme is important to me...')">Let us Know</a>
+    </div>
+  </div>
+</div>

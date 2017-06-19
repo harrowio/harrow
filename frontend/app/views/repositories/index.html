@@ -1,0 +1,50 @@
+<div class="app__content">
+  <div class="card">
+    <div class="card__header">
+      <div class="card__header__title">
+        Repositories
+      </div>
+      <div class="card__header__action" can-disable harrow-can="create-repositories" can-subject="ctrl.project">
+        <a href ui-sref="createRepository" class="btn">
+          <span svg-icon="icon-add"></span>
+        </a>
+      </div>
+    </div>
+
+    <div class="card__items">
+      <div class="card__item" ng-repeat="repository in ctrl.repositories">
+        <div class="card__item__icon">
+          <a ng-click="ctrl.checkNow(repository)">
+            <span svg-icon="icon-repositories" harrow-stateful="ctrl.statefulOptions[repository.subject.uuid]"></span>
+          </a>
+        </div>
+        <div class="card__item__content">
+          <a ui-sref="repository.edit({ projectUuid: repository.subject.projectUuid, repositoryUuid: repository.subject.uuid })" class="repository__status__title" title="{{repository.subject.url}}">
+            {{repository.subject.url | url:'string' }}
+          </a>
+          <small class="bgColor__yellow" style="padding: 2px 6px;border-radius: 3px;text-transform:uppercase;" ng-if="ctrl.isPrivate(repository)">Private</small>
+          <div>
+            <small>
+              <a ng-click="ctrl.checkNow(repository)" ng-if="repository.subject.metadataUpdatedAt">Last updated {{repository.subject.metadataUpdatedAt | amTimeAgo }}</a>
+              <a ng-click="ctrl.checkNow(repository)" ng-if="!repository.subject.accessible" class="color__red">Repository is unaccessible, Check repository now!</a>
+            </small>
+          </div>
+        </div>
+        <div class="card__item__actions">
+          <a ui-sref="repository.edit({ projectUuid: repository.subject.projectUuid, repositoryUuid: repository.subject.uuid })" title="{{repository.subject.url}}">
+            <span svg-icon="icon-edit" svg-icon-size="20"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div ng-if="ctrl.repositories.length == 0" class="card__content card__content--emptyTight">
+      <span svg-icon="icon-repositories"></span>
+      <h3>Repositories</h3>
+      <br>
+      <a href class="btn btn--border btn--small" ui-sref="createRepository" can-disable harrow-can="create-repositories" can-subject="ctrl.project">
+        Add Repository
+      </a>
+    </div>
+  </div>
+</div>

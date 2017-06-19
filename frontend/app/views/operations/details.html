@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card__header">Details</div>
+  <div class="card__items">
+    <div class="card__item">
+      <div class="card__item__content" ng-include="'views/operations/_checkouts.html'"></div>
+    </div>
+    <div class="card__item">
+      <div class="card__item__content">
+        <h4 class="card__item__title">Git Commits</h4>
+        <div ng-include="'views/operations/_git_logs.html'"></div>
+      </div>
+    </div>
+    <div class="card__item cell--grow">
+      <div class="card__item__content cell--top">
+        <h4 class="card__item__title">Operation Status</h4>
+        <div ng-include="'views/operations/_status_logs.html'"></div>
+      </div>
+    </div>
+    <div ng-include="'views/operations/_statuses.html'"></div>
+
+  </div>
+</div>

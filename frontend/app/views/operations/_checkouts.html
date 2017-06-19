@@ -1,0 +1,13 @@
+<table class="repoCheckouts table" ng-if="!operationShow.operation.subject.repositoryCheckouts.refs | empty">
+  <tbody class="repoCheckouts-entry" ng-repeat="(repoUuid, checkout) in operationShow.operation.mostRecentRepositoryCheckouts">
+    <tr ng-repeat="repo in [operationShow.repoFromUuid(repoUuid)]">
+      <td>
+        <code class="standout">{{repo.subject.name}}</code>
+        was checked out at
+        <code class="standout">{{checkout.refName()}}</code>
+        (<code class="standout">{{checkout.shortHash()}}</code>).
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p ng-if="operationShow.operation.subject.repositoryCheckouts.refs | empty">No repositories were checked out</p>

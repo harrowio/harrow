@@ -1,0 +1,30 @@
+<div class="app__content">
+  <harrow-form save="ctrl.save()" translation-root="forms.notifiers.slackNotifier" class="card card--notifier" no-controls>
+    <div class="card__content card__content--icon__slack">
+      <span svg-icon="icon-full-color-slack" class="notifierLogo"></span>
+      <h3>Connect Harrow with Slack</h3>
+      <p>Start by setting up an <a href="https://my.slack.com/services/new/incoming-webhook/" target="_blank">slack incoming webhook intergration</a> in your Slack team.</p>
+      <p>Then provide harrow with your Slack Channel and WebhookUrl.</p>
+      <harrow-input>
+        <input name="name" ng-model="ctrl.notifier.subject.name" required="true">
+      </harrow-input>
+      <harrow-input>
+        <input type="url" name="webhookUrl" ng-model="ctrl.notifier.subject.webhookURL" required="true">
+      </harrow-input>
+    </div>
+    <div class="card__footer">
+      <div ng-click="appctrl.back()" class="btn">Back</div>
+      <div class="layout__spacer"></div>
+      <button type="submit" ng-disabled="harrowForm.form.$invalid" class="btn btn--primary">Save</button>
+    </div>
+  </harrow-form>
+
+  <div class="flash flash--inline flash--danger" style="margin-top: 20px;" ng-if="!appctrl.isNew()">
+    <div class="flash__message">
+      Delete Slack Notifier?
+    </div>
+    <a class="flash__action" ng-confirm-click="Are you sure you want to delete this Slack Notifier?" ng-click="ctrl.delete()">
+    Delete
+  </a>
+  </div>
+</div>

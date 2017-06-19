@@ -1,0 +1,273 @@
+{
+  "collection": [
+    {
+      "subject": {
+        "uuid": "a4c178fd-3049-41b1-37d5-8ed4e130e665",
+        "url": "https://harrowio:AqO0Kg43uqZldqMXkM9Lf4thxZrTqObL@bitbucket.org/harrowio/frontend.git",
+        "name": "Frontend",
+        "accessible": true,
+        "projectUuid": "42e80914-ddad-4bb7-3ee5-adb98b094339",
+        "githubImported": false,
+        "githubLogin": "",
+        "githubRepo": "",
+        "createdAt": "2015-10-07T16:53:17.862423Z",
+        "archivedAt": null,
+        "metadataUpdatedAt": "2016-02-14T23:53:34.232121Z",
+        "metadata": {
+          "contributors": {
+            "dario@gowriteco.de": {
+              "name": "dhamidi",
+              "email": "dario@gowriteco.de"
+            },
+            "davidecicchiello@harrow.io": {
+              "name": "Davide Cicchiello",
+              "email": "davidecicchiello@harrow.io"
+            },
+            "kyle@mekyle.com": {
+              "name": "Kyle Welsby",
+              "email": "kyle@mekyle.com"
+            },
+            "lee.hambley@gmail.com": {
+              "name": "Lee Hambley",
+              "email": "lee.hambley@gmail.com"
+            },
+            "pschyska@gmail.com": {
+              "name": "Paul Schyska",
+              "email": "pschyska@gmail.com"
+            }
+          },
+          "refs": {
+            "HEAD": "f4cba6730ba8c0476e74ddba4a09caa7a04de63e",
+            "refs/heads/master": "f4cba6730ba8c0476e74ddba4a09caa7a04de63e",
+            "refs/remotes/origin/100290962-make-it-possible-to-edit-job-name": "5432e7c63659a8cc512db5eba0717b9614accd63",
+            "refs/remotes/origin/100291288-archive-project": "719641e45afedba77db7f7ee292dff1f308b5cde",
+            "refs/remotes/origin/100291442-run-task": "415c473661430b8169658b0e2feac69eb91a800d",
+            "refs/remotes/origin/102049792-leave-project": "9108a02c2adf9ab2f8919af7ef807f21508653b2",
+            "refs/remotes/origin/102243284-activity-stream": "cb1e5f17fe56c20a236f93184bd695447b23d87f",
+            "refs/remotes/origin/102243356-aritary-secrets-ui": "87ef5f2e8587d3186483da7934beee11fced450a",
+            "refs/remotes/origin/102243462-organization-setup-wizard": "493ee2aba9c26a8a5765036a8bab540d241a4f24",
+            "refs/remotes/origin/103194548-reset-password": "c872dc1eb67f703db52c46d2e0dbabd222d0afeb",
+            "refs/remotes/origin/103412158_permit_forwarding_after_login": "e025593c3094045e9768c46727d87ee548ff1776",
+            "refs/remotes/origin/105180272-oauth-sign-in": "da57c7d5243f674d9e96f22055d0da42de9ad184",
+            "refs/remotes/origin/105186564-operation-status": "cc8ab12f0a14ef68be9df56cb4c0027a0a395e03",
+            "refs/remotes/origin/107280246-git-triggers": "6f90ad44d2e86b1ccde26fc0ed9c36717998788a",
+            "refs/remotes/origin/107280276-bill-customers": "19eb72d440f007e02084bf86d3e9ea2ce0be0b8e",
+            "refs/remotes/origin/107290438-double-opt-in": "7e688c8075062fae62e358a786fc7b447246ecb2",
+            "refs/remotes/origin/110850136-git-https-urls": "5ae249df304e22c2d8e6d7fea57e608441ab03db",
+            "refs/remotes/origin/110927410-add-repository-wizard": "5daf531a7ae781e4903eb224fb9b684e77edbd42",
+            "refs/remotes/origin/111944315-notifier-spike": "96978d20a991e75cf0d1583e85dbab8b0278969f",
+            "refs/remotes/origin/112673285-no-errors-on-login-form": "8d1f8dcca8ee24671ce97d9c29401acc725f17f7",
+            "refs/remotes/origin/1284810-app-bar-changes-from-design": "a34c80fc1d0012ea80a21d18836ea4c3dcba0006",
+            "refs/remotes/origin/1284810-app-bar-changes-from-design-wip-lee": "1bc31d03edff7cc1c6df4842564fc8e99f26f19f",
+            "refs/remotes/origin/88998700-webhooks": "c9e85b44250084bfccb6bcbade9c2cedcda47ea0",
+            "refs/remotes/origin/89179252-logout": "41fc09eb96f242c91accf36faa4544928e5b124b",
+            "refs/remotes/origin/89182898-implement-tfa": "37557176f39fe6569fbd20229132f39c9e5dc3c4",
+            "refs/remotes/origin/90191828-frontend-failing-tests": "f67300929e8c168a91ebfd479c4112c018e1aebd",
+            "refs/remotes/origin/90418876-improve-controllers-views": "81d9e69d2275d2c2e67c9966438bbcd18633db3a",
+            "refs/remotes/origin/90420674-fix-secrets-generation": "7bba0a0e37a1b88723aca27a8241067bd2b0ade7",
+            "refs/remotes/origin/90504732-github-deauth": "259125d5b04eb16164db98100f6c5908bb58b8d6",
+            "refs/remotes/origin/90504830-totp": "cfef0d700b0d07f590316b3b1ced6ab3240b4fdb",
+            "refs/remotes/origin/90591088-create-organization-form": "f5a507a2d80bfb2a66f046bb8d1707c8865bfef8",
+            "refs/remotes/origin/91078736-display-project-members": "42704499d846198a416fdb720d87529d3e99ccff",
+            "refs/remotes/origin/91184422-subscriptions": "a4c337a4902e6451577fe3c24f2ff7443f626daf",
+            "refs/remotes/origin/91208104-display-organization-members": "88b2d9c8c80424f6c714ef450542176fb01b00ae",
+            "refs/remotes/origin/92332530-implement-scheduled-executions-per-project": "ef17e53c0ee5622fcdb981a57b45efc035b1447f",
+            "refs/remotes/origin/93601984-invite-existing": "640165f0ba46004ff8e003c49eeb09fc067ffc57",
+            "refs/remotes/origin/93602028-list-projects": "bf81088c3f3c9c482386f36588d7027d0246a2fb",
+            "refs/remotes/origin/93622934-autocomplete-users": "f699466e2337892787254016240b64a547df0084",
+            "refs/remotes/origin/93644166-path-back": "420f432e1f462507ccdc58d5a3296a40f4339c20",
+            "refs/remotes/origin/94073218-update-users": "cc6bfc5dbf11b87ff35a64e88d7c7c2ab18bf589",
+            "refs/remotes/origin/95159264-unable-to-delete-job": "934ae7ed348c8c828926b7969e6f422a40fccaa8",
+            "refs/remotes/origin/95556878-proper-error-responses": "1477c20077c5eac08fa58dde8d61d717cfb21421",
+            "refs/remotes/origin/95557420-accidental-totp": "faf72ff04cd8c47892e357831d8e0c5f86a99753",
+            "refs/remotes/origin/98537998-ws-rewrite": "239b7f1c835e98c03d932f2bcda2e164951bfe15",
+            "refs/remotes/origin/98897844-add-infos-to-show-operation": "4cc9af6ec437675bf9fdf10a38df52cfd1bfdb26",
+            "refs/remotes/origin/99506526-add-ws-error-indicator": "47199fcf8794b710b36b69fe71dacba0a3cdb657",
+            "refs/remotes/origin/99690806-log-folding": "679bf097656b6be2161dfbb10f6b902c1910147e",
+            "refs/remotes/origin/HEAD": "f4cba6730ba8c0476e74ddba4a09caa7a04de63e",
+            "refs/remotes/origin/WIP-BETTER_OP_STATUS_DIRECTIVES": "138d54c7ea0b3334c79b3e0399b6051116604756",
+            "refs/remotes/origin/WIP-NOISSUE-lee-operation-header-rebuild": "9b986c51dfe26383f6780bad245a08b07a4ed9c5",
+            "refs/remotes/origin/WIP-lee-gulp": "00370de334e59549e41b5e3c07517100806e41fe",
+            "refs/remotes/origin/WIP-lee-gulp-with-billing": "701b5fdf22ac223970f3626a97e1161baa2ac215",
+            "refs/remotes/origin/before-refactor": "9efd272d3db0a3bf9c510be544054825753ae293",
+            "refs/remotes/origin/bugfix-sidebar-name-ordering": "9015ad2550e2e8f8b9d46ad1d4f86aaaefe42f99",
+            "refs/remotes/origin/fix-billing": "fb56b157fdfd052d08e59c5643db7659cdae7ac3",
+            "refs/remotes/origin/frontend-refactor": "8859722b289155515de6220fa95151d2a5c8083e",
+            "refs/remotes/origin/frontend_refactor_bak": "97593ebc35a9628f18be9b4023a623f9d826ea27",
+            "refs/remotes/origin/gulp-refactor": "85e5a493f05d5744750d23b8bdefe617b8eb90d8",
+            "refs/remotes/origin/gulp_bower_fixing_wip": "3412905d708b527e282362d96164d39a5c63ad45",
+            "refs/remotes/origin/hotfix-plan-selection": "bcfab4d4084034538b85be576af1201a3233013f",
+            "refs/remotes/origin/master": "f4cba6730ba8c0476e74ddba4a09caa7a04de63e",
+            "refs/remotes/origin/org-show": "b4fc76efa6088e648fbca9c8019a10eea6606f17",
+            "refs/remotes/origin/org-show-bak": "63343098abed20c308747b86d663fb9dfa022ef8",
+            "refs/remotes/origin/reskin": "a6d9bceb659f365cfb55b18546a692178d456d48",
+            "refs/remotes/origin/rev-assets": "2bb3b2bdae97b7878c3cc64be30ea9680ac26dd1",
+            "refs/remotes/origin/validation": "530add920b3ca95a278588d7c234e858300c909f",
+            "refs/remotes/origin/webhooks-improvements": "3e8444d826d73dc88e3c5c9cb0ee8ccd098ac770",
+            "refs/remotes/origin/wip-dario-api-capabilities": "71cad50993a988689ac18c8a91401bba9cc45e4f",
+            "refs/remotes/origin/wip-dario-block-users": "b3203f3e947c1c817fa1b5cbd52c22c3210dbdbb",
+            "refs/remotes/origin/wip-dario-double-opt-in": "7e688c8075062fae62e358a786fc7b447246ecb2",
+            "refs/remotes/origin/wip-dario-follow-logs": "f0e1161c8256ec22dc5d3fd044dca834b8ca2d17",
+            "refs/remotes/origin/wip-dario-hide-totp-secret": "3a3d8d0da379e0bb93e187419dae60dca54c12a7",
+            "refs/remotes/origin/wip-dario-implement-tfa": "3a3f9d3e01ce62dea79f33ccc8962036fc2e4175",
+            "refs/remotes/origin/wip-dario-invitations": "454197bbcbb5b12f968de05e9345fb204429f336",
+            "refs/remotes/origin/wip-dario-job-widget": "91e101183ba37a13f31002556fb3bd3ec5685cae",
+            "refs/remotes/origin/wip-dario-operation-reasons": "18206899f22b0c9deefaa7aa20217f9d28f946a7",
+            "refs/remotes/origin/wip-dario-promote-users": "b6d25d2fea683cf8d28a0447a91aeeedd82bf271",
+            "refs/remotes/origin/wip-dario-remove-project-members": "231e49055e6d7d8cbcc7ee2e1e9e8cb3236f126e",
+            "refs/remotes/origin/wip-dario-session-expiration": "a871102dd5f70ab8345fd21b61e19a4eebaa3732",
+            "refs/remotes/origin/wip-dario-ui": "dbae7412e6593e0a5b757c0688fb9bf28f5bc1b9",
+            "refs/remotes/origin/wip-dario-webhooks": "a835691cde716a0cbe9e0d3728a7c440e4a4df1b",
+            "refs/remotes/origin/wip-lee-project-triggers": "897e268d33c9e5593a344a3b51889195db7acd7a",
+            "refs/remotes/origin/wip-paul-environment-secrets": "87ef5f2e8587d3186483da7934beee11fced450a",
+            "refs/remotes/origin/wip-paul-fix-secrets-generation": "7bba0a0e37a1b88723aca27a8241067bd2b0ade7",
+            "refs/remotes/origin/wip-paul-forgot-password": "fe25001d0d2d74f3c132b40ef141300eb6805afc",
+            "refs/remotes/origin/wip-paul-hal-embed-job": "740d8b241bb5bd5eae0c33b6c564cfd475260f04",
+            "refs/remotes/origin/wip-paul-improve-controllers-views": "293281ff54456e531623e468242b0a8330618a82",
+            "refs/remotes/origin/wip-paul-logevent": "be560d15a6083e33d7890af7affe3b8de9374abd",
+            "refs/remotes/origin/wip-paul-make-webhook-deliveries-trigger-a-job": "c07d5ca66db1035ecbd7e8bc634fc9385ab64070",
+            "refs/remotes/origin/wip-paul-oauth-sign-in": "88e7788ff637739ea75e6918229bca273200ad22",
+            "refs/remotes/origin/wip-paul-s0ck3t4tor": "239b7f1c835e98c03d932f2bcda2e164951bfe15",
+            "refs/remotes/origin/wip-paul-show-op-info": "77cad9b07fac5f621260077162c575a7b6ec2d1d",
+            "refs/remotes/origin/wrapper-script-errors-silently-kill-operations": "21575e44c13842a678e01df9727dbd97755ecae6",
+            "refs/tags/classical": "4d75c46683b9bee3f9cf5574d172cd96d846bce0"
+          }
+        }
+      },
+      "_links": {
+        "checks": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.app.harrow.io/api/repositories/a4c178fd-3049-41b1-37d5-8ed4e130e665/checks",
+          "read": "GET",
+          "update": "POST"
+        },
+        "credential": {
+          "href": "https://www.app.harrow.io/api/repositories/a4c178fd-3049-41b1-37d5-8ed4e130e665/credential",
+          "read": "GET"
+        },
+        "github-deploy-key": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.app.harrow.io/api/oauth/github/repositories/a4c178fd-3049-41b1-37d5-8ed4e130e665/keys",
+          "update": "POST"
+        },
+        "metadata": {
+          "href": "https://www.app.harrow.io/api/repositories/a4c178fd-3049-41b1-37d5-8ed4e130e665/metadata"
+        },
+        "operations": {
+          "href": "https://www.app.harrow.io/api/repositories/a4c178fd-3049-41b1-37d5-8ed4e130e665/operations",
+          "read": "GET"
+        },
+        "project": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.app.harrow.io/api/projects/42e80914-ddad-4bb7-3ee5-adb98b094339",
+          "read": "GET",
+          "update": "POST"
+        },
+        "self": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.app.harrow.io/api/repositories/a4c178fd-3049-41b1-37d5-8ed4e130e665",
+          "read": "GET",
+          "update": "POST"
+        }
+      },
+      "_embedded": {}
+    },
+    {
+      "subject": {
+        "uuid": "9687386a-f053-4eca-3e00-b721c07cf665",
+        "url": "https://harrowio:AqO0Kg43uqZldqMXkM9Lf4thxZrTqObL@bitbucket.org/harrowio/style-guide.git",
+        "name": "Style Guide",
+        "accessible": true,
+        "projectUuid": "42e80914-ddad-4bb7-3ee5-adb98b094339",
+        "githubImported": false,
+        "githubLogin": "",
+        "githubRepo": "",
+        "createdAt": "2016-01-04T21:19:39.159947Z",
+        "archivedAt": null,
+        "metadataUpdatedAt": "2016-02-15T00:23:31.639477Z",
+        "metadata": {
+          "contributors": {
+            "dario@gowriteco.de": {
+              "name": "dhamidi",
+              "email": "dario@gowriteco.de"
+            },
+            "kyle@mekyle.com": {
+              "name": "Kyle Welsby",
+              "email": "kyle@mekyle.com"
+            },
+            "lee.hambley@gmail.com": {
+              "name": "leehambley",
+              "email": "lee.hambley@gmail.com"
+            },
+            "pschyska@gmail.com": {
+              "name": "Paul Schyska",
+              "email": "pschyska@gmail.com"
+            }
+          },
+          "refs": {
+            "HEAD": "71c1ff180c94834bae6222f4b7c684de468db1d8",
+            "refs/heads/master": "71c1ff180c94834bae6222f4b7c684de468db1d8",
+            "refs/remotes/origin/111538326-app-frame-backend": "85fc263959c26d8a1e99e0fc3f2915cda7394c78",
+            "refs/remotes/origin/111775054-implement-homepage-design": "71c1ff180c94834bae6222f4b7c684de468db1d8",
+            "refs/remotes/origin/1284810-app-bar-changes-from-design": "b5abfc3e8ad6323e9a6cb4c09eb494372c0a913a",
+            "refs/remotes/origin/HEAD": "71c1ff180c94834bae6222f4b7c684de468db1d8",
+            "refs/remotes/origin/master": "71c1ff180c94834bae6222f4b7c684de468db1d8",
+            "refs/tags/v1.0": "f734bccd80bb26ad3f2023f5b53405b825d537f0",
+            "refs/tags/v1.1": "f8be658861eb422f3c78f435c41702407f46b632",
+            "refs/tags/v1.1^{}": "9ef40728a4ffd0e48d49c1e44243ded5254a1228"
+          }
+        }
+      },
+      "_links": {
+        "checks": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.app.harrow.io/api/repositories/9687386a-f053-4eca-3e00-b721c07cf665/checks",
+          "read": "GET",
+          "update": "POST"
+        },
+        "credential": {
+          "href": "https://www.app.harrow.io/api/repositories/9687386a-f053-4eca-3e00-b721c07cf665/credential",
+          "read": "GET"
+        },
+        "github-deploy-key": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.app.harrow.io/api/oauth/github/repositories/9687386a-f053-4eca-3e00-b721c07cf665/keys",
+          "update": "POST"
+        },
+        "metadata": {
+          "href": "https://www.app.harrow.io/api/repositories/9687386a-f053-4eca-3e00-b721c07cf665/metadata"
+        },
+        "operations": {
+          "href": "https://www.app.harrow.io/api/repositories/9687386a-f053-4eca-3e00-b721c07cf665/operations",
+          "read": "GET"
+        },
+        "project": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.app.harrow.io/api/projects/42e80914-ddad-4bb7-3ee5-adb98b094339",
+          "read": "GET",
+          "update": "POST"
+        },
+        "self": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.app.harrow.io/api/repositories/9687386a-f053-4eca-3e00-b721c07cf665",
+          "read": "GET",
+          "update": "POST"
+        }
+      },
+      "_embedded": {}
+    }
+  ],
+  "_meta": {
+    "count": "2",
+    "total": "2"
+  },
+  "_links": {}
+}

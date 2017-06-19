@@ -1,0 +1,65 @@
+<div class="app__content">
+  <div class="card" style="margin-bottom: 10px">
+    <div class="card__header">{{environmentForm.environment.subject.name}} Environment SSH Keys</div>
+    <div class="card__content">
+      <div ng-include="'views/environments/_ssh_keys_list.html'"></div>
+    </div>
+    <div class="card__items card__content--centered" ng-if="environmentForm.currentSecret.subject.publicKey">
+      <code class="card__codeblock card__codeblock--dark cell--stretch">
+        {{environmentForm.currentSecret.subject.publicKey}}
+        <a href class="btn btn--small" clip-click-fallback="appctrl.zClipFail(environmentForm.currentSecret.subject.publicKey)" clip-copy="environmentForm.currentSecret.subject.publicKey"><span svg-icon="icon-copy" svg-icon-size="8"></span> Copy</a>
+      </code>
+    </div>
+    <div class="card__footer">
+      <div ng-include="'views/environments/_ssh_keys_form.html'"></div>
+    </div>
+    <div class="flash flash--info">
+      <div class="flash__message">
+        <span svg-icon="icon-info-alt"></span>
+        <span>The key name is just for convenience. The key data will be generated and stored securely on our server and will be available a few seconds after you name the key.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom: 10px">
+    <div class="card__header">{{environmentForm.environment.subject.name}} Environment Variables</div>
+    <div class="card__content">
+      <div ng-include="'views/environments/_variables_list.html'"></div>
+    </div>
+    <div class="card__footer">
+      <div ng-include="'views/environments/_variables_form.html'"></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom: 10px">
+    <div class="card__header">{{environmentForm.environment.subject.name}} Secret Environment Variables</div>
+    <div class="card__content">
+      <div ng-include="'views/environments/_secrets_list.html'"></div>
+    </div>
+    <div class="card__footer">
+      <div ng-include="'views/environments/_secrets_form.html'"></div>
+    </div>
+  </div>
+
+  <harrow-form save="environmentForm.save()" no-controls translation-root="forms.wizard.connect" class="card" style="margin-bottom: 10px">
+    <div class="card__header">Environment Name</div>
+    <div class="card__content">
+      <div ng-include="'views/environments/_form.html'"></div>
+    </div>
+    <div class="card__footer">
+      <a href="#" ng-click="appctrl.back()" class="btn">Back</a>
+      <div class="layout__spacer"></div>
+      <button type="submit" class="btn btn--primary" ng-disabled="harrowForm.form.$invalid">Save</button>
+    </div>
+
+  </harrow-form>
+
+  <div class="flash flash--inline flash--danger" style="margin-top: 20px;" ng-if="!appctrl.isNew()" can-disable harrow-can="archive" can-subject="environmentForm.environment">
+    <div class="flash__message">
+      Delete environment?
+    </div>
+    <a class="flash__action" ng-confirm-click="Are you sure you want to delete this environment?" ng-click="environmentForm.delete()">
+      Delete
+    </a>
+  </div>
+</div>

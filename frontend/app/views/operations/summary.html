@@ -1,0 +1,51 @@
+<div class="card">
+  <div class="card__header">Operation Information</div>
+
+  <div class="card__items">
+    <div class="card__item card__item--tight">
+      <div class="card__item__icon">
+        <span svg-icon="icon-environments"></span>
+      </div>
+      <div class="card__item__content">
+        <strong>{{operationShow.environment.subject.name}}</strong>
+      </div>
+    </div>
+
+    <div class="card__item card__item--tight">
+      <div class="card__item__icon">
+        <span svg-icon="icon-tasks"></span>
+      </div>
+      <div class="card__item__content">
+        <strong>{{operationShow.script.subject.name}}</strong>
+      </div>
+    </div>
+    <div class="card__item card__item--tight">
+      <div class="card__item__icon">
+        <span svg-icon="icon-triggers"></span>
+      </div>
+      <div class="card__item__content" ng-include="'views/operations/_trigger_reason.html'"></div>
+    </div>
+
+    <div class="card__item">
+      <div ng-if="operationShow.operation.subject.startedAt">
+        Started: <strong>{{ operationShow.operation.subject.startedAt | amTimeAgo }}</strong><br>
+        Elapsed time: <strong elapsed-from="operationShow.operation.subject.startedAt" elapsed-to="operationShow.operation.endedTime()"></strong>
+      </div>
+      <div ng-if="!operationShow.operation.subject.startedAt">
+        Waiting for VM<br>
+        Elapsed time: <strong elapsed-from="operationShow.operation.subject.createdAt" elapsed-to="operationShow.operation.endedTime()"></strong>
+      </div>
+    </div>
+    <pre class="card__item card__item--codeblock">{{operationShow.operation.subject.parameters | json}}</pre>
+  </div>
+
+
+  <div class="card__footer" harrow-can="create" can-subject="operationShow.script">
+    <a harrow-can can-disable can-subject="operationShow.script" can-action="update" class="btn" ui-sref="script.edit({projectUuid: operationShow.script.subject.projectUuid, scriptUuid: operationShow.script.subject.uuid})">Edit Task</a>
+    <div class="layout__spacer"></div>
+    <span  ng-if="operationShow.operation.cancelable()">
+      <a harrow-can can-disable can-subject="operationShow.operation" can-action="cancel" class="btn btn--border" ng-click="appctrl.cancelOperation(operationShow.operation)">Cancel</a>
+    </span>
+    <a harrow-can can-disable can-subject="operationShow.task" can-action="create-schedule" class="btn btn--border" ng-click="appctrl.runTaskNow(operationShow.task)">Run</a>
+  </div>
+</div>

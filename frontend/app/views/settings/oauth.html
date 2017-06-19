@@ -1,0 +1,32 @@
+<div class="card">
+  <div class="card__header">OAuth Connections</div>
+  <div class="card__content grid--margin">
+    <div class="cell">
+      <div ng-show="ctrl.githubAccessible === false">
+        <div class="flash flash--inline flash--error">
+          <div class="flash__message">
+            <span svg-icon="icon-github"></span> Connect With GitHub
+          </div>
+          <div class="flash__action" ng-click="ctrl.connectGithub()">
+            Connect
+          </div>
+        </div>
+      </div>
+      <div ng-show="ctrl.githubAccessible === true">
+        <div class="flash flash--inline flash--success">
+          <div class="flash__message">
+            <span svg-icon="icon-github"></span> Disconnect from GitHub
+          </div>
+          <div class="flash__action" ng-click="ctrl.disconnectGithub()">
+            Disconnect
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flash flash--error" ng-show="ctrl.githubAccessible === true">
+    <div class="flash__message">
+      <em>Disconencting from a service will remove all your deploy keys, webhooks and other integrations.</em>
+    </div>
+  </div>
+</div>

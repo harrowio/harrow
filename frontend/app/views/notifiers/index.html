@@ -1,0 +1,46 @@
+<div class="app__content">
+  <div ng-repeat="(notifierType, notifierCollection) in ctrl.notifiers" style="margin-bottom:20px;">
+    <div class="card card--headerOnly">
+      <div class="card__header">
+        <div class="card__header__title">
+          <span svg-icon="{{ appctrl.menuItems.notifier[(notifierType | singularize)].icon }}"></span>
+          {{ 'forms.notifiers.' + (notifierType | singularize) + '.legend' | translate }}
+        </div>
+        <div class="card__header__action">
+          <a class="btn" ui-state="ctrl.createSrefFor(notifierType)" harrow-can="create-{{notifierType}}" can-disable can-subject="ctrl.project">
+            <span svg-icon="icon-add"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="activity" ng-repeat="notifier in notifierCollection | orderBy:'subject.name'" >
+      <div class="activity__container" ng-switch="notifierType">
+        <div class="activity__meta cell--middle" ng-switch-when="emailNotifiers" ui-state="ctrl.editSrefFor(notifierType)">
+          {{notifier.subject.recipient}}
+        </div>
+        <div class="activity__meta cell--middle" ng-switch-when="taskNotifiers">
+          <strong>{{notifier.subject.triggerTaskName}}</strong>
+          notifies
+          <strong>{{notifier.subject.taskName}}</strong>
+        </div>
+        <div class="activity__meta cell--middle" ng-switch-default>
+          {{notifier.subject.name}}
+        </div>
+        <div class="cell--middle">
+          <a href ui-state="ctrl.editSrefFor(notifierType)" ui-state-params="{projectUuid: ctrl.project.subject.uuid, uuid: notifier.subject.uuid}" class="btn"  harrow-can="create-{{notifierType}}" can-disable can-subject="ctrl.project">edit</a>
+        </div>
+      </div>
+    </div>
+
+    <div ng-if="notifierCollection.length == 0" class="card__content card__content--emptyTight">
+      <span svg-icon="{{appctrl.menuItems.notifier[(notifierType | singularize)].icon}}"></span>
+      <h3>{{ 'forms.notifiers.' + (notifierType | singularize) + '.legend' | translate }}</h3>
+      <br>
+      <a href class="btn btn--border btn--small" ui-state="ctrl.createSrefFor(notifierType)" harrow-can="create-{{notifierType}}" can-disable can-subject="ctrl.project">
+        {{ 'forms.notifiers.' + (notifierType | singularize) + '.buttons.new' | translate }}
+      </a>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<div class="app__content">
+  <div class="sectionHeader sectionHeader--bold">
+    <a href ui-sref="organization({uuid: organization.subject.uuid})" class="sectionHeader__title">{{ctrl.organization.subject.name}}</a>
+    <span>Organization</span>
+    <div class="layout__spacer"></div>
+  </div>
+  <div ng-include="'views/projects/_cards.html'" ng-init="cards = ctrl.cards; organization = ctrl.organization"></div>
+</div>

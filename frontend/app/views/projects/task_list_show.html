@@ -1,0 +1,30 @@
+<div class="tasks">
+  <div class="task" ng-repeat="task in taskList.tasks" ng-class="task.subject.lastRunStatus == 'success' ? 'task--green' : 'task--red'">
+    <div class="task__content" ng-if="taskList.currentState.name != 'projects/show'">
+      <span svg-icon="icon-complete" class="iconColor" ng-if="task.subject.lastRunStatus && task.subject.lastRunStatus == 'success'"></span>
+      <span svg-icon="icon-error" class="iconColor" ng-if="task.subject.lastRunStatus && task.subject.lastRunStatus != 'success'"></span>
+      <a ui-sref="projects/show({projectUuid: task.subject.projectUuid})">{{task.subject.projectName}}</a>
+    </div>
+    <div class="task__content">
+      <span svg-icon="icon-environments"></span>
+      <a ui-sref="task({taskUuid: task.subject.uuid, projectUuid: task.subject.projectUuid})">{{taskList.environmentFor(task).subject.name}}</a>
+    </div>
+    <div class="task__content">
+      <span svg-icon="icon-tasks"></span>
+      <a ui-sref="task({taskUuid: task.subject.uuid, projectUuid: task.subject.projectUuid})">{{taskList.scriptFor(task).subject.name}}</a>
+    </div>
+    <div class="task__footer">
+      <div class="layout__spacer"></div>
+      <a ng-click="appctrl.runTaskNow(task)" class="btn btn--border">Run</a>
+    </div>
+  </div>
+  <div class="card card--task card--taskEmpty" ng-if="taskList.tasks.length == 0">
+    <a class="card__content card__content--emptyTight" href ui-sref="scripts({projectUuid: taskList.project.subject.uuid})">
+      Get started by creating a script
+    </a>
+  </div>
+  <div class="card card--task card--taskEmpty" ng-if="taskList.project && taskList.tasks.length > 0">
+    <a class="card__content card__content--emptyTight" href ui-sref="scripts({projectUuid: taskList.project.subject.uuid})">Create new Task</a>
+  </div>
+
+</div>

@@ -1,0 +1,42 @@
+#!/bin/bash -eu
+
+if [ "$#" -lt 2 ]; then
+  printf "Usage: %s version env [env [...]]\n" "$0" >&2
+  exit 1
+fi
+
+VERSION="$1"
+shift
+
+if ! aws s3 ls "s3://harrow-frontend/$VERSION" >/dev/null; then
+  printf "Not a valid version: %s\n" "$VERSION" >&2
+  exit 1
+fi
+
+if [ "$VERSION" == "" ]; then
+  printf "Please specify a version to deploy\n" >&2
+  exit 1
+fi
+
+check_env_validity() {
+  case "$1" in
+    app|staging|enterprise)
+      # ok
+      ;;
+    *)
+      printf "Not a valid env: %s\n" "$1" >&2
+      exit 1
+      ;;
+  esac
+}
+
+for env in "$@"; do
+  check_env_validity "$env"
+
+  aws s3 rm --recursive "s3://harrow-frontend/$env"
+  aws s3 cp --recursive "s3://harrow-frontend/$VERSION-$env" "s3://harrow-frontend/$env"
+
+  ref="refs/deploys/$(date -u +%Y-%m-%dT%H_%M_%S+00_00)-$env"
+  git update-ref "$ref" "$VERSION"
+  git push origin "$ref":"$ref"
+done

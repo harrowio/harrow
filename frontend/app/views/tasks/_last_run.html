@@ -1,0 +1,23 @@
+<div class="card card--headerOnly">
+  <div class="card__header">
+    <div class="card__header__title">
+      <span ng-if="!operation">
+        Never run
+      </span>
+      <span ng-if="operation && !operation.subject.finishedAt && !operation.subject.failedAt">
+        Currently Running...
+      </span>
+      <span ng-if="operation.subject.finishedAt || operation.subject.failedAt">
+        Last run {{ operation.subject.startedAt | amTimeAgo }}
+      </span>
+    </div>
+  </div>
+</div>
+<div class="activity">
+  <div class="activity__container">
+    <div class="activity__meta">
+      <div ng-include="'views/operations/_meta.html'"></div>
+    </div>
+  </div>
+  <div ng-include="'views/operations/_status_inline.html'" ng-if="operation"></div>
+</div>

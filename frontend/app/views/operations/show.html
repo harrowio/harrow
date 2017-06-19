@@ -1,0 +1,23 @@
+<div class="app__content project__tasks">
+  <div class="sectionHeader sectionHeader--bold">
+    <span class="sectionHeader__title">
+      <span status-icon="{{operationShow.operation.subject.status}}" svg-icon-size="16">{{operationShow.operation.subject.status}}</span>
+      {{operationShow.operation.subject.createdAt | amDateFormat:'LLLL'}}
+    </span>
+    <span>Operation</span>
+    <div class="layout__spacer"></div>
+    <!-- <a href="https://www.youtube.com/channel/UCCJ34dxFauZ15xds-cCdB5w" target="_blank" class="btn btn--learnMore"><span svg-icon="icon-video"></span> Learn about Harrow.io</a> -->
+  </div>
+  <div class="grid grid--row grid--marginWide grid--wrap">
+    <div class="cell cell--4Col cell--baseline" ui-view="summary"></div>
+    <div class="cell cell--8Col cell--stretch" ui-view="details"></div>
+  </div>
+</div>
+<div class="app__content project__activity">
+  <div class="card card--headerOnly">
+    <div class="card__header">
+      Activity Log
+    </div>
+  </div>
+  <log-view operation-uuid="{{operationShow.operation.subject.uuid}}"></log-view>
+</div>

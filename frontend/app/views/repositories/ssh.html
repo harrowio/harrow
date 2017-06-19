@@ -1,0 +1,28 @@
+<div class="app__content">
+  <harrow-form save="ctrl.check()" translation-root="forms.wizard.connect" class="card card--wizard" no-controls>
+    <div class="card__items card__content--centered">
+      <h3>Here is your public SSH key. Add this to your git provider.</h3>
+      <div ng-if="ctrl.url.isGitHub" style="padding: 0 20px; text-align:center;">
+        <h4>We see you are using GitHub</h4>
+        <p>Simply navigate to <a ng-href="{{ctrl.url.toString('gitHubDeployKeys')}}" target="_blank">{{ctrl.url.toString('humanGitHubDeployKeys')}}</a> and click "Add deploy key", pasting the SSH key below.</p>
+      </div>
+      <div ng-if="ctrl.url.isBitbucket" style="padding: 0 20px; text-align:center;">
+        <h4>We see you are using Bitbucket</h4>
+        <p>Simply navigate to <a ng-href="{{ctrl.url.toString('bitbucketDeployKeys')}}" target="_blank">{{ctrl.url.toString('humanBitbucketDeployKeys')}}</a> and click "Add key", pasting the SSH key below.</p>
+      </div><br>
+      <div class="card__codeblock card__codeblock--dark cell--stretch" ng-if="ctrl.credential.subject.publicKey">
+        <pre>{{ctrl.credential.subject.publicKey}}</pre>
+        <div clipboard="ctrl.credential.subject.publicKey"></div>
+      </div>
+      <div class="card__codeblock card__codeblock--dark card__codeblock--empty" ng-if="!ctrl.credential.subject.publicKey" style="min-height: 250px;">
+        <span svg-icon="icon-spinner"></span>
+        <p>Generating public key, please wait.</p>
+      </div>
+    </div>
+    <div class="card__footer">
+      <a class="btn" ng-click="appctrl.back()"><span svg-icon="icon-chevron-left"></span> Back</a>
+      <div class="layout__spacer"></div>
+      <a class="btn" ng-if="appctrl.isNew()" ui-state="ctrl.finalState">Skip</a> <button class="btn btn--primary" harrow-stateful="ctrl.saveButtonOptions" ng-disabled="harrowForm.form.$invalid" type="submit">Continue <span svg-icon="icon-chevron-right"></span></button>
+    </div>
+  </harrow-form>
+</div>

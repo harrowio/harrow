@@ -1,0 +1,28 @@
+<div class="app__content">
+  <harrow-form save="invitationForm.save()" translation-root="forms.invitationForm" no-controls class="card">
+    <div class="card__header"><span translate="forms.invitationForm.title" /></div>
+    <div class="card__content card__content--centered">
+      <harrow-input>
+        <input name="recipientName" ng-model="invitationForm.invitation.subject.recipientName" required="true" />
+      </harrow-input>
+      <harrow-input>
+        <input name="email" type="email" ng-model="invitationForm.invitation.subject.email" required="true" />
+      </harrow-input>
+      <harrow-input>
+        <input name="message" ng-model="invitationForm.invitation.subject.message" required="true" />
+      </harrow-input>    </div>
+    <div class="flash flash--info">
+      <div class="flash__message">
+        <span svg-icon="icon-info-alt"></span>
+        <span>If the person you are inviting already has a Harrow account registered
+        another email address, or wishes to create a new account not using the
+        email address to which you send the invitation, they can.</span>
+      </span>
+      </div>
+    </div>
+    <div class="card__footer">
+      <div class="layout__spacer"></div>
+      <button type="submit" ng-disabled="harrowForm.form.$invalid" class="btn btn--primary">Invite</button>
+    </div>
+  </harrow-form>
+</div>

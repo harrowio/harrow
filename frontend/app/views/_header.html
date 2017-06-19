@@ -1,0 +1,17 @@
+<a href="" class="layout__sidebarButton tab tab--sidebarToggle" sidebar-toggle>
+  <span svg-icon="icon-hamburger"></span>
+</a>
+<div class="breadcrumbs">
+  <a ui-state="menu.stateName" ui-state-params="menu.stateParams" class="breadcrumb" ng-repeat="menu in ctrl.menu">
+    <small ng-bind-html="menu.title | toTrusted"></small>
+    <span><span ng-if="menu.crumb == 'operation'" status-icon="{{menu.resource.subject.status}}" svg-icon-size="16">{{menu.resource.subject.status}}</span> {{menu.name}}</span>
+  </a>
+</div>
+<div class="layout__spacer"></div>
+<a class="tab ng-hide-mobile" href ng-if="ctrl.editItem.stateName == 'task.edit'" harrow-can="update" can-subject="ctrl.editItem.resource" ui-sref="script.edit({scriptUuid: $resolve.script.subject.uuid, projectUuid: $resolve.project.subject.uuid})">
+  <span>Edit Script</span>
+</a>
+<a href ng-if="ctrl.editItem && ctrl.editItem.name" harrow-can="update" can-subject="ctrl.editItem.resource" ui-state="ctrl.editItem.stateName" ui-state-params="ctrl.editItem.stateParams" class="tab" ng-class="{'active': ctrl.isEditing()}">
+  <span class="ng-hide-mobile">{{ctrl.editItem.name}}</span>
+  <span svg-icon='icon-edit' class="ng-show-mobile"></span>
+</a>

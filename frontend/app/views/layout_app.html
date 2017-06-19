@@ -1,0 +1,13 @@
+<div id="app" class="layout__container layout--fixedSidebar">
+  <aside ui-view="sidebar" class="sidebar" ui-has-view ng-show="appctrl.authentication.currentUser"></aside>
+  <div class="layout layout--column layout--purpleLight">
+    <!--[if lt IE 9]>
+      <div class="app__important app__important--warn">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+    <![endif]-->
+    <header ui-view="header" ui-has-view class="layout__header layout__header--app"></header>
+    <main class="layout__content">
+      <aside ui-view="app-sidebar" ui-has-view class="app__sidebar navigation navigation--vertical"></aside>
+      <div ui-view="main" class="app__container"></div>
+    </main>
+  </div>
+</div>

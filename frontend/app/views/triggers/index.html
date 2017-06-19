@@ -1,0 +1,70 @@
+<div class="app__content">
+  <div ng-repeat="(triggerType, triggerCollection) in triggers.triggers" style="margin-bottom: 20px;">
+    <div class="card card--headerOnly">
+      <div class="card__header">
+        <div class="card__header__title">
+          <span svg-icon="{{ 'forms.triggers.' + (triggerType | singularize) + '.icon' | translate }}"></span> {{ 'forms.triggers.' + (triggerType | singularize) + '.legend' | translate }}
+        </div>
+        <div class="card__header__action">
+          <a class="btn" ui-state="triggers.createSrefFor(triggerType)" can-disable harrow-can="create-{{triggerType}}" can-subject="triggers.project">
+            <span svg-icon="icon-add"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="activity" ng-repeat="trigger in triggerCollection | orderBy:'subject.name'" ng-switch="triggerType">
+      <div class="activity__container" ng-switch-when="gitTriggers">
+        <div class="activity__meta cell--middle">
+          <span formatted-git-trigger="trigger" ng-init="{script: triggers.scriptFor(trigger), environment: triggers.environmentFor(trigger)}"></span>
+        </div>
+        <div class="cell--middle">
+          <a href ui-state="triggers.editSrefFor(triggerType)" ui-state-params="{projectUuid: triggers.project.subject.uuid, uuid: trigger.subject.uuid}" class="btn">edit</a>
+        </div>
+      </div>
+      <div class="activity__container" ng-switch-when="webhooks">
+        <div class="activity__detail cell--3Col">
+          <h3>{{trigger.subject.name}}</h3>
+        </div>
+        <div class="activity__meta cell--middle">
+          <code>{{trigger._links.deliver.href}}</code>
+        </div>
+        <div class="cell--middle">
+          <a href ui-state="triggers.editSrefFor(triggerType)" ui-state-params="{projectUuid: triggers.project.subject.uuid, uuid: trigger.subject.uuid}" class="btn">edit</a>
+        </div>
+      </div>
+      <div class="activity__container" ng-switch-when="schedules">
+        <div class="activity__meta cell--middle">
+          <span ng-if="trigger.subject.timespec && trigger.subject.runOnceAt">
+            <code>{{trigger.subject.timespec}}</code>
+            <p>Will run {{trigger.subject.runOnceAt | amCalendar}} <small>({{trigger.subject.runOnceAt | amTimeAgo}})</small></p>
+          </span>
+          <span ng-if="trigger.subject.cronspec">
+            <code>{{trigger.subject.cronspec}}</code>
+            <p><span schedule-next-run="trigger"/></p>
+          </span>
+        </div>
+        <div class="cell--middle">
+          <a href ui-state="triggers.editSrefFor(triggerType)" ui-state-params="{projectUuid: triggers.project.subject.uuid, uuid: trigger.subject.uuid}" class="btn">edit</a>
+        </div>
+      </div>
+      <div class="activity__container" ng-switch-default>
+        <div class="activity__meta cell--middle">
+          {{triggerType}}
+        </div>
+        <div class="cell--middle">
+          <a href ui-state="triggers.editSrefFor(triggerType)" ui-state-params="{projectUuid: triggers.project.subject.uuid, uuid: trigger.subject.uuid}" class="btn">edit</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card__content card__content--emptyTight" ng-if="triggerCollection.length == 0">
+      <span svg-icon="{{ 'forms.triggers.' + (triggerType | singularize) + '.icon' | translate }}"></span>
+
+      <h3>{{ 'forms.triggers.' + (triggerType | singularize) + '.legend' | translate }}</h3>
+      <br>
+      <a class="btn btn--border btn--small" ui-state="triggers.createSrefFor(triggerType)" can-disable harrow-can="create-{{triggerType}}" can-subject="triggers.project">
+        {{ 'forms.triggers.' + (triggerType | singularize) + '.button.new' | translate }}
+      </a>
+    </div>
+  </div>
+</div>

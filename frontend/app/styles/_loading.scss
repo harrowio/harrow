@@ -1,0 +1,32 @@
+.app__loading {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #4B334B;
+  position: relative;
+  color: white;
+  &__status {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 36px;
+    line-height: 42px;
+    font-weight: 300;
+    small {
+      font-size: 22px;
+    }
+  }
+  &__logo {
+    position: absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    text-align:center;
+    padding: 60px;
+    svg {
+      fill: white;
+    }
+  }
+}

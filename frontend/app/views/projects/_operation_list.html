@@ -1,0 +1,33 @@
+<div class="card card--headerOnly">
+  <div class="card__header">Recent Activity</div>
+</div>
+<div class="activity" ng-repeat="operation in operationList.operations | orderBy:'-subject.createdAt'" ui-sref="operations/show({ uuid: operation.subject.uuid })">
+  <div class="activity__container">
+    <div class="activity__detail">
+      <p>
+        <span status-icon="{{operation.status()}}"></span>
+        <strong>{{ (operation.subject.finishedAt || operation.subject.failedAt) | amTimeAgo }}</strong>
+      </p>
+      <p>
+        <span svg-icon="icon-environments"></span>
+        <strong>{{operation.subject.environmentName}}</strong>
+      </p>
+      <p>
+        <span svg-icon="icon-tasks"></span>
+        <strong>{{operation.subject.scriptName}}</strong>
+      </p>
+      <p>
+        <span svg-icon="icon-triggers"></span>
+        <strong>{{operation.subject.parameters.reason | titlecase}}</strong>
+      </p>
+    </div>
+    <div class="activity__meta">
+      <div ng-include="'views/operations/_meta.html'"></div>
+    </div>
+  </div>
+  <div ng-include="'views/operations/_status_inline.html'"></div>
+</div>
+<div class="activity activity--empty" ng-if="!operationList.operations.length">
+  <span svg-icon="icon-tasks"></span>
+  <p>Start running your scripts and we'll start showing your activity.</p>
+</div>

@@ -1,0 +1,93 @@
+{
+  "subject": {
+    "uuid": "a1a53272-5003-4fa6-642c-b1f72d92dd4e",
+    "createdAt": "2016-03-07T19:15:23.302252Z",
+    "name": "Default - Welcome",
+    "description": null,
+    "taskUuid": "7ba05a87-b2cf-4304-6b82-05e044e53365",
+    "environmentUuid": "c868ebb7-31d7-4135-597a-1da6b3684234",
+    "archivedAt": null,
+    "projectUuid": "fa9a0e1d-4b00-49ec-3b1c-bd43c654ef81",
+    "projectName": "",
+    "lastRunStartedAt": null,
+    "runs": null
+  },
+  "_links": {
+    "environment": {
+      "archive": "DELETE",
+      "create": "POST",
+      "href": "https://www.vm.harrow.io/api/environments/c868ebb7-31d7-4135-597a-1da6b3684234",
+      "read": "GET",
+      "update": "POST"
+    },
+    "job-notifiers": {
+      "archive": "DELETE",
+      "create": "POST",
+      "href": "https://www.vm.harrow.io/api/jobs/a1a53272-5003-4fa6-642c-b1f72d92dd4e/job-notifiers",
+      "read": "GET",
+      "update": "POST"
+    },
+    "notification-rules": {
+      "archive": "DELETE",
+      "create": "POST",
+      "href": "https://www.vm.harrow.io/api/jobs/a1a53272-5003-4fa6-642c-b1f72d92dd4e/notification-rules",
+      "read": "GET",
+      "update": "POST"
+    },
+    "operations": {
+      "href": "https://www.vm.harrow.io/api/jobs/a1a53272-5003-4fa6-642c-b1f72d92dd4e/operations",
+      "read": "GET"
+    },
+    "project": {
+      "archive": "DELETE",
+      "create": "POST",
+      "href": "https://www.vm.harrow.io/api/projects/fa9a0e1d-4b00-49ec-3b1c-bd43c654ef81",
+      "read": "GET",
+      "update": "POST"
+    },
+    "schedule": {
+      "archive": "DELETE",
+      "create": "POST",
+      "href": "https://www.vm.harrow.io/api/schedules",
+      "read": "GET",
+      "update": "POST"
+    },
+    "scheduledExecutions": {
+      "href": "https://www.vm.harrow.io/api/jobs/a1a53272-5003-4fa6-642c-b1f72d92dd4e/scheduled-executions"
+    },
+    "self": {
+      "archive": "DELETE",
+      "create": "POST",
+      "href": "https://www.vm.harrow.io/api/jobs/a1a53272-5003-4fa6-642c-b1f72d92dd4e",
+      "read": "GET",
+      "update": "POST"
+    },
+    "subscriptions": {
+      "archive": "DELETE",
+      "create": "POST",
+      "href": "https://www.vm.harrow.io/api/jobs/a1a53272-5003-4fa6-642c-b1f72d92dd4e/watch",
+      "read": "GET",
+      "update": "POST"
+    },
+    "task": {
+      "archive": "DELETE",
+      "create": "POST",
+      "href": "https://www.vm.harrow.io/api/tasks/7ba05a87-b2cf-4304-6b82-05e044e53365",
+      "read": "GET",
+      "update": "POST"
+    },
+    "triggers-git": {
+      "href": "https://www.vm.harrow.io/api/jobs/a1a53272-5003-4fa6-642c-b1f72d92dd4e/triggers/git"
+    },
+    "triggers-jobs": {
+      "href": "https://www.vm.harrow.io/api/jobs/a1a53272-5003-4fa6-642c-b1f72d92dd4e/triggers/jobs"
+    },
+    "triggers-schedules": {
+      "href": "https://www.vm.harrow.io/api/jobs/a1a53272-5003-4fa6-642c-b1f72d92dd4e/triggers/schedules"
+    },
+    "triggers-webhooks": {
+      "href": "https://www.vm.harrow.io/api/jobs/a1a53272-5003-4fa6-642c-b1f72d92dd4e/triggers/webhooks"
+    }
+  },
+  "_embedded": {}
+}

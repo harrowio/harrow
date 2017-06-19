@@ -1,0 +1,31 @@
+<div class="app__content">
+  <harrow-form save="ctrl.save()" translation-root="forms.wizard.connect" class="card card--wizard card--iconWall" no-controls>
+    <div class="card__content card__content--centered">
+      <img width="64" height="64" gravatar-src="'{{appctrl.authentication.currentUser.subject.email}}'" gravatar-size="128" class="avatar">
+
+      <h2>Hey {{appctrl.authentication.currentUser.subject.name | titlecase}}</h2>
+      <p>Lets get your account all set up.</p>
+
+      <harrow-input>
+        <input name="url" ng-model="ctrl.url" required="true" />
+      </harrow-input>
+
+      <div class="grid" style="max-width: 400px;">
+        <div class="cell cell--middle" style="max-width: 36px; margin-right: 10px;">
+          <span><span svg-icon="icon-info" style="fill: #48639c;"></span></span>
+        </div>
+        <div class="cell">
+          <p>Did you know? We also have a self-hosted version of Harrow you can run behind your firewall! <a href="https://harrow.io/enterprise" target="_blank">Learn more</a>.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card__footer">
+      <div class="layout__spacer"></div>
+      <button type="submit" class="btn btn--primary" ng-disabled="harrowForm.form.$invalid" harrow-stateful="ctrl.saveButtonOptions"> Continue <span svg-icon="icon-chevron-right"></span></button>
+    </div>
+  </harrow-form>
+  <center ng-if="$resolve.organizations.length == 0">
+    <small>Not your account? <a ng-click="appctrl.logout()">Log out</a></small>
+  </center>
+</div>

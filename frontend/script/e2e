@@ -1,0 +1,13 @@
+#!/bin/sh -eu
+
+read -p "Would you like to clear and seed the database (y/N)?" -n 1 -r
+echo # (optional) move to a new line
+
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+  echo "Running cleardb and seed"
+  (cd $HARROW_PATH/api && vagrant ssh default -c "make -C /harrow/api cleardb seed")
+else
+  echo "Skipping cleardb and seed"
+fi
+DEBUG=e2e:* ./node_modules/.bin/mocha ./e2e/*_test.js

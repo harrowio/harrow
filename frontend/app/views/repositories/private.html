@@ -1,0 +1,45 @@
+<div class="app__content">
+  <harrow-form save="ctrl.check()" translation-root="forms.wizard.connect" class="card card--wizard" no-controls>
+    <div class="card__content card__content--centered">
+      <h3>Your repository is private, we'll need some more information</h3>
+      <p>You can <a href="https://help.github.com/articles/creating-an-access-token-for-command-line-use/" target="_blank">create an access token</a> for GitHub repositories.</p>
+      <br>
+      <!--
+      <div class="field__group field__group--tight">
+        <harrow-field-input>
+          <select name="protocol" ng-model="ctrl.url.protocol" required="true" ng-options="value as value for value in ['ssh', 'https']">
+          </select>
+        </harrow-field-input>
+        <harrow-field-input>
+          <input name="host" ng-model="ctrl.url.hostname" required="true">
+        </harrow-field-input>
+      </div>
+
+      <div class="field__group field__group--tight">
+        <harrow-field-input>
+          <input type="number" name="port" ng-model="ctrl.url.port">
+        </harrow-field-input>
+        <harrow-field-input>
+          <input name="path" ng-model="ctrl.url.pathname" required="true" focus-if>
+        </harrow-field-input>
+      </div>
+      -->
+      <div class="field__group field__group--tight">
+        <harrow-field-input>
+          <input name="username" ng-model="ctrl.url.username">
+        </harrow-field-input>
+      </div>
+      <div class="field__group field__group--tight">
+        <harrow-field-input>
+          <input type="password" name="password" ng-model="ctrl.url.password">
+        </harrow-field-input>
+      </div>
+    </div>
+    <div class="card__footer">
+      <a ng-click="appctrl.back()" class="btn"><span svg-icon="icon-chevron-left"></span> Back</a>
+      <div class="layout__spacer"></div>
+      <a ng-if="appctrl.isNew()" class="btn" ui-state="ctrl.finalState">Skip</a>
+      <button type="submit" class="btn btn--primary" harrow-stateful="ctrl.saveButtonOptions" ng-disabled="harrowForm.form.$invalid">Continue <span svg-icon="icon-chevron-right"></span></button>
+    </div>
+  </harrow-form>
+</div>

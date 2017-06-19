@@ -1,0 +1,23 @@
+<div class="app__content">
+  <harrow-form save="environmentForm.save()" no-controls translation-root="forms.wizard.connect" class="card">
+    <div class="card__header">Create an Environment</div>
+    <div class="card__content">
+      <div ng-include="'views/environments/_form.html'"></div>
+      <div>
+        <p>Environments contain secrets and SSH key pairs, which can be used by your scripts to make them reusable.</p>
+        <p>Simply write a script that uses a variable such as <code>cap $STAGE deploy</code> and, add a variable <code>STAGE=production</code> to your environment.
+      </div>
+    </div>
+    <div class="flash flash--info">
+      <div class="flash__message">
+        <span svg-icon="icon-info-alt"></span>
+        <span translate="environmentsCreate.environmentPropertiesHint"></span>
+      </div>
+    </div>
+    <div class="card__footer">
+      <a ng-click="appctrl.back()" class="btn">Back</a>
+      <div class="layout__spacer"></div>
+      <button type="submit" class="btn btn--primary" ng-disabled="harrowForm.form.$invalid">Save</button>
+    </div>
+  </harrow-form>
+</div>

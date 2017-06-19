@@ -1,0 +1,51 @@
+<div ng-switch="operationShow.operation.status()" class="grid grid--column grid--margin">
+  <div ng-switch-when="canceled" class="cell flash flash--error">
+    <div class="flash__message">
+      <span svg-icon="icon-error" class=""></span> Your operation was canceled by a user.
+    </div>
+  </div>
+  <div ng-switch-when="success" class="cell flash flash--success">
+    <div class="flash__message">
+      <span svg-icon="icon-complete" class=""></span> Your operation completed successfully.
+    </div>
+  </div>
+
+  <div ng-switch-when="failed" class="cell flash flash--error">
+    <div class="flash__message">
+      <p><span svg-icon="icon-info-alt"></span> Your operation failed, please examine the logs below to understand the failure.</p>
+      <p>If you need help, please don't hesitate to contact our support team, or check the <a href="http://kb.harrow.io/">knowledge base</a></p>
+    </div>
+  </div>
+
+  <div ng-switch-when="fatalerr" class="cell flash flash--error">
+    <div class="flash__message">
+      <h3><span svg-icon="icon-error"></span> Your operation failed fatally</h3>
+      <p>Usually due to an inaccessible repository. Please check the <a ui-sref="projects/edit({projectUuid: operationShow.project.subject.uuid})">Project Settings</a> and verify that all repositories are reachable. If the problems persist, please contact
+        our team for help in getting past this error.</p>
+      <pre class="code pre-wrap"><code>{{operationShow.operation.subject.fatalError}}</code></pre>
+    </div>
+    <a class="flash__action" ui-sref="projects/edit({projectUuid: operationShow.project.subject.uuid})">
+      Check Settings
+    </a>
+  </div>
+
+  <div ng-switch-when="timedout" class="cell flash flash--error">
+    <div class="flash__message">
+      Your operation timed out. To restrict the load on our systems, operations are limited to a total run time of 2 hours.
+    </div>
+    <div class="flash__action" ng-click="appctrl.openSupport($event, 'Hi, I have experienced a timeout error and I would like to increase the limit please...')">
+      Contact Support
+    </div>
+  </div>
+
+  <div ng-switch-when="running" class="cell flash">
+    <div class="flash__message">
+      <span svg-icon="icon-spinner"></span>
+      Running
+    </div>
+  </div>
+
+  <div ng-switch-default class="cell flash">
+    <div class="flash__message">Operation state: {{ operationShow.operation.status() | titlecase }}</div>
+  </div>
+</div>

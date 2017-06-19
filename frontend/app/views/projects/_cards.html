@@ -1,0 +1,25 @@
+<div class="projects">
+  <a ui-sref="projects/show({projectUuid: card.subject.projectUuid})" class="project" ng-repeat="card in cards | orderBy:'subject.projectName'">
+    <div class="project__status__icon">
+      <span status-icon="{{card.subject.lastTaskStatus}}"></span>
+    </div>
+
+    <div class="project__content">
+      <h3>{{card.subject.projectName}}</h3>
+      <span ng-if="card.subject.lastTaskRunAt">
+        <strong>Last task run:</strong> {{card.subject.lastTaskName}}<br>
+        <strong>When:</strong> {{card.subject.lastTaskRunAt | amTimeAgo}}<br>
+        <strong>Status:</strong> {{card.subject.lastTaskStatus}}
+      </span>
+      <span ng-if="!card.subject.lastTaskRunAt" class="typography--mock color__purpleLight--A200">
+        <strong>Last task run:</strong> No task<br>
+        <strong>When:</strong> Never<br>
+        <strong>Status:</strong> Unknown
+      </span>
+    </div>
+  </a>
+  <a class="project project--empty" ui-sref="wizard.create({ organizationUuid: organization.subject.uuid })" harrow-can="create-projects" can-subject="organization">
+    <span svg-icon="icon-add"></span>
+    Add new project
+  </a>
+</div> <!-- projects -->

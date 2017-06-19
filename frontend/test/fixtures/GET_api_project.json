@@ -1,0 +1,95 @@
+{
+  "subject": {
+    "uuid": "42e80914-ddad-4bb7-3ee5-adb98b094339",
+    "organizationUuid": "89e75265-1b2e-4363-354e-26ac47104f9a",
+    "name": "Frontend",
+    "public": false,
+    "createdAt": "2015-10-07T16:52:50.676286Z",
+    "archivedAt": null
+  },
+  "_links": {
+    "environments": {
+      "archive": "DELETE",
+      "create": "POST",
+      "href": "https://www.app.harrow.io/api/projects/42e80914-ddad-4bb7-3ee5-adb98b094339/environments",
+      "read": "GET",
+      "update": "POST"
+    },
+    "git-triggers": {
+      "href": "https://www.app.harrow.io/api/projects/42e80914-ddad-4bb7-3ee5-adb98b094339/git-triggers"
+    },
+    "invitations": {
+      "archive": "DELETE",
+      "create": "POST",
+      "href": "https://www.app.harrow.io/api/invitations",
+      "update": "POST"
+    },
+    "jobs": {
+      "archive": "DELETE",
+      "create": "POST",
+      "href": "https://www.app.harrow.io/api/projects/42e80914-ddad-4bb7-3ee5-adb98b094339/jobs",
+      "read": "GET",
+      "update": "POST"
+    },
+    "leave": {
+      "href": "https://www.app.harrow.io/api/projects/42e80914-ddad-4bb7-3ee5-adb98b094339/members"
+    },
+    "project-members": {
+      "href": "https://www.app.harrow.io/api/projects/42e80914-ddad-4bb7-3ee5-adb98b094339/members"
+    },
+    "operations": {
+      "href": "https://www.app.harrow.io/api/projects/42e80914-ddad-4bb7-3ee5-adb98b094339/operations",
+      "read": "GET"
+    },
+    "organization": {
+      "create": "POST",
+      "href": "https://www.app.harrow.io/api/organizations/89e75265-1b2e-4363-354e-26ac47104f9a",
+      "read": "GET"
+    },
+    "repositories": {
+      "archive": "DELETE",
+      "create": "POST",
+      "href": "https://www.app.harrow.io/api/projects/42e80914-ddad-4bb7-3ee5-adb98b094339/repositories",
+      "read": "GET",
+      "update": "POST"
+    },
+    "scheduled-executions": {
+      "href": "https://www.app.harrow.io/api/projects/42e80914-ddad-4bb7-3ee5-adb98b094339/scheduled-executions"
+    },
+    "schedules": {
+      "archive": "DELETE",
+      "create": "POST",
+      "href": "https://www.app.harrow.io/api/projects/42e80914-ddad-4bb7-3ee5-adb98b094339/schedules",
+      "read": "GET",
+      "update": "POST"
+    },
+    "self": {
+      "archive": "DELETE",
+      "create": "POST",
+      "href": "https://www.app.harrow.io/api/projects/42e80914-ddad-4bb7-3ee5-adb98b094339",
+      "read": "GET",
+      "update": "POST"
+    },
+    "slack-notifiers": {
+      "href": "https://www.vm.harrow.io/api/projects/92cfa771-abcb-4366-3246-846d7a3eac3d/slack-notifiers"
+    },
+    "job-notifiers": {
+      "href": "https://www.vm.harrow.io/api/projects/92cfa771-abcb-4366-3246-846d7a3eac3d/job-notifiers"
+    },
+    "tasks": {
+      "archive": "DELETE",
+      "create": "POST",
+      "href": "https://www.app.harrow.io/api/projects/42e80914-ddad-4bb7-3ee5-adb98b094339/tasks",
+      "read": "GET",
+      "update": "POST"
+    },
+    "webhooks": {
+      "archive": "DELETE",
+      "create": "POST",
+      "href": "https://www.app.harrow.io/api/projects/42e80914-ddad-4bb7-3ee5-adb98b094339/webhooks",
+      "read": "GET",
+      "update": "POST"
+    }
+  },
+  "_embedded": {}
+}

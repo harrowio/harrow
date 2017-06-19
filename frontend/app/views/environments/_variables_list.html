@@ -1,0 +1,32 @@
+<div ng-show="environmentForm.variables.length == 0">
+  <p>This environment contains no variables.</p>
+</div>
+<!-- <div class="variables" ng-show="environmentForm.variables.length > 0"> -->
+<!--   <div class="variable" ng-repeat="variable in environmentForm.variables"> -->
+<!--     <span style="display: inline-block; width: calc(100% / 3)" class="variable__name">{{variable.name}}</span> -->
+<!--     <span style="display: inline-block; width: calc(100% / 3)" class="variable__value">{{variable.value}}</span> -->
+<!--   </div> -->
+<!-- </div> -->
+<table class="table" ng-show="environmentForm.variables.length > 0">
+  <thead>
+    <tr>
+      <th class="name">Name</th>
+      <th class="value">Value</th>
+      <th class="buttons"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="variable" ng-repeat="variable in environmentForm.variables">
+      <td class="name">
+        <code>{{variable.name}}</code>
+      </td>
+      <td class="value">
+        <code>{{variable.value}}</code>
+      </td>
+      <td class="buttons">
+        <a class="btn btn--small" ng-click="environmentForm.showVariableValueModal(variable.name, variable.value)">Show</a>
+        <a harrow-can can-disable can-subject="environmentForm.environment" can-action="update" class="btn btn--small" ng-click="environmentForm.deleteVariable(variable)">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,26 @@
+<div class="grid grid--wrap grid--row grid--marginWide">
+  <a href ui-sref="script({scriptUuid: script.subject.scriptUuid})" ng-repeat="script in ctrl.scriptCards" class="card card--script card--script--{{script.subject.lastOperation.status()}}">
+    <div class="card__content">
+      <div class="card--script__content__header">
+        <span ng-if="script.subject.lastOperation" status-icon="{{script.subject.lastOperation.status()}}" class="card--script__content__icon"></span>
+        <span class="card--script__content__title">{{script.subject.scriptName}}</span>
+      </div>
+      <small ng-if="script.subject.lastOperation" ng-bind-html="script.subject.lastOperation | formattedOperationTrigger"></small>
+      <small ng-if="!script.subject.lastOperation">Has not been run yet.</small>
+      <div class="environment__cards">
+        <div class="environment__card" ng-repeat="environment in script.subject.enabledEnvironments | limitTo:ctrl.environmentLimit">
+          <span class="environment__card__title" ng-class="{true: 'environment__card__title--' + script.subject.recentOperationStatusByEnvironmentUuid[environment.uuid][0]}[script.subject.lastOperationEnvironmentUuid == environment.uuid]">{{environment.name}}</span>
+          <div class="environment__card__history">
+            <span class="environment__dot environment__dot--{{run}}" ng-repeat="run in script.subject.recentOperationStatusByEnvironmentUuid[environment.uuid] track by $index | limitTo:ctrl.historyLimit"></span>
+            <span class="environment__dot" ng-repeat="dot in ctrl.emptyDots(script.subject.recentOperationStatusByEnvironmentUuid[environment.uuid].length)"></span>
+          </div>
+        </div>
+        <small ng-if="script._embedded.environments.length > ctrl.environmentLimit">{{ 'scripts.otherEnvironments' | translate:{count: script._embedded.environments.length - ctrl.environmentLimit}:'messageformat' }}</small>
+      </div>
+    </div>
+  </a>
+  <a class="card card--script emptyCard" ui-sref="createScript()" harrow-can="create-scripts" can-subject="$resolve.project">
+    <span svg-icon="icon-add"></span>
+    Add new script
+  </a>
+</div>

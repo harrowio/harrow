@@ -1,0 +1,45 @@
+{
+  "collection": [
+    {
+      "subject": {
+        "uuid": "dd2c15ff-cfdf-49ef-3b7d-250be5dc77a7",
+        "name": "test",
+        "githubLogin": "",
+        "public": false,
+        "createdAt": "2016-02-05T11:18:06.848194Z",
+        "archivedAt": null
+      },
+      "_links": {
+        "add-credit-card": {
+          "href": "https://www.vm.harrow.io/api/billing-plans/braintree/credit-cards"
+        },
+        "members": {
+          "href": "https://www.vm.harrow.io/api/organizations/dd2c15ff-cfdf-49ef-3b7d-250be5dc77a7/members"
+        },
+        "memberships": {
+          "href": "https://www.vm.harrow.io/api/organizations/dd2c15ff-cfdf-49ef-3b7d-250be5dc77a7/memberships"
+        },
+        "projects": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/organizations/dd2c15ff-cfdf-49ef-3b7d-250be5dc77a7/projects",
+          "read": "GET",
+          "update": "POST"
+        },
+        "self": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/organizations/dd2c15ff-cfdf-49ef-3b7d-250be5dc77a7",
+          "read": "GET",
+          "update": "POST"
+        }
+      },
+      "_embedded": {}
+    }
+  ],
+  "_meta": {
+    "count": "1",
+    "total": "1"
+  },
+  "_links": {}
+}

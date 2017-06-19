@@ -1,0 +1,35 @@
+<div class="card">
+  <div class="card__header">
+    <div class="card__header__title">Repositories</div>
+    <div class="card__header__action">
+      <a ui-sref="projects/edit.createRepository({projectUuid: repositoryList.project.subject.uuid})" class="btn"><span svg-icon="icon-add"></span></a>
+    </div>
+  </div>
+  <div class="repository__status" ng-repeat="repository in repositoryList.repositories" ng-class="{inaccessible: 'repository__status--error'}[repositoryList.repositoryStatus(repository)]">
+    <div class="repository__status__row">
+      <div class="repository__status__icon">
+        <span svg-icon="icon-repositories" ng-show="repositoryList.repositoryStatus(repository) === 'accessible'"></span>
+        <span svg-icon="icon-error" ng-show="repositoryList.repositoryStatus(repository) === 'inaccessible'"></span>
+        <span svg-icon="icon-spinner" class="iconColor" ng-show="repositoryList.repositoryStatus(repository) == 'checking'"></span>
+
+      </div>
+      <div class="repository__status__detail">
+        <a ui-sref="projects/edit.editRepository({ projectUuid: repositoryList.project.subject.uuid, uuid: repository.subject.uuid })" class="repository__status__title" title="{{repository.subject.url}}">{{repository.subject.url | formatGitUrl }}</a>
+        <span ng-show="repository.subject.metadataUpdatedAt">
+          <div>Last updated {{repository.subject.metadataUpdatedAt | amTimeAgo }}</div>
+        </span>
+      </div>
+    </div>
+    <div class="flash flash--inline flash--error" ng-show="repositoryList.repositoryStatus(repository) === 'inaccessible'">
+      <div class="flash__message">Repository is not reachable</div>
+      <div class="flash__action" harrow-can can-disable can-subject="repository" can-action="create-checks" ng-click="repositoryList.check(repository)">Fix It</div>
+    </div>
+  </div>
+
+
+  <div class="repository__status--empty" ng-if="!repositoryList.repositories.length">
+    <span svg-icon="icon-repositories"></span>
+    <p>There are no repositories</p>
+    <a ui-sref="projects/edit.createRepository({projectUuid: repositoryList.project.subject.uuid})" class="btn btn--border">Add Repository</a>
+  </div>
+</div>

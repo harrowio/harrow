@@ -1,0 +1,37 @@
+<harrow-form save="ctrl.signup()" translation-root="forms.signup" no-controls class="card card--auth">
+  <div class="card__content">
+    <h3><span svg-icon="icon-user" svg-icon-size="20"></span> New Users - Create a new account</h3>
+    <br>
+    <div class="grid grid--rowReverse grid--marginWide grid--wrap">
+      <div class="cell cell--5Col">
+        <div class="grid grid--margin grid--column">
+          <div class="cell" feature="oauth.github.authentication">
+            <a class="btn btn--border btn--white" ng-click="ctrl.githubSignin()" type="button"><span svg-icon="icon-github"></span> Log in with GitHub</a>
+          </div>
+          <div class="cell" feature="guest-account.enabled">
+            <a class="btn btn--border btn--white" ng-click="ctrl.guest()"><span svg-icon="icon-user"></span> Log In As A Guest</a>
+          </div>
+        </div>
+      </div>
+      <div class="cell cell--7Col">
+        <harrow-input>
+          <input name="name" type="text" ng-model="ctrl.user.subject.name" required="true" focus-if />
+        </harrow-input>
+        <harrow-input>
+          <input name="email" type="email" ng-model="ctrl.user.subject.email" required="true" />
+        </harrow-input>
+        <harrow-input>
+          <input name="password" type="password" ng-model="ctrl.user.subject.password" required="true" minlength="10" />
+        </harrow-input>
+        <button type="submit" class="btn btn--primary" ng-disabled="harrowForm.form.$invalid" harrow-stateful="ctrl.buttonStateful">Create Account</button>
+      </div>
+    </div>
+  </div>
+  <div class="card__footer">
+    <a ui-sref="login({invitation: ctrl.invitationUuid, origin: ctrl.origin})">Already have an account?</a>
+    <a href="https://harrow.io/terms-and-conditions/" target="_blank">Terms of Service</a>
+    <a href="https://harrow.io/privacy-policy/" target="_blank">Privacy Policy</a>
+    <div class="layout__spacer"></div>
+    <p>Free 14-day unlimited trial. Always free for public projects.</p>
+  </div>
+</harrow-form>

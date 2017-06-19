@@ -1,0 +1,51 @@
+<div ng-switch="operation.status()">
+  <div ng-switch-when="success" class="flash">
+    <div class="flash__message">
+      <span svg-icon="icon-complete" class="iconColor"></span>
+      Completed {{ operation.subject.finishedAt | amTimeAgo }}
+    </div>
+    <a class="flash__action" ui-sref="operations/show({ uuid: operation.subject.uuid })">
+      See Log
+    </a>
+  </div>
+  <div ng-switch-when="failed" class="flash flash--error">
+    <div class="flash__message">
+      <span svg-icon="icon-error"></span> Something went wrong, try again?
+    </div>
+    <a class="flash__action" ui-sref="operations/show({ uuid: operation.subject.uuid })">
+      See Log
+    </a>
+  </div>
+  <div ng-switch-when="fatalerr" class="flash flash--error">
+    <div class="flash__message">
+      <span svg-icon="icon-error-alt"></span> A few errors occured when runnig this script
+    </div>
+    <a class="flash__action" ui-sref="operations/show({ uuid: operation.subject.uuid })">
+      See Log
+    </a>
+  </div>
+  <div ng-switch-when="timedout" class="flash flash--error">
+    <div class="flash__message">
+      <span svg-icon="icon-error-alt"></span> Timed out
+    </div>
+    <a class="flash__action" ui-sref="operations/show({ uuid: operation.subject.uuid })">
+      See Log
+    </a>
+  </div>
+  <div ng-switch-when="running" class="flash">
+    <div class="flash__message">
+      <span svg-icon="icon-spinner" class="iconColor"></span> Running
+    </div>
+    <a class="flash__action" ui-sref="operations/show({ uuid: operation.subject.uuid })">
+      See Log
+    </a>
+  </div>
+  <div ng-switch-default class="flash">
+    <div class="flash__message">
+      <span svg-icon="icon-info-alt" class="iconColor"></span> {{operation.status() | titlecase}}
+    </div>
+    <a class="flash__action" ui-sref="operations/show({ uuid: operation.subject.uuid })">
+      See Log
+    </a>
+  </div>
+</div>

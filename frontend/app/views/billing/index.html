@@ -1,0 +1,117 @@
+<div class="app__content">
+  <div class="sectionHeader sectionHeader--bold">
+    <a href ui-sref="organization({uuid: organization.subject.uuid})" class="sectionHeader__title">{{ctrl.organization.subject.name}}</a>
+    <span>Organization Billing</span>
+    <div class="layout__spacer"></div>
+  </div>
+  <div class="prompt prompt--blue" style="margin-bottom: 20px;" ng-if="isTrialEnding()">
+    <h3>Your trial is going to end soon</h3>
+    <p>{{ 'forms.billing.prompt.trialWarning' | translate:{count: ctrl.limits.subject.trialDaysLeft}:'messageformat' }}</p>
+  </div>
+  <div class="prompt prompt--red" style="margin-bottom: 20px;" ng-if="ctrl.hasTrialEnded()">
+    <h3>Your trial has ended</h3>
+    <p>{{ 'forms.billing.prompt.trialEnded' | translate }}</p>
+  </div>
+  <div class="prompt prompt--red" ng-if="ctrl.limits.subject.exceeded">
+    <h3>Whoops, you're over your plan limits!</h3>
+    <ul>
+      <li ng-if="ctrl.limits.subject.plan.usersExceedingLimit">Your plan allows for {{ ctrl.limits.subject.plan.usersIncluded }} users but you have {{ ctrl.limits.subject.plan.usersIncluded + ctrl.limits.subject.plan.usersExceedingLimit }}.</li>
+      <li ng-if="ctrl.limits.subject.plan.projectsExceedingLimit">
+        Your plan allows for {{ ctrl.limits.subject.plan.projectsIncluded }} projects but you have {{ ctrl.limits.subject.plan.projectsIncluded + ctrl.limits.subject.plan.projectsExceedingLimit }}.
+        <br>or archive a project:
+        <ul>
+          <li ng-repeat="project in ctrl.projects"><a ui-sref="projects/edit.archive({projectUuid: project.subject.uuid})">{{project.subject.name}}</a></li>
+        </ul>
+      </li>
+    </ul>
+    <p>You can choose a more suitable plan and upgrade below.</p>
+  </div>
+
+  <div class="grid featureSection__pricing__cards featureSection__pricing__cards--alt">
+    <div class="grid--4Col featureSection__pricing__card" ng-repeat="plan in ctrl.plans | filter:{subject: {uuid: '!b99a21cc-b108-466e-aa4d-bde10ebbe1f3'}}" ng-click="ctrl.selectPlan(plan)" ng-class="{active: ctrl.isCurrentPlan(plan)}" style="min-width: 0;">
+      <div class="featureSection__pricing__card__header">
+        {{ 'formattedPricingPlan.price' | translate:{price: plan.subject.pricePerMonth} }}
+        <small>per month</small>
+      </div>
+      <div class="featureSection__pricing__card__detail" style="min-height: 175px">
+        <strong class="color__red">{{ 'formattedPricingPlan.planName' | translate:{planUuid: plan.subject.uuid, name: plan.subject.name}:'messageformat' }}</strong>
+        <p ng-bind-html="plan.subject | formattedPricingPlan | toTrusted"></p>
+        <a href class="btn btn--green">{{ 'forms.billing.button.planChangeDirection' | translate:{isUpgrade: ctrl.isPlanUpgrade(plan)}:'messageformat' }}</a>
+      </div>
+      <div class="featureSection__pricing__card__popular" ng-if="ctrl.isRecommendedPlan(plan)">
+        Suitable Plan
+      </div>
+      <div class="featureSection__pricing__card__popular" ng-if="ctrl.planUuid == 'b99a21cc-b108-466e-aa4d-bde10ebbe1f3' && plan.subject.uuid == '1b67ab5d-9fff-46a3-89ac-113fbd360790'">
+        Most popular
+      </div>
+      <div class="featureSection__pricing__card__selected" ng-if="ctrl.isCurrentPlan(plan)">
+        Your Current Plan
+      </div>
+      <div class="featureSection__pricing__card__processing" ng-if="plan.subject.uuid == ctrl.pendingPlanUuid">
+        <span svg-icon="icon-spinner"></span> Processing
+      </div>
+    </div>
+
+    <div class="featureSection__pricing__card" style="min-width: 0;">
+      <div class="featureSection__pricing__card__header">
+        <span svg-icon="icon-enterprise"></span>
+      </div>
+      <div class="featureSection__pricing__card__detail" style="min-height: 175px">
+        <p>Need something special?
+          <br>Self-hosted
+        </p>
+        <a href="mailto:team@harrow.io?subject=I'd%20like%20to%20do%20Harrow" class="btn btn--primary">Get in Touch</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid--marginWide" style="margin-bottom">
+    <div class="cell cell--8Col prompt" ng-if="ctrl.organization.subject.extrasGranted.length">
+      <h3>Special Extras</h3>
+      <p>Your organization has been granted the following extras.</p>
+      <p ng-repeat="extras in ctrl.organization.subject.extrasGranted">
+        <small>{{ 'formattedPricingPlan.extras' | translate:{projects: extras.Data.Projects, users: extras.Data.Users, reason: extras.Data.Reason}:'messageformat' }}</small>
+      </p>
+    </div>
+    <div class="cell cell--4Col prompt" ng-if="false">
+      <h3>Current Usage</h3>
+      <p>
+        <small>Selected Plan: {{ 'formattedPricingPlan.planName' | translate:{planUuid: ctrl.currentPlan().subject.uuid, name: ctrl.currentPlan().subject.name}:'messageformat' }}</small><br>
+        <small ng-class="{'color__red': (ctrl.limits.subject.plan.projectsIncluded - ctrl.limits.subject.projects) == 0}">{{ 'formattedPricingPlan.projects' | translate:{projects: (ctrl.limits.subject.plan.projectsIncluded - ctrl.limits.subject.projects)}:'messageformat' }} remaining</small><br>
+        <small ng-class="{'color__red': (ctrl.limits.subject.plan.projectsIncluded - ctrl.limits.subject.projects) == 0}">{{ 'formattedPricingPlan.users' | translate:{users: (ctrl.limits.subject.plan.usersIncluded - ctrl.limits.subject.members)}:'messageformat' }} remaining</small><br>
+      </p>
+    </div>
+  </div>
+
+  <div class="flash flash--inline flash--info" style="margin-bottom:30px;margin-top: 30px;">
+    <div class="flash__message">
+      <strong>Free Plan</strong> - for public projects and repositories without collaborators.
+      <span ng-if="ctrl.currentPlan().subject.uuid == ctrl.freePlan().subject.uuid">(<u>You are currently using this plan.</u>)</span>
+    </div>
+    <div ng-click="ctrl.selectPlan(ctrl.freePlan())" class="flash__action" ng-if="ctrl.isPaid()">
+      <span harrow-stateful="ctrl.statefulOptions">Downgrade</span>
+    </div>
+  </div>
+
+  <div class="card" ng-if="ctrl.organization.subject.creditCards.length">
+    <div class="card__header">
+      <div class="card__header__title">
+        Credit Cards
+      </div>
+      <div class="card__header__action">
+        <a href ui-sref="createCreditCard" class="btn">
+          <span svg-icon="icon-add"></span>
+        </a>
+      </div>
+    </div>
+
+    <div class="card__items">
+      <div class="card__item" ng-repeat="creditCard in ctrl.organization.subject.creditCards">
+        <div class="card__item__content">
+          Card Ending in <code>{{creditCard.safeCardNumber}}</code><span ng-if="creditCard.isDefault">, is <strong>default</strong></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

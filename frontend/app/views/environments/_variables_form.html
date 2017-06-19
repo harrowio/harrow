@@ -1,0 +1,10 @@
+<harrow-can can-subject="environmentForm.environment" can-action="update">
+  <harrow-form save="environmentForm.addVariable()" translation-root="forms.variableForm">
+    <harrow-input class="field__input--join">
+      <input name="name" required="true" ng-model="environmentForm.variableName" />
+    </harrow-input>
+    <harrow-input>
+      <input name="value" required="true" ng-model="environmentForm.variableValue" />
+    </harrow-input>
+  </harrow-form>
+</harrow-can>

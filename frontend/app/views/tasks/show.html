@@ -1,0 +1,19 @@
+<div class="app__content project__tasks" ng-init="triggers = ctrl.triggers; notifiers = ctrl.notifiers; task = ctrl.task ;project = ctrl.project">
+  <div class="sectionHeader sectionHeader--bold">
+    <span class="sectionHeader__title">{{ctrl.task.subject.name | titlecase}}</span>
+    <span>Task</span>
+    <div class="layout__spacer"></div>
+  </div>
+  <div class="environment">
+  <div class="environment__detail">
+    <div class="grid grid--marginWide">
+      <div class="cell cell--3Col" ng-include="'views/tasks/_triggers.html'" ng-if="appctrl.isAuthenticated()"></div>
+      <div class="cell cell--3Col" ng-include="'views/tasks/_notifications.html'" ng-if="appctrl.isAuthenticated()"></div>
+      <div class="cell cell--6Col cell--baseline" ng-include="'views/tasks/_last_run.html'" ng-init="operation = ctrl.mostRecentOperationFor(task)"></div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="app__content project__activity">
+  <div ui-view="operationList"></div>
+</div>

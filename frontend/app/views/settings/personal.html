@@ -1,0 +1,48 @@
+<div class="card card--">
+  <div class="card__header">Personal Settings</div>
+  <div class="card__content">
+  <harrow-form no-controls save="ctrl.updatePersonalSettings()" translation-root="forms.userSettings">
+    <harrow-input>
+      <input name="name" ng-model="ctrl.user.subject.name" />
+    </harrow-input>
+    <harrow-input>
+      <input name="email" ng-model="ctrl.user.subject.email" />
+    </harrow-input>
+    <p ng-if="ctrl.user.subject.withoutPassword">
+    <span translate="forms.userSettings.withoutPassword"></span>
+    <a href="" ui-sref="forgot_password" translate="forms.userSettings.withoutPasswordLink"></a>
+    <p>
+    <div ng-if="!ctrl.user.subject.withoutPassword">
+      <harrow-input >
+        <input
+         name="newPassword"
+         type="password"
+         ng-model="ctrl.user.subject.newPassword"
+         minlength="10"
+         />
+      </harrow-input>
+        <harrow-input>
+          <input
+         name="passwordConfirmation"
+         type="password"
+         ng-model="passwordConfirmation"
+         validate-match="{{ctrl.user.subject.newPassword}}"
+         />
+        </harrow-input>
+        <p translate="forms.userSettings.passwordHint"></p>
+        <harrow-input>
+          <input
+           name="password"
+           type="password"
+           ng-model="ctrl.user.subject.password"
+           required="true"
+           />
+        </harrow-input>
+    </div>
+  </harrow-form>
+  </div>
+  <div class="card__footer">
+    <div class="layout__spacer"></div>
+    <button type="submit" class="btn btn--primary" ng-disabled="harrowForm.form.$invalid">Update</button>
+  </div>
+</div>

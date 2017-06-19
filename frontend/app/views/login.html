@@ -1,0 +1,32 @@
+<harrow-form save="ctrl.login()" translation-root="forms.login" no-controls class="card card--auth">
+  <div class="card__content">
+    <h3><span svg-icon="icon-user" svg-icon-size="20"></span> Returning Users - Log in</h3>
+    <br>
+    <div class="grid grid--rowReverse grid--marginWide grid--wrap">
+      <div class="cell cell--5Col">
+        <div class="grid grid--margin grid--column">
+          <div class="cell" feature="oauth.github.authentication">
+            <a class="btn btn--border btn--white" ng-click="ctrl.githubSignin()" type="button"><span svg-icon="icon-github"></span> Log in with GitHub</a>
+          </div>
+          <div class="cell" feature="guest-account.enabled">
+            <a class="btn btn--border btn--white" ng-click="ctrl.guest()"><span svg-icon="icon-user"></span> Log In As A Guest</a>
+          </div>
+        </div>
+      </div>
+      <div class="cell cell--7Col">
+        <harrow-input>
+          <input name="email" type="email" required="true" ng-model="ctrl.user.subject.email" focus-if />
+        </harrow-input>
+        <harrow-input>
+          <input name="password" type="password" required="true" ng-model="ctrl.user.subject.password" />
+        </harrow-input>
+        <button type="submit" class="btn btn--primary" ng-disabled="harrowForm.form.$invalid" harrow-stateful="ctrl.buttonStateful">Log In</button>
+      </div>
+    </div>
+  </div>
+  <div class="card__footer">
+    <a ui-sref="forgot_password" translate="forms.login.forgotPassword"></a>
+    <a ui-sref="signup({invitation: ctrl.invitationUuid, origin: ctrl.origin})" translate="forms.login.noAccount.callToActionButtonTitle"></a>
+    <div class="layout__spacer"></div>
+  </div>
+</harrow-form>

@@ -1,0 +1,25 @@
+{
+  "subject": {
+    "uuid": "b485ad7c-5e76-4ebd-5ea0-6ddc2294b956",
+    "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+    "expiresAt": "2016-02-22T00:00:00Z",
+    "createdAt": "2016-02-07T14:10:56.995441Z",
+    "validatedAt": "2016-02-07T14:10:56.995441Z",
+    "loggedOutAt": null,
+    "valid": true,
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2643.0 Safari/537.36",
+    "clientAddress": "127.0.0.1"
+  },
+  "_links": {
+    "self": {
+      "create": "POST",
+      "href": "https://www.vm.harrow.io/api/sessions/b485ad7c-5e76-4ebd-5ea0-6ddc2294b956",
+      "validate": "POST"
+    },
+    "user": {
+      "href": "https://www.vm.harrow.io/api/users/adb9fb2c-0b93-46e9-7679-d856e347db71",
+      "signup": "POST"
+    }
+  },
+  "_embedded": {}
+}

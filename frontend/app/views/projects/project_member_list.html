@@ -1,0 +1,15 @@
+<div class="members member-list list">
+  <table class="table table-nostripes members">
+    <tr ng-repeat="member in projectMemberList.members">
+      <td width="36"><img class="member-list avatar" ng-src="{{member._links.profilePicture.href}}" /></td>
+      <td>{{member.subject.name}}</td>
+      <td translate="membershipTypes.{{member.subject.type}}"></td>
+      <td class="buttons">
+        <div class="buttons pull-right">
+          <a harrow-can="update" can-subject="member" class="btn btn-small btn-primary" ng-click="projectMemberList.promote(member)">Promote</a>
+          <a harrow-can="archive" can-subject="member" class="btn btn-small btn-danger" ng-click="projectMemberList.remove(member)">Remove</a>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>

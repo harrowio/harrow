@@ -1,0 +1,61 @@
+<div class="card">
+  <div class="card__header">
+    <div class="card__header__title">
+      Notifications
+    </div>
+    <div class="card__header__action">
+      <a class="btn" harrow-can="create-tasks" can-disable can-subject="project" ui-sref="task.edit.notification-rules({taskUuid: task.subject.uuid, projectUuid: project.subject.uuid})">
+        <span svg-icon="icon-add"></span>
+      </a>
+    </div>
+  </div>
+
+  <div ng-if="notifiers | hasItems" class="card__items">
+    <div ng-repeat="(notifierType, notifierCollection) in notifiers">
+      <div class="card__item" ng-repeat="notifier in notifierCollection" ng-if="notifierCollection.length <= 2" harrow-can="create-tasks" can-disable can-subject="project" ui-sref="task.edit.notification-rules({taskUuid: task.subject.uuid, projectUuid: project.subject.uuid})">
+        <div class="card__item__icon">
+          <span svg-icon="{{appctrl.menuItems.notifier[(notifierType | singularize)].icon}}"></span>
+        </div>
+        <div class="card__item__content">
+          <strong>{{ 'forms.notifiers.' + (notifierType | singularize) + '.legend' | translate }}</strong>
+          {{ notifier.subject.name || notifier.subject.recipient }}<br>
+          <span notification-rules="notifier.subject.rules"></span>
+        </div>
+      </div>
+      <div class="card__item" ng-if="notifierCollection.length > 2">
+        <div class="card__item__icon">
+          <span svg-icon="{{ 'forms.notifiers.' + (notifierType | singularize) + '.icon' | translate }}"></span>
+        </div>
+        <div class="card__item__content">
+          <strong>{{ 'forms.notifiers.' + (notifierType | singularize) + '.collectionLegend' | translate:{count:notifierCollection.length}:'messageformat' }}</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div ng-if="notifiers | hasNoItems" class="card__content card__content--emptyTight">
+    <span svg-icon="icon-output"></span>
+    <h3>No Notifiers</h3>
+    <p>By adding notifiers Harrow can inform third-party services or other tasks on the finsihed state when this task is run.</p>
+  </div>
+
+  <div class="layout__spacer" harrow-can="create-notificationRules" can-subject="project"></div>
+
+  <div class="card__item" harrow-can="create-notificationRules" can-subject="project">
+    <div class="card__item__icon">
+      <img width="36" height="36" gravatar-src="'{{appctrl.authentication.currentUser.subject.email}}'" gravatar-size="72" class="avatar">
+    </div>
+    <div class="card__item__content">
+      Subscribe me to email
+      <div class="field__group" ng-controller="notificationRuleCtrl as ctrl" ng-init="notifier = ctrl.currentUserEmailNotifier">
+        <div class="field__checkbox" ng-repeat="action in ctrl.operationActions">
+          <label>
+            <input type="checkbox" name="{{action.actionKey}}" ng-model="ctrl.checkedRules[notifier.subject.uuid][action.actionKey]" ng-change="ctrl.onRuleChange(notifier, project, task, action.actionKey, 'email_notifiers')" harrow-stateful="ctrl.ruleChange">
+            <span></span>
+            {{ ('forms.tasks.notifierRules.label.' + action.actionKey) | translate }}
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

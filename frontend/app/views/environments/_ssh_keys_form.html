@@ -1,0 +1,7 @@
+<harrow-can can-subject="environmentForm.environment" can-action="create-secrets">
+  <harrow-form save="environmentForm.addSshSecret()" translation-root="forms.sshForm">
+    <harrow-input>
+      <input name="name" required="true" ng-model="environmentForm.keyName" />
+    </harrow-input>
+  </harrow-form>
+</harrow-can>

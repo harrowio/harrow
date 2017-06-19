@@ -1,0 +1,52 @@
+<div class="card card--headerOnly">
+  <div class="card__header">
+    <div class="card__header__title">Incoming Webhooks</div>
+    <div class="card__header__action">
+      <a ui-sref="webhooks/create({projectUuid: webhookList.project.subject.uuid})" harrow-can can-disable can-subject="ctrl.project" can-action="create-webhooks" class="btn"><span svg-icon="icon-add"></span></a>
+    </div>
+  </div>
+
+  <div ng-if="webhookList.webhooks.length == 0" class="card__content card__content--empty">
+    <span svg-icon="icon-triggers"></span>
+    <h3>Integrate with other services</h3>
+    <p>By adding a webhook Harrow can get notified by other services such as GitHub and Trello.</p>
+    <a ui-sref="webhooks/create({projectUuid: webhookList.project.subject.uuid})" harrow-can can-disable can-subject="ctrl.project" can-action="create-webhooks" class="btn btn--border">
+      Add a Webhook
+    </a>
+  </div>
+</div>
+
+<div ng-if="webhookList.webhooks.length > 0" class="activity" ng-repeat="webhook in webhookList.webhooks">
+  <div class="activity__container">
+    <div class="activity__detail">
+      <p>
+        <span svg-icon="icon-environments"></span>
+        <strong>{{webhookList.environmentFor(webhook).subject.name}}</strong>
+      </p>
+      <p>
+        <span svg-icon="icon-tasks"></span>
+        <strong>{{webhookList.scriptFor(webhook).subject.name}}</strong>
+      </p>
+      <p>
+        <span svg-icon="icon-triggers"></span>
+        <strong>{{webhook.subject.name}}</strong>
+      </p>
+    </div>
+    <div class="activity__meta">
+      <div class="grid grid--column grid--margin">
+        <div class="cell">
+          <code>{{webhook._links.deliver.href}}</code>
+        </div>
+
+        <div class="cell">
+          <div class="btn__group btn__group--end">
+            <a harrow-can can-disable can-subject="webhook" can-action="read" class="btn btn--small btn--border" ui-sref="webhooks/show({uuid: webhook.subject.uuid})">View</a>
+            <a harrow-can can-disable can-subject="webhook" can-action="update" class="btn btn--small btn--border" ui-sref="webhooks/edit({uuid: webhook.subject.uuid})">Edit</a>
+            <a harrow-can can-disable can-subject="webhook" can-action="update" class="btn btn--small btn--yellow" ng-click="webhookList.regenerate(webhook)">Regenerate</a>
+            <a harrow-can can-disable can-subject="webhook" can-action="archive" class="btn btn--small btn--red" ng-click="webhookList.delete(webhook)">Delete</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

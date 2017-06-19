@@ -1,0 +1,31 @@
+<div ng-show="environmentForm.sshSecrets.length == 0">
+  <p>This environment contains no SSH keys.</p>
+</div>
+<table class="table ssh-keys" cell-ng-show="environmentForm.sshSecrets.length > 0">
+  <thead>
+    <tr>
+      <th class="name">Name</th>
+      <th class="type">Type</th>
+      <th class="status">Status</th>
+      <th class="buttons"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="ssh-key" ng-repeat="secret in environmentForm.sshSecrets">
+      <td class="name" style="min-width: 150px;white-space: nowrap;">
+        {{secret.subject.name}}
+      </td>
+      <td class="type" style="min-width: 150px;white-space: nowrap;">
+        {{secret.subject.type}}
+      </td>
+      <td class="status" style="white-space: nowrap;">
+        {{secret.subject.status}}
+      </td>
+      <td class="buttons" style="width:100%; white-space: nowrap; text-align:right;">
+        <a ng-show="secret.subject.status == 'present'" harrow-can can-disable can-subject="secret" can-action="readPrivileged" class="btn btn--small" ui-sref="secrets/show({uuid: secret.subject.uuid})">Show Private Key</a>
+        <a ng-show="secret.subject.status == 'present'" harrow-can can-disable can-subject="secret" can-action="read" class="btn btn--small" ng-click="environmentForm.showSshPublicKeyModal(secret)">Show Public Key</a>
+        <a harrow-can can-disable can-subject="secret" can-action="archive" class="btn btn--small" ng-click="environmentForm.deleteSecret(secret)">Remove</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

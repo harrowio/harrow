@@ -1,0 +1,19 @@
+app = angular.module "harrowApp", [
+  "ng"
+  "angular-flash.flash-alert-directive"
+  "angular-flash.service"
+  "angularMoment"
+  "focus-if"
+  "ga"
+  "ngAnimate"
+  "ngMessages"
+  "ngResource"
+  "ngProgressLite"
+  "pascalprecht.translate"
+  "toggles"
+  "ui.gravatar"
+  "ui.router"
+  "ui.router.history"
+  "ui.router.state.events"
+  'platanus.inflector'
+]

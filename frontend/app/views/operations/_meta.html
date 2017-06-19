@@ -1,0 +1,11 @@
+<div ng-if="operation.mostRecentRepositoryCheckouts | empty">
+  <code>
+    <div ng-repeat="(i, statusLogEntry) in operation.subject.statusLogs.entries" title="{{ statusLogEntry.occurredOn | amDateFormat }}">
+      {{statusLogEntry.subject}}
+      <small ng-if="!$last">(took <span elapsed-from="statusLogEntry.occurredOn" elapsed-to="operation.subject.statusLogs.entries[i+1].occurredOn"></span>)</small>
+    </div>
+  </code>
+</div>
+<p ng-repeat="(repoUuid, checkout) in operation.mostRecentRepositoryCheckouts">
+  <strong>{{ operationList.repositoryFor(repoUuid).subject.url | formatGitUrl }}</strong> ({{checkout.refName()}}) {{checkout.shortHash()}}
+</p>

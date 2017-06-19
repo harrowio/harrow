@@ -1,0 +1,22 @@
+<div class="app__content">
+  <harrow-form save="ctrl.save()" no-controls translation-root="forms.project" class="card">
+    <div class="card__header">
+      Details
+    </div>
+    <div class="card__content">
+      <harrow-input>
+        <input name="name" ng-model="ctrl.project.subject.name" required="true"/>
+      </harrow-input>
+      <div class="field__group field__group--tight" feature="public-projects.enabled">
+        <harrow-field-input>
+          <input name="public" ng-model="ctrl.project.subject.public" type="checkbox"/>
+        </harrow-field-input>
+      </div>
+    </div>
+    <div class="card__footer">
+      <a class="btn" ng-click="appctrl.back()">Back</a>
+      <div class="layout__spacer"></div>
+      <button type="submit" class="btn btn--primary" ng-disabled="harrowForm.form.$invalid">Save <span svg-icon="icon-chevron-right"></span></button>
+    </div>
+  </harrow-form>
+</div>

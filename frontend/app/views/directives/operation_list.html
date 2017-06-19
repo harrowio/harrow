@@ -1,0 +1,8 @@
+<div class="operationList">
+  <div style="padding: 10px">
+    <p ng-if="!operations.length">No recent operations to show.</p>
+    <p ng-if="operations.length > 0 && operations.length <= operationList.showTo">Showing {{operations.length}} operations.</p>
+    <p ng-if="operations.length > operationList.showTo">Showing most recent {{operationList.showTo}} operations ({{operations.length - operationList.showTo}} older operations not shown).</p>
+  </div>
+  <operation-status operation="operation" ng-repeat="operation in operations | orderBy:'-subject.createdAt' | limitTo:(operationList.showTo)"></operation-status>
+</div>

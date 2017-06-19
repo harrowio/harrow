@@ -1,0 +1,47 @@
+<div class="app__content">
+  <harrow-form no-controls translation-root="forms.tasks.notifierRules">
+    <div ng-repeat="(notifierType, notifiers) in ctrl.notifiers" style="margin-bottom: 20px;">
+      <div class="card card--headerOnly">
+        <div class="card__header">
+          <div class="card__header__title">
+            <span svg-icon="{{appctrl.menuItems.notifier[(notifierType | singularize)].icon}}"></span> {{ 'forms.notifiers.' + (notifierType | singularize) + '.legend' | translate }}
+          </div>
+          <div class="card__header__action">
+            <a href class="btn" ui-state="ctrl.createSrefFor(notifierType)" ui-state-params="ctrl.$stateParams" can-disable harrow-can="create-{{notifierType}}" can-subject="ctrl.project">
+              <span svg-icon="icon-add"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="activity" ng-repeat="notifier in notifiers | orderBy:'subject.name'">
+        <div class="activity__container">
+          <div class="activity__detail cell--4Col" ui-state="ctrl.editSrefFor(notifierType)" ui-state-params="{projectUuid: ctrl.project.subject.uuid, uuid: notifier.subject.uuid}"  can-disable harrow-can="create-{{notifierType}}" can-subject="ctrl.project">
+            <h3>{{notifier.subject.name || notifier.subject.recipient}} <span ng-show="false" harrow-stateful="ctrl.statefulOptions[notifierType][notifier.subject.uuid]"><span svg-icon="icon-spinner" class="iconColor"></span></span></h3>
+          </div>
+          <div class="activity__meta cell--middle">
+            <div class="field__group" ng-repeat="action in ctrl.actions">
+              <div class="field__checkbox">
+                <label>
+                  <input type="checkbox" name="{{action.actionKey}}" ng-model="ctrl.checkedRules[notifier.subject.uuid][action.actionKey]" ng-change="ctrl.onRuleChange(notifier, action.actionKey, notifierType)" >
+                  <span></span>
+                  {{ ('forms.tasks.notifierRules.label.' + action.actionKey) | translate }}
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div ng-if="notifiers.length == 0" class="card__content card__content--emptyTight">
+        <span svg-icon="{{appctrl.menuItems.notifier[(notifierType | singularize)].icon}}"></span>
+        <h3>{{ 'forms.notifiers.' + (notifierType | singularize) + '.legend' | translate }}</h3>
+        <br>
+
+        <a href class="btn btn--border btn--small" ui-state="ctrl.createSrefFor(notifierType)" ui-state-params="ctrl.$stateParams" can-disable harrow-can="create-{{notifierType}}" can-subject="ctrl.project">
+          Add new notifier
+        </a>
+      </div>
+    </div>
+  </harrow-form>
+
+</div>

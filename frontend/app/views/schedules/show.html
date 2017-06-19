@@ -1,0 +1,21 @@
+<div class="app__content project__tasks">
+  <div class="sectionHeader sectionHeader--bold">
+    <span class="sectionHeader__title">
+      {{scheduleShow.taskName}}
+    </span>
+    <span>Schedule</span>
+    <div class="layout__spacer"></div>
+  </div>
+  <div class="grid grid--marginWide grid--wrap">
+    <div class="cell cell--3Col" ng-include="'views/schedules/_scheduled_executions.html'"></div>
+    <div class="cell cell--6Col">
+      <div ng-show="scheduleShow.operations.length > 0" ui-view="operationList"></div>
+    </div>
+  </div>
+  <div class="flash flash--inline flash--danger" style="margin-top: 20px;" ng-if="!appctrl.isNew()">
+    <div class="flash__message">
+      Delete Schedule?
+    </div>
+    <a class="flash__action" ng-confirm-click="Are you sure you want to delete this Schedule?" ng-click="trigger.delete()">Delete</a>
+  </div>
+</div>

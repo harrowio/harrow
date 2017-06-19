@@ -1,0 +1,745 @@
+{
+  "collection": [
+    {
+      "subject": {
+        "uuid": "10d0ca55-bf26-4c22-37c5-943d7a5c5380",
+        "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+        "jobUuid": "d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+        "cronspec": null,
+        "description": "Ad-hoc",
+        "createdAt": "2016-02-07T13:52:32.663544Z",
+        "timespec": "now",
+        "location": "UTC",
+        "parameters": {
+          "checkout": {},
+          "reason": "",
+          "username": "kyle welsby",
+          "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "triggeredByDelivery": "",
+          "triggeredByGitTrigger": "",
+          "gitTriggerName": "",
+          "triggeredByNotificationRule": "",
+          "triggeredByActivityId": 0
+        },
+        "disabled": "ran_once",
+        "runOnceAt": "2016-02-07T13:52:32Z"
+      },
+      "_links": {
+        "job": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/jobs/d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+          "read": "GET",
+          "update": "POST"
+        },
+        "self": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/schedules/10d0ca55-bf26-4c22-37c5-943d7a5c5380",
+          "read": "GET",
+          "update": "POST"
+        },
+        "user": {
+          "href": "https://www.vm.harrow.io/api/users/adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "signup": "POST"
+        }
+      },
+      "_embedded": {}
+    },
+    {
+      "subject": {
+        "uuid": "cde0df7a-0663-444b-3b47-bf1249c2f8cf",
+        "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+        "jobUuid": "d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+        "cronspec": null,
+        "description": "Ad-hoc",
+        "createdAt": "2016-02-08T12:58:11.065991Z",
+        "timespec": "now",
+        "location": "UTC",
+        "parameters": {
+          "checkout": {},
+          "reason": "",
+          "username": "kyle welsby",
+          "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "triggeredByDelivery": "",
+          "triggeredByGitTrigger": "",
+          "gitTriggerName": "",
+          "triggeredByNotificationRule": "",
+          "triggeredByActivityId": 0
+        },
+        "disabled": "ran_once",
+        "runOnceAt": "2016-02-08T12:58:11Z"
+      },
+      "_links": {
+        "job": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/jobs/d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+          "read": "GET",
+          "update": "POST"
+        },
+        "self": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/schedules/cde0df7a-0663-444b-3b47-bf1249c2f8cf",
+          "read": "GET",
+          "update": "POST"
+        },
+        "user": {
+          "href": "https://www.vm.harrow.io/api/users/adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "signup": "POST"
+        }
+      },
+      "_embedded": {}
+    },
+    {
+      "subject": {
+        "uuid": "cf3b4e3a-76ce-4aaa-32c0-8244b7ab3073",
+        "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+        "jobUuid": "d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+        "cronspec": null,
+        "description": "",
+        "createdAt": "2016-02-08T12:57:58.935573Z",
+        "timespec": "now",
+        "location": "UTC",
+        "parameters": {
+          "checkout": {},
+          "reason": "",
+          "username": "kyle welsby",
+          "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "triggeredByDelivery": "",
+          "triggeredByGitTrigger": "",
+          "gitTriggerName": "",
+          "triggeredByNotificationRule": "",
+          "triggeredByActivityId": 0
+        },
+        "disabled": "ran_once",
+        "runOnceAt": "2016-02-08T12:57:58Z"
+      },
+      "_links": {
+        "job": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/jobs/d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+          "read": "GET",
+          "update": "POST"
+        },
+        "self": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/schedules/cf3b4e3a-76ce-4aaa-32c0-8244b7ab3073",
+          "read": "GET",
+          "update": "POST"
+        },
+        "user": {
+          "href": "https://www.vm.harrow.io/api/users/adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "signup": "POST"
+        }
+      },
+      "_embedded": {}
+    },
+    {
+      "subject": {
+        "uuid": "87a4c57f-f5e4-48db-346e-a9b63933fa9c",
+        "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+        "jobUuid": "d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+        "cronspec": null,
+        "description": "",
+        "createdAt": "2016-02-08T12:57:58.600198Z",
+        "timespec": "now",
+        "location": "UTC",
+        "parameters": {
+          "checkout": {},
+          "reason": "",
+          "username": "kyle welsby",
+          "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "triggeredByDelivery": "",
+          "triggeredByGitTrigger": "",
+          "gitTriggerName": "",
+          "triggeredByNotificationRule": "",
+          "triggeredByActivityId": 0
+        },
+        "disabled": "ran_once",
+        "runOnceAt": "2016-02-08T12:57:58Z"
+      },
+      "_links": {
+        "job": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/jobs/d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+          "read": "GET",
+          "update": "POST"
+        },
+        "self": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/schedules/87a4c57f-f5e4-48db-346e-a9b63933fa9c",
+          "read": "GET",
+          "update": "POST"
+        },
+        "user": {
+          "href": "https://www.vm.harrow.io/api/users/adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "signup": "POST"
+        }
+      },
+      "_embedded": {}
+    },
+    {
+      "subject": {
+        "uuid": "3e054331-d74a-4e08-36aa-c631b42f6ee0",
+        "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+        "jobUuid": "d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+        "cronspec": null,
+        "description": "",
+        "createdAt": "2016-02-08T12:57:58.124389Z",
+        "timespec": "now",
+        "location": "UTC",
+        "parameters": {
+          "checkout": {},
+          "reason": "",
+          "username": "kyle welsby",
+          "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "triggeredByDelivery": "",
+          "triggeredByGitTrigger": "",
+          "gitTriggerName": "",
+          "triggeredByNotificationRule": "",
+          "triggeredByActivityId": 0
+        },
+        "disabled": "ran_once",
+        "runOnceAt": "2016-02-08T12:57:58Z"
+      },
+      "_links": {
+        "job": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/jobs/d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+          "read": "GET",
+          "update": "POST"
+        },
+        "self": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/schedules/3e054331-d74a-4e08-36aa-c631b42f6ee0",
+          "read": "GET",
+          "update": "POST"
+        },
+        "user": {
+          "href": "https://www.vm.harrow.io/api/users/adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "signup": "POST"
+        }
+      },
+      "_embedded": {}
+    },
+    {
+      "subject": {
+        "uuid": "80118123-8b7c-4a10-32b8-53743e6481fa",
+        "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+        "jobUuid": "d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+        "cronspec": null,
+        "description": "",
+        "createdAt": "2016-02-08T12:57:57.245625Z",
+        "timespec": "now",
+        "location": "UTC",
+        "parameters": {
+          "checkout": {},
+          "reason": "",
+          "username": "kyle welsby",
+          "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "triggeredByDelivery": "",
+          "triggeredByGitTrigger": "",
+          "gitTriggerName": "",
+          "triggeredByNotificationRule": "",
+          "triggeredByActivityId": 0
+        },
+        "disabled": "ran_once",
+        "runOnceAt": "2016-02-08T12:57:57Z"
+      },
+      "_links": {
+        "job": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/jobs/d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+          "read": "GET",
+          "update": "POST"
+        },
+        "self": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/schedules/80118123-8b7c-4a10-32b8-53743e6481fa",
+          "read": "GET",
+          "update": "POST"
+        },
+        "user": {
+          "href": "https://www.vm.harrow.io/api/users/adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "signup": "POST"
+        }
+      },
+      "_embedded": {}
+    },
+    {
+      "subject": {
+        "uuid": "ffa15436-26d5-43a0-3b21-91e85183dd47",
+        "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+        "jobUuid": "d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+        "cronspec": null,
+        "description": "",
+        "createdAt": "2016-02-08T12:57:49.075498Z",
+        "timespec": "now",
+        "location": "UTC",
+        "parameters": {
+          "checkout": {},
+          "reason": "",
+          "username": "kyle welsby",
+          "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "triggeredByDelivery": "",
+          "triggeredByGitTrigger": "",
+          "gitTriggerName": "",
+          "triggeredByNotificationRule": "",
+          "triggeredByActivityId": 0
+        },
+        "disabled": "ran_once",
+        "runOnceAt": "2016-02-08T12:57:49Z"
+      },
+      "_links": {
+        "job": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/jobs/d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+          "read": "GET",
+          "update": "POST"
+        },
+        "self": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/schedules/ffa15436-26d5-43a0-3b21-91e85183dd47",
+          "read": "GET",
+          "update": "POST"
+        },
+        "user": {
+          "href": "https://www.vm.harrow.io/api/users/adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "signup": "POST"
+        }
+      },
+      "_embedded": {}
+    },
+    {
+      "subject": {
+        "uuid": "94a40dee-3160-48b0-3ed0-b7d71408000c",
+        "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+        "jobUuid": "d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+        "cronspec": null,
+        "description": "",
+        "createdAt": "2016-02-08T12:57:34.975798Z",
+        "timespec": "now",
+        "location": "UTC",
+        "parameters": {
+          "checkout": {},
+          "reason": "",
+          "username": "kyle welsby",
+          "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "triggeredByDelivery": "",
+          "triggeredByGitTrigger": "",
+          "gitTriggerName": "",
+          "triggeredByNotificationRule": "",
+          "triggeredByActivityId": 0
+        },
+        "disabled": "ran_once",
+        "runOnceAt": "2016-02-08T12:57:34Z"
+      },
+      "_links": {
+        "job": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/jobs/d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+          "read": "GET",
+          "update": "POST"
+        },
+        "self": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/schedules/94a40dee-3160-48b0-3ed0-b7d71408000c",
+          "read": "GET",
+          "update": "POST"
+        },
+        "user": {
+          "href": "https://www.vm.harrow.io/api/users/adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "signup": "POST"
+        }
+      },
+      "_embedded": {}
+    },
+    {
+      "subject": {
+        "uuid": "a6be015f-299b-4e37-370e-77678d24499e",
+        "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+        "jobUuid": "d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+        "cronspec": null,
+        "description": "",
+        "createdAt": "2016-02-08T12:57:12.063325Z",
+        "timespec": "now",
+        "location": "UTC",
+        "parameters": {
+          "checkout": {},
+          "reason": "",
+          "username": "kyle welsby",
+          "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "triggeredByDelivery": "",
+          "triggeredByGitTrigger": "",
+          "gitTriggerName": "",
+          "triggeredByNotificationRule": "",
+          "triggeredByActivityId": 0
+        },
+        "disabled": "ran_once",
+        "runOnceAt": "2016-02-08T12:57:12Z"
+      },
+      "_links": {
+        "job": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/jobs/d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+          "read": "GET",
+          "update": "POST"
+        },
+        "self": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/schedules/a6be015f-299b-4e37-370e-77678d24499e",
+          "read": "GET",
+          "update": "POST"
+        },
+        "user": {
+          "href": "https://www.vm.harrow.io/api/users/adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "signup": "POST"
+        }
+      },
+      "_embedded": {}
+    },
+    {
+      "subject": {
+        "uuid": "f75ca18c-5f8e-441d-39e7-2220f69011c3",
+        "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+        "jobUuid": "d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+        "cronspec": null,
+        "description": "",
+        "createdAt": "2016-02-08T12:56:51.212111Z",
+        "timespec": "now",
+        "location": "UTC",
+        "parameters": {
+          "checkout": {},
+          "reason": "",
+          "username": "kyle welsby",
+          "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "triggeredByDelivery": "",
+          "triggeredByGitTrigger": "",
+          "gitTriggerName": "",
+          "triggeredByNotificationRule": "",
+          "triggeredByActivityId": 0
+        },
+        "disabled": "ran_once",
+        "runOnceAt": "2016-02-08T12:56:51Z"
+      },
+      "_links": {
+        "job": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/jobs/d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+          "read": "GET",
+          "update": "POST"
+        },
+        "self": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/schedules/f75ca18c-5f8e-441d-39e7-2220f69011c3",
+          "read": "GET",
+          "update": "POST"
+        },
+        "user": {
+          "href": "https://www.vm.harrow.io/api/users/adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "signup": "POST"
+        }
+      },
+      "_embedded": {}
+    },
+    {
+      "subject": {
+        "uuid": "644248f1-09fb-4ec0-3418-1293ae0b070c",
+        "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+        "jobUuid": "d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+        "cronspec": null,
+        "description": "Ad-hoc",
+        "createdAt": "2016-02-08T12:56:50.783342Z",
+        "timespec": "now",
+        "location": "UTC",
+        "parameters": {
+          "checkout": {},
+          "reason": "",
+          "username": "kyle welsby",
+          "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "triggeredByDelivery": "",
+          "triggeredByGitTrigger": "",
+          "gitTriggerName": "",
+          "triggeredByNotificationRule": "",
+          "triggeredByActivityId": 0
+        },
+        "disabled": "ran_once",
+        "runOnceAt": "2016-02-08T12:56:50Z"
+      },
+      "_links": {
+        "job": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/jobs/d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+          "read": "GET",
+          "update": "POST"
+        },
+        "self": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/schedules/644248f1-09fb-4ec0-3418-1293ae0b070c",
+          "read": "GET",
+          "update": "POST"
+        },
+        "user": {
+          "href": "https://www.vm.harrow.io/api/users/adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "signup": "POST"
+        }
+      },
+      "_embedded": {}
+    },
+    {
+      "subject": {
+        "uuid": "e38312ee-a816-46cd-36b1-9247a0c625da",
+        "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+        "jobUuid": "d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+        "cronspec": null,
+        "description": "Ad-hoc",
+        "createdAt": "2016-02-08T13:31:30.650858Z",
+        "timespec": "now",
+        "location": "UTC",
+        "parameters": {
+          "checkout": {},
+          "reason": "",
+          "username": "kyle welsby",
+          "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "triggeredByDelivery": "",
+          "triggeredByGitTrigger": "",
+          "gitTriggerName": "",
+          "triggeredByNotificationRule": "",
+          "triggeredByActivityId": 0
+        },
+        "disabled": "ran_once",
+        "runOnceAt": "2016-02-08T13:31:30Z"
+      },
+      "_links": {
+        "job": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/jobs/d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+          "read": "GET",
+          "update": "POST"
+        },
+        "self": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/schedules/e38312ee-a816-46cd-36b1-9247a0c625da",
+          "read": "GET",
+          "update": "POST"
+        },
+        "user": {
+          "href": "https://www.vm.harrow.io/api/users/adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "signup": "POST"
+        }
+      },
+      "_embedded": {}
+    },
+    {
+      "subject": {
+        "uuid": "863b4184-b9df-421c-3b53-e324609db13c",
+        "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+        "jobUuid": "d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+        "cronspec": null,
+        "description": "Ad-hoc",
+        "createdAt": "2016-02-08T13:40:10.94962Z",
+        "timespec": "now",
+        "location": "UTC",
+        "parameters": {
+          "checkout": {},
+          "reason": "",
+          "username": "kyle welsby",
+          "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "triggeredByDelivery": "",
+          "triggeredByGitTrigger": "",
+          "gitTriggerName": "",
+          "triggeredByNotificationRule": "",
+          "triggeredByActivityId": 0
+        },
+        "disabled": "ran_once",
+        "runOnceAt": "2016-02-08T13:40:10Z"
+      },
+      "_links": {
+        "job": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/jobs/d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+          "read": "GET",
+          "update": "POST"
+        },
+        "self": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/schedules/863b4184-b9df-421c-3b53-e324609db13c",
+          "read": "GET",
+          "update": "POST"
+        },
+        "user": {
+          "href": "https://www.vm.harrow.io/api/users/adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "signup": "POST"
+        }
+      },
+      "_embedded": {}
+    },
+    {
+      "subject": {
+        "uuid": "e48286fc-b288-46fd-3c0a-439b47260828",
+        "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+        "jobUuid": "d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+        "cronspec": null,
+        "description": "Ad-hoc",
+        "createdAt": "2016-02-11T13:57:22.730409Z",
+        "timespec": "now",
+        "location": "UTC",
+        "parameters": {
+          "checkout": {},
+          "reason": "",
+          "username": "kyle welsby",
+          "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "triggeredByDelivery": "",
+          "triggeredByGitTrigger": "",
+          "gitTriggerName": "",
+          "triggeredByNotificationRule": "",
+          "triggeredByActivityId": 0
+        },
+        "disabled": "ran_once",
+        "runOnceAt": "2016-02-11T13:57:22Z"
+      },
+      "_links": {
+        "job": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/jobs/d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+          "read": "GET",
+          "update": "POST"
+        },
+        "self": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/schedules/e48286fc-b288-46fd-3c0a-439b47260828",
+          "read": "GET",
+          "update": "POST"
+        },
+        "user": {
+          "href": "https://www.vm.harrow.io/api/users/adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "signup": "POST"
+        }
+      },
+      "_embedded": {}
+    },
+    {
+      "subject": {
+        "uuid": "9b16d5ce-ccbf-42b5-3d90-6b3be8a2520b",
+        "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+        "jobUuid": "d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+        "cronspec": null,
+        "description": "Ad-hoc",
+        "createdAt": "2016-02-11T14:02:57.297679Z",
+        "timespec": "now",
+        "location": "UTC",
+        "parameters": {
+          "checkout": {},
+          "reason": "",
+          "username": "kyle welsby",
+          "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "triggeredByDelivery": "",
+          "triggeredByGitTrigger": "",
+          "gitTriggerName": "",
+          "triggeredByNotificationRule": "",
+          "triggeredByActivityId": 0
+        },
+        "disabled": "ran_once",
+        "runOnceAt": "2016-02-11T14:02:57Z"
+      },
+      "_links": {
+        "job": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/jobs/d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+          "read": "GET",
+          "update": "POST"
+        },
+        "self": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/schedules/9b16d5ce-ccbf-42b5-3d90-6b3be8a2520b",
+          "read": "GET",
+          "update": "POST"
+        },
+        "user": {
+          "href": "https://www.vm.harrow.io/api/users/adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "signup": "POST"
+        }
+      },
+      "_embedded": {}
+    },
+    {
+      "subject": {
+        "uuid": "1b6f0b2e-3f64-49e2-8414-a27f40996f70",
+        "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+        "jobUuid": "d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+        "cronspec": null,
+        "description": "Ad-hoc",
+        "createdAt": "2016-02-15T18:59:34.589966Z",
+        "timespec": "now",
+        "location": "UTC",
+        "parameters": {
+          "checkout": {},
+          "reason": "",
+          "username": "kyle welsby",
+          "userUuid": "adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "triggeredByDelivery": "",
+          "triggeredByGitTrigger": "",
+          "gitTriggerName": "",
+          "triggeredByNotificationRule": "",
+          "triggeredByActivityId": 0
+        },
+        "disabled": "ran_once",
+        "runOnceAt": "2016-02-15T18:59:34Z"
+      },
+      "_links": {
+        "job": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/jobs/d7bb1076-9f36-492f-6caa-67b8bac3de0e",
+          "read": "GET",
+          "update": "POST"
+        },
+        "self": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/schedules/1b6f0b2e-3f64-49e2-8414-a27f40996f70",
+          "read": "GET",
+          "update": "POST"
+        },
+        "user": {
+          "href": "https://www.vm.harrow.io/api/users/adb9fb2c-0b93-46e9-7679-d856e347db71",
+          "signup": "POST"
+        }
+      },
+      "_embedded": {}
+    }
+  ],
+  "_meta": {
+    "count": "16",
+    "total": "16"
+  },
+  "_links": {}
+}

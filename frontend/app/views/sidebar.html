@@ -1,0 +1,68 @@
+<div class="sidebar__header">
+  <a ui-sref="dashboard" class="sidebar__header__logo">
+    <span svg-icon="icon-harrow" />
+  </a>
+  <div class="sidebar__header__account">
+    <img width="36" height="36" gravatar-src="'{{sidebar.authentication.currentUser.subject.email}}'" gravatar-size="72" class="avatar">
+  </div>
+</div>
+
+<div class="sidebar__content">
+  <ul class="sidebar__menu" ng-if="sidebar.organizationsLength == 0">
+    <li>
+      <a ui-sref="wizard"> Create a New Organization</a>
+    </li>
+  </ul>
+  <ul class="sidebar__menu" ng-if="sidebar.organizationsLength > 0">
+    <li ng-if="sidebar.authentication.isGuest()">
+      <div class="sidebar__claimAccount">
+        <strong>You're using a guest account</strong>
+        <p>Set your email address and password to be able to regain access to your work.</p>
+        <div style="text-align:right">
+          <a ng-click="appctrl.claimAccount()" class="btn btn--green btn--border">Set Email and Password</a>
+        </div>
+      </div>
+    </li>
+    <li ng-repeat="organization in sidebar.organizationList | orderObjectBy:'subject.name'">
+      <a ui-sref="organization({uuid: organization.subject.uuid})">
+        <span>{{organization.subject.name}}</span>
+      </a>
+      <span ui-sref="billing({uuid: organization.subject.uuid})" class="sidebar__menu__issue" ng-if="organization._embedded.limits[0].subject.exceeded">
+        <span svg-icon="icon-error" svg-icon-size="18" class="iconColor"></span>
+      </span>
+      <ul class="sidebar__menuNested">
+        <li ng-repeat="project in organization.projects | orderObjectBy:'subject.name'">
+          <a ui-sref="projects/show({projectUuid: project.subject.uuid})" ng-class="{'active': sidebar.isActive(project)}">{{project.subject.name}}</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <ul class="sidebar__menu">
+    <li>
+      <a ui-sref="settings" translate="navigation.nav.settings">Settings</a>
+    </li>
+    <li>
+      <a ng-click="appctrl.logout()" translate="navigation.user.logOut">Logout</a>
+    </li>
+  </ul>
+</div>
+
+<div ng-include="'views/_flash-alerts.html'"></div>
+
+<div class="flash flash--error" ng-click="sidebar.reconnectApp()" ng-if="sidebar.websocketError" duration=0>
+  <div class="flash__message">
+    <span svg-icon="icon-error-alt"></span> Disconnected
+  </div>
+  <div class="flash__action">
+    Reconnect
+  </div>
+</div>
+
+<div class="sidebar__footer">
+  <div>
+    <a href="https://kb.harrow.io/" ga="'send', 'event', 'user', 'knowledgebase'">Knowledge Base</a>
+    <a href="mailto:{{sidebar.intercomId}}@incoming.intercom.io?Subject=Harrow%20Support%20Request&Body=Hi%20guys%2C%20I%27m%20having%20problems%20with%20...." ng-click="appctrl.openSupport($event)" ga="'send', 'event', 'user', 'support'">Support</a>
+    <a href="https://harrow.io/privacy-policy/" ga="'send', 'event', 'user', 'privacy'">Privacy</a>
+    <a href="https://harrow.io/terms-and-conditions/" ga="'send', 'event', 'user', 'terms'">Terms</a>
+  </div>
+</div>

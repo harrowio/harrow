@@ -1,0 +1,67 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-sm-12 col-md-12">
+      <div class="panel">
+        <ol class="breadcrumb">
+          <li><a ui-sref="dashboard">Home</a></li>
+
+          <li><a ui-sref="organizations/show({uuid: organizationCreditCard.organization.subject.uuid})">{{organizationCreditCard.organization.subject.name}}</a></li>
+          <li class="active">Add credit card</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-12">
+      <div class="panel">
+        <h2>Add credit card for <em>{{organizationCreditCard.organization.subject.name}}</em></h2>
+	<div ng-if="organizationCreditCard.braintreeError">
+	  <h3>Errors</h3>
+	  <p>Our payment provider reported the following errors with
+	    your credit card information:</p>
+	  <ul>
+	    <li ng-repeat="error in organizationCreditCard.braintreeErrors() track by $index">
+	      {{error}}
+	    </li>
+	  </ul>
+	</div>
+	<harrow-form save="organizationCreditCard.provideCreditCard()" translation-root="forms.addCreditCard">
+	  <div class="row">
+	    <div class="col-sm-9 col-md-3">
+	      <harrow-input>
+		<input name="number" ng-model="organizationCreditCard.braintree.number"  placeholder="4111111111111" required>
+	      </harrow-input>
+	    </div>
+	    <div class="col-sm-3">
+	      <harrow-input>
+		<input name="cvv" ng-model="organizationCreditCard.braintree.cvv" placeholder="123" required>
+	      </harrow-input>
+	    </div>
+	  </div>
+	  <div class="row">
+	    <div class="col-sm-3 col-md-3">
+	      <harrow-input>
+		<input name="expirationMonth" ng-model="organizationCreditCard.braintree.expirationMonth" placeholder="04" required>
+	      </harrow-input>
+	    </div>
+	    <div class="col-sm-9 col-md-3">
+	      <harrow-input>
+		<input name="expirationYear" ng-model="organizationCreditCard.braintree.expirationYear"  placeholder="2018" required>
+	      </harrow-input>
+	    </div>
+	  </div>
+	  <div class="row">
+	    <div class="col-sm-12 col-md-6">
+	      <harrow-input>
+		<input name="cardholderName" ng-model="organizationCreditCard.braintree.cardholderName" placeholder="John Doe" required>
+	      </harrow-input>
+	    </div>
+	  </div>
+	</harrow-form>
+      </div>
+    </div>
+  </div>
+</div>

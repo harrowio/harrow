@@ -1,0 +1,65 @@
+<div class="app__content">
+  <harrow-form save="ctrl.saveCard()" no-controls translation-root="forms.billing" class="card card--notifier">
+    <div class="card__content card__content--centered card__content--icon__credit-card">
+      <h3>Credit Card</h3>
+      <br>
+      <div class="grid grid--marginWide">
+        <div class="cell cell--7Col">
+          <div>
+            <harrow-input>
+              <input pattern="[0-9]+" name="number" ng-model="ctrl.braintree.number" required="true" autocomplete="cc-number">
+            </harrow-input>
+            <harrow-input>
+              <input pattern="[0-9]{3,4}" name="cvv" ng-model="ctrl.braintree.cvv" required="true" autocomplete="cc-csc">
+            </harrow-input>
+            <div class="field__group">
+              <div class="field__input field__input--join" style="max-width:initial;">
+                <label for="expirationMonth">{{'forms.billing.label.expirationMonth' | translate }}</label>
+                <input pattern="[0-9]{2}" name="expirationMonth" ng-model="ctrl.braintree.expirationMonth" required="true" autocomplete="cc-exp-month">
+                <span data-error-messages="Required"></span>
+              </div>
+              <div class="field__input">
+                <label for="expirationYear">{{'forms.billing.label.expirationYear' | translate }}</label>
+                <input pattern="[0-9]{4}" name="expirationYear" ng-model="ctrl.braintree.expirationYear" required="true" autocomplete="cc-exp-year">
+                <span data-error-messages="Required"></span>
+              </div>
+            </div>
+            <harrow-input>
+              <input name="cardholderName" ng-model="ctrl.braintree.cardholderName" required="true">
+            </harrow-input>
+            <a href="https://www.braintreegateway.com/merchants/cc7ky9xmn99th58b/verified" target="_blank">
+              <img src="https://s3.amazonaws.com/braintree-badges/braintree-badge-wide-dark.png" width="200px" height="31px" border="0" />
+            </a>
+          </div>
+        </div>
+        <div class="cell cell--5Col">
+          <div class="featureSection__pricing__cards">
+            <div class="featureSection__pricing__card active" style="margin:0">
+              <div class="featureSection__pricing__card__header">
+                <span ng-if="ctrl.selectedPlan.subject.pricePerMonth == 0">
+                  Free
+                </span>
+                <span ng-if="ctrl.selectedPlan.subject.pricePerMonth != 0">
+                  {{ 'formattedPricingPlan.price' | translate:{price: ctrl.selectedPlan.subject.pricePerMonth} }}
+                </span>
+                <small>Per Month</small>
+              </div>
+              <div class="featureSection__pricing__card__detail">
+                <strong class="color__red">{{ctrl.selectedPlan.subject.name}}</strong>
+                <p ng-bind-html="ctrl.selectedPlan.subject | formattedPricingPlan | toTrusted"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card__footer">
+      <a class="btn" ng-click="appctrl.back()">Back</a>
+      <div class="layout__spacer"></div>
+      <button type="submit" class="btn btn--primary" harrow-stateful="ctrl.statefulOptions" ng-disabled="harrowForm.form.$invalid">
+        Subscribe and pay {{ctrl.selectedPlan.subject.pricePerMonth | currency:'$':0}} per month
+      </button>
+    </div>
+  </harrow-form>
+
+</div>

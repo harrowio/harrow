@@ -1,0 +1,23 @@
+{
+  "subject": {
+    "uuid": "c9f45ff0-e22f-4170-9abc-5a09d400dcb2",
+    "name": "Silver",
+    "providerName": "braintree",
+    "providerPlanId": "2015-07-21-silver",
+    "privateCodeAvailable": true,
+    "pricePerMonth": "29.00 USD",
+    "usersIncluded": 2,
+    "projectsIncluded": 2,
+    "pricePerAdditionalUser": "9.90 USD",
+    "numberOfConcurrentJobs": 1
+  },
+  "_links": {
+    "braintree-purchase": {
+      "href": "https://www.vm.harrow.io/api/billing-plans/braintree/purchase"
+    },
+    "self": {
+      "href": "https://www.vm.harrow.io/api/billing-plans/c9f45ff0-e22f-4170-9abc-5a09d400dcb2"
+    }
+  },
+  "_embedded": {}
+}

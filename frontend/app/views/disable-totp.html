@@ -1,0 +1,14 @@
+<harrow-form save="ctrl.confirm()" translation-root="forms.disableTotp" no-controls class="card card--wizard">
+  <div class="card__content card__content--centered">
+    <h3 translate="forms.disableTotp.header"></h3>
+    <p translate="forms.disableTotp.warning"></p>
+    <harrow-input>
+      <input name="totp" type="number" ng-minlength="6" ng-maxlength="6" ng-model="ctrl.session.subject.totp" />
+    </harrow-input>
+  </div>
+  <div class="card__footer">
+    <a ng-click="appctrl.back()" class="btn">Back</a>
+    <div class="layout__spacer"></div>
+    <button type="submit" class="btn btn--primary" ng-disabled="harrowForm.form.$invalid">Confirm <span svg-icon="icon-chevron-right"></span></button>
+  </div>
+</harrow-form>

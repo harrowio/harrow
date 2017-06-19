@@ -1,0 +1,109 @@
+{
+  "collection": [
+    {
+      "subject": {
+        "uuid": "2684f719-c313-4a18-3907-f5031a4f97ec",
+        "name": "#harrow",
+        "webhookURL": "http://hooks.slack.com/",
+        "urlHost": "www.vm.harrow.io",
+        "projectUuid": "92cfa771-abcb-4366-3246-846d7a3eac3d",
+        "archivedAt": null
+      },
+      "_links": {
+        "self": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/slack-notifiers/2684f719-c313-4a18-3907-f5031a4f97ec",
+          "read": "GET",
+          "update": "POST"
+        }
+      },
+      "_embedded": {}
+    },
+    {
+      "subject": {
+        "uuid": "d84ec3ed-8329-4db9-3ece-c97f364880b0",
+        "name": "#Channel",
+        "webhookURL": "http://hooks.slack.com/",
+        "urlHost": "www.vm.harrow.io",
+        "projectUuid": "92cfa771-abcb-4366-3246-846d7a3eac3d",
+        "archivedAt": null
+      },
+      "_links": {
+        "self": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/slack-notifiers/d84ec3ed-8329-4db9-3ece-c97f364880b0",
+          "read": "GET",
+          "update": "POST"
+        }
+      },
+      "_embedded": {}
+    },
+    {
+      "subject": {
+        "uuid": "d3a7b711-6ea3-4994-3189-1dd3ba0fdea5",
+        "name": "#Zooloo",
+        "webhookURL": "http://hooks.slack.com/",
+        "urlHost": "www.vm.harrow.io",
+        "projectUuid": "92cfa771-abcb-4366-3246-846d7a3eac3d",
+        "archivedAt": null
+      },
+      "_links": {
+        "self": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/slack-notifiers/d3a7b711-6ea3-4994-3189-1dd3ba0fdea5",
+          "read": "GET",
+          "update": "POST"
+        }
+      },
+      "_embedded": {}
+    },
+    {
+      "subject": {
+        "uuid": "b42d371d-321a-4441-3970-b2b2d91f4c2b",
+        "name": "#Alpha",
+        "webhookURL": "http://hooks.slack.com/",
+        "urlHost": "www.vm.harrow.io",
+        "projectUuid": "92cfa771-abcb-4366-3246-846d7a3eac3d",
+        "archivedAt": null
+      },
+      "_links": {
+        "self": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/slack-notifiers/b42d371d-321a-4441-3970-b2b2d91f4c2b",
+          "read": "GET",
+          "update": "POST"
+        }
+      },
+      "_embedded": {}
+    },
+    {
+      "subject": {
+        "uuid": "2f1301d0-d1fa-48d9-3eee-c290e3b605bb",
+        "name": "sdfghash",
+        "webhookURL": "http://123",
+        "urlHost": "www.vm.harrow.io",
+        "projectUuid": "92cfa771-abcb-4366-3246-846d7a3eac3d",
+        "archivedAt": null
+      },
+      "_links": {
+        "self": {
+          "archive": "DELETE",
+          "create": "POST",
+          "href": "https://www.vm.harrow.io/api/slack-notifiers/2f1301d0-d1fa-48d9-3eee-c290e3b605bb",
+          "read": "GET",
+          "update": "POST"
+        }
+      },
+      "_embedded": {}
+    }
+  ],
+  "_meta": {
+    "count": "5",
+    "total": "5"
+  },
+  "_links": {}
+}

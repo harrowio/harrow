@@ -1,0 +1,19 @@
+<div class="app__container">
+  <div ng-if="ctrl.hasInaccessibleRepository()" modal modal-mode="warning" modal-sticky harrow-can="update-repositories" can-subject="$resolve.project">
+    <p>
+      One or more of your repositories has become inaccessible to harrow and may cause your tasks to fail,
+      <a href ui-sref="repositories({projectUuid: ctrl.project.subject.uuid})">Go to repositories</a> to fix the problem.
+    </p>
+  </div>
+  <div class="app__content project__tasks">
+    <div class="sectionHeader sectionHeader--bold">
+      <a href ui-sref="projects/show({projectUuid: ctrl.project.subject.uuid})" class="sectionHeader__title">{{ctrl.project.subject.name}}</a>
+      <span>Project</span>
+      <div class="layout__spacer"></div>
+    </div>
+    <div ui-view="scriptList"></div>
+  </div>
+  <div class="app__content project__activity">
+    <div ui-view="operationList"></div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="app__content">
+  <harrow-form save="ctrl.save()" translation-root="forms.notifiers.taskNotifier" class="card card--notifier" no-controls>
+    <div class="card__content card__content--icon__tasks">
+      <span svg-icon="icon-tasks" class="iconColor notifierLogo"></span>
+      <h3>Trigger another Harrow Task</h3>
+      <br>
+      <harrow-input ng-if="!ctrl.task">
+        <select name="triggeredByTaskUuid" ng-model="ctrl.notifier.subject.triggeredByTaskUuid" required="true" ng-options="task.subject.uuid as task.subject.name for task in ctrl.tasks" ng-disabled="ctrl.task"></select>
+      </harrow-input>
+      <harrow-input>
+        <select name="taskUuid" ng-model="ctrl.notifier.subject.taskUuid" required="true" ng-options="task.subject.uuid as task.subject.name for task in ctrl.tasks"></select>
+      </harrow-input>
+      <harrow-input ng-if="ctrl.notifier.subject.triggerAction">
+        <select name="triggerAction" ng-model="ctrl.notifier.subject.triggerAction" required="true" ng-options="action as ('forms.notifiers.taskNotifier.options.triggerAction.'+action | translate) for action in ctrl.triggerActions"></select>
+      </harrow-input>
+    </div>
+    <div class="card__footer">
+      <div ng-click="appctrl.back()" class="btn">Back</div>
+      <div class="layout__spacer"></div>
+      <button type="submit" ng-disabled="harrowForm.form.$invalid" class="btn btn--primary">Save</button>
+    </div>
+  </harrow-form>
+
+  <div class="flash flash--inline flash--danger" style="margin-top: 20px;" ng-if="!appctrl.isNew()">
+    <div class="flash__message">
+      Delete Task Notifier?
+    </div>
+    <a class="flash__action" ng-confirm-click="Are you sure you want to delete this Task Notifier?" ng-click="ctrl.delete()">
+    Delete
+  </a>
+  </div>
+</div>

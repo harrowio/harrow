@@ -1,0 +1,19 @@
+<div class="flash flash--success" flash-alert="success" active-class="ng-show" ng-click="hide()">
+  <div class="flash__message" ng-bind-html="flash.message | toTrusted"></div>
+  <div class="flash__dismiss">Dismiss</div>
+</div>
+
+<div class="flash flash--warn" flash-alert="warn" active-class="ng-show" ng-click="hide()" duration=0>
+  <div class="flash__message" ng-bind-html="flash.message | toTrusted"></div>
+  <div class="flash__dismiss">Dismiss</div>
+</div>
+
+<div class="flash flash--error" flash-alert="error" active-class="ng-show" ng-click="hide()" duration=0>
+  <div class="flash__message" ng-bind-html="flash.message | toTrusted"></div>
+  <div class="flash__dismiss">Dismiss</div>
+</div>
+
+<div class="flash flash--warn" flash-alert="info" active-class="ng-show" ng-click="hide()" duration=0>
+  <div class="flash__message" ng-bind-html="flash.message | toTrusted"></div>
+  <div class="flash__dismiss">Dismiss</div>
+</div>

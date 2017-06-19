@@ -1,0 +1,61 @@
+@import 'loading';
+/**
+ TODO: Can move to SG?
+ */
+.card__footer {
+  align-items: center;
+}
+
+[flash-alert] {
+  display: none;
+  &.ng-show {
+    display: flex;
+  }
+}
+.ng-show {
+  display: block;
+}
+[ng-click],
+[href] {
+  cursor: pointer;
+}
+
+
+// Prime candididate for moving into a mixin or function
+// copied verbatim from ../style-guide/docs/styles/wordpress.scss
+.loading-indicator, .ws-error-indicator {
+  padding:           10px;
+  border-radius:     5px 5px 0 0;
+  left:              50%;
+  position:          absolute;
+  bottom:            0;
+  transform:         translateX(-50%);
+}
+
+.loading-indicator {
+  background-color:  color(attention);
+}
+
+.ws-error-indicator {
+  background-color:  color(danger);
+}
+
+span.dropdown-wrapper {
+  display: inline-block;
+  position: relative;
+}
+
+ul.dropdown {
+  position: absolute;
+  margin-top: -1px;
+  left: 0;
+  white-space: nowrap;
+  padding: 10px;
+  z-index: 10000;
+  list-style: none;
+  background-color: white;
+  border: 1px solid color(silver);
+  li:nth-child(3) { // two lis appear before the button
+    padding-top: 0;
+  }
+}

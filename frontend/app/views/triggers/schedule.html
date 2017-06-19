@@ -1,0 +1,51 @@
+<div class="app__content">
+  <harrow-form save="trigger.save()" no-controls translation-root="forms.triggers.schedule" class="card card--notifier">
+    <div class="card__content card__content--icon__clock">
+      <span svg-icon="icon-clock"></span>
+      <h3>Schedule</h3>
+      <div class="field__group field__group--tight">
+        <div class="field__radio">
+          <label>
+            <input type="radio" name="toggleTimespec" ng-model="trigger.scheduleType" ng-change="harrowForm.clearAllServerErrors()" value="timespec">
+            <span></span>
+            {{ 'forms.triggers.schedule.label.toggleTimespec' | translate }}
+          </label>
+        </div>
+
+        <div class="field__radio">
+          <label>
+            <input type="radio" name="toggleCronspec" ng-model="trigger.scheduleType" ng-change="harrowForm.clearAllServerErrors()" value="cronspec">
+            <span></span>
+            {{ 'forms.triggers.schedule.label.toggleCronspec' | translate }}
+          </label>
+        </div>
+      </div>
+      <harrow-input>
+        <input name="description" ng-model="trigger.trigger.subject.description" required="true">
+      </harrow-input>
+      <harrow-input ng-show="trigger.scheduleType == 'cronspec'">
+        <input name="cronspec" ng-model="trigger.trigger.subject.cronspec" ng-required="trigger.scheduleType == 'cronspec'">
+        <p class="field__hint"><span schedule-next-run="trigger.trigger"/></p>
+      </harrow-input>
+      <harrow-input ng-show="trigger.scheduleType == 'timespec'">
+        <input name="timespec" ng-model="trigger.trigger.subject.timespec" ng-required="trigger.scheduleType == 'timespec'">
+        <p class="field__hint"><span schedule-next-run="trigger.trigger"/></p>
+      </harrow-input>
+      <harrow-input>
+        <select name="taskUuid" ng-model="trigger.trigger.subject.taskUuid" required="true" ng-options="value.subject.uuid as value.subject.name for value in trigger.tasks" ng-disabled="trigger.task != null"></select>
+      </harrow-input>
+    </div>
+    <div class="card__footer">
+      <a ng-click="appctrl.back()" class="btn"><span svg-icon="icon-chevron-left"></span> Back</a>
+      <div class="layout__spacer"></div>
+      <button type="submit" class="btn btn--primary" ng-disabled="harrowForm.form.$invalid">Save</button>
+    </div>
+  </harrow-form>
+
+  <div class="flash flash--inline flash--danger" style="margin-top: 20px;" ng-if="!appctrl.isNew()">
+    <div class="flash__message">
+      Delete Schedule?
+    </div>
+    <a class="flash__action" ng-confirm-click="Are you sure you want to delete this Schedule?" ng-click="trigger.delete()">Delete</a>
+  </div>
+</div>

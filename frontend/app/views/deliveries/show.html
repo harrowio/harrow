@@ -1,0 +1,16 @@
+<div class="card">
+  <div class="card__header">
+    <div class="card__header__title">
+      Webhook Delivery: {{deliveryShow.delivery.subject.request.method}} <code>{{deliveryShow.delivery.subject.request.path}}</code>
+    </div>
+  </div>
+  <div class="card__content">
+    <pre><code>
+<div ng-repeat="(header, values) in deliveryShow.delivery.subject.request.header"><div ng-repeat="value in values track by $index">{{header}}: {{value}}</div></div>
+{{deliveryShow.delivery.subject.request.body}}
+    </code></pre>
+  </div>
+  <div class="card__footer">
+    <button ng-click="appctrl.back()" class="btn">Back</button>
+  </div>
+</div>

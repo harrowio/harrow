@@ -1,0 +1,35 @@
+{
+  "subject": {
+    "uuid": "f3fcd172-ea46-4573-8195-3e211fa897c3",
+    "name": "Harrow",
+    "githubLogin": "",
+    "public": false,
+    "createdAt": "2016-06-28T14:14:49.882575Z",
+    "archivedAt": null
+  },
+  "_links": {
+    "add-credit-card": {
+      "href": "https://www.vm.harrow.io/api/billing-plans/braintree/credit-cards"
+    },
+    "limits": {
+      "href": "https://www.vm.harrow.io/api/organizations/f3fcd172-ea46-4573-8195-3e211fa897c3/limits"
+    },
+    "members": {
+      "href": "https://www.vm.harrow.io/api/organizations/f3fcd172-ea46-4573-8195-3e211fa897c3/members"
+    },
+    "memberships": {
+      "href": "https://www.vm.harrow.io/api/organizations/f3fcd172-ea46-4573-8195-3e211fa897c3/memberships"
+    },
+    "project-cards": {
+      "href": "https://www.vm.harrow.io/api/organizations/f3fcd172-ea46-4573-8195-3e211fa897c3/project-cards"
+    },
+    "projects": {
+      "href": "https://www.vm.harrow.io/api/organizations/f3fcd172-ea46-4573-8195-3e211fa897c3/projects"
+    },
+    "self": {
+      "create": "POST",
+      "href": "https://www.vm.harrow.io/api/organizations/f3fcd172-ea46-4573-8195-3e211fa897c3"
+    }
+  },
+  "_embedded": {}
+}
