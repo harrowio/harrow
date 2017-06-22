@@ -33,3 +33,15 @@
     state: present
   tags:
     - lxd
+
+- name: set sysctl values
+  sysctl:
+    name: "{{ item }}"
+    value: 1048576
+    sysctl_set: yes
+  with_items:
+    - 'fs.inotify.max_queued_events'
+    - 'fs.inotify.max_user_instances'
+    - 'fs.inotify.max_user_watches'
+  tags:
+    - lxd
