@@ -1,5 +1,6 @@
 pkg
 bin
+logs
 
 # the admin api's boltdb
 config.db

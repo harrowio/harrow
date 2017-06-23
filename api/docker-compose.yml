@@ -1,6 +1,36 @@
-version: '2'
+version: '3.0'
 
 services:
+
+  fluentd:
+    image: harrowio/fluentd:latest
+    container_name: harrow-fluentd
+    ports:
+      - "24224:24224"
+      - "24224:24224/udp"
+    volumes:
+      - ./support/fluentd/fluentd.conf:/fluentd/etc/fluentd.conf
+      - ./logs:/mnt/data/api-logs/
+    environment:
+      - FLUENTD_CONF=fluentd.conf
+    links:
+      - elasticsearch
+
+  elasticsearch:
+    image: elasticsearch
+    container_name: harrow_elasticsearch
+    expose:
+      - 9200
+    ports:
+      - "9200:9200"
+
+  kibana:
+    image: kibana
+    links:
+      - elasticsearch
+    ports:
+      - "5601:5601"
+
   rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: harrow-rabbitmq
