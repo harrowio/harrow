@@ -7,8 +7,8 @@ incompatibilities, the following versions of software are mandatory.
 
 The specific known-good baseimage version is named in the `Vagrantfile`.
 
-  - VirtualBox >= 5.1
-  - Vagrant >= 1.8
+  - [VirtualBox](https://www.virtualbox.org/wiki/Downloads) >= 5.1
+  - [Vagrant](https://www.vagrantup.com/downloads.html) >= 1.8
 
 ## Installation
 
