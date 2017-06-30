@@ -127,7 +127,6 @@ func (h *scriptEditorHandler) init(ctxt RequestContext) (*scriptEditorHandler, e
 	handler.tasks.SetLogger(ctxt.Log())
 	handler.environments = stores.NewDbEnvironmentStore(ctxt.Tx())
 	handler.environments.SetLogger(ctxt.Log())
-	handler.secrets.SetLogger(ctxt.Log())
 	handler.secrets = stores.NewSecretStore(ctxt.SecretKeyValueStore(), ctxt.Tx())
 	handler.secrets.SetLogger(ctxt.Log())
 	handler.projects = stores.NewDbProjectStore(ctxt.Tx())
