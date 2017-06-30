@@ -14,7 +14,7 @@
         <input name="matchRef" ng-model="trigger.trigger.subject.matchRef" required="true">
       </harrow-input>
       <harrow-input>
-        <select name="repositoryUuid" ng-model="trigger.trigger.subject.repositoryUuid" ng-options="value.uuid as value.name for value in trigger.repositoryOptions"></select>
+        <select name="repositoryUuid" ng-model="trigger.trigger.subject.repositoryUuid" ng-options="value.uuid as value.url for value in trigger.repositoryOptions"></select>
         <p ng-if="trigger.hasRepositoryIssue" class="field__hint color__red"><span svg-icon="icon-error" class="iconColor"></span> One or more of your repositories might not be accesible. <a href="" ui-sref="repositories({projectUuid: trigger.project.subject.uuid})">View repositories</a>.</p>
       </harrow-input>
       <harrow-input>

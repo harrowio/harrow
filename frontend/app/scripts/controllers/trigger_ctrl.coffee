@@ -18,13 +18,13 @@ Controller = (
   @_generateNamesForTasks()
   @scheduleType = if @trigger.subject.cronspec then 'cronspec' else 'timespec'
   @repositoryOptions = []
-  @repositoryOptions.push { name: 'all', uuid: null }
+  @repositoryOptions.push { url: 'all', uuid: null }
   @hasRepositoryIssue = false
   @repositories.forEach (repository) =>
     unless repository.subject.accessible
       @hasRepositoryIssue = true
     @repositoryOptions.push {
-      name: repository.subject.name
+      url: repository.subject.url
       uuid: repository.subject.uuid
     }
   @nextState = 'triggers'
