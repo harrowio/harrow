@@ -114,7 +114,9 @@ queueued.
 This periodically scans all repositories which have Git triggers attached (i.e
 "run task on new commits") and updates the PostgreSQL with the new metadata.
 The presense of new metadata causes other events to be publishied which then
-activate the scheduler, etc.
+activate the scheduler, etc. Only repositories with associated Git triggers are
+scanned. A one-time scan of all relevant repositories can be triggerd with the
+`-once` flag, else the tool polls periodically (default 1 minute).
 
 ### Operation Runner
 
