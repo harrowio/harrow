@@ -36,9 +36,16 @@ to function.
 
     $ # Install Caddy from https://caddyserver.com/download and make sure it's
         on the $PATH
-    $ go get -u github.com/ddollar/forego
+    $ gem install foreman
     $ docker-compose up [-d]
-    $ forego start
+    $ foreman start
+
+Be mindful not to take a Procfile runner which autodetects a `.env` file, the
+format is not compatible with `autoenv`, and will lead to problems such as Git
+not being on the PATH because .env is assumed to be a file of key/value pairs
+and will not be evaluated as it would be with autoenv.
+
+For that reason `Foreman` rather than the Go port `forego` is recommended.
 
 ## TODO
 
