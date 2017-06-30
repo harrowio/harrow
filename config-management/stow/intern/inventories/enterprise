@@ -1,0 +1,7 @@
+enterprise ansible_ssh_host=192.168.50.5 ansible_become=yes
+
+[all]
+enterprise
+
+[lxd]
+enterprise

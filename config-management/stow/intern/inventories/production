@@ -1,0 +1,14 @@
+lxd-01 ansible_ssh_host=lxd-01.prod.harrow.io ansible_user=root ansible_become=no
+lxd-03 ansible_ssh_host=lxd-03.prod.harrow.io ansible_user=root ansible_become=no
+lxd-04 ansible_ssh_host=lxd-04.prod.harrow.io ansible_user=root ansible_become=no
+
+[all]
+lxd-01
+lxd-03
+lxd-04
+
+[lxd]
+lxd-01
+lxd-03
+lxd-04
+

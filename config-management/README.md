@@ -20,6 +20,25 @@ you know what you're doing:
     $ virtualenv venv
     $ (source venv/bin/activate && pip install "ansible>=2.3,<2.4")
 
+## "Secret" Files
+
+A handful of files in this repo are stored with the Ansible Vault function. To
+keep these files out of Ansible's field of vision for the public released code
+they are "stowed" using GNU stow.
+
+Although it's rare that you would want to access these files, the system is simple:
+
+
+    $ cd stow
+    $ stow intern
+
+Observe that this will create new files (symlinks) in `./inventories/` and
+`./host_vars/`. If you are not in the list of authorized users Ansible will
+fail because you are not able to decrypt the vault password file.
+
+You can undo this process by manually removing the symlinks or running `stow -D
+intern` from the `stow` directory.
+
 ## Vagrant Plugins
 
     $ vagrant plugin install vagrant-persistent-storage
