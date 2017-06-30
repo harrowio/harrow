@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
+	"runtime/debug"
 	"time"
 
 	"github.com/harrowio/harrow/activities"
@@ -124,7 +125,7 @@ func HandlerFunc(ctxt ServerContext, h Handler) http.Handler {
 
 		defer func(w http.ResponseWriter) {
 			if r := recover(); r != nil {
-				ctxt.Log().Info().Msgf("recovered from panic: %v\n", r)
+				ctxt.Log().Info().Msgf("recovered from panic: %v %s\n", r, debug.Stack())
 				handleError(w, ErrRecoveredFromPanic)
 			}
 		}(w)
