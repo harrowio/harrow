@@ -2,6 +2,7 @@ version: '3.0'
 
 services:
 
+  # The Dockerfile for this image can be found in ./support/fluentd
   fluentd:
     image: harrowio/fluentd:latest
     container_name: harrow-fluentd
