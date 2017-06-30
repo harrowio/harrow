@@ -16,7 +16,7 @@ func MountLogHandler(r *mux.Router, ctxt ServerContext) {
 	lh := logHandler{
 		logStores: []stores.LogStore{ // the order is important
 			stores.NewRedisLogStore(ctxt.KeyValueStore()),
-			stores.NewDiskLogStore(config.FilesystemConfig().LogDir),
+			stores.NewDiskLogStore(config.FilesystemConfig().OpLogDir),
 		},
 	}
 

@@ -28,7 +28,7 @@ func NewFileTransport(c *config.Config, log logger.Logger) *FileTransport {
 }
 
 func (self *FileTransport) Consume(operationUUID string) (<-chan *Message, error) {
-	f, err := os.Open(fmt.Sprintf(fileNameTpl, self.config.FilesystemConfig().LogDir, operationUUID))
+	f, err := os.Open(fmt.Sprintf(fileNameTpl, self.config.FilesystemConfig().OpLogDir, operationUUID))
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ func (self *FileTransport) Close() error {
 }
 
 func (self *FileTransport) WriteLexemes(operationUUID string, lexemes []*Message) error {
-	tmp, err := ioutil.TempDir(self.config.FilesystemConfig().LogDir, "log_transport")
+	tmp, err := ioutil.TempDir(self.config.FilesystemConfig().OpLogDir, "log_transport")
 	if err != nil {
 		return fmt.Errorf("ioutil.TempDir(\"\", \"log_transport\"): %s", err)
 	}
@@ -125,7 +125,7 @@ func (self *FileTransport) WriteLexemes(operationUUID string, lexemes []*Message
 	if err != nil {
 		return fmt.Errorf("f.Close(): %s", err)
 	}
-	fileName := fmt.Sprintf(fileNameTpl, self.config.FilesystemConfig().LogDir, operationUUID)
+	fileName := fmt.Sprintf(fileNameTpl, self.config.FilesystemConfig().OpLogDir, operationUUID)
 	err = os.Rename(tmpFileName, fileName)
 	if err != nil {
 		return fmt.Errorf("os.Rename(%q, %q): %s", tmpFileName, fileName, err)

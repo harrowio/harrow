@@ -63,7 +63,7 @@ func (self *DbLimitsStore) FindByOrganizationUuid(organizationUuid string) (*lim
 }
 
 func (self *DbLimitsStore) CacheLimits(organizationUuid string, limits *limits.Limits) {
-	filename := filepath.Join("/mnt/gluster/harrow/limits", organizationUuid+".json")
+	filename := filepath.Join(self.cachePath, organizationUuid+".json")
 	os.MkdirAll(filepath.Dir(filename), 0755)
 	file, err := os.Create(filename)
 	if err != nil {
