@@ -61,7 +61,8 @@ app.factory "Operation", ($filter, $injector, RepositoryCheckout) ->
       @subject.endedTime() - @subject?.startedAt
 
   Operation::cancelable = ->
-    @status() == 'running'
+    status = @status();
+    return status == 'running' || status == 'pending'
 
   Operation::status = ->
     if @subject.canceledAt
