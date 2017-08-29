@@ -4,6 +4,7 @@ activity-worker:    ./support/capture_stdout logs/harrow_activity_worker     "bi
 api:                ./support/capture_stdout logs/harrow_api                 "bin/harrow-debug api"
 build-status:       ./support/capture_stdout logs/harrow_build_status_worker "bin/harrow-debug build-status-worker"
 keymaker:           ./support/capture_stdout logs/harrow_keymaker            "bin/harrow-debug keymaker"
+limits:             ./support/capture_stdout logs/harrow_limits              "bin/harrow-debug limits"
 mail-dispatcher:    ./support/capture_stdout logs/harrow_mail_dispatcher     "bin/harrow-debug mail-dispatcher"
 metadata-preflight: ./support/capture_stdout logs/harrow_metadata_preflight  "bin/harrow-debug metadata-preflight"
 postal-worker:      ./support/capture_stdout logs/harrow_postal_worker       "bin/harrow-debug postal-worker"
@@ -11,5 +12,3 @@ projector:          ./support/capture_stdout logs/harrow_projector           "bi
 scheduler:          ./support/capture_stdout logs/harrow_scheduler           "bin/harrow-debug scheduler"
 websocket:          ./support/capture_stdout logs/harrow_websocket           "bin/harrow-debug ws"
 zob:                ./support/capture_stdout logs/harrow_zob                 "bin/harrow-debug zob"
-
-operation-runner:   ./support/capture_stdout logs/harrow_operation_runner_vagrant_localhost "bin/harrow-debug operation-runner -connect ssh://vagrant@localhost:2222/"
