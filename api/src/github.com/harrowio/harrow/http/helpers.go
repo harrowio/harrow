@@ -8,7 +8,6 @@ import (
 	"github.com/harrowio/harrow/authz"
 	"github.com/harrowio/harrow/domain"
 	"github.com/harrowio/harrow/limits"
-	"github.com/harrowio/harrow/stores"
 )
 
 // requestBaseUri takes an http.Request and returns the canonical base. This
@@ -118,17 +117,9 @@ func applyFilterTemplate(r *http.Request, subj domain.Subject, o []byte) []byte 
 	}
 }
 
-func NewLimitsFromContext(ctxt RequestContext) (*limits.Service, error) {
-	organizationStore := stores.NewDbOrganizationStore(ctxt.Tx())
-	projectStore := stores.NewDbProjectStore(ctxt.Tx())
-	billingPlanStore := stores.NewDbBillingPlanStore(ctxt.Tx(), stores.NewBraintreeProxy())
-	billingHistoryStore := stores.NewDbBillingHistoryStore(ctxt.Tx(), ctxt.KeyValueStore())
-	billingHistory, err := billingHistoryStore.Load()
-	if err != nil {
-		return nil, err
-	}
-	limitsStore := stores.NewDbLimitsStore(ctxt.Tx())
-	limitsStore.SetLogger(ctxt.Log())
-
-	return limits.NewService(organizationStore, projectStore, billingPlanStore, billingHistory, limitsStore), nil
+func NewLimitsFromContext(ctxt RequestContext) *limits.Client {
+	cfg := ctxt.Config()
+	limits := limits.NewDefaultClient(&cfg)
+	limits.SetLogger(ctxt.Log())
+	return limits
 }

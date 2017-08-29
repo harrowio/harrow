@@ -172,3 +172,28 @@ messages onto a more tolerant bus, in thie case RabbitMQ.
 
 These two components start and stop LXC containers at the discretion of the
 operation-runner on the LXC/D host in question. They need not be used directly.
+
+## Running Harrow Without Limits / Billing
+
+If you want to self-host Harrow you'll need to export the following:
+
+    export HAR_LIMIT_STORE_FAIL_MODE=assume_allowed
+
+This ensures that when the GRPC service for the limits subsystem fails, it will
+fail "open", and no limits will be applied.
+
+For the normal server this is sufficient, a failure in the limits package will
+cancel the request context, which may or may not cause problems. For the tests
+and other long-lived servers where the cancellation of a context may be fatal
+(it's not possible to reuse a cancelled context) there is another option
+available
+
+    export HAR_LIMITS_ENABLED=false
+
+The value given is parsed by Go's
+[`strconv.ParseBool`](https://golang.org/pkg/strconv/#ParseBool).
+
+*Note:* This double environment variable is less than ideal. A further look at
+why the request context is cancelled in case of a bad `grpc.Dial` call would
+probably allow us to get rid of the `HAR_LIMITS_ENABLED` env variable all
+together.

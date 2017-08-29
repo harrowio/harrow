@@ -103,25 +103,11 @@ func (self orgHandler) Show(ctxt RequestContext) (err error) {
 		return err
 	}
 
-	limitsStore := stores.NewDbLimitsStore(tx)
-	limitsStore.SetLogger(ctxt.Log())
-
-	limits, err := limitsStore.FindByOrganizationUuid(organizationUuid)
+	limits := NewLimitsFromContext(ctxt)
+	reported, err := limits.ForOrganizationUuid(org.Uuid)
 	if err != nil {
 		return err
 	}
-
-	planUuid := billingHistory.PlanUuidFor(organizationUuid)
-	plan, err := stores.NewDbBillingPlanStore(ctxt.Tx(), stores.NewBraintreeProxy()).FindByUuid(planUuid)
-	if err != nil {
-		ctxt.Log().Warn().Msgf("error loading plan for organization %s: %s", organizationUuid, err)
-	}
-
-	reported := limits.Report(
-		plan,
-		billingHistory.ExtraUsersFor(organizationUuid),
-		billingHistory.ExtraProjectsFor(organizationUuid),
-	)
 
 	org.Embed("limits", reported)
 
@@ -398,28 +384,10 @@ func (self orgHandler) Limits(ctxt RequestContext) error {
 	}
 
 	organizationUuid := ctxt.PathParameter("uuid")
-	tx := ctxt.Tx()
-	limits, err := stores.NewDbLimitsStore(tx).FindByOrganizationUuid(organizationUuid)
-	if err != nil {
-		return err
-	}
 
-	billingHistory, err := stores.NewDbBillingHistoryStore(
-		ctxt.Tx(),
-		ctxt.KeyValueStore(),
-	).Load()
-	planUuid := billingHistory.PlanUuidFor(organizationUuid)
-	plan, err := stores.NewDbBillingPlanStore(ctxt.Tx(), stores.NewBraintreeProxy()).FindByUuid(planUuid)
+	limits := NewLimitsFromContext(ctxt)
+	reported, err := limits.ForOrganizationUuid(organizationUuid)
 	if err != nil {
-		ctxt.Log().Warn().Msgf("error loading plan for organization %s: %s", organizationUuid, err)
-	}
-
-	reported := limits.Report(
-		plan,
-		billingHistory.ExtraUsersFor(organizationUuid),
-		billingHistory.ExtraProjectsFor(organizationUuid),
-	)
-	if allowed, err := ctxt.Auth().CanRead(reported); !allowed {
 		return err
 	}
 

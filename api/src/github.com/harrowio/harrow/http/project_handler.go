@@ -2,11 +2,13 @@ package http
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 	"strings"
 
 	"github.com/gorilla/mux"
+	"github.com/pkg/errors"
 
 	"github.com/harrowio/harrow/activities"
 	"github.com/harrowio/harrow/authz"
@@ -130,6 +132,7 @@ func (self projectHandler) Show(ctxt RequestContext) (err error) {
 func (self projectHandler) CreateUpdate(ctxt RequestContext) (err error) {
 
 	store := stores.NewDbProjectStore(ctxt.Tx())
+	orgStore := stores.NewDbOrganizationStore(ctxt.Tx())
 
 	params, err := ReadProjectParams(ctxt.R().Body)
 	if err != nil {
@@ -175,12 +178,12 @@ func (self projectHandler) CreateUpdate(ctxt RequestContext) (err error) {
 			return err
 		}
 
-		theLimits, err := NewLimitsFromContext(ctxt)
+		org, err := orgStore.FindByUuid(proj.OrganizationUuid)
 		if err != nil {
-			return err
+			return errors.Wrap(err, fmt.Sprintf("can't lookup org for project uuid %s", proj.Uuid))
 		}
 
-		if exceeded, err := theLimits.Exceeded(proj); exceeded && err == nil {
+		if exceeded, err := NewLimitsFromContext(ctxt).OrganizationLimitsExceeded(org); exceeded && err == nil {
 			return ErrLimitsExceeded
 		}
 

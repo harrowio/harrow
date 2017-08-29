@@ -133,6 +133,7 @@ func Test_SecretStore_FindSsh(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+
 	// There is 1 Secret in world already
 	if len(secrets) != 4 {
 		t.Fatalf("FindAll: Wanted to find 4 records but found %d\n", len(secrets))

@@ -72,7 +72,9 @@ func ListenAndServe(l zerolog.Logger, db *sqlx.DB, bus activity.Sink, kv stores.
 	activitySink = NewBusSink(bus)
 
 	r.NotFoundHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		l.Warn().Msgf("404 invoked: %s", r.URL.String())
+		if r.URL.String() != "/inform" {
+			l.Warn().Msgf("404 invoked: %s", r.URL.String())
+		}
 	})
 
 	MountAll(r, ctxt)

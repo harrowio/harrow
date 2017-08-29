@@ -1,9 +1,12 @@
 package config
 
 import (
+	"fmt"
 	"log"
 	"os"
+	"strconv"
 	"strings"
+	"time"
 
 	_ "github.com/lib/pq"
 )
@@ -12,6 +15,8 @@ type Config struct {
 	environment string
 	Root        string
 }
+
+const InstanceDeadline = 2 * time.Hour
 
 //
 // Unexported Package varaibles to hold memoized
@@ -39,6 +44,14 @@ func getEnvWithDefault(k, d string) string {
 	}
 	if val == "" && d != "" {
 		val = d
+	}
+	return val
+}
+
+func getEnvBoolWithDefault(k string, d bool) bool {
+	val, err := strconv.ParseBool(getEnvWithDefault(k, fmt.Sprintf("%t", d)))
+	if err != nil {
+		panic(fmt.Sprintf("can't parse env variable '%s' as boolean", k))
 	}
 	return val
 }

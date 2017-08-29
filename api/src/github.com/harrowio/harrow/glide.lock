@@ -1,8 +1,8 @@
-hash: 2a3bdc6258e30b8229a705cb4c1c4b6957d351d9a2ff4ffb49671c4ea646238e
-updated: 2017-05-30T11:44:10.416054482+02:00
+hash: 31f22f23fb411bff50c397620255fc4dcfc577d77d0c1e9d991b06abca7634b6
+updated: 2017-07-27T23:28:58.741484768+02:00
 imports:
 - name: github.com/aws/aws-sdk-go
-  version: e0cdae7a65ba3a5e66a0af747a7b3967ddac099c
+  version: e0223293ab40c06fad94970678748486705f8d0f
   subpackages:
   - aws
   - aws/awserr
@@ -20,6 +20,7 @@ imports:
   - aws/request
   - aws/session
   - aws/signer/v4
+  - internal/shareddefaults
   - private/protocol
   - private/protocol/ec2query
   - private/protocol/query
@@ -31,7 +32,7 @@ imports:
   - service/ec2
   - service/sts
 - name: github.com/boltdb/bolt
-  version: 583e8937c61f1af6513608ccc75c97b6abdf4ff9
+  version: 2f1ce7a837dcb8da3ec595b1dac9d0632f0f99e8
 - name: github.com/craigmj/gototp
   version: bbfd598b42caf9b1db7318cae7e10d0b94846f56
 - name: github.com/davecgh/go-spew
@@ -42,6 +43,11 @@ imports:
   version: be9b77fa8b17bd771c1782f246be9194ff5b6792
 - name: github.com/go-ini/ini
   version: e7fea39b01aea8d5671f6858f0532f56e8bff3a5
+- name: github.com/golang/protobuf
+  version: 748d386b5c1ea99658fd69fe9f03991ce86a90c1
+  subpackages:
+  - proto
+  - ptypes/any
 - name: github.com/gorhill/cronexpr
   version: a557574d6c024ed6e36acc8b610f5f211c91568a
 - name: github.com/gorilla/context
@@ -53,11 +59,9 @@ imports:
 - name: github.com/gorilla/websocket
   version: a91eba7f97777409bc2c443f5534d41dd20c5720
 - name: github.com/influxdata/influxdb
-  version: 77909d7c7826afe597b12d957996d6e16cd1afaa
+  version: 5887e92e8950435ac7e496ff8dada784051284b7
   subpackages:
   - client/v2
-  - models
-  - pkg/escape
 - name: github.com/jameskeane/bcrypt
   version: c3cd44c1e20fec46baad45b108a45be93394dc8d
 - name: github.com/jmespath/go-jmespath
@@ -72,7 +76,7 @@ imports:
   subpackages:
   - oid
 - name: github.com/lionelbarrow/braintree-go
-  version: ec210f929dd2950dadd745b975b0a4918eae4bec
+  version: 5b8ec4387e42df5c09f40da9436dc29a69047f51
   subpackages:
   - customfields
   - date
@@ -81,9 +85,12 @@ imports:
   version: 52bc9c59063f12d07450d2ce7853cac3d3892a74
 - name: github.com/nu7hatch/gouuid
   version: 179d4d0c4d8d407a32af483c2354df1d2c91e6c3
+- name: github.com/pkg/errors
+  version: 645ef00459ed84a119197bfb8d8205042c6df63d
 - name: github.com/rs/zerolog
-  version: bf4b44614c4fe42f071ba7162e4898edaef8fa1e
+  version: 89ff8dbc5f047ae9957523b07e627891079f7967
   subpackages:
+  - internal/json
   - log
 - name: github.com/rubenv/sql-migrate
   version: 38004e7a77f2b350ea8467038dca66073d907725
@@ -106,10 +113,47 @@ imports:
   - openpgp/s2k
   - ssh
   - ssh/terminal
+- name: golang.org/x/net
+  version: f5079bd7f6f74e23c4d65efa0f4ce14cbd6a3c0f
+  subpackages:
+  - context
+  - http2
+  - http2/hpack
+  - idna
+  - internal/timeseries
+  - lex/httplex
+  - trace
 - name: golang.org/x/sys
   version: f3918c30c5c2cb527c0b071a27c35120a6c0719a
   subpackages:
   - unix
+- name: golang.org/x/text
+  version: 836efe42bb4aa16aaa17b9c155d8813d336ed720
+  subpackages:
+  - secure/bidirule
+  - transform
+  - unicode/bidi
+  - unicode/norm
+- name: google.golang.org/genproto
+  version: b0a3dcfcd1a9bd48e63634bd8802960804cf8315
+  subpackages:
+  - googleapis/rpc/status
+- name: google.golang.org/grpc
+  version: d2e1b51f33ff8c5e4a15560ff049d200e83726c5
+  subpackages:
+  - codes
+  - credentials
+  - grpclb/grpc_lb_v1
+  - grpclog
+  - internal
+  - keepalive
+  - metadata
+  - naming
+  - peer
+  - stats
+  - status
+  - tap
+  - transport
 - name: gopkg.in/alexcesaro/quotedprintable.v3
   version: 2caba252f4dc53eaf6b553000885530023f54623
 - name: gopkg.in/bufio.v1

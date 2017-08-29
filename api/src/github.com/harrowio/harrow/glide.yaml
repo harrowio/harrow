@@ -53,3 +53,5 @@ import:
 - package: github.com/rs/zerolog
   subpackages:
   - log
+- package: github.com/pkg/errors
+  version: v0.8.0

@@ -12,6 +12,7 @@ import (
 	"time"
 
 	"github.com/jmoiron/sqlx"
+	"github.com/pkg/errors"
 	"github.com/rs/zerolog"
 	redis "gopkg.in/redis.v2"
 
@@ -20,6 +21,7 @@ import (
 	"github.com/harrowio/harrow/bus/broadcast"
 	"github.com/harrowio/harrow/cast"
 	"github.com/harrowio/harrow/config"
+	"github.com/harrowio/harrow/domain"
 	"github.com/harrowio/harrow/limits"
 	"github.com/harrowio/harrow/stores"
 )
@@ -36,14 +38,17 @@ const ProgramName = "operation-runner"
 var log zerolog.Logger = zerolog.New(os.Stdout).With().Str("harrow", ProgramName).Timestamp().Logger()
 
 func Main() {
+
 	c := config.GetConfig()
-	connectTo := flag.String("connect", "ssh://root@virthost.harrow.io/1", "Connection string")
+
+	connectTo := flag.String("connect", "ssh://root@virthost.harrow.io/1", "connection string")
 	flag.Parse()
 
 	connectionInfo, err := url.Parse(*connectTo)
 	if err != nil {
-		panic(err)
+		log.Fatal().Msgf("Could not parse connection info as URL %v", err)
 	}
+
 	lxd := LXDAcquisition{ConnectTo: connectionInfo, BaseImage: "harrow-baseimage"}
 	lxd.log = log
 	db, err := c.DB()
@@ -52,31 +57,21 @@ func Main() {
 	}
 	defer db.Close()
 
-	acquisitionFuns := make(map[string]acquisitionFun)
-	acquisitionFuns["lxd"] = lxd.MustTakeInstance
-
-	machinedConfig := c.MachinedConfig()
-	implName := machinedConfig.AcquisitionImpl
-	mustTakeInstance, ok := acquisitionFuns[implName]
-	if !ok {
-		log.Fatal().Msgf("Unknown acquisition impl: %s", implName)
-	}
-
 	keyValueStore := stores.NewRedisKeyValueStore(redis.NewTCPClient(c.RedisConnOpts(0)))
 	activityBus := activity.NewAMQPTransport(c.AmqpConnectionString(), "machined")
 	defer activityBus.Close()
 
-	containerId, host, err := mustTakeInstance(c)
-	log.Info().Msgf("impl=%s instance=%v host=%v err=%s", implName, containerId, host, err)
+	containerId, host, err := lxd.MustTakeInstance(c)
+	log.Info().Msgf("instance=%v host=%v err=%s", containerId, host, err)
 	if err != nil {
-		log.Fatal().Msgf("%s: error taking instance: %s", implName, err)
+		log.Fatal().Msgf(" error taking instance: %s", err)
 	}
 	intTerm := make(chan os.Signal, 1)
 	signal.Notify(intTerm, os.Interrupt, syscall.SIGTERM, syscall.SIGKILL)
 	go func(c chan os.Signal) {
 		signal := <-c
-		log.Info().Msgf("Got signal %s, exiting", signal)
-		terminateInstance(implName, containerId, host)
+		log.Info().Msgf("got signal %s, exiting", signal)
+		terminateInstance(containerId, host)
 		os.Exit(0)
 	}(intTerm)
 
@@ -189,37 +184,62 @@ func handleActivity(db *sqlx.DB, message broadcast.Message, operationUuid string
 	tx.Commit()
 }
 
+func orgForOperation(tx *sqlx.Tx, operation *domain.Operation) (*domain.Organization, error) {
+
+	projStore := stores.NewDbProjectStore(tx)
+	project, err := operation.FindProject(projStore)
+	if err != nil {
+		return nil, errors.Wrap(err, "can't lookup project for operation in orgForOperation")
+	}
+
+	orgStore := stores.NewDbOrganizationStore(tx)
+	org, err := orgStore.FindByUuid(project.OrganizationUuid)
+	if err != nil {
+		return nil, errors.Wrap(err, "can't lookup organization for project in orgForOperation")
+	}
+
+	return org, nil
+}
+
 func handleMessage(c *config.Config, activityBus activity.Sink, db *sqlx.DB, source broadcast.Source, containerId string, host string, connect string, msg broadcast.Message, keyValueStore stores.KeyValueStore) {
 
 	tx, err := db.Beginx()
 	if err != nil {
-		log.Error().Msgf("db.Beginx(): %s", err)
 		msg.RejectForever()
+		log.Error().Msgf("db.Beginx(): %s", err)
 		return
 	}
 	defer tx.Rollback()
+
 	operationStore := stores.NewDbOperationStore(tx)
 	operation, err := operationStore.FindByUuid(msg.UUID())
 	if err != nil {
-		log.Error().Msgf("operationstore.findbyuuid(uuid): %s", err)
 		msg.RejectForever()
+		log.Error().Msgf("operationStore.FindByUuid(uuid): %s", err)
 		return
 	}
-	theLimits, err := newLimits(tx, keyValueStore)
+
+	org, err := orgForOperation(tx, operation)
 	if err != nil {
-		log.Error().Msgf("newlimits(tx): %s", err)
-		msg.RejectOnce()
+		msg.RejectForever()
+		log.Error().Msgf("orgForOperation(tx, operation): %s", err)
 		return
 	}
-	if exceeded, err := theLimits.Exceeded(operation); exceeded {
+
+	limits := limits.NewDefaultClient(c)
+	limits.SetLogger(log)
+
+	if exceeded, err := limits.OrganizationLimitsExceeded(org); exceeded {
 		log.Info().Msgf("Limits exceeded for operation %q", operation.Uuid)
 		activityBus.Publish(activities.OperationCanceledDueToBilling(operation.Uuid))
 		msg.RejectForever()
 		return
 	} else if err != nil {
+		msg.RejectForever()
 		log.Error().Msgf("error calculating limits: %s", err)
 		return
 	}
+
 	stopCancellationWatcher := make(chan bool)
 	go watchForCancellations(c, db, operation.Uuid, stopCancellationWatcher)
 	defer func() { stopCancellationWatcher <- true }()
@@ -234,12 +254,12 @@ func handleMessage(c *config.Config, activityBus activity.Sink, db *sqlx.DB, sou
 		notifierType := strings.Split(*operation.NotifierType, "_")[0]
 		err := spawnNotifierJob(msg.UUID(), notifierType)
 		if err != nil {
-			log.Error().Msgf("spawnnotifierjob:%s", err)
 			msg.RejectForever()
+			log.Error().Msgf("spawnnotifierjob:%s", err)
 		}
 	} else {
-		log.Error().Msgf("no handler found for %#v", operation)
 		msg.RejectForever()
+		log.Error().Msgf("no handler found for %#v", operation)
 	}
 	if err := msg.Acknowledge(); err != nil {
 		log.Error().Msgf("failed to acknowledge message: %s", err)
@@ -249,19 +269,11 @@ func handleMessage(c *config.Config, activityBus activity.Sink, db *sqlx.DB, sou
 func handleUserJob(c *config.Config, db *sqlx.DB, containerId string, host string, connect string, uuid string) error {
 
 	log.Info().Msgf("spawn controller for operation(%s) on %s (%s)", uuid, containerId, connect)
-	implName := c.MachinedConfig().AcquisitionImpl
-	err := (error)(nil)
-
-	switch implName {
-	case "lxd":
-		err = spawnUserJobLXD(c, uuid, containerId, connect)
-	default:
-		err = fmt.Errorf("unknown acquistion implementation: %q", implName)
-	}
-
+	err := spawnUserJobLXD(c, uuid, containerId, connect)
 	if err != nil {
 		return fmt.Errorf("unable to spawn controller for operation(%s): %s", uuid, err)
 	}
+
 	return nil
 }
 
@@ -292,28 +304,9 @@ func emitStatus(db *sqlx.DB, uuid, entryType, subject string) {
 	}
 }
 
-func newLimits(tx *sqlx.Tx, keyValueStore stores.KeyValueStore) (*limits.Service, error) {
-	organizationStore := stores.NewDbOrganizationStore(tx)
-	projectStore := stores.NewDbProjectStore(tx)
-	billingPlanStore := stores.NewDbBillingPlanStore(tx, stores.NewBraintreeProxy())
-	billingHistoryStore := stores.NewDbBillingHistoryStore(tx, keyValueStore)
-	billingHistory, err := billingHistoryStore.Load()
+func terminateInstance(containerId string, host string) {
+	err := startProcess([]string{"vmex-lxd", "-container-id", containerId, "-host", host})
 	if err != nil {
-		return nil, err
-	}
-	limitsStore := stores.NewDbLimitsStore(tx)
-
-	return limits.NewService(organizationStore, projectStore, billingPlanStore, billingHistory, limitsStore), nil
-}
-
-func terminateInstance(implName string, containerId string, host string) {
-	err := (error)(nil)
-	switch implName {
-	case "lxd":
-		err = startProcess([]string{"vmex-lxd", "-container-id", containerId, "-host", host})
-	}
-
-	if err != nil {
-		log.Error().Msgf("terminateInstance(%s, %s, %s): %s", implName, containerId, host, err)
+		log.Error().Msgf("terminateInstance( %s, %s): %s", containerId, host, err)
 	}
 }

@@ -118,7 +118,7 @@ func run(c *config.Config, dbFileName string, clonedRepositories map[string]*git
 		UpdateMetadata(c, db, repository, activitySink, repoStore, clonedRepositories)
 		elapsed := time.Since(start)
 		log.Info().Str("url", repository.Url).Str("uuid", repository.Uuid).Int64("repo-meta-update-ns", elapsed.Nanoseconds()).Msg("finished")
-		log.Info().Str("url", repository.Url).Str("uuid", repository.Uuid).Int64("repo-meta-update-ms", elapsed.Nanoseconds()/int64(time.Millisecond)).Msg("finished")
+		log.Info().Str("url", repository.Url).Str("uuid", repository.Uuid).Int64("repo-meta-update-ms", elapsed.Nanoseconds()/int64(1e6)).Msg("finished")
 	}
 }
 

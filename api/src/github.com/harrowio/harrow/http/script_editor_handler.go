@@ -6,6 +6,7 @@ import (
 	"io"
 
 	"github.com/gorilla/mux"
+	"github.com/pkg/errors"
 
 	"github.com/harrowio/harrow/activities"
 	"github.com/harrowio/harrow/diff"
@@ -201,15 +202,26 @@ func (self *scriptEditorHandler) Apply(ctxt RequestContext) error {
 		return err
 	}
 
-	theLimits, err := NewLimitsFromContext(ctxt)
+	jobStore := stores.NewDbJobStore(ctxt.Tx())
+	projStore := stores.NewDbProjectStore(ctxt.Tx())
+	orgStore := stores.NewDbOrganizationStore(ctxt.Tx())
+	job, err := jobStore.FindByUuid(schedule.JobUuid)
 	if err != nil {
-		return err
+		return errors.Wrap(err, fmt.Sprintf("can't lookup job for schedule uuid %s", schedule.Uuid))
 	}
 
-	if exceeded, err := theLimits.Exceeded(schedule); exceeded {
+	proj, err := projStore.FindByUuid(job.ProjectUuid)
+	if err != nil {
+		return errors.Wrap(err, fmt.Sprintf("can't lookup project for job uuid %s", job.Uuid))
+	}
+
+	org, err := orgStore.FindByUuid(proj.OrganizationUuid)
+	if err != nil {
+		return errors.Wrap(err, fmt.Sprintf("can't lookup org for project uuid %s", proj.Uuid))
+	}
+
+	if exceeded, err := NewLimitsFromContext(ctxt).OrganizationLimitsExceeded(org); exceeded && err == nil {
 		return ErrLimitsExceeded
-	} else if err != nil {
-		ctxt.Log().Warn().Msgf("error calculating limits: %s", err)
 	}
 
 	scheduleStore := stores.NewDbScheduleStore(ctxt.Tx())

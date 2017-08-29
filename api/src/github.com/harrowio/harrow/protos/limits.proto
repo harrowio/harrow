@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package protos;
+
+message OrganizationKey {
+ string uuid = 1;
+}
+
+message OrganizationLimits {
+  int32 Projects = 1;
+  int32 Members = 2;
+  int32 PrivateRepositories = 3;
+  int32 PublicRepositories = 4;
+  int32 TrialDaysLeft = 5;
+  bool TrialEnabled = 6;
+}
+
+message OrganizationLimitsExceeded {
+  bool Exceeded = 1;
+}
+
+service LimitsService {
+  rpc Exceeded(OrganizationKey) returns (OrganizationLimitsExceeded);
+  rpc ForOrganization(OrganizationKey) returns (OrganizationLimits);
+}

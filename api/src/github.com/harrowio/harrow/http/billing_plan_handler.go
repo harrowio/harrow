@@ -16,12 +16,12 @@ import (
 )
 
 var (
-	generateBraintreeToken      = braintreeClientToken
-	findBraintreeCustomer       = braintreeFindCustomer
-	cancelBraintreeSubscription = braintreeCancelSubscription
-	createBraintreeSubscription = braintreeCreateSubscription
-	createBraintreeCustomer     = braintreeCreateCustomer
-	braintreeConfig             *config.BraintreeConfig
+	generateBraintreeToken = braintreeClientToken
+	findBraintreeCustomer  = braintreeFindCustomer
+	// cancelBraintreeSubscription = braintreeCancelSubscription
+	// createBraintreeSubscription = braintreeCreateSubscription
+	createBraintreeCustomer = braintreeCreateCustomer
+	braintreeConfig         *config.BraintreeConfig
 )
 
 const (
@@ -30,12 +30,6 @@ const (
 
 func init() {
 	braintreeConfig = config.GetConfig().Braintree()
-}
-
-func braintreeCancelSubscription(subscriptionId string) error {
-	client := braintreeConfig.NewClient()
-	_, err := client.Subscription().Cancel(subscriptionId)
-	return err
 }
 
 func braintreeFindCustomer(id string) (*braintree.Customer, error) {
@@ -74,15 +68,6 @@ func braintreeCreateCustomer(user *domain.User) (*braintree.Customer, error) {
 	}
 
 	return client.Customer().Create(customer)
-}
-
-func braintreeCreateSubscription(paymentToken, planId string) (*braintree.Subscription, error) {
-	client := braintreeConfig.NewClient()
-	return client.Subscription().Create(&braintree.SubscriptionRequest{
-		PaymentMethodToken: paymentToken,
-		MerchantAccountId:  "harrowUSD",
-		PlanId:             planId,
-	})
 }
 
 func braintreeClientToken() (string, error) {
@@ -139,7 +124,7 @@ func MountBillingPlanHandler(r *mux.Router, ctxt ServerContext) {
 }
 
 func (self *billingPlanHandler) List(ctxt RequestContext) error {
-	billingPlanStore := stores.NewDbBillingPlanStore(ctxt.Tx(), stores.NewBraintreeProxy())
+	billingPlanStore := stores.NewDbBillingPlanStore(ctxt.Tx())
 	plans, err := billingPlanStore.FindAll()
 	if err != nil {
 		return err
@@ -187,7 +172,7 @@ func (self *billingPlanHandler) BraintreePurchase(ctxt RequestContext) error {
 		return domain.NewValidationError("organizationUuid", "required")
 	}
 
-	plans := stores.NewDbBillingPlanStore(ctxt.Tx(), stores.NewBraintreeProxy())
+	plans := stores.NewDbBillingPlanStore(ctxt.Tx())
 	plan, err := plans.FindByUuid(params.PlanUuid)
 	if err != nil {
 		return err
@@ -215,23 +200,6 @@ func (self *billingPlanHandler) BraintreePurchase(ctxt RequestContext) error {
 		organization.Uuid,
 		(func() []byte { data, _ := json.Marshal(existingSubscription); return data })(),
 	)
-	if existingSubscription != nil && existingSubscription.PlanUuid != domain.FreePlanUuid {
-		if err := cancelBraintreeSubscription(existingSubscription.Id); err != nil {
-			if err.Error() != ErrorMessageFromBraintreeAboutCanceledSubscription {
-				ctxt.Log().Warn().Msgf("cancelbraintreesubscription(%q): %s\n", existingSubscription.Id, err)
-				return err
-			}
-		}
-		event := &domain.BillingPlanSubscriptionChanged{
-			UserUuid:       existingSubscription.UserUuid,
-			SubscriptionId: existingSubscription.Id,
-			PlanId:         existingSubscription.PlanUuid,
-			Status:         "canceled",
-		}
-		if _, err := billingEvents.Create(organization.NewBillingEvent(event)); err != nil {
-			return err
-		}
-	}
 
 	customer, err := findBraintreeCustomer(ctxt.User().Uuid)
 	if err != nil {
@@ -255,13 +223,6 @@ func (self *billingPlanHandler) BraintreePurchase(ctxt RequestContext) error {
 			organization.Uuid,
 			time.Now().Format(time.RFC3339),
 		)
-	} else {
-		subscription, err := createBraintreeSubscription(creditCard.Token, plan.ProviderPlanId)
-		if err != nil {
-			return err
-		}
-
-		event.SubscriptionId = subscription.Id
 	}
 
 	if _, err := billingEvents.Create(organization.NewBillingEvent(event)); err != nil {
@@ -281,7 +242,7 @@ func BraintreeNotificationToBillingEventData(notification *braintree.WebhookNoti
 	return &domain.BillingPlanSubscriptionChanged{
 		PlanId:         notification.Subject.Subscription.PlanId,
 		SubscriptionId: notification.Subject.Subscription.Id,
-		Status:         strings.ToLower(notification.Subject.Subscription.Status),
+		Status:         strings.ToLower(string(notification.Subject.Subscription.Status)),
 	}, nil
 }
 
@@ -330,7 +291,7 @@ func (self *billingPlanHandler) BraintreeHandleNotification(ctxt RequestContext)
 func (self *billingPlanHandler) Show(ctxt RequestContext) error {
 
 	planUuid := ctxt.PathParameter("uuid")
-	billingPlanStore := stores.NewDbBillingPlanStore(ctxt.Tx(), stores.NewBraintreeProxy())
+	billingPlanStore := stores.NewDbBillingPlanStore(ctxt.Tx())
 	plan, err := billingPlanStore.FindByUuid(planUuid)
 	if err != nil {
 		return err

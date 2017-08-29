@@ -3,8 +3,6 @@
 package stores_test
 
 import (
-	"fmt"
-
 	"github.com/harrowio/harrow/config"
 	"github.com/harrowio/harrow/domain"
 	"github.com/harrowio/harrow/stores"
@@ -140,8 +138,6 @@ func Test_SessionStore_FindByUuid_sets_loaded_at_to_the_current_time(t *testing.
 		t.Fatal(err)
 	}
 
-	fmt.Println("now", time.Now())
-	fmt.Println("loadedAd", s.LoadedAt)
 	loadedAtDelta := time.Now().Sub(s.LoadedAt)
 	if got, want := loadedAtDelta, 5*time.Second; got >= want {
 		t.Errorf(`loadedAtDelta = %v; want < %v`, got, want)

@@ -376,7 +376,7 @@ func (self userHandler) Organizations(ctxt RequestContext) (err error) {
 		}
 
 		planUuid := billingHistory.PlanUuidFor(o.Uuid)
-		plan, err := stores.NewDbBillingPlanStore(ctxt.Tx(), stores.NewBraintreeProxy()).FindByUuid(planUuid)
+		plan, err := stores.NewDbBillingPlanStore(ctxt.Tx()).FindByUuid(planUuid)
 		if err != nil {
 			ctxt.Log().Warn().Msgf("error loading plan for organization %s: %s", o.Uuid, err)
 			return

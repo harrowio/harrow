@@ -9,17 +9,16 @@ import (
 
 	"github.com/harrowio/harrow/cmd/activity-worker"
 	"github.com/harrowio/harrow/cmd/api"
-	"github.com/harrowio/harrow/cmd/braintree-proxy"
 	"github.com/harrowio/harrow/cmd/build-status-worker"
 	controllerLXD "github.com/harrowio/harrow/cmd/controller-lxd"
 	controllerShell "github.com/harrowio/harrow/cmd/controller-shell"
 	"github.com/harrowio/harrow/cmd/fsbuilder"
 	"github.com/harrowio/harrow/cmd/git-trigger-worker"
 	"github.com/harrowio/harrow/cmd/harrow-archivist"
-	"github.com/harrowio/harrow/cmd/harrow-limits"
 	"github.com/harrowio/harrow/cmd/harrow-mail"
 	"github.com/harrowio/harrow/cmd/harrow-update-repository-metadata"
 	"github.com/harrowio/harrow/cmd/keymaker"
+	limits "github.com/harrowio/harrow/cmd/limits"
 	"github.com/harrowio/harrow/cmd/mail-dispatcher"
 	"github.com/harrowio/harrow/cmd/metadata-preflight"
 	"github.com/harrowio/harrow/cmd/migrate"
@@ -43,14 +42,13 @@ func main() {
 	programs := map[string]func(){
 		activityWorker.ProgramName:                 activityWorker.Main,
 		api.ProgramName:                            api.Main,
-		braintreeProxy.ProgramName:                 braintreeProxy.Main,
 		buildStatusWorker.ProgramName:              buildStatusWorker.Main,
 		controllerLXD.ProgramName:                  controllerLXD.Main,
 		controllerShell.ProgramName:                controllerShell.Main,
 		fsbuilder.ProgramName:                      fsbuilder.Main,
 		gitTriggerWorker.ProgramName:               gitTriggerWorker.Main,
 		harrowArchivist.ProgramName:                harrowArchivist.Main,
-		harrowLimits.ProgramName:                   harrowLimits.Main,
+		limits.ProgramName:                         limits.Main,
 		harrowMail.ProgramName:                     harrowMail.Main,
 		harrowUpdateRepositoryMetadata.ProgramName: harrowUpdateRepositoryMetadata.Main,
 		keymaker.ProgramName:                       keymaker.Main,

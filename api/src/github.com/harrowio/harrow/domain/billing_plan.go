@@ -2,8 +2,6 @@ package domain
 
 import (
 	"fmt"
-
-	braintree "github.com/lionelbarrow/braintree-go"
 )
 
 const (
@@ -15,7 +13,6 @@ var (
 	FreePlan = &BillingPlan{
 		Uuid:                   FreePlanUuid,
 		Name:                   "free",
-		ProviderName:           "braintree",
 		PrivateCodeAvailable:   true,
 		PricePerMonth:          Money{0, USD},
 		UsersIncluded:          1,
@@ -26,7 +23,6 @@ var (
 	PlatinumPlan = &BillingPlan{
 		Uuid:                   PlatinumPlanUuid,
 		Name:                   "Platinum",
-		ProviderName:           "braintree",
 		PrivateCodeAvailable:   true,
 		PricePerMonth:          Money{12900, USD},
 		UsersIncluded:          10,
@@ -56,20 +52,12 @@ func NewBillingPlan(uuid string) *BillingPlan {
 	}
 }
 
-func (self *BillingPlan) BindFromBraintree(plan *braintree.Plan) {
-	pricePerMonth := fmt.Sprintf("%s %s", plan.Price, plan.CurrencyISOCode)
-	(&self.PricePerMonth).Scan(pricePerMonth)
-}
-
 func (self *BillingPlan) OwnUrl(requestScheme, requestBase string) string {
 	return fmt.Sprintf("%s://%s/billing-plans/%s", requestScheme, requestBase, self.Uuid)
 }
 
 func (self *BillingPlan) Links(response map[string]map[string]string, requestScheme, requestBase string) map[string]map[string]string {
 	response["self"] = map[string]string{"href": self.OwnUrl(requestScheme, requestBase)}
-	response["braintree-purchase"] = map[string]string{
-		"href": fmt.Sprintf("%s://%s/billing-plans/braintree/purchase", requestScheme, requestBase),
-	}
 	return response
 }
 
