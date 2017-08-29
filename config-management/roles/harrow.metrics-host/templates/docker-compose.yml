@@ -1,0 +1,38 @@
+influxdb:
+  image: influxdb:latest
+  container_name: influxdb
+  restart: always
+  volumes:
+    - /var/lib/influxdb:/var/lib/influxdb
+  ports:
+    - "8086:8086"
+
+grafana:
+  image: grafana/grafana:latest
+  container_name: grafana
+  restart: always
+  environment:
+    - GF_SERVER_PROTOCOL=http
+    - GF_USERS_ALLOW_SIGN_UP=false
+    - GF_SERVER_DOMAIN=grafana.metrics-01.prod.harrow.io
+    - GF_SECURITY_ADMIN_USER={{ vault.grafana.admin_username }}
+    - GF_SECURITY_ADMIN_PASSWORD={{ vault.grafana.admin_password }}
+  ports:
+    - "3000:3000"
+  links:
+    - influxdb
+
+caddy:
+  image: abiosoft/caddy
+  container_name: caddy
+  restart: always
+  ports:
+    - "80:80"
+    - "443:443"
+  volumes:
+   - /etc/caddy/Caddyfile:/etc/Caddyfile
+   - /etc/caddy:/root/.caddy
+  links:
+    - grafana:grafana_host
+    - influxdb
+

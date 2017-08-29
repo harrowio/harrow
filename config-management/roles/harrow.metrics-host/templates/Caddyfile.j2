@@ -1,0 +1,17 @@
+influxdb.metrics-01.prod.harrow.io {
+  gzip
+  log stdout
+  basicauth / {{ vault.basicauth.username }} {{ vault.basicauth.password }}
+  proxy / influxdb:8086 {
+    transparent
+  }
+}
+
+grafana.metrics-01.prod.harrow.io {
+  log stdout
+  basicauth / {{ vault.basicauth.username }} {{ vault.basicauth.password }}
+  proxy / grafana_host:3000 { # not `grafana' as we get screwy matches on the host.
+    header_upstream -Authorization
+    transparent
+  }
+}

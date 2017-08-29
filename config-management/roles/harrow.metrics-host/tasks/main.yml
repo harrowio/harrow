@@ -1,0 +1,116 @@
+- set_fact: compose_dir=/var/tmp/ansible-docker-service
+
+- file:
+    path: "{{ compose_dir }}"
+    state: directory
+
+- name: Upload docker-compose files
+  template:
+    src: "docker-compose.yml"
+    dest: "{{ compose_dir }}/docker-compose.yml"
+
+- apt:
+    name: "{{ item }}"
+  with_items:
+    - python-virtualenv
+    - python-setuptools
+    - python-dev
+    - ufw
+    - docker.io
+    - docker-compose
+    - aufs-tools
+
+- file:
+    path: "/etc/caddy"
+    state: directory
+
+- file:
+    path: "/var/lib/influxdb"
+    state: directory
+
+- template:
+    src: Caddyfile.j2
+    dest: /etc/caddy/Caddyfile
+
+- easy_install:
+    name: pip
+    state: latest
+
+- pip:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - docker
+    - docker-compose
+
+- docker_service:
+    project_src: "{{ compose_dir }}"
+    restarted: true
+
+- name: Configure ufw defaults
+  ufw: direction={{ item.direction }} policy={{ item.policy }}
+  with_items:
+    - { direction: 'incoming', policy: 'deny' }
+    - { direction: 'outgoing', policy: 'allow' }
+  notify:
+    - restart ufw
+
+- name: Configure ufw rules
+  ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }}
+  with_items:
+    - { rule: 'limit', port: '{{ ssh_port | default("22") }}', proto: 'tcp' }
+    - { rule: 'allow', port: '80', proto: 'tcp' }
+    - { rule: 'allow', port: '443', proto: 'tcp' }
+  notify:
+    - restart ufw
+
+- name: Enable ufw logging
+  ufw: logging=on
+  notify:
+  - restart ufw
+
+- name: Enable ufw
+  ufw: state=enabled
+
+- name: Create Harrow DB For Metrics
+  uri:
+    url: "http://localhost:8086/query"
+    method: POST
+    status_code: 200
+    body: "q={{ item }}"
+    return_content: yes
+    headers:
+      "Content-Type": "application/x-www-form-urlencoded"
+  with_items:
+    - 'CREATE DATABASE harrow'
+    - 'CREATE RETENTION POLICY "one_day"  ON "harrow" DURATION 24h REPLICATION 1 DEFAULT'
+    - 'CREATE RETENTION POLICY "one_week" ON "harrow" DURATION 7d REPLICATION 1'
+    - 'CREATE RETENTION POLICY "one_year" ON "harrow" DURATION 52w REPLICATION 1'
+    - |-
+       CREATE CONTINUOUS QUERY "cq_operations_30m" ON "harrow" BEGIN
+          SELECT mean("unstarted") AS "mean_unstarted", mean("running") AS "mean_running"
+          INTO "one_week"."downsampled_operations"
+          FROM "one_day"."operations"
+          GROUP BY time(30m)
+        END
+    - |-
+       CREATE CONTINUOUS QUERY "cq_operations_1d" ON "harrow" BEGIN
+          SELECT mean("mean_unstarted") AS "mean_unstarted", mean("mean_running") AS "mean_running"
+          INTO "one_year"."downsampled_operations"
+          FROM "one_week"."downsampled_operations"
+          GROUP BY time(1d)
+        END
+    - |-
+       CREATE CONTINUOUS QUERY "cq_lxd_containers_30m" ON "harrow" BEGIN
+          SELECT mean("value") AS "mean_value"
+          INTO "one_week"."downsampled_lxd_containers"
+          FROM "one_day"."lxd_containers"
+          GROUP BY time(30m)
+        END
+    - |-
+        CREATE CONTINUOUS QUERY "cq_lxd_containers_1d" ON "harrow" BEGIN
+          SELECT mean("mean_value") AS "mean_value"
+          INTO "one_year"."downsampled_lxd_containers"
+          FROM "one_week"."downsampled_lxd_containers"
+          GROUP BY time(1d)
+        END

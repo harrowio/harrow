@@ -1,0 +1,42 @@
+#!/usr/bin/env python3
+
+import timeit
+import subprocess
+import json
+import codecs
+import socket
+import requests
+
+url = "https://influxdb.metrics-01.prod.harrow.io/write?db=harrow"
+user = "{{ vault.influxdb.basicauth.username }}"
+passwd = "{{ vault.influxdb.basicauth.password }}"
+
+def main():
+    try:
+        start_time = timeit.default_timer()
+        out = subprocess.check_output(["lxc", "list", "--format=json"])
+        elapsed = timeit.default_timer() - start_time
+
+        unix_nanos = subprocess.check_output(["date", "+%s%N"])
+
+        obj = json.loads(out.decode('utf-8'))
+
+        payload = "lxd_containers,host={} value={},lxc_response_time_ms={},error_calling_lxc_list=0 {}".format(
+                socket.gethostname(),
+                len(obj),
+                int(elapsed * 1000),
+                unix_nanos.decode('utf-8').rstrip()
+        )
+
+        requests.post(url, data=payload, auth=requests.auth.HTTPBasicAuth(user, passwd))
+
+    except subprocess.CalledProcessError as e:
+        unix_nanos = subprocess.check_output(["date", "+%s%N"])
+        payload = "lxd_containers,host={} error_calling_lxc_list=1 {}".format(
+                socket.gethostname(),
+                unix_nanos.decode('utf-8').rstrip()
+                )
+        requests.post(url, data=payload, auth=requests.auth.HTTPBasicAuth(user, passwd))
+
+main()
+

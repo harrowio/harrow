@@ -1,5 +1,7 @@
 ---
 lxd:
-  device: /dev/sdc
+  devices:
+   - /dev/sdc
+   - /dev/sdd
   baseimage:
-    fingerprint: 'f12268c1968ebcbdfe3baedb568990c6afd5aefad2120eedc5d3a42a5a627a17'
+    fingerprint: 'a98b7dde384a25db0a960a8c3f595e98ad60ddaeaaab2c81e562f008018e7739'

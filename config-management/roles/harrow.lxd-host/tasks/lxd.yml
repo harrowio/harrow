@@ -1,38 +1,56 @@
 ---
 
+- name: mkpart
+  parted:
+    device: "{{ item }}"
+    number: 1
+    state: present
+  with_items: "{{ lxd.devices }}"
+
+- lvg:
+   vg: lxd
+   pvs: "{{ lxd.partitions | join(',') }}"
+
 - apt:
     name: "{{ item }}"
     update_cache: true
   with_items:
-    - btrfs-tools
-    - lxd
-  tags:
+    - thin-provisioning-tools
     - lxd
 
 - name: enable lxd
   service:
     name: lxd
     state: started
-  tags:
-    - lxd
 
-- name: format ssd for lxd mount volume
-  filesystem:
-    fstype: btrfs
-    opts: '--metadata single --data single'
-    dev: "{{ lxd.device }}"
-  tags:
-    - lxd
+- name: set-up the lxc storage pool
+  command: lxc storage create default lvm source=lxd
+  failed_when: false
 
-- name: mount on /var/lib/lxd
-  mount:
-    name: /var/lib/lxd
-    src: "{{ lxd.device }}"
-    fstype: btrfs
-    opts: noatime
-    state: present
-  tags:
-    - lxd
+- name: set-up the root stoarge device for lxc
+  command: lxc profile device add default root disk path=/ pool=default
+  failed_when: false
+
+- name: create default network for lxc
+  command: lxc network create lxdbr0
+  failed_when: false
+
+- name: attach the bridged network to the default profile
+  command: lxc network attach-profile lxdbr0 default eth0
+  failed_when: false
+
+- name: allow security nesting in lxc
+  command: lxc profile set default security.nesting true
+  failed_when: false
+
+# copied from the default docker profile
+- name: disable apparmour in containers
+  command: lxc profile device add default aadisable disk path=/sys/module/apparmor/parameters/enabled source=/dev/null
+  failed_when: false
+
+- name: copy default profile to docker
+  command: lxc profile copy default docker
+  failed_when: false
 
 - name: set sysctl values
   sysctl:
@@ -43,5 +61,11 @@
     - 'fs.inotify.max_queued_events'
     - 'fs.inotify.max_user_instances'
     - 'fs.inotify.max_user_watches'
-  tags:
-    - lxd
+
+- copy:
+    dest: /etc/modules-load.d/overlay.conf
+    content: "overlay"
+
+- modprobe:
+    name: overlay
+    state: present

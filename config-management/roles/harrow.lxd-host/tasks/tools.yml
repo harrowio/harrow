@@ -1,12 +1,25 @@
 ---
 - apt:
-    name: python3-dateutil
+    name: "{{ item }}"
     update_cache: true
+  with_items:
+    - python3-requests
+    - python3-dateutil
 
 - name: copy lxd-kill-old script
-  copy:
-    src: usr/local/bin/lxd-kill-old.py
+  template:
+    src: usr/local/bin/lxd-kill-old.py.j2
     dest: /usr/local/bin/lxd-kill-old
+    owner: root
+    group: root
+    mode: 0700
+  tags:
+    - lxd
+
+- name: copy report-container-info-to-influxdb script
+  template:
+    src: usr/local/bin/report-container-info-to-influxdb.py.j2
+    dest: /usr/local/bin/report-container-info-to-influxdb
     owner: root
     group: root
     mode: 0700
@@ -20,3 +33,14 @@
     job: "/usr/local/bin/lxd-kill-old kill"
   tags:
     - lxd
+
+- name:   report container info to influxdb
+  cron:
+    name: "report-container-info-to-influxdb"
+    minute: "*/5"
+    job: "/usr/local/bin/report-container-info-to-influxdb"
+  tags:
+    - lxd
+
+
+

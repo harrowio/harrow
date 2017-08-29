@@ -1,23 +1,11 @@
 ---
 
-- name: Install Dario's key
-  lineinfile:
-    dest: /home/vagrant/.ssh/authorized_keys
-    line: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDZBGYzqJT4NsBZKEp1sfftI26HNbnnIZeXQ8EjNyu4olT2gqj4wgBE4ZuCLFlyr7vY+jrb7R9UfYCOuPm/YsIF/IjF2FZ6NkTKknUHTyXlOBJeWubzeibdfpWXY1l8DI2julHO/hf4iusI/Oe4lYT42RoOmnL6r85vAmKI4mnuIWA1kIC+quL8eLjDhARkjFVV5m92qLixzHAUSEX/5yqDaAKBW8/Wop4U3B9rWhYxsRkz153xdy2GmH2TrXZX0KgIm2n1QNwQceYEG3m9ibgUgA/Bw+XSeROOK2DFOlY3MUJVGOYuAhTe+hr/eKiR7jDjGO+9JwtNDmm3LSDP0PHJ dhamidi@reval"
-  tags: dev
-
 - name: ansible user in users group (like harrow, for hmac_secret)
   user:
     name: vagrant
     groups: users
     append: true
   become: true
-  tags: dev
-
-- name: Install Lee's key
-  lineinfile:
-    dest: /home/vagrant/.ssh/authorized_keys
-    line: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCp9XYJcoMbxmp1c71zAsGanm/yNdyubTpYL4D+ACi4w/vHMjYBEml0HfVwOfTCj9ChArgFxTnrcjbQctiH6Qwupn0DcapVfmaPRrh5Kck9nbh00dAgWvUpvjLt7ETcvSkj9Ry11Sz+SOSJq0ofYxjOwssPMVk/T68ek27wqgQx0mNlLqXucytS3hY3P7BrJv5/S2ZCxP/xoZkRt2gWda1LJWZfFXb+8UrvNlnIgBJZe3ol2sIy7qE68tILgtdkDGBWjhUYO6ormy0BPPvewkSGkyFoboiyyLcQchq/NgUTD2SnXkO0so8czKZQfI/J2MHoPfWa9y1cXaEgyaw6bEmhI91T+ddORdvJCsjj8cxYK+U4SWuXh3WE8Jn4Rl8JRNfZJvspQ9logfmX8ozsFocizpNpeVQjCGNWfWO4D8luu+gRxZgVpasgJXDP3u3QKDaIB5rTncGnpsDItR+a7a4YSYPF4ybfNCBhdEcxB8H7J01l8GiCv2dMzBLn3UVoIfRwOagQ9e6893yYCY2KDGA+U58BIUx3fsXZcJAJae3CWEjp9E70Mb6WmijIAxEUYSwcxA9prMSehwED3mLTE07C2s9HEQQuFoeBzx8ibC1U6KSIU2jDyxXS+3TF7ehnQG0KWg00f+tFrcarFvnrd30YHFLnVdK8iS+fdAqq9XQYdQ== lee.hambley@gmail.com"
   tags: dev
 
 - name: Add mappings to /etc/hosts

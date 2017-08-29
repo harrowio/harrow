@@ -2,14 +2,19 @@
 
 import sys
 import subprocess
+import socket
 import datetime
 import dateutil.parser
 import json
 import time
+import requests
 from collections import namedtuple
 
-Container = namedtuple('Container', ('name', 'created_at'))
+url = "https://influxdb.metrics-01.prod.harrow.io/write?db=harrow"
+user = "{{ vault.influxdb.basicauth.username }}"
+passwd = "{{ vault.influxdb.basicauth.password }}"
 
+Container = namedtuple('Container', ('name', 'created_at'))
 
 def main(**kwargs):
     dispatcher = {
@@ -33,7 +38,22 @@ def fn_kill():
                 ["lxc", "delete", "--force", container.name])
             print("> deleted container {container}\n\t{out}".format(
                 container=container, out=out.decode("utf-8")))
+
+            unix_nanos = subprocess.check_output(["date", "+%s%N"])
+            payload = "lxd_containers,host={} error_killing_stale_container=0,killed_stale_container=1 {}".format(
+                    socket.gethostname(),
+                    unix_nanos.decode('utf-8').rstrip()
+            )
+            requests.post(url, data=payload, auth=requests.auth.HTTPBasicAuth(user, passwd))
+
         except subprocess.CalledProcessError as e:
+            unix_nanos = subprocess.check_output(["date", "+%s%N"])
+            payload = "lxd_containers,host={},lxc_error={} error_killing_stale_container=1,killed_stale_container=0 {}".format(
+                    socket.gethostname(),
+                    out.split()[-1],
+                    unix_nanos.decode('utf-8').rstrip()
+            )
+            requests.post(url, data=payload, auth=requests.auth.HTTPBasicAuth(user, passwd))
             print(
                 "! couldn't delete container {container}".format(
                     container=container))
