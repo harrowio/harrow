@@ -1,19 +1,19 @@
-- name: Make sure we have a 'wheel' group
+- name: make sure we have a 'wheel' group
   group:
     name: wheel
     state: present
 
-- name: Allow 'wheel' group to have passwordless sudo
+- name: allow 'wheel' group to have passwordless sudo
   lineinfile:
     dest: /etc/sudoers
     state: present
     regexp: '^%wheel'
     line: '%wheel ALL=(ALL) NOPASSWD: ALL'
 
-- name: Add sudoers users to wheel group
+- name: add sudoers users to wheel group
   user: name=harrow groups=wheel append=yes state=present createhome=yes
 
-- name: Set up authorized keys for the deployer user
+- name: set up authorized keys for the deployer user
   authorized_key: user=harrow key="{{item}}"
   with_file:
     - files/authorized_keys

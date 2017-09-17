@@ -7,8 +7,9 @@ OnFailure=harrow-notify-about-failure@%n.service
 {% endif %}
 
 [Service]
-Environment=HARROW_ENV={{ harrow.environment }}
-WorkingDirectory=/srv/harrow
-ExecStart=/srv/harrow/bin/harrow-any intercom-worker
+EnvironmentFile=/etc/harrow/env
+WorkingDirectory=/tmp
+PrivateTmp=true
+ExecStart=/usr/local/bin/harrow intercom-worker
 User=harrow
 Restart=always

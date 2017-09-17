@@ -1,11 +1,17 @@
 ---
 harrow:
   postgresql:
+    version: 9.6
     databases:
       - environment: development
         name: "{{ shared.postgresql.development.name }}"
         username: "{{ shared.postgresql.development.username }}"
         password: "{{ vault.postgresql.development.password }}"
+        port: 6423
+      - environment: production
+        name: "{{ shared.postgresql.production.name }}"
+        username: "{{ shared.postgresql.production.username }}"
+        password: "{{ vault.postgresql.production.password }}"
         port: 6423
       - environment: test
         name: "harrow_test"

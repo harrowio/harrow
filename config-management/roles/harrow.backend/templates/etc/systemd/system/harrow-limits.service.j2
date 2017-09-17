@@ -1,0 +1,15 @@
+[Unit]
+Description=Harrow Postal Worker
+#Requires=harrow.service
+After=harrow.service
+{% if harrow.services.notify_on_failure %}
+OnFailure=harrow-notify-about-failure@%n.service
+{% endif %}
+
+[Service]
+EnvironmentFile=/etc/harrow/env
+WorkingDirectory=/tmp
+PrivateTmp=true
+ExecStart=/usr/local/bin/harrow limits
+User=harrow
+Restart=always

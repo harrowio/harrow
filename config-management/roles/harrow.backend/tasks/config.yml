@@ -1,41 +1,22 @@
 ---
 
-- name: file:/srv/harrow/config
+- name: /etc/harrow
   file:
     state: directory
-    path: /srv/harrow/config
+    path: /etc/harrow
     owner: harrow
     group: harrow
 
-- name: "configuration files {{ item }}"
+- name: "create /etc/harrow/env"
   template:
-    src: "srv/harrow/config/{{ item }}.json.j2"
-    dest: "/srv/harrow/config/{{ item }}.json"
-  with_items:
-    - intercom
-  when: harrow.intercom.enabled
+    src: "etc/harrow/env.j2"
+    dest: "/etc/harrow/env"
+    owner: harrow
+    group: harrow
 
-- name: "configuration files {{ item }}"
+- name: "create /etc/harrow/env.sh"
   template:
-    src: "srv/harrow/config/{{ item }}.json.j2"
-    dest: "/srv/harrow/config/{{ item }}.json"
-  with_items:
-    - hvirt
-  when: harrow.runners.libvirt.enabled
-
-- name: "configuration files {{ item }}"
-  template:
-    src: "srv/harrow/config/{{ item }}.json.j2"
-    dest: "/srv/harrow/config/{{ item }}.json"
-  with_items:
-    - aws
-    - braintree
-    - features
-    - filesystem
-    - http
-    - limits_store
-    - mail
-    - oauth
-    - pgsql
-    - rabbitmq
-    - redis
+    src: "etc/harrow/env.sh.j2"
+    dest: "/etc/harrow/env.sh"
+    owner: harrow
+    group: harrow

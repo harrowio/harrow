@@ -7,9 +7,10 @@ OnFailure=harrow-notify-about-failure@%n.service
 {% endif %}
 
 [Service]
-Environment=HARROW_ENV={{ harrow.environment }}
-WorkingDirectory=/srv/harrow
-ExecStart=/srv/harrow/bin/harrow-any metadata-preflight -poll 1m -db /var/lib/harrow/metadata-preflight/cache.db
+EnvironmentFile=/etc/harrow/env
+WorkingDirectory=/tmp
+PrivateTmp=true
+ExecStart=/usr/local/bin/harrow metadata-preflight -poll 1m -db /var/lib/harrow/metadata-preflight/cache.db
 User=harrow
 PrivateTmp=yes
 Restart=always

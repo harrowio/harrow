@@ -7,6 +7,11 @@ harrow:
         host: "localhost"
         username: "{{ shared.rabbitmq.development.username }}"
         password: "{{ vault.rabbitmq.development.password }}"
+      - environment: production
+        name: "{{ shared.rabbitmq.production.name }}"
+        host: "localhost"
+        username: "{{ shared.rabbitmq.production.username }}"
+        password: "{{ vault.rabbitmq.production.password }}"
       - environment: test
         name: "harrow_test"
         host: "localhost"

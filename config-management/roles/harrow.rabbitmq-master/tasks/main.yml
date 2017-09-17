@@ -4,7 +4,6 @@
   apt:
     name: rabbitmq-server
     update_cache: true
-  tags: rabbitmq
 
 - name: make data dir on /var/lib/harrow for rabbirmq
   file:
@@ -12,14 +11,12 @@
     path: /var/lib/harrow/rabbitmq
     owner: rabbitmq
     group: rabbitmq
-  tags: rabbitmq
 
 - name: remove /var/lib/rabbitmq
   file:
     state: absent
     path: /var/lib/rabbitmq
   become: true
-  tags: rabbitmq
 
 - name: link /var/lib/rabbitmq to /var/lib/harrow/rabbitmq
   file:
@@ -29,13 +26,11 @@
     force: true
   notify: restart rabbitmq
   become: true
-  tags: rabbitmq
 
 - lineinfile:
     dest:  /etc/rabbitmq/rabbitmq-env.conf
     line: RABBITMQ_BASE=/var/lib/harrow/rabbitmq
   notify: restart rabbitmq
-  tags: rabbitmq
 
 - systemd:
     name: rabbitmq-server
@@ -49,16 +44,10 @@
 - rabbitmq_plugin:
     names: rabbitmq_management
     state: enabled
-  environment:
-    - RABBITMQ_NODENAME: rabbit@dev
-  tags: rabbitmq
 
 - rabbitmq_vhost:
     name: "{{ vhost.name }}"
     state: present
-  tags: rabbitmq
-  environment:
-    - RABBITMQ_NODENAME: rabbit@dev
   with_items: "{{ harrow.rabbitmq.virtual_hosts }}"
   loop_control:
     loop_var: vhost
@@ -72,9 +61,6 @@
     write_priv: ".*"
     tags: "administrator"
     state: present
-  environment:
-    - RABBITMQ_NODENAME: rabbit@dev
-  tags: rabbitmq
   with_items: "{{ harrow.rabbitmq.virtual_hosts }}"
   loop_control:
     loop_var: vhost

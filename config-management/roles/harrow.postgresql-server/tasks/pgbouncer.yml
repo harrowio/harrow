@@ -5,7 +5,7 @@
   tags: pgbouncer
 
 - file:
-    path: /var/log/pgbouncer/
+    path: /var/log/pgbouncer
     state: directory
     mode: 0775
     owner: 'postgres'
@@ -21,7 +21,7 @@
   tags: pgbouncer
 
 - file:
-    dest: /var/run/pgbouncer/
+    dest: /var/run/pgbouncer
     state: directory
     owner: postgres
     group: postgres

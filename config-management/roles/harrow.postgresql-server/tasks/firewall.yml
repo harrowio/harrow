@@ -1,0 +1,7 @@
+---
+
+- debug: "msg={{item}}"
+  with_items:
+    - "{{ hostvars }}"
+  tags: what
+

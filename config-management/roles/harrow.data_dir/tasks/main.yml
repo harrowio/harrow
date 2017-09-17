@@ -1,0 +1,5 @@
+---
+
+- file:
+    dest: /var/lib/harrow
+    state: directory

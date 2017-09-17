@@ -7,8 +7,9 @@ OnFailure=harrow-notify-about-failure@%n.service
 {% endif %}
 
 [Service]
-Environment=HARROW_ENV={{ harrow.environment }}
-WorkingDirectory=/srv/harrow
-ExecStart=/srv/harrow/bin/harrow-any postal-worker -d=/srv/harrow/mail
+EnvironmentFile=/etc/harrow/env
+WorkingDirectory=/tmp
+PrivateTmp=true
+ExecStart=/usr/local/bin/harrow postal-worker -d=/srv/harrow/mail
 User=harrow
 Restart=always

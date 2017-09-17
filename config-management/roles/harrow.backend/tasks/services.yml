@@ -1,4 +1,11 @@
 ---
+- name: make data dir on /var/lib/harrow for metadata preflight
+  file:
+    state: directory
+    path: /var/lib/harrow/metadata-preflight
+    owner: harrow
+    group: harrow
+
 - name: "install harrow-notify-about-failure service unit file"
   copy:
     src: "etc/systemd/system/harrow-notify-about-failure@.service"
@@ -23,21 +30,28 @@
   include: service.yml
   with_items:
     - harrow
-    - harrow-admin-api
+    - harrow-activity-worker
     - harrow-api
-    - harrow-braintree-proxy
     - harrow-build-status-worker
     - harrow-git-trigger-worker
     - harrow-keymaker
+    - harrow-limits
     - harrow-mail-dispatcher
     - harrow-metadata-preflight
+    - harrow-postal-worker
     - harrow-notifier
-    - harrow-operation-runner@
     - harrow-projector
     - harrow-scheduler
-    - harrow-watchdog
     - harrow-ws
     - harrow-zob
   loop_control:
     loop_var: service_name
+
+- name: create temp dirs for harrow
+  file:
+    state: directory
+    path: "{{ item.value }}"
+    owner: harrow
+    group: harrow
+  with_dict: "{{ harrow.filesystem }}"
 

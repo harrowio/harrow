@@ -6,12 +6,8 @@
   with_items:
     - python-pip
     - python-virtualenv
-  tags:
-    - lxd
 
 - name: install boto3
   pip:
     name: boto
-  tags:
-    - lxd
 

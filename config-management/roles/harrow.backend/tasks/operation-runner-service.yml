@@ -1,0 +1,39 @@
+---
+
+- name: "ensure {{ harrow.operator.filename }} exists"
+  file:
+    path: "{{ harrow.operator.filename | dirname }}"
+    state: directory
+    mode: 0755
+
+- name: install operator ssh key
+  copy:
+    content: "{{ harrow.operator.ssh_key }}"
+    dest: "{{ harrow.operator.filename }}"
+    owner: harrow
+    group: harrow
+    mode: 0600
+
+- name: "install harrow-operation-runner@ service unit file"
+  template:
+    src: "etc/systemd/system/harrow-operation-runner@.service.j2"
+    dest: "/etc/systemd/system/harrow-operation-runner@.service"
+
+- apt:
+    name: "{{ item }}"
+    update_cache: true
+  with_items:
+    - docker.io
+    - python-pip
+
+- name: install docker-py
+  pip:
+    name: docker-py
+
+- name: "pull docker image: {{ item }}"
+  docker_image:
+    name: "{{ item }}"
+  with_items:
+    - docker.io/harrow/email_notifiers
+    - docker.io/harrow/job_notifiers
+    - docker.io/harrow/slack_notifiers

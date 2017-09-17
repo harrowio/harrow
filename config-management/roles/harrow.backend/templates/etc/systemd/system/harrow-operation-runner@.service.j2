@@ -7,10 +7,10 @@ OnFailure=systemd-harrow-notify-about-failure@%n.service
 {% endif %}
 
 [Service]
-Environment=HARROW_ENV={{ harrow.environment }}
-WorkingDirectory=/srv/harrow
-ExecStartPre=/bin/bash -c 'sleep $(( (RANDOM % 5) + 1))'
-ExecStart=/srv/harrow/bin/operation-runner --connect %I
+EnvironmentFile=/etc/harrow/env
+WorkingDirectory=/tmp
+PrivateTmp=true
+ExecStart=/usr/local/bin/harrow operation-runner --connect %I
 User=harrow
 Restart=always
 

@@ -1,10 +1,11 @@
 production:
-	ANSIBLE_CONFIG=./ansible.cfg ansible-playbook --inventory=./inventories/production production.yml
+	ANSIBLE_CONFIG=./ansible.cfg ansible-playbook --inventory=./inventories/production provision.yml
 
-development:
-	ANSIBLE_CONFIG=./ansible.cfg vagrant up dev --provision
+# development:
+# 	ANSIBLE_CONFIG=./ansible.cfg vagrant up dev --provision
+#
+# appliance:
+# 	ANSIBLE_CONFIG=./ansible.cfg vagrant up appliance --provision
 
-appliance:
-	ANSIBLE_CONFIG=./ansible.cfg vagrant up appliance --provision
-
-.PHONY: production development enterprise
+.PHONY: production
+# .PHONY: production development enterprise

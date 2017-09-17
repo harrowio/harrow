@@ -9,28 +9,32 @@
     group: www-data
   tags: nginx
 
-- name: s3file:dist.tar.gz
-  s3file:
-    bucket: harrow-frontend
-    key: enterprise/dist.tar.gz
-    dest: /tmp/dist.tar.gz
-    mode: 0600
-    owner: root
-    group: root
-    access_key_id: "{{ vault.aws.access_key_id }}"
-    secret_access_key: "{{ vault.aws.secret_access_key }}"
+- apt:
+    name: "{{ item }}"
+    update_cache: true
+  with_items:
+    - python-pip
+    - python-virtualenv
+
+- name: install boto3
+  pip:
+    name: boto
+
+- s3:
+    bucket: harrow-builds
+    object: "frontend/{{ harrow.frontend.version}}-{{ harrow.environment }}/dist.tar.gz"
+    dest: "/tmp/harrow-{{ harrow.frontend.version }}.tar.gz"
+    mode: get
+    aws_access_key: "{{ vault.aws.access_key_id }}"
+    aws_secret_key: "{{ vault.aws.secret_access_key }}"
     region: eu-west-1
-  register: dist
-  tags: nginx
+  register: new_dist
 
 - name: unarchive:dist.tar.gz
   unarchive:
-    src: /tmp/dist.tar.gz
+    src: "/tmp/harrow-{{ harrow.frontend.version }}.tar.gz"
     dest: /var/www/html
     copy: No
     owner: www-data
     group: www-data
-  when: dist | changed
-  tags: nginx
-
-
+  when: new_dist | changed

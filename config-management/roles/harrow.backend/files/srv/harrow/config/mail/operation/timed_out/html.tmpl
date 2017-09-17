@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1998/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width">
+    
+    <title>{{.Recipient.Subject}}</title>
+  </head>
+  <body style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; background-color: #FFF; color: #212121; font-family: 'Helvetica Neue', Helvetica, Arial, Verdana, 'Trebuchet MS'; font-size: 14px; font-weight: 400; letter-spacing: 0.001em; line-height: 1.429;">
+    <table cellpadding="0" cellspacing="0" border="0" width="100%" class="mui-body" style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; background-color: #FFF; border-collapse: collapse; border-spacing: 0; color: #212121; font-family: 'Helvetica Neue', Helvetica, Arial, Verdana, 'Trebuchet MS'; font-size: 14px; font-weight: 400; height: 100%; letter-spacing: 0.001em; line-height: 1.429; margin: 0; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 0; width: 100%;">
+      <tr>
+        <td style="-moz-hyphens: auto; -ms-text-size-adjust: 100%; -webkit-hyphens: auto; -webkit-text-size-adjust: 100%; border-collapse: collapse; hyphens: auto; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 0; text-align: left; word-break: break-word;">
+          <center>
+            <table style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; border-collapse: collapse; border-spacing: 0; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+              <tr>
+                <td class="logo-container" style="-moz-hyphens: auto; -ms-text-size-adjust: 100%; -webkit-hyphens: auto; -webkit-text-size-adjust: 100%; border-collapse: collapse; hyphens: auto; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 10px 0; text-align: left; word-break: break-word;"><a href="https://{{.Recipient.UrlHost}}" style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; color: #2196F3; text-decoration: none;"><img title="" alt="" width="160" src="cid:logo-c-primary-darker-with-logotype-c-gray-darker-w320.png" style="-ms-interpolation-mode: bicubic; border: 0 none; height: auto; line-height: 100%; outline: none; text-decoration: none;"></a></td>
+              </tr>
+            </table><!--[if mso]><table><tr><td class="mui-container-fixed"><![endif]-->
+            <div class="mui-container" style="clear: both; display: block; margin: 0 auto; max-width: 600px; padding-left: 15px; padding-right: 15px; text-align: left;">
+              <table width="600px" style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; border-collapse: collapse; border-spacing: 0; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                <tr>
+                  <td class="mui-panel" style="-moz-hyphens: auto; -ms-text-size-adjust: 100%; -webkit-hyphens: auto; -webkit-text-size-adjust: 100%; background-color: #FFF; border-bottom: 2px solid #d4d4d4; border-collapse: collapse; border-left: 1px solid #e6e6e6; border-radius: 0; border-right: 1px solid #e6e6e6; border-top: 1px solid #ededed; hyphens: auto; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 15px; text-align: left; word-break: break-word;">
+                    <table style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; border-collapse: collapse; border-spacing: 0; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                      <tr>
+                        <td width="100%" style="-moz-hyphens: auto; -ms-text-size-adjust: 100%; -webkit-hyphens: auto; -webkit-text-size-adjust: 100%; border-collapse: collapse; hyphens: auto; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 0; text-align: left; word-break: break-word;">&nbsp;</td>
+                        <td class="label-container" style="-moz-hyphens: auto; -ms-text-size-adjust: 100%; -webkit-hyphens: auto; -webkit-text-size-adjust: 100%; border-collapse: collapse; hyphens: auto; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 0; text-align: left; white-space: nowrap; word-break: break-word;">
+                          <div class="label" style="border-radius: 5px; color: #fff; display: inline-block; font-weight: bold; padding: 5px;">
+                            <div title="◔̯◔" class="label label-dead" style="background: #2c3e50; border-radius: 5px; color: #fff; display: inline-block; font-weight: bold; padding: 5px;">Time Out!</div>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                    <div class="mui-text-title mui-text-black" style="color: #212121; font-size: 20px; font-weight: 400; letter-spacing: 0.005em; line-height: 28px;">Sorry, {{.Recipient.DisplayName}},</div>{{.Actor.DisplayName}} just {{.Action.DisplayName}} for {{.Object.DisplayName}}
+                    <hr style="background-color: #e0e0e0; border: none; color: #e0e0e0; height: 1px;"><a href="https://{{.Recipient.UrlHost}}/#{{.Object.Uri}}" class="mui-btn mui-btn-primary mui-btn-raised" style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; background-color: #2196F3; border-bottom: 2px solid #0a6ebd; border-left: 1px solid #2196F3; border-radius: 3px; border-right: 1px solid #2196F3; border-top: 1px solid #51adf6; color: #FFF; cursor: pointer; display: inline-block; font-size: 14px; font-weight: 400; letter-spacing: 0.05em; line-height: 14px; padding: 10px 25px; text-align: center; text-decoration: none; text-transform: uppercase; white-space: nowrap;">View the logs</a>
+                  </td>
+                </tr>
+              </table>
+            </div><!--[if mso]></td></tr></table><![endif]-->
+          </center>
+        </td>
+      </tr>
+      <tr>
+        <td style="-moz-hyphens: auto; -ms-text-size-adjust: 100%; -webkit-hyphens: auto; -webkit-text-size-adjust: 100%; border-collapse: collapse; hyphens: auto; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 0; text-align: left; word-break: break-word;">
+          <center><!--[if mso]><table><tr><td class="mui-container-fixed"><![endif]-->
+            <div class="footer" style="margin-top: 1em;">
+              <div class="mui-container" style="clear: both; display: block; margin: 0 auto; max-width: 600px; padding-left: 15px; padding-right: 15px; text-align: left;">
+                <table width="600px" style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; border-collapse: collapse; border-spacing: 0; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                  <tr>
+                    <td width="50%" style="-moz-hyphens: auto; -ms-text-size-adjust: 100%; -webkit-hyphens: auto; -webkit-text-size-adjust: 100%; border-collapse: collapse; hyphens: auto; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 0; text-align: center; word-break: break-word;"><a href="https://www.harrow.io/terms-of-service" style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; color: #2196F3; text-decoration: none;">Terms of Service</a></td>
+                    <td width="50%" style="-moz-hyphens: auto; -ms-text-size-adjust: 100%; -webkit-hyphens: auto; -webkit-text-size-adjust: 100%; border-collapse: collapse; hyphens: auto; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 0; text-align: center; word-break: break-word;"><a href="https://www.harrow.io/privacy-policy" style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; color: #2196F3; text-decoration: none;"> Privacy</a></td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" class="why-mail" style="-moz-hyphens: auto; -ms-text-size-adjust: 100%; -webkit-hyphens: auto; -webkit-text-size-adjust: 100%; border-collapse: collapse; color: #B7B7B7; font-size: 80%; hyphens: auto; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 0; text-align: center; word-break: break-word;">You are receiving this mail because you have an account with Harrow.io.</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="social-links" style="margin-top: 1em;">
+              <div class="mui-container" style="clear: both; display: block; margin: 0 auto; max-width: 600px; padding-left: 15px; padding-right: 15px; text-align: left;">
+                <table width="600px" style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; border-collapse: collapse; border-spacing: 0; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                  <tr>
+                    <th rowspan="2" style="text-align: center; vertical-align: top;">Connect with us:</th>
+                  </tr>
+                  <tr>
+                    <td style="-moz-hyphens: auto; -ms-text-size-adjust: 100%; -webkit-hyphens: auto; -webkit-text-size-adjust: 100%; border-collapse: collapse; hyphens: auto; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 0; text-align: left; word-break: break-word;"><a href="https://www.facebook.com/harrow.io" style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; color: #2196F3; text-decoration: none;">Facebook</a></td>
+                    <td style="-moz-hyphens: auto; -ms-text-size-adjust: 100%; -webkit-hyphens: auto; -webkit-text-size-adjust: 100%; border-collapse: collapse; hyphens: auto; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 0; text-align: left; word-break: break-word;"><a href="http://twitter.com/harrowio" style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; color: #2196F3; text-decoration: none;">Twitter</a></td>
+                  </tr>
+                  <tr>
+                    <td style="-moz-hyphens: auto; -ms-text-size-adjust: 100%; -webkit-hyphens: auto; -webkit-text-size-adjust: 100%; border-collapse: collapse; hyphens: auto; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 0; text-align: left; word-break: break-word;">
+                      <!-- nothing (for rowspan)-->
+                    </td>
+                    <td style="-moz-hyphens: auto; -ms-text-size-adjust: 100%; -webkit-hyphens: auto; -webkit-text-size-adjust: 100%; border-collapse: collapse; hyphens: auto; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 0; text-align: left; word-break: break-word;"><a href="https://plus.google.com/communities/111732444272140063932" style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; color: #2196F3; text-decoration: none;">Google+</a></td>
+                    <td style="-moz-hyphens: auto; -ms-text-size-adjust: 100%; -webkit-hyphens: auto; -webkit-text-size-adjust: 100%; border-collapse: collapse; hyphens: auto; mso-table-lspace: 0pt; mso-table-rspace: 0pt; padding: 0; text-align: left; word-break: break-word;"><a href="mailto:hello@harrow.io" style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; color: #2196F3; text-decoration: none;">hello@harrow.io</a></td>
+                  </tr>
+                </table>
+              </div>
+            </div><!--[if mso]></td></tr></table><![endif]-->
+          </center>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

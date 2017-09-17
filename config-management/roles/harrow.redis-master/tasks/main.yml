@@ -1,22 +1,68 @@
 ---
 
 - apt:
-    name: redis-server
+    name: "{{ item }}"
     update_cache: true
-  tags: redis
+  with_items:
+    - redis-server
+    - sysfsutils
 
 - name: /var/lib/harrow/redis
   file:
     state: directory
     path: /var/lib/harrow/redis
-    owner: harrow
-    group: harrow
-  tags: redis
+    owner: redis
+    group: redis
+    mode: 0766
+  notify: restart redis
 
 - name: "install redis config file"
   copy:
     src: "etc/redis/redis.conf"
     dest: "/etc/redis/redis.conf"
-    mode: 0644
+    mode: 0655
   notify: restart redis
-  tags: redis
+
+- name: ensure redis can write to it's dump.rdb dir
+  lineinfile:
+    dest: "/etc/systemd/system/redis.service"
+    line: "ReadWriteDirectories=/var/lib/harrow/redis"
+    insertafter: "ReadWriteDirectories=-/etc/redis"
+  notify:
+    - reload systemd
+    - restart redis
+
+- name: disable hugepages in the kernel
+  lineinfile:
+    dest: /etc/sysfs.conf
+    line: "kernel/mm/transparent_hugepage/enabled = never"
+  notify: restart redis
+
+- name: increase net.core.somaxconn
+  sysctl:
+    name: net.core.somaxconn
+    value: 511
+    sysctl_set: yes
+    state: present
+    reload: yes
+  notify: restart redis
+
+- name: set vm.overcommit_memory = 1
+  sysctl:
+    name: vm.overcommit_memory
+    value: 1
+    sysctl_set: yes
+    state: present
+    reload: yes
+  notify: restart redis
+
+#  WARNING overcommit_memory is set to 0! Background save may fail under low
+#  memory condition. To fix this issue add 'vm.overcommit_memory = 1' to
+#  /etc/sysctl.conf and then reboot or run the command 'sysctl
+#  vm.overcommit_memory=1' for this to take effect.
+#
+#  WARNING you have Transparent Huge Pages (THP) support enabled in your kernel.
+#  This will create latency and memory usage issues with Redis. To fix this issue
+#  run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as
+#  root, and add it to your /etc/rc.local in order to retain the setting after a
+#  reboot. Redis must be restarted after THP is disabled.

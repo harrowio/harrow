@@ -1,0 +1,13 @@
+#!/bin/bash -x
+
+temp_dir=$(mktemp -d)
+trap "rm -r $temp_dir" EXIT
+
+# Untar a streamed payload into a tempdir
+tar -xzf - -C "$temp_dir"
+
+/usr/local/bin/harrow mail \
+    --attachments=/harrow/mail/global/attachments \
+    --templates=/srv/harrow/config/mail/ \
+    $temp_dir/harrow | sendmail -t
+

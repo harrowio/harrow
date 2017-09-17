@@ -2,6 +2,8 @@
 harrow:
   http:
     domain_base: localhost
+  email:
+    domain_base: localhost
 
   email_routing:
     sasl:

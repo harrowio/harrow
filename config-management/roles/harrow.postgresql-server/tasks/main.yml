@@ -5,29 +5,26 @@
     update_cache: true
   with_items:
     - libpq-dev
-    - postgresql
+    - "postgresql={{harrow.postgresql.version}}*"
     - python-psycopg2
-  tags: postgresql
 
 - name: stop postgresql before lobotomising it
   systemd:
     name: postgresql
     state: stopped
-  tags: postgresql
 
-- name: /var/lib/harrow/postgresql/9.5/main
+- name: "/var/lib/harrow/postgresql/{{harrow.postgresql.version}}/main"
   file:
     state: directory
-    path: /var/lib/harrow/postgresql/9.5/main
+    path: "/var/lib/harrow/postgresql/{{harrow.postgresql.version}}/main"
     owner: postgres
     group: postgres
-  tags: postgresql
 
-- lineinfile:
-   dest: /etc/postgresql/9.5/main/postgresql.conf
+- name: set postgresql data_directory
+  lineinfile:
+   dest: "/etc/postgresql/{{harrow.postgresql.version}}/main/postgresql.conf"
    regexp: '^data_directory ='
-   line: "data_directory = '/var/lib/harrow/postgresql/9.5/main'"
-  tags: postgresql
+   line: "data_directory = '/var/lib/harrow/postgresql/{{harrow.postgresql.version}}/main'"
   become: true
 
 - name: 'fix postgresql permissions'
@@ -38,7 +35,6 @@
     mode: 0700
     recurse: true
   become: true
-  tags: postgresql
 
 # - name: 'check for postgresql dir files (must init?)'
 #   find:
@@ -46,30 +42,26 @@
 #     file_type: file
 #     patterns: "*"
 #   register: postgresql_dir_files
-#   tags: postgresql
 
 - name: initiate database
-  command: /usr/lib/postgresql/9.5/bin/initdb -D /var/lib/harrow/postgresql/9.5/main
+  command: "/usr/lib/postgresql/{{harrow.postgresql.version}}/bin/initdb -D /var/lib/harrow/postgresql/{{harrow.postgresql.version}}/main"
   become: true
   become_user: postgres
   ignore_errors: true
-  tags: postgresql
 
 - replace:
     dest: "{{ item }}"
     regexp: 'local.*all.*all.*peer'
     replace: "local   all             all                                     password"
   with_items:
-    - /etc/postgresql/9.5/main/pg_hba.conf
-    - /var/lib/harrow/postgresql/9.5/main/pg_hba.conf
+    - "/etc/postgresql/{{harrow.postgresql.version}}/main/pg_hba.conf"
+    - "/var/lib/harrow/postgresql/{{harrow.postgresql.version}}/main/pg_hba.conf"
   become: true
-  tags: postgresql
 
 - name: start post-lobotomy postgresql
   systemd:
     name: postgresql
     state: restarted
-  tags: postgresql
 
 - postgresql_db:
     name: "{{ db.name }}"
@@ -83,9 +75,9 @@
     loop_var: db
   become: true
   become_user: postgres
-  tags: postgresql
 
-- postgresql_user:
+- name: "create postgresql user {{ db.username }}"
+  postgresql_user:
     db: "{{ db.name }}"
     name: "{{ db.username }}"
     password: "{{ db.password }}"
@@ -94,13 +86,12 @@
     loop_var: db
   become: true
   become_user: postgres
-  tags: postgresql
 
 - copy:
-    dest: /etc/tmpfiles.d/postgresql-9.5.conf
+    dest: "/etc/tmpfiles.d/postgresql-{{harrow.postgresql.version}}.conf"
     content: "D /var/run/postgresql 0775 - postgres -"
-  tags: postgresql
   notify: restart postgresql
 
 - include: pgbouncer.yml
 - include: postgresql_extensions.yml
+- include: firewall.yml

@@ -3,3 +3,13 @@
 - include: apt-no-ipv6.yml
 - include: disable-ipv6.yml
 - include: email-routing.yml
+- include: harrow-user.yml
+
+- name: ensure sudo and coreutils installed
+  apt:
+    name: "{{ item }}"
+  with_items:
+    - coreutils
+    - sudo
+    - fail2ban
+

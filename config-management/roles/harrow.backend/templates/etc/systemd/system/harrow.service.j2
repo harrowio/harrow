@@ -2,10 +2,6 @@
 Description=Harrow
 Wants= \
       harrow-api.service \
-      harrow-activity-stream-worker.service \
-{% if harrow.braintree.enabled %}
-      harrow-braintree-proxy.service \
-{% endif %}
       harrow-build-status-worker.service \
       harrow-git-trigger-worker.service \
       harrow-keymaker.service \
@@ -15,17 +11,8 @@ Wants= \
       harrow-intercom-worker.service \
 {% endif %}
       harrow-notifier.service \
-{% if harrow.runners.libvirt.enabled %}
-      harrow-pooler.service \
-{% endif %}
-{% if harrow.runners.lxd.enabled %}
-      harrow-pooler-lxd.service \
-{% endif %}
       harrow-postal-worker.service \
       harrow-scheduler.service \
-{% if harrow.watchdog.enabled %}
-      harrow-watchdog.service \
-{% endif %}
       harrow-ws.service \
       harrow-zob.service
 
@@ -34,7 +21,7 @@ After= \
       network.target \
       redis.service \
       rabbitmq-server.service \
-      postgresql-9.4.service
+      postgresql-9.6.service
 
 {% if harrow.services.notify_on_failure %}
 OnFailure=harrow-notify-about-failure@%n.service
@@ -43,9 +30,10 @@ OnFailure=harrow-notify-about-failure@%n.service
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-Environment=HARROW_ENV={{ harrow.environment }}
-WorkingDirectory=/srv/harrow
-ExecStart=/srv/harrow/bin/harrow-any migrate
+EnvironmentFile=/etc/harrow/env
+WorkingDirectory=/tmp
+PrivateTmp=true
+ExecStart=/usr/local/bin/harrow migrate
 User=harrow
 
 [Install]

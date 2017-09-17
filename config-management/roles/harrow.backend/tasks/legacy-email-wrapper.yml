@@ -1,0 +1,33 @@
+---
+
+- name: make legacy harrow bin dir
+  file:
+    state: directory
+    path: /srv/harrow/bin
+    owner: harrow
+    group: harrow
+
+- name: "install harrow-notify-email wrapper script"
+  copy:
+    src: "srv/harrow/bin/harrow-notify-email"
+    dest: "/srv/harrow/bin/harrow-notify-email"
+    mode: 0744
+    owner: harrow
+    group: harrow
+
+- name: "copy mail templates"
+  copy:
+    src: "srv/harrow/config/mail/"
+    dest: "/srv/harrow/config/mail/"
+    mode: 0644
+    owner: harrow
+    group: harrow
+
+- name: Template files
+  template:
+    src: '{{ item.src }}'
+    dest: /web/{{ item.path }}
+    mode: '{{ item.mode }}'
+  with_filetree: web/
+  when: item.state == 'file'
+

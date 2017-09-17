@@ -5,6 +5,3 @@
     dest: /etc/hosts
   with_items:
     - "{{ groups['lxd'] }}"
-  tags:
-    - lxd
-    - backend

@@ -1,0 +1,35 @@
+---
+
+- apt:
+    name: "{{ item }}"
+    update_cache: true
+  with_items:
+    - python-pip
+    - python-virtualenv
+
+- name: install boto3
+  pip:
+    name: boto
+
+- name: "download release backend/{{ harrow.backend.version}}"
+  s3:
+    bucket: harrow-builds
+    object: "backend/harrow-{{ harrow.backend.version}}"
+    dest: "/tmp/harrow-{{ harrow.backend.version }}"
+    mode: get
+    aws_access_key: "{{ vault.aws.access_key_id }}"
+    aws_secret_key: "{{ vault.aws.secret_access_key }}"
+    region: eu-west-1
+  register: new_binary
+
+- name: move binary into place
+  command: "mv /tmp/harrow-{{ harrow.backend.version }} /usr/local/bin/harrow"
+  when: new_binary
+
+
+- name: set file mode for harrow binary
+  file:
+    path: /usr/local/bin/harrow
+    mode: 0700
+    owner: harrow
+    group: harrow

@@ -42,6 +42,7 @@
   with_items:
     - docker
     - docker-compose
+    - splitdrive
 
 - docker_service:
     project_src: "{{ compose_dir }}"

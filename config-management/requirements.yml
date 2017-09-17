@@ -6,3 +6,9 @@
 - name: 'gtrafimenkov.golang'
   src: git+https://github.com/leehambley/ansible-role-golang
   version: v0.0.3
+
+- src: 'antoiner77.caddy'
+  version: v2.0.3
+
+- src: 'dj-wasabi.telegraf'
+  version: 0.7.0

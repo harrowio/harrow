@@ -1,0 +1,105 @@
+---
+
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: apt update
+      raw: DEBIAN_FRONTEND=noninteractive apt update
+      changed_when: false
+    - name: apt install python apt-transport-https
+      raw: dpkg -l python || DEBIAN_FRONTEND=noninteractive apt install -y python apt-transport-https
+      changed_when: false
+    - name: set timezone to Asia/Tokyo
+      timezone:
+        name: Etc/UTC
+    - name: set hostname
+      hostname:
+        name: "{{ inventory_hostname }}"
+  tags:
+    - essentials
+
+- hosts: all
+  tasks:
+    - name: install apt essential packages
+      apt: "pkg={{ item }} state=installed update_cache=yes"
+      with_items:
+        - atop
+        - htop
+        - jq
+        - sudo
+        - vim
+  tags:
+    - base
+
+- hosts: all
+  roles:
+     - { role: dj-wasabi.telegraf }
+  vars:
+    telegraf_agent_output:
+      - type: influxdb
+        config:
+          - urls = ["http://{{ vault.influxdb.basicauth.username }}:{{ vault.influxdb.basicauth.password }}@{{ vault.influxdb.host }}:{{ vault.influxdb.port }}"]
+          - database = "telegraf"
+        tagpass:
+          - diskmetrics = ["true"]
+    telegraf_plugins_default:
+      - plugin: redis
+      - plugin: rabbitmq
+        config:
+        - username = "{{ shared.rabbitmq.production.username }}"
+        - password = "{{ vault.rabbitmq.production.password }}"
+  tags:
+    - metrics
+
+- hosts: all
+  roles:
+    - harrow.base
+    - franklinkim.ufw
+  tags:
+    - base
+
+- hosts: lxd
+  roles:
+    - harrow.lxd-host
+  tags:
+    - lxd
+
+- hosts: metrics
+  roles:
+    - harrow.metrics-host
+  tags:
+    - metrics
+
+- hosts: postgresql
+  roles:
+    - harrow.postgresql-server
+  tags:
+    - postgresql
+
+- hosts: rabbitmq
+  roles:
+    - harrow.rabbitmq-master
+  tags:
+    - rabbitmq
+
+- hosts: redis
+  roles:
+    - harrow.redis-master
+  tags:
+    - redis
+
+- hosts: http
+  roles:
+    - antoiner77.caddy
+    - harrow.http-server
+  tags:
+    - http
+
+- hosts: services
+  vars:
+    harrow:
+      environment: production
+  roles:
+    - harrow.backend
+  tags:
+    - services

@@ -1,30 +1,13 @@
 ---
-- name: "install environment file for units"
-  template:
-    src: "etc/systemd/system/{{ service_name }}.service.j2"
-    dest: "/etc/systemd/system/{{ service_name }}.service"
-  register: environment_file
 
 - name: "install {{ service_name }} service unit file"
   template:
     src: "etc/systemd/system/{{ service_name }}.service.j2"
     dest: "/etc/systemd/system/{{ service_name }}.service"
-  register: unit_file
 
-- name: "restart systemd"
-  become: true
-  command: 'systemctl daemon-reload'
-  ignore_errors: yes
-  when: unit_file.changed
-
-- command: 'systemctl restart {{ service_name }}'
-  become: true
-  ignore_errors: yes
-  when: unit_file.changed
-
-# available in ansible >= 2.2
-# - systemd:
-#     name: "{{ service_name }}"
-#     state: 'reloaded'
-#     daemon_reload: yes
-#     enabled: yes
+- name: reload changed daemons
+  systemd:
+    name: "{{ service_name }}"
+    state: restarted
+    daemon_reload: yes
+    enabled: yes

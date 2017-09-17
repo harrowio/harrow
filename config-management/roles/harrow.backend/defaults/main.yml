@@ -1,11 +1,18 @@
 ---
 harrow:
 
+  http:
+    user_hmac_secret: "{{ vault.http.user_hmac_secret }}"
+
+  filesystem:
+    op_log_dir: /var/lib/harrow/tmp/op-logs
+    git_tmp_dir: /var/tmp/harrow/git-tmp
+
   email:
     sending_domain: 'example.com'
 
   services:
-    notify_on_failure: true
+    notify_on_failure: false
 
   victorops:
     enabled: "{{ vault.victorops.enabled }}"
@@ -43,6 +50,7 @@ harrow:
       app_id: e283dc31b791c3cdb282
       app_secret: a7d1857c76c11b5330d62859a117e7261e9d50f9
       redirect_uri_pattern: 'https://www.${domain}/#/a/github/callback/%s'
+
   features:
     trial_period:
       enabled: false
@@ -58,11 +66,19 @@ harrow:
       - environment: development
         name: "{{ shared.rabbitmq.development.name }}"
         host: "127.0.0.1"
+        port: 5672
         username: "{{ shared.rabbitmq.development.username }}"
         password: "{{ vault.rabbitmq.development.password }}"
+      - environment: production
+        name: "{{ shared.rabbitmq.production.name }}"
+        host: "127.0.0.1"
+        port: 5672
+        username: "{{ shared.rabbitmq.production.username }}"
+        password: "{{ vault.rabbitmq.production.password }}"
       - environment: test
         name: "harrow_test"
         host: "127.0.0.1"
+        port: 5672
         username: "test"
         password: "test"
 
@@ -80,18 +96,18 @@ harrow:
         username: "{{ shared.postgresql.development.username }}"
         password: "{{ vault.postgresql.development.password }}"
         port: 5432
-        host: "/var/run/postgresql/"
+        host: '/var/run/postgresql/'
+        sslmode: 'disable'
+      - environment: production
+        name: "{{ shared.postgresql.production.name }}"
+        username: "{{ shared.postgresql.production.username }}"
+        password: "{{ vault.postgresql.production.password }}"
+        port: 5432
+        host: 127.0.0.1
         sslmode: 'disable'
 
-  runners:
-    lxd:
-      enabled: true
-    libvirt:
-      enabled: false
-      libvirt_conn: 'qemu:///system'
-      pool_path: /var/lib/libvirt/images
-      baseimage: harrow-baseimage-sparse.qcow2
-      vcpu: 2
-      volume_size: 17179869184 # 16GiB, $(printf "16*2^30\n" | bc)
-      memory: 1073741824 # 1GiB
-      start_limit: 5m
+  environment: production
+
+  operator:
+    ssh_key: "{{ vault.operator_ssh_key }}"
+    filename: /etc/harrow/operator_ssh_key

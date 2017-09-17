@@ -10,7 +10,7 @@ import time
 import requests
 from collections import namedtuple
 
-url = "https://influxdb.metrics-01.prod.harrow.io/write?db=harrow"
+url = "https://{{ vault.influxdb.host }}/write?db=harrow"
 user = "{{ vault.influxdb.basicauth.username }}"
 passwd = "{{ vault.influxdb.basicauth.password }}"
 
