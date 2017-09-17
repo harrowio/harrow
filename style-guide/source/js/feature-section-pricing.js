@@ -35,7 +35,7 @@
     }
     this.classList.add('active')
     if (this.textContent.indexOf('Year') >= 0) {
-      setPricing(12, 30)
+      setPricing(12, 20)
     } else if (this.textContent.indexOf('Month') >= 0) {
       setPricing()
     }
