@@ -8,12 +8,14 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 
 	"github.com/boltdb/bolt"
 	"github.com/rs/zerolog"
 
 	"github.com/harrowio/harrow/clock"
 	"github.com/harrowio/harrow/config"
+	"github.com/harrowio/harrow/domain"
 	"github.com/harrowio/harrow/stores"
 )
 
@@ -54,6 +56,8 @@ func Main() {
 	default:
 		log.Fatal().Msgf("unknown storage driver: " + storageURL.String())
 	}
+
+	index = setUpDefaultValues(IndexWithDefaults(index))
 
 	projector := NewProjector(index, log)
 	db, err := config.GetConfig().DB()
@@ -131,4 +135,21 @@ func Main() {
 	go updateIndex()
 	log.Info().Msgf("Listening on %s", *listen)
 	log.Fatal().Err(http.ListenAndServe(*listen, nil))
+}
+
+func setUpDefaultValues(index *IndexWithDefaults) *IndexWithDefaults {
+	defaultEnvironmentUUID := "55da4f33-9bb3-41d6-ab92-5b03c975cf8a"
+	defaultJobUUID := "82753083-64d1-4683-af2f-25fd00959473"
+	defaultTaskUUID := "14db69ed-d797-43d6-8edc-eaad80e6298a"
+	unknownJob := "Unknown job"
+	index.SetDefault(&domain.Job{
+		Uuid:            defaultJobUUID,
+		CreatedAt:       time.Now(),
+		Name:            unknownJob,
+		Description:     &unknownJob,
+		TaskUuid:        defaultTaskUUID,
+		EnvironmentUuid: defaultEnvironmentUUID,
+		ArchivedAt:      nil,
+	})
+	return index
 }

@@ -53,3 +53,7 @@ func (self *IndexTest) test_Put_adds_object_that_can_be_returned_by_find(t *test
 func TestInMemoryIndex(t *testing.T) {
 	NewIndexTest(func() Index { return NewInMemoryIndex() }).Run(t)
 }
+
+func TestIndexWithDefaults(t *testing.T) {
+	NewIndexTest(func() Index { return NewIndexWithDefaults(NewInMemoryIndex()) }).Run(t)
+}

@@ -27,7 +27,7 @@ func (self *InMemoryIndex) Get(uuid string, dest interface{}) error {
 	defer self.lock.RUnlock()
 	value, found := self.data[uuid]
 	if !found {
-		return fmt.Errorf("%s:%T: not found", uuid, dest)
+		return fmt.Errorf("%T code=not_found key=%s", dest, uuid)
 	}
 
 	destValue := reflect.ValueOf(dest)
