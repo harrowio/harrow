@@ -70,7 +70,11 @@ func Main() {
 			continue
 		}
 
-		command := exec.Command("/srv/harrow/bin/harrow-any", "report-build-status-to-github", "--operation-uuid", operation.Uuid)
+		executable, err := os.Executable()
+		if err != nil {
+			panic(err)
+		}
+		command := exec.Command(executable, "report-build-status-to-github", "--operation-uuid", operation.Uuid)
 		go run(message, log, command)
 	}
 }
