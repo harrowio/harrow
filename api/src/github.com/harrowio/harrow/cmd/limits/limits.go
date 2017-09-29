@@ -55,14 +55,10 @@ func Main() {
 	}
 	go lc.Serve()
 
-	intTerm := make(chan os.Signal, 1)
-	signal.Notify(intTerm, os.Interrupt, syscall.SIGTERM, syscall.SIGKILL)
-	go func(c chan os.Signal) {
-		signal := <-c
-		logger.Info().Msgf("got signal %s, exiting", signal)
-		os.Exit(0)
-	}(intTerm)
-
+	signals := make(chan os.Signal, 1)
+	signal.Notify(signals, os.Interrupt, syscall.SIGTERM)
+	s := <-signals
+	logger.Info().Msgf("got signal %s, exiting", s)
 }
 
 func (lc *LimitCmd) Log() logger.Logger {
