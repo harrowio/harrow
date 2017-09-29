@@ -15,10 +15,10 @@ import (
 	"github.com/harrowio/harrow/cmd/fsbuilder"
 	"github.com/harrowio/harrow/cmd/git-trigger-worker"
 	"github.com/harrowio/harrow/cmd/harrow-archivist"
-	"github.com/harrowio/harrow/cmd/harrow-mail"
 	"github.com/harrowio/harrow/cmd/harrow-update-repository-metadata"
 	"github.com/harrowio/harrow/cmd/keymaker"
 	limits "github.com/harrowio/harrow/cmd/limits"
+	mail "github.com/harrowio/harrow/cmd/mail"
 	"github.com/harrowio/harrow/cmd/mail-dispatcher"
 	"github.com/harrowio/harrow/cmd/metadata-preflight"
 	"github.com/harrowio/harrow/cmd/migrate"
@@ -27,6 +27,7 @@ import (
 	"github.com/harrowio/harrow/cmd/postal-worker"
 	"github.com/harrowio/harrow/cmd/projector"
 	"github.com/harrowio/harrow/cmd/report-build-status-to-github"
+	"github.com/harrowio/harrow/cmd/runner"
 	"github.com/harrowio/harrow/cmd/scheduler"
 	"github.com/harrowio/harrow/cmd/user-script-runner"
 	vmexLXD "github.com/harrowio/harrow/cmd/vmex-lxd"
@@ -49,7 +50,7 @@ func main() {
 		gitTriggerWorker.ProgramName:               gitTriggerWorker.Main,
 		harrowArchivist.ProgramName:                harrowArchivist.Main,
 		limits.ProgramName:                         limits.Main,
-		harrowMail.ProgramName:                     harrowMail.Main,
+		mail.ProgramName:                           mail.Main,
 		harrowUpdateRepositoryMetadata.ProgramName: harrowUpdateRepositoryMetadata.Main,
 		keymaker.ProgramName:                       keymaker.Main,
 		mailDispatcher.ProgramName:                 mailDispatcher.Main,
@@ -57,6 +58,7 @@ func main() {
 		migrate.ProgramName:                        migrate.Main,
 		notifier.ProgramName:                       notifier.Main,
 		operationRunner.ProgramName:                operationRunner.Main,
+		runner.ProgramName:                         runner.Main,
 		postalWorker.ProgramName:                   postalWorker.Main,
 		projector.ProgramName:                      projector.Main,
 		reportBuildStatusToGitHub.ProgramName:      reportBuildStatusToGitHub.Main,
@@ -80,7 +82,6 @@ func main() {
 		logger.Fatal().Msgf("unknown program: %s", programName)
 	}
 
-	logger.Info().Msgf("run %s", programInfo(program))
 	program()
 }
 
