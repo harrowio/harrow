@@ -28,7 +28,7 @@ import:
   - types
 - package: github.com/lib/pq
 - package: github.com/lionelbarrow/braintree-go
-  version: ^0.9.0
+  version: ^0.13.0
 - package: github.com/mohamedattahri/mail
 - package: github.com/nu7hatch/gouuid
 - package: github.com/rubenv/sql-migrate
@@ -55,3 +55,6 @@ import:
   - log
 - package: github.com/pkg/errors
   version: v0.8.0
+- package: github.com/joho/godotenv
+  version: v1.1
+- package: github.com/carlescere/goback
