@@ -22,26 +22,35 @@ func (usu *userScriptUploader) uploadUserScript(client *ssh.Client, containerId 
 		return err
 	}
 	defer session.Close()
+
+	usu.log.Debug().Msg("got ssh session on server")
 	errors := make(chan error)
 	go func() {
+		usu.log.Debug().Msg("connecting my stdin to the session's stdinpipe")
 		w, err := session.StdinPipe()
 		if err != nil {
 			errors <- err
 			return
 		}
+		usu.log.Debug().Msg("beore iocopy")
 		io.Copy(w, os.Stdin)
+		usu.log.Debug().Msg("after iocopy")
 		w.Close()
+		usu.log.Debug().Msg("after close")
 		errors <- nil
 	}()
 
+	usu.log.Debug().Msg("starting untar command on container")
 	tarCmd := fmt.Sprintf("lxc exec %s -- sudo -u ubuntu -i tar -xzf -", containerId)
 	if containerId == "" {
 		tarCmd = "sudo -u ubuntu -i tar -xzf -"
 	}
+	usu.log.Debug().Msgf("starting %s on container", tarCmd)
 	err = session.Run(tarCmd)
 	if err != nil {
 		return err
 	}
+	usu.log.Debug().Msgf("finished upload")
 
 	return <-errors
 }

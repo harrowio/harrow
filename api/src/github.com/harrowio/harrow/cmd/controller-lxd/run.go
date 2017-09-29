@@ -30,6 +30,7 @@ type FatalError struct {
 
 func runUserScript(log logger.Logger, client *ssh.Client, activitySink ActivitySink, db *sqlx.DB, operationUuid string, entrypoint string, config *config.Config) error {
 
+	log.Debug().Msg("setting up log sink (redis) db:0")
 	wg := new(sync.WaitGroup)
 	logSinkClient := redis.NewTCPClient(config.RedisConnOpts(0))
 	defer logSinkClient.Close()
@@ -115,19 +116,26 @@ func runUserScript(log logger.Logger, client *ssh.Client, activitySink ActivityS
 		log.Debug().Msg("controlmessages closed")
 	}(log)
 
+	log.Debug().Msg("starting new client session to run job")
 	session, err := client.NewSession()
 	if err != nil {
 		fatalError := FatalError{fmt.Errorf("Unable to connect to vm: %s", err)}
 		return fatalError
 	}
 	defer session.Close()
+	log.Debug().Msg("starting new client session to run job")
 
+	log.Debug().Msg("setting the session stdout to new ControlMessageParser")
 	session.Stdout = cast.NewControlMessageParser(controlMessages)
 
+	log.Debug().Msgf("about to run: %s", entrypoint)
 	err = session.Run(entrypoint)
 	stdoutLoxer.Close()
 	stderrLoxer.Close()
+	log.Debug().Msg("waiting for waitgroup")
 	wg.Wait()
+	log.Debug().Msg("waiting for waitgroup (done)")
+
 	return err
 }
 

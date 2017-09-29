@@ -3,9 +3,10 @@ package controllerLXD
 import (
 	"flag"
 	"fmt"
+	"net"
+	"net/http"
 	"net/url"
 	"os"
-	"os/exec"
 	"strconv"
 	"time"
 
@@ -26,31 +27,43 @@ const ProgramName = "controller-lxd"
 var log zerolog.Logger = zerolog.New(os.Stdout).With().Str("harrow", ProgramName).Timestamp().Logger()
 
 func Main() {
-	c := config.GetConfig()
+
+	var conf *config.Config = config.GetConfig()
 	operationUuid := flag.String("operation-uuid", "", "The operation to run")
 	containerId := flag.String("container-id", "", "The id of the container to run the operation in")
 	connectTo := flag.String("connect", "", "The URL to connect with")
 	entrypoint := flag.String("entrypoint", "", "The command to run")
 
 	flag.Parse()
+
+	go func() {
+		listener, err := net.Listen("tcp", ":0")
+		if err != nil {
+			panic(err)
+		}
+		log.Info().Msgf("debug http server on port %d", listener.Addr().(*net.TCPAddr).Port)
+		http.Serve(listener, nil)
+	}()
+
 	connectionInfo, err := url.Parse(*connectTo)
 	if err != nil {
 		panic(err)
 	}
+
 	host := connectionInfo.Host
 	user := connectionInfo.User.Username()
 	if user == "" {
 		user = "root"
 	}
 
-	db, err := c.DB()
+	db, err := conf.DB()
 	if err != nil {
 		log.Fatal().Msgf("unable to open db: %s", err)
 	}
 	defer db.Close()
 
 	consumerId := fmt.Sprintf("controller-pid-%d", os.Getpid())
-	activityBus := activity.NewAMQPTransport(c.AmqpConnectionString(), consumerId)
+	activityBus := activity.NewAMQPTransport(conf.AmqpConnectionString(), consumerId)
 	activitySink := NewBusActivitySink(activityBus)
 	activitySink.log = log
 
@@ -64,52 +77,63 @@ func Main() {
 	deadline := time.After(config.InstanceDeadline)
 	go func() {
 		<-deadline
-		deadlineReached(db, c, *connectTo, *operationUuid)
+		deadlineReached(db, conf, *connectTo, *operationUuid)
 	}()
 
 	tx := mustBeginTx(db)
 	defer tx.Rollback()
 
 	store := stores.NewDbOperationStore(tx)
-	if err := store.MarkAsStarted(*operationUuid); err != nil {
-		log.Fatal().Msgf("unable to mark started: %s", err)
-	}
+	log.Debug().Msg("looking up operation...")
 	operation, err := store.FindByUuid(*operationUuid)
 	if err != nil {
 		log.Fatal().Msgf("operation not found: %s", err)
 	}
+	log.Debug().Msg("looking up operation... (done)")
+
+	log.Debug().Msg("checking if operation cancelled...")
 	if operation.Status() == "canceled" {
-		log.Info().Msgf("operation canceled at %s", operation.CanceledAt)
+		log.Info().Msgf("yes, operation canceled at %s. exiting.", operation.CanceledAt)
 		os.Exit(0)
+	} else {
+		log.Debug().Msg("not cancelled, continuing")
 	}
 
 	operation.StartedAt = func() *time.Time { now := time.Now(); return &now }()
 	mustCommitTx(tx)
 
+	log.Debug().Msg("broadcasting op started")
 	activitySink.EmitActivity(activities.OperationStarted(operation))
+	log.Debug().Msg("broadcasting op started (done)")
 
+	log.Debug().Msg("getting ssh config")
 	addr := fmt.Sprintf("%s", host)
-	conf, err := c.GetSshConfig()
+	sshConf, err := conf.GetSshConfig()
 	if err != nil {
 		log.Fatal().Msgf("unable to get ssh config: %s", err)
 	}
-	conf.User = user
-	client, err := ssh.Dial("tcp", addr, conf)
+	sshConf.User = user
+	log.Debug().Msgf("done, dialing ssh %s %v", addr, sshConf)
+	client, err := ssh.Dial("tcp", addr, sshConf)
 	if err != nil {
 		log.Fatal().Msgf("unable to open ssh connection: %s", err)
 	}
 	defer client.Close()
 
+	log.Debug().Msg("starting upload user script")
 	usu := userScriptUploader{log: log}
 	if err := usu.uploadUserScript(client, *containerId); err != nil {
 		fatalError := fmt.Errorf("unable to upload user script: %s", err)
 		mustMarkFatal(db, *operationUuid, fatalError.Error())
 		log.Fatal().Msgf("%s", fatalError)
 	}
+	log.Debug().Msg("user script uploaded")
 
-	go watchForCancellations(c, db, activitySink, *operationUuid)
+	go watchForCancellations(conf, db, activitySink, *operationUuid)
 
-	err = runUserScript(log, client, activitySink, db, *operationUuid, *entrypoint, c)
+	log.Debug().Msg("running user script")
+	err = runUserScript(log, client, activitySink, db, *operationUuid, *entrypoint, conf)
+	log.Debug().Msg("done, checking response type")
 	switch e := err.(type) {
 	case FatalError:
 		mustMarkFatal(db, *operationUuid, e.Error())
@@ -120,12 +144,6 @@ func Main() {
 		}
 	}
 	log.Debug().Msgf("exiting cleanly")
-}
-
-func deleteContainer(connect string, containerId string) {
-	if err := exec.Command(fmt.Sprintf("%s vmex-lxd", os.Args[0]), "--container-id", containerId, "--connect", connect).Start(); err != nil {
-		log.Error().Msgf("Failed to start vmex-lxd: %s", err)
-	}
 }
 
 func markFatal(db *sqlx.DB, operationUuid string, fatal string) error {
@@ -159,9 +177,11 @@ func mustBeginTx(db *sqlx.DB) *sqlx.Tx {
 }
 
 func mustCommitTx(tx *sqlx.Tx) {
+	log.Debug().Msg("entering mustCommitTx")
 	if err := tx.Commit(); err != nil {
 		log.Fatal().Msgf("Unable to commit tx: %s", err)
 	}
+	log.Debug().Msg("leaving mustCommitTx")
 }
 
 func deadlineReached(db *sqlx.DB, c *config.Config, connect string, operationUuid string) {
@@ -175,8 +195,9 @@ func deadlineReached(db *sqlx.DB, c *config.Config, connect string, operationUui
 	defer activityBus.Close()
 	activityBus.Publish(activities.OperationTimedOut(operationUuid))
 
+	// deleteContainer(connect, operationUuid)
+
 	// sysexits.h: #define EX_TEMPFAIL	75	/* temp failure; user is invited to retry */
-	deleteContainer(connect, operationUuid)
 	os.Exit(75)
 }
 

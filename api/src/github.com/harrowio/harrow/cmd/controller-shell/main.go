@@ -26,17 +26,18 @@ const ProgramName = "controller-shell"
 var log zerolog.Logger = zerolog.New(os.Stdout).With().Str("harrow", ProgramName).Timestamp().Logger()
 
 func Main() {
+	operationUuid := flag.String("operation-uuid", "", "The operation to run")
+
+	flag.Parse()
+
 	c := config.GetConfig()
 	db, err := c.DB()
 	if err != nil {
 		log.Fatal().Msgf("unable to open db: %s", err)
 	}
 
-	operationUuid := flag.String("operation-uuid", "", "The operation to run")
-
 	defer db.Close()
 
-	flag.Parse()
 	if *operationUuid == "" {
 		fmt.Fprint(os.Stderr, "Usage:\n")
 		flag.PrintDefaults()
@@ -59,6 +60,7 @@ func run(db *sqlx.DB, operationUuid string, args []string) error {
 	commandToRun.Stdin = os.Stdin
 	out, err := commandToRun.CombinedOutput()
 	log.Debug().Msgf("\nOUTPUT:\n%s\n", out)
+
 	if err == nil {
 		mustMarkExit(db, operationUuid, 0)
 	} else if e, ok := err.(*exec.ExitError); ok {
