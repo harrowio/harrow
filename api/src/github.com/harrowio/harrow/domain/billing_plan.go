@@ -58,6 +58,9 @@ func (self *BillingPlan) OwnUrl(requestScheme, requestBase string) string {
 
 func (self *BillingPlan) Links(response map[string]map[string]string, requestScheme, requestBase string) map[string]map[string]string {
 	response["self"] = map[string]string{"href": self.OwnUrl(requestScheme, requestBase)}
+	response["braintree-purchase"] = map[string]string{
+		"href": fmt.Sprintf("%s://%s/billing-plans/braintree/purchase", requestScheme, requestBase),
+	}
 	return response
 }
 
