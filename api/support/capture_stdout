@@ -1,5 +1,5 @@
 #!/bin/bash
 
-trap 'echo parent shutting down; kill $(jobs -p)' EXIT
+trap 'echo parent shutting down; kill $(jobs -p) 2>&1 > /dev/null' EXIT
 
 $2 | /usr/bin/tee -a $(pwd)/$1
