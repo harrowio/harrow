@@ -149,7 +149,7 @@ func (ofdob *OperationFromDbOrBus) Next() (*domain.Operation, error) {
 	}
 
 	if err := ofdob.AppendStatusLog(tx, op.Uuid, "vm.reserved", fmt.Sprintf("operation starting (wait time %s)", time.Now().UTC().Sub(*op.CreatedAt))); err != nil {
-		return nil, errors.Wrap(err, "could not append ttl.expired message to operation status logs")
+		return nil, errors.Wrap(err, "could not append vm.reserved message to operation status logs")
 	}
 
 	ofdob.log.Info().Msg("marking operation as started and putting it on the pendingOps channel")
