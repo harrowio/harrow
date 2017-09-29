@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"time"
 
 	"golang.org/x/crypto/ssh"
 )
@@ -41,5 +42,6 @@ func (self *Config) GetSshConfig() (*ssh.ClientConfig, error) {
 		Auth: []ssh.AuthMethod{
 			ssh.PublicKeys(privateKey),
 		},
+		Timeout: 5 * time.Second,
 	}, nil
 }
