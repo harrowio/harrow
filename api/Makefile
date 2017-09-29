@@ -13,6 +13,7 @@ ${mkfile_dir}/bin/harrow-release: release
 release: BUILD_OPTS+=-tags release -ldflags="-s -w"
 release: TARGET_NAME=${mkfile_dir}/bin/harrow-release
 release: build
+	AWS_PROFILE=harrow-build-deploy aws s3api put-object --bucket harrow-builds --key backend/harrow-$(shell git rev-parse --short HEAD) --body ./bin/harrow-release
 
 build:
 	go generate -x github.com/harrowio/harrow/cmd/...
