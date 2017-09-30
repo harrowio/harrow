@@ -3,3 +3,5 @@ venv
 roles/*
 !roles/harrow*
 harrow-data/*
+host_vars
+group_vars
