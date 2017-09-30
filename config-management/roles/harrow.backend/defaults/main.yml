@@ -5,7 +5,7 @@ harrow:
     user_hmac_secret: "{{ vault.http.user_hmac_secret }}"
 
   filesystem:
-    op_log_dir: /var/lib/harrow/tmp/op-logs
+    op_log_dir: /var/lib/harrow/op-logs
     git_tmp_dir: /var/tmp/harrow/git-tmp
 
   email:

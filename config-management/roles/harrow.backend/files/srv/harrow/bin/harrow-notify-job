@@ -1,0 +1,54 @@
+#!/bin/bash -x
+
+temp_dir=$(mktemp -d)
+trap "rm -r $temp_dir" EXIT
+
+tar -xzf - -C "$temp_dir"
+cd $temp_dir
+
+WEBHOOK_URL=''
+JQ=$(command -v jq 2>/dev/null)
+
+main() {
+  check_prerequisites
+  extract_webhook_url
+  trigger_webhook
+}
+
+check_prerequisites() {
+  if [ -z "$JQ" ]; then
+      log "jq not installed"
+      ensure_jq
+  fi
+}
+
+extract_webhook_url() {
+  if ! [ -e harrow/notifier.json ]; then
+      log "Expected to find notifier information in harrow/notifier.json"
+      return 1
+  fi
+
+  WEBHOOK_URL=$($JQ -r .notifier.webhookURL < harrow/notifier.json)
+}
+
+trigger_webhook() {
+  curl $WEBHOOK_URL
+}
+
+ensure_jq() {
+  local install_jq=/tmp/jq.$(id -u)
+
+  if ! [ -e /tmp/jq.$(id -u) ]; then
+      log "downloading jq from https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64"
+      curl -s -L https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 > $install_jq
+  fi
+
+  chmod +x $install_jq
+  JQ=$install_jq
+}
+
+log() {
+  printf "%s: %s\n" "$1" >&2
+}
+
+main "$@"

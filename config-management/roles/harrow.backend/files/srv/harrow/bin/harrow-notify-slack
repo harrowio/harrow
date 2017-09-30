@@ -1,0 +1,118 @@
+#!/bin/bash -x
+temp_dir=$(mktemp -d)
+trap "rm -r $temp_dir" EXIT
+
+tar -xzf - -C "$temp_dir"
+cd $temp_dir
+
+JQ=$(command -v jq 2>/dev/null)
+HARROW_DATA_DIR=harrow
+WEBHOOK_URL=''
+DEFAULT_TEXT=$(cat <<EOF
+You can view the logs here
+EOF
+)
+main() {
+  check_prerequisites
+  extract_webhook_url
+  trigger_webhook
+}
+
+check_prerequisites() {
+  if [ -z "$JQ" ]; then
+      log "jq not installed"
+      ensure_jq
+  fi
+}
+
+extract_webhook_url() {
+  if ! [ -e $HARROW_DATA_DIR/notifier.json ]; then
+      printf "Expected to find notifier information in %s/notifier.json\n" "$HARROW_DATA_DIR" >&2
+      return 1
+  fi
+
+  WEBHOOK_URL=$($JQ -r .notifier.webhookURL < $HARROW_DATA_DIR/notifier.json)
+}
+
+trigger_webhook() {
+  curl -s -X POST -H 'Content-Type: application/json' --data-binary "$(message_payload)" "$WEBHOOK_URL"
+}
+
+message_payload() {
+  local activity_kind author_icon author_link author_name color operation_url text url_host
+
+  activity_kind=$($JQ -r .name < $HARROW_DATA_DIR/activity.json)
+  author_link=$(make_author_link)
+  author_icon=https://www.app.harrow.io/images/favicons/apple-touch-icon-57x57.png
+  color=good
+  operation_url=$(make_operation_link)
+  text=$(printf "%s: %s\n" "$DEFAULT_TEXT" "$operation_url")
+
+  case $activity_kind in
+    operation.succeeded)
+      author_name=$(printf "%s has finished successfully" "$(job_name)")
+      ;;
+    operation.failed)
+      author_name=$(printf "%s has failed" "$(job_name)")
+      color=danger
+      ;;
+    *)
+      author_name=$(author_name_from_activity_kind "$activity_kind")
+      ;;
+  esac
+
+  # shellcheck disable=SC2016
+  $JQ \
+      --arg username    "Harrow" \
+      --arg author_name "$author_name" \
+      --arg author_link "$author_link" \
+      --arg author_icon "$author_icon" \
+      --arg text        "$text" \
+      --arg color       "$color" \
+      '{$username, icon_url: $author_icon, "attachments": [{$author_name, $author_link, $text, $color}]}' < <(seq 1)
+}
+
+author_name_from_activity_kind() {
+  sed -e 's!\.!: !' -e 's!-! !' <<<"$activity_kind"
+}
+
+job_name() {
+  $JQ -r .name < $HARROW_DATA_DIR/job.json
+}
+
+make_author_link() {
+  local url_host project_uuid job_uuid
+
+  url_host=$($JQ -r .notifier.urlHost < $HARROW_DATA_DIR/notifier.json)
+  project_uuid=$($JQ -r .uuid < $HARROW_DATA_DIR/project.json)
+  job_uuid=$($JQ -r .uuid < $HARROW_DATA_DIR/job.json)
+
+  printf "https://%s/#/a/projects/%s/jobs/%s\n" "$url_host" "$project_uuid" "$job_uuid"
+}
+
+make_operation_link() {
+  local url_host operation_uuid
+
+  url_host=$($JQ -r .notifier.urlHost < $HARROW_DATA_DIR/notifier.json)
+  operation_uuid=$($JQ -r .payload.uuid < $HARROW_DATA_DIR/activity.json)
+
+  printf "https://%s/#/a/operations/%s\n" "$url_host" "$operation_uuid"
+}
+
+ensure_jq() {
+  local install_jq=/tmp/jq.$(id -u)
+
+  if ! [ -e $install_jq ]; then
+      log "downloading jq from https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64"
+      curl -s -L https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 > $install_jq
+  fi
+
+  chmod +x $install_jq
+  JQ=$install_jq
+}
+
+log() {
+  printf "%s: %s\n" "$1" >&2
+}
+
+main "$@"

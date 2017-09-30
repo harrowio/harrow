@@ -4,7 +4,7 @@
   when: harrow.backend.version
 
 - include: config.yml
-- include: legacy-email-wrapper.yml
+- include: legacy-notifier-wrappers.yml
 - include: lxd-hosts.yml
-- include: operation-runner-service.yml
+- include: runner-service.yml
 - include: services.yml

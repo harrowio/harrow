@@ -1,5 +1,5 @@
-[Unit]
-Description=Harrow operation runner - %i
+Unit]
+Description=Harrow runner - %i
 Requires=harrow.service
 After=harrow.service
 {% if harrow.services.notify_on_failure %}
@@ -10,7 +10,7 @@ OnFailure=systemd-harrow-notify-about-failure@%n.service
 EnvironmentFile=/etc/harrow/env
 WorkingDirectory=/tmp
 PrivateTmp=true
-ExecStart=/usr/local/bin/harrow operation-runner --connect %I
+ExecStart=/usr/local/bin/harrow runner --connect %I
 User=harrow
 Restart=always
 

@@ -7,13 +7,17 @@
     owner: harrow
     group: harrow
 
-- name: "install harrow-notify-email wrapper script"
+- name: "install harrow-notify-{{ item }} wrapper script"
   copy:
-    src: "srv/harrow/bin/harrow-notify-email"
-    dest: "/srv/harrow/bin/harrow-notify-email"
+    src: "srv/harrow/bin/harrow-notify-{{ item }}"
+    dest: "/srv/harrow/bin/harrow-notify-{{ item }}"
     mode: 0744
     owner: harrow
     group: harrow
+  with_items:
+    - email
+    - job
+    - slack
 
 - name: "copy mail templates"
   copy:

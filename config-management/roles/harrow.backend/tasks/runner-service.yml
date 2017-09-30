@@ -14,10 +14,10 @@
     group: harrow
     mode: 0600
 
-- name: "install harrow-operation-runner@ service unit file"
+- name: "install harrow-runner@ service unit file"
   template:
-    src: "etc/systemd/system/harrow-operation-runner@.service.j2"
-    dest: "/etc/systemd/system/harrow-operation-runner@.service"
+    src: "etc/systemd/system/harrow-runner@.service.j2"
+    dest: "/etc/systemd/system/harrow-runner@.service"
 
 - apt:
     name: "{{ item }}"
