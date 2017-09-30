@@ -34,6 +34,7 @@ func (self *DbScheduler) ScheduleNotification(rule *domain.NotificationRule, act
 	now := time.Now()
 	operation := &domain.Operation{
 		Uuid:                   uuidhelper.MustNewV4(),
+		TimeLimit:              300,
 		Type:                   domain.OperationTypeNotifierInvoke,
 		NotifierUuid:           &rule.NotifierUuid,
 		NotifierType:           &rule.NotifierType,
