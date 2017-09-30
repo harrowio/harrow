@@ -1,0 +1,11 @@
+#!/bin/bash -x
+temp_dir=$(mktemp -d)
+trap "rm -r $temp_dir" EXIT
+
+tar -xzf - -C "$temp_dir"
+cd /srv/harrow/
+
+bin/harrow-mail \
+    --attachments=/harrow/mail/global/attachments \
+    --templates=/srv/harrow/config/mail/ \
+    $temp_dir/harrow | sendmail -t
