@@ -44,10 +44,10 @@
           - diskmetrics = ["true"]
     telegraf_plugins_default:
       - plugin: redis
-      - plugin: rabbitmq
-        config:
-        - username = "{{ shared.rabbitmq.production.username }}"
-        - password = "{{ vault.rabbitmq.production.password }}"
+      # - plugin: rabbitmq
+      #   config:
+      #   - username = "{{ shared.rabbitmq.production.username }}"
+      #   - password = "{{ vault.rabbitmq.production.password }}"
   tags:
     - metrics
 
