@@ -26,16 +26,6 @@
   tags:
     - lxd
 
-- name: set MAILTO to nothing in crontab
-  cron:
-    name: MAILTO
-    minute: MAILTO=""
-    hour: ""
-    day: ""
-    month: ""
-    weekday: ""
-    job: ""
-
 - name: periodically kill old containers
   cron:
     name: "kill too-old containers"
@@ -44,13 +34,10 @@
   tags:
     - lxd
 
-- name:   report container info to influxdb
+- name: report container info to influxdb
   cron:
     name: "report-container-info-to-influxdb"
     minute: "*/5"
     job: "/usr/local/bin/report-container-info-to-influxdb"
   tags:
     - lxd
-
-
-
