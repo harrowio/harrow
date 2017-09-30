@@ -1,5 +1,6 @@
 coverage
 bower_components
 node_modules
+dist
 
 .DS_Store
