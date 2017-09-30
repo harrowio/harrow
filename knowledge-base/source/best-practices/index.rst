@@ -210,6 +210,7 @@ be whitelisted on your firewall are:
 
 .. code-block:: none
 
+  144.76.166.35
   144.76.41.245
   144.76.62.172
   178.63.25.5
