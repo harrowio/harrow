@@ -40,7 +40,7 @@ func (o *Operation) RunLocally(notifierType string) {
 		"controller-shell",
 		"-operation-uuid",
 		o.op.Uuid,
-		fmt.Sprintf("/srv/harrow/bin/harrow-nofity-%s", notifierType),
+		fmt.Sprintf("/srv/harrow/bin/harrow-notify-%s", notifierType),
 	)
 
 	pr, pw := io.Pipe()
