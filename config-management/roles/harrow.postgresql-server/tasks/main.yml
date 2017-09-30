@@ -58,6 +58,15 @@
     - "/var/lib/harrow/postgresql/{{harrow.postgresql.version}}/main/pg_hba.conf"
   become: true
 
+- lineinfile:
+    dest: "{{ item }}"
+    regexp: 'local.*all.*all.*password'
+    line: "local   all             all                                     trust"
+  with_items:
+    - "/etc/postgresql/{{harrow.postgresql.version}}/main/pg_hba.conf"
+    - "/var/lib/harrow/postgresql/{{harrow.postgresql.version}}/main/pg_hba.conf"
+  become: true
+
 - name: start post-lobotomy postgresql
   systemd:
     name: postgresql
