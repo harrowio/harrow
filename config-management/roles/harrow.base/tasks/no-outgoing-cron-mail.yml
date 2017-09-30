@@ -1,0 +1,4 @@
+- name: disable outbound cron mail
+  cronvar:
+    name: EMAIL
+    value: "root@localhost"

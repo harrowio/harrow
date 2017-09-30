@@ -4,6 +4,7 @@
 - include: disable-ipv6.yml
 - include: email-routing.yml
 - include: harrow-user.yml
+- include: no-outgoing-cron-mail.yml
 
 - name: ensure sudo and coreutils installed
   apt:
