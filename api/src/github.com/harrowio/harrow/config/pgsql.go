@@ -10,6 +10,7 @@ func (c *Config) PgDataSourceName() (string, error) {
 }
 
 func (c *Config) DB() (*sqlx.DB, error) {
+
 	dsn, err := c.PgDataSourceName()
 	if err != nil {
 		return nil, err
@@ -20,9 +21,7 @@ func (c *Config) DB() (*sqlx.DB, error) {
 		return nil, err
 	}
 
-	// PgBouncer will do the pooling for us so we shouldn't keep any connections
-	// longer as necessary (the default is 2)
-	db.SetMaxIdleConns(0)
+	db.SetMaxOpenConns(10)
 
 	return db, nil
 }

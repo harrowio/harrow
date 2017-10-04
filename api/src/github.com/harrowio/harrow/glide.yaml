@@ -58,3 +58,6 @@ import:
 - package: github.com/joho/godotenv
   version: v1.1
 - package: github.com/carlescere/goback
+- package: golang.org/x/net
+  subpackages:
+  - netutil

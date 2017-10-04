@@ -357,38 +357,14 @@ func (self userHandler) Organizations(ctxt RequestContext) (err error) {
 	if err != nil {
 		return err
 	}
-	billingHistory, err := stores.NewDbBillingHistoryStore(
-		ctxt.Tx(),
-		ctxt.KeyValueStore(),
-	).Load()
-	if err != nil {
-		return err
-	}
-
-	limitsStore := stores.NewDbLimitsStore(ctxt.Tx())
-	limitsStore.SetLogger(ctxt.Log())
 
 	embedLimits := func(o *domain.Organization) {
-		limits, err := limitsStore.FindByOrganizationUuid(o.Uuid)
-		if err != nil {
-			ctxt.Log().Warn().Msgf("user.Organizations.FindLimits: %q: %s", o.Uuid, err)
-			return
+		limits := NewLimitsFromContext(ctxt)
+		// TODO: better err handling
+		reported, err := limits.ForOrganizationUuid(o.Uuid)
+		if err == nil {
+			o.Embed("limits", reported)
 		}
-
-		planUuid := billingHistory.PlanUuidFor(o.Uuid)
-		plan, err := stores.NewDbBillingPlanStore(ctxt.Tx()).FindByUuid(planUuid)
-		if err != nil {
-			ctxt.Log().Warn().Msgf("error loading plan for organization %s: %s", o.Uuid, err)
-			return
-		}
-
-		reported := limits.Report(
-			plan,
-			billingHistory.ExtraUsersFor(o.Uuid),
-			billingHistory.ExtraProjectsFor(o.Uuid),
-		)
-		ctxt.Log().Debug().Msgf("embedding limits for %q: %#v", o.Uuid, reported)
-		o.Embed("limits", reported)
 	}
 
 	var interfaceOrgs []interface{} = make([]interface{}, 0, len(orgs))

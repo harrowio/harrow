@@ -2,6 +2,10 @@ package http
 
 import (
 	"fmt"
+	"net"
+	"time"
+
+	"golang.org/x/net/netutil"
 
 	"github.com/harrowio/harrow/bus/activity"
 	"github.com/harrowio/harrow/config"
@@ -79,9 +83,26 @@ func ListenAndServe(l zerolog.Logger, db *sqlx.DB, bus activity.Sink, kv stores.
 
 	MountAll(r, ctxt)
 
-	server := &http.Server{Addr: c.HttpConfig().String(), Handler: r}
+	listener, err := net.Listen("tcp", c.HttpConfig().String())
+	if err != nil {
+		l.Fatal().Msgf("Listen Failed: %v", err)
+	}
+
 	ctxt.Log().Info().Msgf("listening on %s", c.HttpConfig())
-	server.ListenAndServe()
+
+	ctxt.Log().Info().Msgf("setting max simultanious connections to %d", c.HttpConfig().MaxSimultaneousConns)
+	listener = netutil.LimitListener(listener, c.HttpConfig().MaxSimultaneousConns)
+
+	server := &http.Server{
+		Addr:           ":8080",
+		Handler:        r,
+		ReadTimeout:    10 * time.Second,
+		WriteTimeout:   10 * time.Second,
+		MaxHeaderBytes: 1 << 20,
+	}
+
+	ctxt.Log().Info().Msg("starting server")
+	server.Serve(listener)
 
 }
 

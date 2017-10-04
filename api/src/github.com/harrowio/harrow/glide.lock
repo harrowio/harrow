@@ -1,8 +1,8 @@
-hash: e40b08d61ff029b66353e400cc821a421afbd66c3ad45e2e34a2e64de43fe962
-updated: 2017-09-19T17:40:50.355130418+02:00
+hash: 08d9ff926da9f4ddf39fdb3d5aa44bc24432d991372c2c9164e7ba677d7ee83c
+updated: 2017-10-04T19:23:00.768859873+02:00
 imports:
 - name: github.com/aws/aws-sdk-go
-  version: 9924c83c280264fb32f34cc5095204c451bedf0c
+  version: 0bac5578f9a18b467487ee2dda67fedb328e9452
   subpackages:
   - aws
   - aws/awserr
@@ -62,7 +62,7 @@ imports:
 - name: github.com/gorilla/websocket
   version: a91eba7f97777409bc2c443f5534d41dd20c5720
 - name: github.com/influxdata/influxdb
-  version: 9d9001036d3585cf21925c13a57881bc6c8dcc7e
+  version: a7c3d3c0f7b74f71919047adbc4933460967a576
   subpackages:
   - client/v2
 - name: github.com/jameskeane/bcrypt
@@ -81,7 +81,7 @@ imports:
   subpackages:
   - oid
 - name: github.com/lionelbarrow/braintree-go
-  version: 953a0d2555490f14b7ced09a5110f126c8b496b1
+  version: a840f2e081fd551c4db28b7c0ae72884ed331ea2
   subpackages:
   - customfields
   - date
@@ -127,6 +127,7 @@ imports:
   - idna
   - internal/timeseries
   - lex/httplex
+  - netutil
   - trace
 - name: golang.org/x/sys
   version: f3918c30c5c2cb527c0b071a27c35120a6c0719a

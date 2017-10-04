@@ -4,9 +4,11 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
+	"os"
 	"runtime/debug"
 	"time"
 
+	"github.com/gorilla/handlers"
 	"github.com/harrowio/harrow/activities"
 	"github.com/harrowio/harrow/stores"
 	"github.com/lib/pq"
@@ -150,8 +152,10 @@ func HandlerFunc(ctxt ServerContext, h Handler) http.Handler {
 		}
 	}
 
+	return handlers.CombinedLoggingHandler(os.Stdout, http.HandlerFunc(fn))
+
 	// From here on (owing to above) panics will be caught, and
 	// errors correctly handled
 
-	return http.HandlerFunc(fn)
+	// return http.HandlerFunc(fn)
 }
