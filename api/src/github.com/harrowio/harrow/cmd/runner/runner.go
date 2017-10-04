@@ -83,6 +83,7 @@ func (r *Runner) Start() {
 		// completion. This gives whoever started us chance to maybe start again
 		// incase we "err" out successfully
 		case op := <-operationPending:
+			operationPending = nil
 			go r.runOperation(op)
 
 		// were we able to start a container?
