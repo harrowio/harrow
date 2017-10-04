@@ -40,11 +40,13 @@ func braintreeFindCustomer(id string) (*braintree.Customer, error) {
 func braintreeCreateCreditCard(user *domain.User, nonce string) (*braintree.CreditCard, error) {
 	client := braintreeConfig.NewClient()
 
+	t := &[]bool{true}[0]
+
 	creditCard := &braintree.CreditCard{
 		CustomerId:         user.Uuid,
 		PaymentMethodNonce: nonce,
 		Options: &braintree.CreditCardOptions{
-			VerifyCard:  true,
+			VerifyCard:  t,
 			MakeDefault: true,
 		},
 	}
