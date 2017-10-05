@@ -41,8 +41,9 @@ type Runner struct {
 	lxd     *LXD
 
 	// internal management channels/etc
-	stopper      chan chan bool
-	healthTicker *time.Ticker
+	operationPending chan *domain.Operation
+	stopper          chan chan bool
+	healthTicker     *time.Ticker
 
 	// state (used for metrics and expvars)
 	stateChange chan state
@@ -69,14 +70,19 @@ func (r *Runner) Start() {
 
 	r.stopper = make(chan chan bool)
 	r.stateChange = make(chan state)
+	r.operationPending = make(chan *domain.Operation)
 
 	connectionLost := make(chan error)
 	containerNetworkUp := make(chan error)
-	operationPending := make(chan *domain.Operation)
 	go r.MakeContainer(uuidhelper.MustNewV4(), containerNetworkUp)
+
+	ticker := time.NewTicker(time.Millisecond * 500)
 
 	for {
 		select {
+
+		case <-ticker.C:
+			r.log.Info().Msgf("pending operations is %v", r.operationPending)
 
 		// we have a pending job, we should only recieve on this channel after we
 		// successfully start a container as the Runnable fetcher only runs once we
@@ -84,7 +90,7 @@ func (r *Runner) Start() {
 		// goroutine will send something (maybe nil) on the err channel upon
 		// completion. This gives whoever started us chance to maybe start again
 		// incase we "err" out successfully
-		case op := <-operationPending:
+		case op := <-r.operationPending:
 			go r.runOperation(op)
 
 		// were we able to start a container?
@@ -119,7 +125,8 @@ func (r *Runner) Start() {
 				if err := opdob.NextOn(sendOn); err != nil {
 					r.errs <- err
 				}
-			}(operationPending, r.db)
+				r.log.Info().Msgf("got one operation, cancelling out of searching goroutine")
+			}(r.operationPending, r.db)
 
 		// Incase we got a stop signal break this loop
 		case stopped := <-r.stopper:

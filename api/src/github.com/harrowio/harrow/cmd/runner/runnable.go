@@ -64,6 +64,7 @@ func (ofdob *OperationFromDbOrBus) NextOn(ch chan<- *domain.Operation) error {
 	}
 	if op != nil {
 		ch <- op
+		return nil
 	}
 	ofdob.WaitForNew()
 	return ofdob.NextOn(ch)
