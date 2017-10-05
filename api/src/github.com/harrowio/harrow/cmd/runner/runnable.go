@@ -27,6 +27,7 @@ func (ofdob *OperationFromDbOrBus) WaitForNew() {
 	if err := l.Listen("new-operation"); err != nil {
 		ofdob.log.Fatal().Msgf("error listening on pg channel %q: %s", "new-operation", err)
 	}
+	defer l.Close()
 	<-l.Notify
 	ofdob.log.Info().Msg("something happened in db, returning")
 	return
