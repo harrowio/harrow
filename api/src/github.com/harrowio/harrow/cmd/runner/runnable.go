@@ -145,8 +145,6 @@ func (ofdob *OperationFromDbOrBus) Next() (*domain.Operation, error) {
 		if err := opStore.MarkAsTimedOut(op.Uuid); err != nil {
 			return nil, errors.Wrap(err, "could not mark expired operation as timed out")
 		}
-		ofdob.log.Info().Msg("operation has exceeded ttl, status will be updated and marked as timed out")
-		tx.Commit()
 		return ofdob.Next()
 	}
 
