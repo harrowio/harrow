@@ -1,6 +1,7 @@
 package runner
 
 import (
+	"fmt"
 	"net/url"
 	"strings"
 	"time"
@@ -9,6 +10,7 @@ import (
 	"github.com/harrowio/harrow/config"
 	"github.com/harrowio/harrow/domain"
 	"github.com/harrowio/harrow/logger"
+	"github.com/harrowio/harrow/stores"
 	"github.com/harrowio/harrow/uuidhelper"
 	"github.com/jmoiron/sqlx"
 	"github.com/pkg/errors"
@@ -188,7 +190,32 @@ func (r *Runner) MakeContainer(uuid string, res chan error) {
 }
 
 func (r *Runner) runOperation(op *domain.Operation) {
-	r.log.Info().Msgf("received operation to run: %s", op.Uuid)
+
+	tx, err := r.db.Beginx()
+	if err != nil {
+		r.errs <- errors.Wrap(err, "could not start database transaction")
+		return
+	}
+
+	r.log.Info().Msg("disabling stop signal handler whilst running operation")
+	origStopper := r.stopper
+	defer func() {
+		r.log.Info().Msgf("setting stopper to %#v", origStopper)
+		r.stopper = origStopper
+	}()
+	r.stopper = nil
+
+	if err := appendStatusLog(r.log, tx, op.Uuid, "vm.reserved", fmt.Sprintf("operation starting (wait time %s)", time.Now().UTC().Sub(*op.CreatedAt))); err != nil {
+		r.errs <- errors.Wrap(err, "could not append vm.reserved message to operation status logs")
+		return
+	}
+
+	var opStore *stores.DbOperationStore = stores.NewDbOperationStore(tx)
+	r.log.Info().Msg("marking operation as proceeding to run it")
+	opStore.MarkAsStarted(op.Uuid)
+	tx.Commit()
+
+	r.log.Info().Msgf("operation to run is: %s", op.Uuid)
 	o := Operation{
 		op:     op,
 		db:     r.db,
