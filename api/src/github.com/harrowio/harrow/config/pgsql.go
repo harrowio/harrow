@@ -1,6 +1,8 @@
 package config
 
 import (
+	"net/url"
+	"os"
 	"time"
 
 	"github.com/jmoiron/sqlx"
@@ -18,7 +20,17 @@ func (c *Config) DB() (*sqlx.DB, error) {
 		return nil, err
 	}
 
-	db, err := sqlx.Open("postgres", dsn)
+	// Try and inject os.Args[0] (executable name) into the application_name conn parameter
+	u, err := url.Parse(dsn)
+	if err != nil {
+		return nil, err
+	}
+
+	q := u.Query()
+	q.Set("application_name", os.Args[0])
+	u.RawQuery = q.Encode()
+
+	db, err := sqlx.Open("postgres", u.String())
 	if err != nil {
 		return nil, err
 	}
