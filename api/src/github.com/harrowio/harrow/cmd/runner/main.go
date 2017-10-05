@@ -29,7 +29,7 @@ func Main() {
 
 	// Set up handler for signals from the operating system (e.g CTRL+C)
 	sig := make(chan os.Signal, 1)
-	signal.Notify(sig, os.Interrupt, syscall.SIGTERM)
+	signal.Notify(sig, os.Interrupt)
 
 	listener, err := net.Listen("tcp", ":0")
 	go func(l net.Listener) {
