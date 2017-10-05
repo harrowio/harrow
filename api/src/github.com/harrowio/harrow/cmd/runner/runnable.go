@@ -32,26 +32,11 @@ func (ofdob *OperationFromDbOrBus) WaitForNew() {
 	return
 }
 
-// AppendStatusLog appends a record to the stauts log for the event given
+// appendStatusLog appends a record to the stauts log for the event given
 // a transaction to use. The transaction must be given as we have two
 // different transactions in play here. If nil is given then a new one will
 // be started on the OperationFromDbOrBus.db
-func (ofdob *OperationFromDbOrBus) AppendStatusLog(tx *sqlx.Tx, uuid, entryType, subject string) error {
-
-	if tx == nil {
-		ofdob.log.Info().Msg("appending status logs in independent tx")
-		var err error
-		tx, err = ofdob.db.Beginx()
-		if err != nil {
-			return errors.Wrap(err, "could not start database transaction")
-		}
-		defer func(tx *sqlx.Tx, log logger.Logger) {
-			if err := tx.Commit(); err != nil {
-				log.Info().Msgf("error committing logs: %s", err)
-			}
-			log.Info().Msg("independent status log update tx committed!")
-		}(tx, ofdob.log)
-	}
+func appendStatusLog(log logger.Logger, tx *sqlx.Tx, uuid, entryType, subject string) error {
 
 	operationStore := stores.NewDbOperationStore(tx)
 	operation, err := operationStore.FindByUuid(uuid)
@@ -139,7 +124,7 @@ func (ofdob *OperationFromDbOrBus) Next() (*domain.Operation, error) {
 
 	if op.CreatedAt.Add(time.Duration(op.TimeLimit) * time.Second).Before(time.Now().UTC()) {
 		ofdob.log.Info().Msg("operation has exceeded ttl, status will be updated and marked as timed out")
-		if err := ofdob.AppendStatusLog(tx, op.Uuid, "ttl.expired", fmt.Sprintf("failed to start before the %s time limit expired", time.Duration(op.TimeLimit)*time.Second)); err != nil {
+		if err := appendStatusLog(ofdob.log, tx, op.Uuid, "ttl.expired", fmt.Sprintf("failed to start before the %s time limit expired", time.Duration(op.TimeLimit)*time.Second)); err != nil {
 			return nil, errors.Wrap(err, "could not append ttl.expired message to operation status logs")
 		}
 		if err := opStore.MarkAsTimedOut(op.Uuid); err != nil {
@@ -149,13 +134,6 @@ func (ofdob *OperationFromDbOrBus) Next() (*domain.Operation, error) {
 		tx.Commit()
 		return ofdob.Next()
 	}
-
-	if err := ofdob.AppendStatusLog(tx, op.Uuid, "vm.reserved", fmt.Sprintf("operation starting (wait time %s)", time.Now().UTC().Sub(*op.CreatedAt))); err != nil {
-		return nil, errors.Wrap(err, "could not append vm.reserved message to operation status logs")
-	}
-
-	ofdob.log.Info().Msg("marking operation as started and putting it on the pendingOps channel")
-	opStore.MarkAsStarted(op.Uuid)
 
 	return op, nil
 }
