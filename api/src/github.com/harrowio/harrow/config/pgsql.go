@@ -1,6 +1,8 @@
 package config
 
 import (
+	"time"
+
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
 )
@@ -21,7 +23,9 @@ func (c *Config) DB() (*sqlx.DB, error) {
 		return nil, err
 	}
 
+	db.SetMaxIdleConns(2)
 	db.SetMaxOpenConns(10)
+	db.SetConnMaxLifetime(5 * time.Minute)
 
 	return db, nil
 }

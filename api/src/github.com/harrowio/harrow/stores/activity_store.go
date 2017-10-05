@@ -96,6 +96,8 @@ func (self *DbActivityStore) Store(activity *domain.Activity) error {
 		return resolveErrType(err)
 	}
 	query, args, err := self.tx.BindNamed(q, params)
+
+	// fmt.Fprintf(os.Stderr, "%s %v\n", query, args)
 	if err != nil {
 		return resolveErrType(err)
 	}

@@ -9,6 +9,5 @@ mail-dispatcher:    ./support/capture_stdout logs/harrow_mail_dispatcher     "bi
 metadata-preflight: ./support/capture_stdout logs/harrow_metadata_preflight  "bin/harrow-debug metadata-preflight"
 postal-worker:      ./support/capture_stdout logs/harrow_postal_worker       "bin/harrow-debug postal-worker"
 projector:          ./support/capture_stdout logs/harrow_projector           "bin/harrow-debug projector"
-scheduler:          ./support/capture_stdout logs/harrow_scheduler           "bin/harrow-debug scheduler"
 websocket:          ./support/capture_stdout logs/harrow_websocket           "bin/harrow-debug ws"
 zob:                ./support/capture_stdout logs/harrow_zob                 "bin/harrow-debug zob"

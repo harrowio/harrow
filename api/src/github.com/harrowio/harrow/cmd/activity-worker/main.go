@@ -12,7 +12,7 @@ import (
 
 const ProgramName = "activity-worker"
 
-var logger zerolog.Logger = zerolog.New(os.Stdout).With().Str("harrow", ProgramName).Timestamp().Logger()
+var log zerolog.Logger = zerolog.New(os.Stdout).With().Str("harrow", ProgramName).Timestamp().Logger()
 
 func Main() {
 
@@ -22,17 +22,18 @@ func Main() {
 
 	db, err := conf.DB()
 	if err != nil {
-		logger.Fatal().Err(err)
+		log.Fatal().Err(err)
 	}
 
 	store := NewDbActivityStore(db)
-	// store.SetLogger(logger)
 
 	worker := NewActivityWorker(bus, store).
 		AddMessageHandler(ListProjectMembers(db)).
 		AddMessageHandler(MarkProjectUuid(db)).
 		AddMessageHandler(MarkJobUuid(db)).
 		AddMessageHandler(logMessage)
+
+	worker.SetLogger(log)
 
 	signals := make(chan os.Signal, 1)
 	signal.Notify(signals, os.Interrupt, syscall.SIGTERM)
@@ -41,16 +42,16 @@ func Main() {
 
 	select {
 	case sig := <-signals:
-		logger.Info().Msgf("Received %s", sig)
-		logger.Info().Msgf("Stopping...")
+		log.Info().Msgf("Received %s", sig)
+		log.Info().Msgf("Stopping...")
 		worker.Stop()
-		logger.Info().Msgf("Stopped")
+		log.Info().Msgf("Stopped")
 		os.Exit(0)
 	}
 }
 
 func logMessage(msg activity.Message) {
 	activity := msg.Activity()
-	logger.Info().Msgf("received %q", activity.Name)
-	logger.Info().Msgf("audience: %v", activity.Audience())
+	log.Info().Msgf("received %q", activity.Name)
+	log.Info().Msgf("audience: %v", activity.Audience())
 }

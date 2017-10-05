@@ -92,7 +92,6 @@ func runUserScript(log logger.Logger, client *ssh.Client, activitySink ActivityS
 			case cast.ChildExited:
 				tx := mustBeginTx(db)
 				defer tx.Rollback()
-				close(lexemes)
 				store := stores.NewDbOperationStore(tx)
 				publish := &domain.Activity{}
 				markExitStatus(log, store, db, controlMessage.ExitStatus, operationUuid, &publish)

@@ -281,7 +281,7 @@ func (store *DbOperationStore) updateTimestamp(operationUuid, columnName string)
 	      SET %s = NOW() at time zone 'utc'
 	      WHERE uuid = $1::uuid
 	`, columnName)
-
+	fmt.Println("Running", q, operationUuid)
 	r, err := store.tx.Exec(q, operationUuid)
 	if err != nil {
 		return resolveErrType(err)

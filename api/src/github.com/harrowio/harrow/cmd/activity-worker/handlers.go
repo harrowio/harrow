@@ -7,7 +7,6 @@ import (
 	"github.com/harrowio/harrow/domain"
 	"github.com/harrowio/harrow/stores"
 	"github.com/jmoiron/sqlx"
-	"github.com/rs/zerolog/log"
 )
 
 var (

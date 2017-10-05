@@ -5,15 +5,17 @@ import (
 
 	"github.com/harrowio/harrow/bus/activity"
 	"github.com/harrowio/harrow/domain"
+	"github.com/harrowio/harrow/logger"
 	"github.com/harrowio/harrow/stores"
 	"github.com/jmoiron/sqlx"
-	"github.com/rs/zerolog/log"
 )
 
 type ActivityWorker struct {
 	handlers []func(activity.Message)
 	source   activity.Source
 	store    ActivityStore
+
+	log logger.Logger
 
 	running *sync.WaitGroup
 
@@ -84,13 +86,30 @@ func NewActivityWorker(source activity.Source, store ActivityStore) *ActivityWor
 	}
 }
 
+func (self *ActivityWorker) SetLogger(l logger.Logger) {
+	self.log = l
+}
+
+func (self *ActivityWorker) Log() logger.Logger {
+	if self.log == nil {
+		self.log = logger.Discard
+	}
+	return self.log
+}
+
 func (self *ActivityWorker) AddMessageHandler(handler func(activity.Message)) *ActivityWorker {
+
+	self.Log().Debug().Msgf("adding message handler %v", handler)
+
 	self.handlers = append(self.handlers, handler)
 
 	return self
 }
 
 func (self *ActivityWorker) Start() error {
+
+	self.Log().Debug().Msg("starting worker")
+
 	src, err := self.source.Consume()
 	if err != nil {
 		return err
@@ -102,37 +121,53 @@ func (self *ActivityWorker) Start() error {
 
 func (self *ActivityWorker) Stop() {
 	self.stop <- nil
-	log.Info().Msgf("stopped")
+	self.Log().Info().Msgf("stopped")
 }
 
 func (self *ActivityWorker) processMessages(src chan activity.Message) {
 	for {
 		select {
 		case <-self.stop:
-			log.Info().Msgf("stopping")
+			self.Log().Info().Msg("stopping")
 			return
 		case err := <-self.errors:
-			log.Error().Msgf("error: %s", err)
+			self.Log().Error().Msgf("error: %s", err)
 		case msg, more := <-src:
 			if !more {
+				self.Log().Info().Msg("no more on channel, returning")
 				return
 			}
+			self.Log().Info().Msgf("processing message %s", msg.Activity())
 			self.processMessage(msg)
 		}
 	}
 }
 
 func (self *ActivityWorker) processMessage(msg activity.Message) {
-	for _, handler := range self.handlers {
+
+	self.Log().Debug().Msgf("applying %d handlers", len(self.handlers))
+
+	for n, handler := range self.handlers {
+		self.Log().Debug().Msgf("applying handler %d/%d", n, len(self.handlers))
 		handler(msg)
+		self.Log().Debug().Msgf("applying handler %d/%d ... done", n, len(self.handlers))
 	}
 
+	self.Log().Debug().Msgf("about to store activity from store %v", msg.Activity())
 	if err := self.store.Store(msg.Activity()); err != nil {
-		self.errors <- err
+		if _, ok := err.(*domain.ValidationError); ok {
+			self.Log().Debug().Msgf("validation error, not interested in this.. skipping %s", err)
+		} else {
+			self.Log().Debug().Msgf("not a validation error, d'oh %s", err)
+			self.errors <- err
+		}
 		return
 	}
 
+	self.Log().Debug().Msg("about to acknowledge message")
 	if err := msg.Acknowledge(); err != nil {
+		self.Log().Debug().Msgf("error acknowledging message", err)
 		self.errors <- err
 	}
+	self.Log().Debug().Msg("acknowledged OK")
 }

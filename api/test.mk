@@ -1,4 +1,4 @@
-PACKAGES_WITH_TESTS = $(shell find '${GOPATH}/src' -path '*vendor*' -prune -o -name '*_test.go' -exec dirname {} \; | sort -u | sed 's\#${GOPATH}/src/\#\#' )
+PACKAGES_WITH_TESTS = $(shell find '${GOPATH}/src/github.com/harrowio/harrow' -path '*vendor*' -prune -o -name '*_test.go' -exec dirname {} \; | sort -u | sed 's\#${GOPATH}/src/\#\#' )
 
 t:
 	HARROW_ENV=test go test $(TEST_FLAGS) -run $(t) github.com/harrowio/harrow/$(p)

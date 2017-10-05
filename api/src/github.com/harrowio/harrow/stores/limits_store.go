@@ -79,7 +79,7 @@ func (self *DbLimitsStore) CacheLimits(organizationUuid string, limits *limits.L
 }
 
 func (self *DbLimitsStore) LoadFromCache(organizationUuid string) *limits.Limits {
-	filename := filepath.Join("/mnt/gluster/harrow/limits", organizationUuid+".json")
+	filename := filepath.Join(self.cachePath, organizationUuid+".json")
 	file, err := os.Open(filename)
 	if err != nil {
 		return limits.NewLimits(organizationUuid, time.Now())

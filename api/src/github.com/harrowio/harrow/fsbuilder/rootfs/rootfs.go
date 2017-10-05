@@ -9,6 +9,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"os"
 	"regexp"
 	"strings"
 	"text/template"
@@ -190,6 +191,7 @@ func (self *rootFs) constructContext() error {
 	if err != nil {
 		return fmt.Errorf("Can't load operation repositories: %s", err)
 	} else {
+		fmt.Fprintf(os.Stderr, "found some repos %#v\n", repositories)
 		self.OperationCtxt.Repositories = repositories
 	}
 
@@ -214,6 +216,7 @@ func (self *rootFs) constructContext() error {
 	}
 
 	for _, repository := range repositories {
+
 		if _, found := parameters.Checkout[repository.Uuid]; !found {
 			parameters.Checkout[repository.Uuid] = "master"
 		}
@@ -227,8 +230,12 @@ func (self *rootFs) constructContext() error {
 		if err != nil && !domain.IsNotFound(err) {
 			return fmt.Errorf("Can't load credentials for repository %s: %s", repository.Uuid, err)
 		} else if err != nil {
+			fmt.Fprintf(os.Stderr, "error: %s\n", err)
+			fmt.Fprintf(os.Stderr, "repoCreden: %s\n", repositoryCredential)
 			continue
 		}
+
+		fmt.Fprintf(os.Stderr, "do we get here?\n")
 
 		sshRepositoryCredential, err := domain.AsSshRepositoryCredential(repositoryCredential)
 		if err != nil {
@@ -236,10 +243,14 @@ func (self *rootFs) constructContext() error {
 			continue
 		}
 
+		fmt.Fprintf(os.Stderr, "getting handle on Git repo\n")
 		if gitRepo, err := repository.Git(); err == nil {
 			if gitRepo.UsesSSH() {
 				self.OperationCtxt.AddKey("repository", repositoryCredential.Name, sshRepositoryCredential.PrivateKey, sshRepositoryCredential.PublicKey)
+				fmt.Fprintf(os.Stderr, "repouses ssh credentials are %v", repositoryCredential)
 				self.OperationCtxt.AddSshConfig(repository, repositoryCredential)
+			} else {
+				fmt.Fprintf(os.Stderr, "repo claims not use ssh")
 			}
 		} else {
 			self.Log().Warn().Msgf("Can't parse repository URL, so skipping generating keys: %s", err)

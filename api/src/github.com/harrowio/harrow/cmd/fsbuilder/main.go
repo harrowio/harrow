@@ -23,7 +23,7 @@ import (
 
 const ProgramName = "fsbuilder"
 
-var log zerolog.Logger = zerolog.New(os.Stdout).With().Str("harrow", ProgramName).Timestamp().Logger()
+var log zerolog.Logger = zerolog.New(os.Stderr).With().Str("harrow", ProgramName).Timestamp().Logger()
 
 func Main() {
 	c := config.GetConfig()
@@ -57,6 +57,7 @@ func Main() {
 	}
 	defer tx.Rollback()
 
+	log.Info().Msg("starting for loop")
 	for {
 		if err := buildRootFs(c, os.Stdout, tx, *operationUuid); err != nil {
 			log.Error().Msgf("unable to build rootfs: %s", err)

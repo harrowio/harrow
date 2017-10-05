@@ -63,8 +63,11 @@ func handleWork(log logger.Logger, fromAddress string, c *config.Config, db *sql
 		return message.RejectForever()
 	}
 
+	log.Info().Msgf("checking for handlers for %s", activity.Name)
+
 	handler, found := activityHandlers[activity.Name]
 	if !found {
+		log.Info().Msgf("found no handler")
 		return message.RejectForever()
 	}
 
@@ -403,6 +406,8 @@ func Main() {
 	c := config.GetConfig()
 	fromAddress := c.MailConfig().FromAddress
 
+	log.Debug().Msgf("Sending from %s", fromAddress)
+
 	var err error
 
 	db, err := c.DB()
@@ -420,11 +425,13 @@ func Main() {
 
 	bus := broadcast.NewAMQPTransport(c.AmqpConnectionString(), "mail-dispatcher")
 	defer bus.Close()
+
 	work, err := bus.Consume(broadcast.Create)
 	if err != nil {
 		log.Fatal().Msgf("bus.consume(broadcast.create): %s", err)
 	}
 
+	log.Error().Msgf("listening on %s", broadcast.Create)
 	for created := range work {
 	retry:
 		for {

@@ -61,6 +61,17 @@ func (self *ClonedRepository) Pull() error {
 		return err
 	}
 
+	gitReset := NewSystemCommand("git", "reset", "--hard").
+		WorkingDirectory(self.clonedInto).
+		SetEnv("GIT_PAGER", "/usr/bin/cat").
+		SetEnv("GIT_CONFIG_NOSYSTEM", "true").
+		SetEnv("GIT_ASKPASS", "/bin/echo").
+		SetEnv("GIT_SSH", filepath.Join(self.tempDir, "git-ssh"))
+
+	if output, err := self.os.Run(gitReset); err != nil {
+		return fmt.Errorf("Reset: %s\n%s\n%s\n", gitReset, output, err)
+	}
+
 	gitPull := NewSystemCommand("git", "pull").
 		WorkingDirectory(self.clonedInto).
 		SetEnv("GIT_PAGER", "/usr/bin/cat").
