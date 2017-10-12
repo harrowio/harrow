@@ -9,7 +9,7 @@
     - name: apt install python apt-transport-https
       raw: dpkg -l python || DEBIAN_FRONTEND=noninteractive apt install -y python apt-transport-https
       changed_when: false
-    - name: set timezone to Asia/Tokyo
+    - name: set timezone to UTC
       timezone:
         name: Etc/UTC
     - name: set hostname
