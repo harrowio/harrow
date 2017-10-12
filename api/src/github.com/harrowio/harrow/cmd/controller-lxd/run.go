@@ -57,7 +57,12 @@ func runUserScript(log logger.Logger, client *ssh.Client, activitySink ActivityS
 	wg.Add(1)
 	go func(log logger.Logger) {
 		defer wg.Done()
-		for l := range lexemes {
+		for {
+			l, more := <-lexemes
+			if !more {
+				log.Warn().Msgf("no more lexemes coming, breaking loop")
+				break
+			}
 			err := logSink.Publish(operationUuid, int(l.Fd), l.T, l.Event)
 			if err != nil {
 				log.Warn().Msgf("unable to publish lexeme: %s", l)
@@ -83,6 +88,7 @@ func runUserScript(log logger.Logger, client *ssh.Client, activitySink ActivityS
 				log.Error().Msgf("logsink.eof(%s): %s", operationUuid, err)
 			}
 		}
+		log.Debug().Msgf("wg-1 lexemes")
 	}(log)
 	wg.Add(1)
 	go func(log logger.Logger) {
@@ -113,6 +119,7 @@ func runUserScript(log logger.Logger, client *ssh.Client, activitySink ActivityS
 			}
 		}
 		log.Debug().Msg("controlmessages closed")
+		log.Debug().Msgf("wg-1 control messages")
 	}(log)
 
 	log.Debug().Msg("starting new client session to run job")
@@ -122,15 +129,17 @@ func runUserScript(log logger.Logger, client *ssh.Client, activitySink ActivityS
 		return fatalError
 	}
 	defer session.Close()
-	log.Debug().Msg("starting new client session to run job")
+	log.Debug().Msg("starting new client session to run job (done)")
 
 	log.Debug().Msg("setting the session stdout to new ControlMessageParser")
 	session.Stdout = cast.NewControlMessageParser(controlMessages)
 
 	log.Debug().Msgf("about to run: %s", entrypoint)
 	err = session.Run(entrypoint)
+	log.Debug().Msgf("run completed, can close streams")
 	stdoutLoxer.Close()
 	stderrLoxer.Close()
+	close(lexemes)
 	log.Debug().Msg("waiting for waitgroup")
 	wg.Wait()
 	log.Debug().Msg("waiting for waitgroup (done)")

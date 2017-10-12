@@ -220,7 +220,7 @@ func watchForCancellations(c *config.Config, db *sqlx.DB, activitySink ActivityS
 				continue
 			}
 			id, _ := strconv.Atoi(message.UUID())
-			log.Debug().Msgf("received message id=%d", id)
+			log.Debug().Msgf("received message id=%d table=%s", id, message.Table())
 			tx := mustBeginTx(db)
 			activityStore := stores.NewDbActivityStore(tx)
 			activity, err := activityStore.FindActivityById(id)

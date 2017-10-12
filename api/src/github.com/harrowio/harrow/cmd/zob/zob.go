@@ -5,6 +5,7 @@ import (
 
 	"github.com/harrowio/harrow/bus/broadcast"
 	"github.com/harrowio/harrow/config"
+	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 
 	"encoding/json"
@@ -16,6 +17,8 @@ import (
 const ProgramName = "zob"
 
 func Main() {
+
+	zerolog.SetGlobalLevel(zerolog.InfoLevel)
 
 	c := config.GetConfig()
 	db, err := c.DB()
