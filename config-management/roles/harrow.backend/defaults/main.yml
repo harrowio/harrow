@@ -47,8 +47,8 @@ harrow:
         enabled: true
       authentication:
         enabled: true
-      app_id: e283dc31b791c3cdb282
-      app_secret: a7d1857c76c11b5330d62859a117e7261e9d50f9
+      app_id: {{ vault.github.oauth.app_id }}
+      app_secret: {{ vault.github.oauth.app_secret }}
       redirect_uri_pattern: 'https://www.${domain}/#/a/github/callback/%s'
 
   features:
