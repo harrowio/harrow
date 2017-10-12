@@ -1,4 +1,4 @@
-Unit]
+[Unit]
 Description=Harrow runner - %i
 Requires=harrow.service
 After=harrow.service
@@ -13,6 +13,8 @@ PrivateTmp=true
 ExecStart=/usr/local/bin/harrow runner --connect %I
 User=harrow
 Restart=always
+RestartSec=5
 
-# To keep forked controller processes around when this unit is restarted
-KillMode=process
+# Worker must be allowed to finish working before being force-killed
+# we trust that Go's signal queueing and channels work as intended.
+SendSIGKILL=false

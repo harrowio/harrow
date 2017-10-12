@@ -1,15 +1,13 @@
 [Unit]
 Description=Harrow
 Wants= \
+      harrow-activity-worker.service \
       harrow-api.service \
       harrow-build-status-worker.service \
       harrow-git-trigger-worker.service \
       harrow-keymaker.service \
       harrow-mail-dispatcher.service \
       harrow-metadata-preflight.service \
-{% if harrow.intercom.enabled %}
-      harrow-intercom-worker.service \
-{% endif %}
       harrow-notifier.service \
       harrow-postal-worker.service \
       harrow-scheduler.service \
