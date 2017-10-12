@@ -23,6 +23,7 @@ import (
 	"github.com/harrowio/harrow/cmd/metadata-preflight"
 	"github.com/harrowio/harrow/cmd/migrate"
 	"github.com/harrowio/harrow/cmd/notifier"
+	"github.com/harrowio/harrow/cmd/op-metrics"
 	"github.com/harrowio/harrow/cmd/operation-runner"
 	"github.com/harrowio/harrow/cmd/postal-worker"
 	"github.com/harrowio/harrow/cmd/projector"
@@ -44,6 +45,7 @@ func main() {
 		activityWorker.ProgramName:                 activityWorker.Main,
 		api.ProgramName:                            api.Main,
 		buildStatusWorker.ProgramName:              buildStatusWorker.Main,
+		opMetrics.ProgramName:                      opMetrics.Main,
 		controllerLXD.ProgramName:                  controllerLXD.Main,
 		controllerShell.ProgramName:                controllerShell.Main,
 		fsbuilder.ProgramName:                      fsbuilder.Main,
