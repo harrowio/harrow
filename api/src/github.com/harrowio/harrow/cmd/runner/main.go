@@ -66,7 +66,6 @@ func Main() {
 
 	// Wait for the runner to return an error or for an OS signal and then
 	// continue.
-Wait:
 	for {
 		select {
 		case e := <-runner.errs:
@@ -80,7 +79,7 @@ Wait:
 			activityBus.Close()
 			listener.Close()
 
-			runner.Stop() // premature stop, running syscall.Exec will mean we never continue
+			runner.Stop("err") // premature stop, running syscall.Exec will mean we never continue
 
 			executable, _ := os.Executable()
 			execErr := syscall.Exec(executable, os.Args, os.Environ())
@@ -90,11 +89,10 @@ Wait:
 
 		case s := <-sig:
 			log.Error().Msgf("received signal: %s", s)
-			break Wait
+			runner.Stop("sig")
 		}
 	}
 
-	// Stop the runner before we exit, as far as possible we'll wait for it to
-	// clean up after itself.
-	runner.Stop()
+	log.Info().Msgf("trying to drop out of main")
+
 }

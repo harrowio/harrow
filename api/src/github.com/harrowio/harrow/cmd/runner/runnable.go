@@ -21,16 +21,22 @@ type OperationFromDbOrBus struct {
 	log       logger.Logger
 }
 
-func (ofdob *OperationFromDbOrBus) WaitForNew() {
+func (ofdob *OperationFromDbOrBus) WaitForNew(quit chan bool) bool { // look again
 	ofdob.log.Info().Msg("waiting for sth to happen on db new-operation channel")
 	l := pq.NewListener(ofdob.dbConnStr, 10*time.Second, time.Minute, nil)
 	if err := l.Listen("new-operation"); err != nil {
 		ofdob.log.Fatal().Msgf("error listening on pg channel %q: %s", "new-operation", err)
 	}
 	defer l.Close()
-	<-l.Notify
-	ofdob.log.Info().Msg("something happened in db, returning")
-	return
+	select {
+	case <-l.Notify:
+		ofdob.log.Info().Msg("something happened in db, returning")
+		return true // look again
+	case <-quit:
+		ofdob.log.Info().Msg("searcher goroutine got kill sig, closing listener and returning")
+		l.Close()
+		return false // don't look again
+	}
 }
 
 // appendStatusLog appends a record to the stauts log for the event given
@@ -57,7 +63,7 @@ func appendStatusLog(log logger.Logger, tx *sqlx.Tx, uuid, entryType, subject st
 
 // Next on can immediately return an error, else it will eventually send
 // an operation when one becomes available on the channel given
-func (ofdob *OperationFromDbOrBus) NextOn(ch chan<- *domain.Operation) error {
+func (ofdob *OperationFromDbOrBus) NextOn(quit chan bool, ch chan<- *domain.Operation) error {
 	op, err := ofdob.Next()
 	if err != nil {
 		return err
@@ -66,8 +72,11 @@ func (ofdob *OperationFromDbOrBus) NextOn(ch chan<- *domain.Operation) error {
 		ch <- op
 		return nil
 	}
-	ofdob.WaitForNew()
-	return ofdob.NextOn(ch)
+	if lookAgain := ofdob.WaitForNew(quit); lookAgain {
+		return ofdob.NextOn(quit, ch)
+	} else {
+		return nil
+	}
 }
 
 // Next uses it's own transaction to atomically select the next unstarted operation
@@ -88,6 +97,7 @@ func (ofdob *OperationFromDbOrBus) Next() (*domain.Operation, error) {
 		return nil, errors.Wrap(err, "could not start database transaction")
 	}
 	defer tx.Commit()
+
 	ofdob.log.Info().Msg("getting next unstarted operation from database")
 
 	var op *domain.Operation = &domain.Operation{}
@@ -132,8 +142,10 @@ func (ofdob *OperationFromDbOrBus) Next() (*domain.Operation, error) {
 		if err := opStore.MarkAsTimedOut(op.Uuid); err != nil {
 			return nil, errors.Wrap(err, "could not mark expired operation as timed out")
 		}
+		tx.Commit()
 		return ofdob.Next()
 	}
 
+	ofdob.log.Info().Msg("returning without recursing")
 	return op, nil
 }

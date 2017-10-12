@@ -42,6 +42,7 @@ type Runner struct {
 
 	// internal management channels/etc
 	operationPending chan *domain.Operation
+	quitSearching    chan bool
 	stopper          chan chan bool
 	healthTicker     *time.Ticker
 
@@ -71,18 +72,14 @@ func (r *Runner) Start() {
 	r.stopper = make(chan chan bool)
 	r.stateChange = make(chan state)
 	r.operationPending = make(chan *domain.Operation)
+	r.quitSearching = make(chan bool)
 
 	connectionLost := make(chan error)
 	containerNetworkUp := make(chan error)
 	go r.MakeContainer(uuidhelper.MustNewV4(), containerNetworkUp)
 
-	ticker := time.NewTicker(time.Millisecond * 500)
-
 	for {
 		select {
-
-		case <-ticker.C:
-			r.log.Info().Msgf("pending operations is %v", r.operationPending)
 
 		// we have a pending job, we should only recieve on this channel after we
 		// successfully start a container as the Runnable fetcher only runs once we
@@ -116,28 +113,30 @@ func (r *Runner) Start() {
 			}
 
 			go r.lxd.MaintainConnection(connectionLost)
-			go func(sendOn chan<- *domain.Operation, db *sqlx.DB) {
+			go func(quit chan bool, sendOn chan<- *domain.Operation, db *sqlx.DB) {
 				opdob := OperationFromDbOrBus{
 					db:        db,
 					log:       r.log,
 					dbConnStr: pgDSN,
 				}
-				if err := opdob.NextOn(sendOn); err != nil {
+				if err := opdob.NextOn(quit, sendOn); err != nil {
+					r.log.Info().Msgf("searching goroutine sending on err chan (%s)", err)
 					r.errs <- err
 				}
 				r.log.Info().Msgf("got one operation, cancelling out of searching goroutine")
-			}(r.operationPending, r.db)
+			}(r.quitSearching, r.operationPending, r.db)
 
 		// Incase we got a stop signal break this loop
 		case stopped := <-r.stopper:
-			r.db.Close()
 			if r.healthTicker != nil {
 				r.healthTicker.Stop()
 			}
 			if err := r.lxd.DestroyContainer(); err != nil {
 				r.log.Error().Msgf("error destroying container: %s", err)
 			}
+			go func() { r.quitSearching <- true }()
 			stopped <- true
+			r.db.Close()
 			return
 
 		// healchChecks might be a channel that never yields (if we never go into
@@ -156,13 +155,18 @@ func (r *Runner) Start() {
 
 }
 
-func (r *Runner) Stop() {
-	r.log.Info().Msg("sending stop signal on stopper channel")
-	stopped := make(chan bool)
-	r.stopper <- stopped
-	r.log.Info().Msg("waiting for clean shutdown...")
-	<-stopped
-	r.log.Info().Msg("got clean shutdown notice")
+func (r *Runner) Stop(reason string) {
+	r.log.Info().Msgf("sending stop signal on stopper channel (%s)", reason)
+	if r.stopper == nil {
+		r.log.Info().Msgf("already got stop signal, please be patient")
+	} else {
+		stopped := make(chan bool)
+		r.stopper <- stopped
+		r.stopper = nil
+		r.log.Info().Msg("waiting for clean shutdown...")
+		<-stopped
+		r.log.Info().Msg("got clean shutdown notice, returning from Stop()")
+	}
 }
 
 func (r *Runner) SetLXDConnStr(connStr string) (err error) {
@@ -204,15 +208,15 @@ func (r *Runner) runOperation(op *domain.Operation) {
 		return
 	}
 
-	r.log.Info().Msg("disabling stop signal handler whilst running operation")
-	origStopper := r.stopper
-	defer func() {
-		r.log.Info().Msgf("setting stopper to %#v", origStopper)
-		r.stopper = origStopper
-	}()
-	r.stopper = nil
+	// r.log.Info().Msg("disabling stop signal handler whilst running operation")
+	// origStopper := r.stopper
+	// defer func() {
+	// 	r.log.Info().Msgf("setting stopper to %#v", origStopper)
+	// 	r.stopper = origStopper
+	// }()
+	// r.stopper = nil
 
-	if err := appendStatusLog(r.log, tx, op.Uuid, "vm.reserved", fmt.Sprintf("operation starting (wait time %s)", time.Now().UTC().Sub(*op.CreatedAt))); err != nil {
+	if err := appendStatusLog(r.log, tx, op.Uuid, "vm.reserved", fmt.Sprintf("Reserved, will start (wait time %s)", time.Now().UTC().Sub(*op.CreatedAt))); err != nil {
 		r.errs <- errors.Wrap(err, "could not append vm.reserved message to operation status logs")
 		return
 	}
@@ -239,5 +243,6 @@ func (r *Runner) runOperation(op *domain.Operation) {
 		r.log.Info().Msg("operation is a notifier job (will run in the local shell)")
 		o.RunLocally(notifierType)
 	}
+
 	r.errs <- nil
 }
