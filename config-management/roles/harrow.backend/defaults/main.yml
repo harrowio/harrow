@@ -89,21 +89,21 @@ harrow:
         password: test
         port: 5432
         sslmode: 'disable'
-        host: '/var/run/postgresql/'
+        host: /var/run/postgresql
         username: test
       - environment: development
         name: "{{ shared.postgresql.development.name }}"
         username: "{{ shared.postgresql.development.username }}"
         password: "{{ vault.postgresql.development.password }}"
-        port: 5432
-        host: '/var/run/postgresql/'
+        port: 6432
+        host: /var/run/postgresql
         sslmode: 'disable'
       - environment: production
         name: "{{ shared.postgresql.production.name }}"
         username: "{{ shared.postgresql.production.username }}"
         password: "{{ vault.postgresql.production.password }}"
-        port: 5432
-        host: 127.0.0.1
+        port: 6432
+        host: /var/run/postgresql
         sslmode: 'disable'
 
   environment: production
