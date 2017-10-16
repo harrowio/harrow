@@ -51,8 +51,12 @@ func Main() {
 	}
 
 	host := connectionInfo.Host
-	user := connectionInfo.User.Username()
-	if user == "" {
+	if connectionInfo.User != nil {
+		user := connectionInfo.User.Username()
+		if user == "" {
+			user = "root"
+		}
+	} else {
 		user = "root"
 	}
 
