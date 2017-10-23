@@ -47,16 +47,10 @@ def fn_kill():
             requests.post(url, data=payload, auth=requests.auth.HTTPBasicAuth(user, passwd))
 
         except subprocess.CalledProcessError as e:
-            unix_nanos = subprocess.check_output(["date", "+%s%N"])
-            payload = "lxd_containers,host={},lxc_error={} error_killing_stale_container=1,killed_stale_container=0 {}".format(
-                    socket.gethostname(),
-                    out.split()[-1],
-                    unix_nanos.decode('utf-8').rstrip()
-            )
-            requests.post(url, data=payload, auth=requests.auth.HTTPBasicAuth(user, passwd))
             print(
                 "! couldn't delete container {container}".format(
                     container=container))
+            pass
 
 
 def fn_list():
