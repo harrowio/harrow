@@ -52,7 +52,21 @@ intern` from the `stow` directory.
     $ make development
     # <make a coffee>
 
-## TODO LXD
+# Porting Fixes To Base Image
 
- * sudo apt-get install python3-dateutil
- * 'net.ipv4.ip_forward=1' in /etc/sysctl.conf (# sysctl -p)
+
+    $ lxc launch harrow-baseimage $name
+    $ lxc exec $name <some command here>
+    $ lxc publish --force $name
+    => Container published with fingerprint: $fingerprint
+
+    $ lxc export $fingerprint .
+    => Output is in $fingerprint.tar.gz
+
+    $ lxc image alias delete harrow-baseimage
+    $ lxc image alias create harrow-baseimage $fingerprint
+
+
+*Note:* Be sure to fix the Ansible scripts, and to put this tarball into the
+correct S3 bucket.
+
