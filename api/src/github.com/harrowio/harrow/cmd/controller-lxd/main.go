@@ -50,14 +50,12 @@ func Main() {
 		panic(err)
 	}
 
+	var user string = "root"
 	host := connectionInfo.Host
 	if connectionInfo.User != nil {
-		user := connectionInfo.User.Username()
-		if user == "" {
-			user = "root"
+		if u := connectionInfo.User.Username(); u != "" {
+			user = u
 		}
-	} else {
-		user = "root"
 	}
 
 	db, err := conf.DB()
@@ -224,7 +222,6 @@ func watchForCancellations(c *config.Config, db *sqlx.DB, activitySink ActivityS
 				continue
 			}
 			id, _ := strconv.Atoi(message.UUID())
-			log.Debug().Msgf("received message id=%d table=%s", id, message.Table())
 			tx := mustBeginTx(db)
 			activityStore := stores.NewDbActivityStore(tx)
 			activity, err := activityStore.FindActivityById(id)

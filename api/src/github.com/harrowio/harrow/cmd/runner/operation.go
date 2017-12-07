@@ -174,36 +174,3 @@ func (o *Operation) RunOnLXDHost() {
 
 	return
 }
-
-// func logForwarder(buf *bytes.Buffer, log logger.Logger) {
-// 	for {
-// 		if buf != nil {
-// 			fmt.Println("DEBUG BUF LEN", buf.Len())
-// 			line, err := buf.ReadBytes('\n')
-// 			if err != nil && err != io.EOF {
-// 				log.Error().Msgf("error reading bytes from buffer: %s", err)
-// 				return
-// 			}
-// 			if len(line) > 0 {
-// 				fmt.Print(string(line))
-// 			}
-// 		}
-// 	}
-// }
-
-// func logForwarder(buf *bytes.Buffer, log logger.Logger) {
-//
-// 	fmt.Printf("starting log forwarder for %p\n", buf)
-// 	scanner := bufio.NewScanner(buf)
-// 	scanner.Split(bufio.ScanWords)
-// 	for scanner.Scan() {
-// 		fmt.Print(scanner.Text())
-// 	}
-//
-// 	if err := scanner.Err(); err != nil {
-// 		if err != nil && err != io.EOF {
-// 			log.Error().Msgf("error reading bytes from buffer: %s", err)
-// 		}
-// 	}
-//
-// }

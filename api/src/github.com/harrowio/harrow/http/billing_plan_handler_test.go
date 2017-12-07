@@ -100,6 +100,7 @@ func MustNewWebhookNotification() *braintree.WebhookNotification {
 }
 
 func TestBillingHandler_BraintreeNotificationToBillingEvent_createsABillingEventForSubscriptions(t *testing.T) {
+	t.Skip("not relevant anymore")
 	notification := MustNewWebhookNotification()
 	subscriptionCanceled, err := BraintreeNotificationToBillingEventData(notification)
 	if err != nil {

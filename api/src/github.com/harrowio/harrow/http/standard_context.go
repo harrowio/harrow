@@ -109,13 +109,14 @@ func (sc *standardContext) RequestContext(w http.ResponseWriter, req *http.Reque
 
 func (sc *standardContext) newTx() *sqlx.Tx {
 
-	if err := sc.d.Ping(); err != nil {
-		fmt.Fprintf(os.Stderr, "ERROR PINGING DATABASE, WILL PROBABLY PANIC\n")
-	}
+	// if err := sc.d.Ping(); err != nil {
+	// 	fmt.Fprintf(os.Stderr, "ERROR PINGING DATABASE, WILL PROBABLY PANIC\n")
+	// }
 
 	if sc.t == nil {
 		fmt.Fprintf(os.Stderr, "had no tx in progess, starting one\n")
 		sc.t = sc.d.MustBegin()
+		fmt.Fprintf(os.Stderr, "have tx, will continue\n")
 	} else {
 		fmt.Fprintf(os.Stderr, "reusing prexisting tx\n")
 	}

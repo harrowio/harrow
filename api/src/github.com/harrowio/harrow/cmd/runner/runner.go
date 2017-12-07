@@ -1,7 +1,6 @@
 package runner
 
 import (
-	"fmt"
 	"net/url"
 	"strings"
 	"time"
@@ -205,26 +204,10 @@ func (r *Runner) runOperation(op *domain.Operation) {
 	tx, err := r.db.Beginx()
 	if err != nil {
 		r.errs <- errors.Wrap(err, "could not start database transaction")
-		return
 	}
-
-	// r.log.Info().Msg("disabling stop signal handler whilst running operation")
-	// origStopper := r.stopper
-	// defer func() {
-	// 	r.log.Info().Msgf("setting stopper to %#v", origStopper)
-	// 	r.stopper = origStopper
-	// }()
-	// r.stopper = nil
-
-	if err := appendStatusLog(r.log, tx, op.Uuid, "vm.reserved", fmt.Sprintf("Reserved, will start (wait time %s)", time.Now().UTC().Sub(*op.CreatedAt))); err != nil {
-		r.errs <- errors.Wrap(err, "could not append vm.reserved message to operation status logs")
-		return
-	}
+	defer tx.Commit()
 
 	var opStore *stores.DbOperationStore = stores.NewDbOperationStore(tx)
-	r.log.Info().Msg("marking operation as proceeding to run it")
-	opStore.MarkAsStarted(op.Uuid)
-	tx.Commit()
 
 	r.log.Info().Msgf("operation to run is: %s", op.Uuid)
 	o := Operation{
@@ -234,6 +217,10 @@ func (r *Runner) runOperation(op *domain.Operation) {
 		lxd:    r.lxd,
 		log:    r.log,
 	}
+
+	r.log.Info().Msg("marking operation as proceeding to run it")
+	opStore.MarkAsStarted(op.Uuid)
+
 	switch op.IsUserJob() {
 	case true:
 		r.log.Info().Msg("operation is a user job (will run in lxd)")

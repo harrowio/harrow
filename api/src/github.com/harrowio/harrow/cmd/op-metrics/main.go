@@ -120,7 +120,9 @@ func Main() {
 		waitTimeMeanMetrics = append(waitTimeMeanMetrics, Metric{Y: t.Mean, X: t.Date.Unix()})
 	}
 
-	p.Metrics["timeouts"] = timeoutMetrics
+	if len(timeoutMetrics) > 0 {
+		p.Metrics["timeouts"] = timeoutMetrics
+	}
 	p.Metrics["wait_time_00pct"] = waitTime00Metrics
 	p.Metrics["wait_time_99pct"] = waitTime99Metrics
 	p.Metrics["wait_time_95pct"] = waitTime95Metrics

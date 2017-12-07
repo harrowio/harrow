@@ -8,6 +8,7 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"math/big"
 	"path/filepath"
 	"strings"
 	"time"
@@ -213,6 +214,12 @@ func (self *OperationParameters) Scan(from interface{}) error {
 
 func (self *Operation) OwnUrl(requestScheme, requestBaseUri string) string {
 	return fmt.Sprintf("%s://%s/operations/%s", requestScheme, requestBaseUri, self.Uuid)
+}
+
+func (self *Operation) UuidBigInt() big.Int {
+	var i big.Int
+	i.SetString(strings.Replace(self.Uuid, "-", "", 4), 16)
+	return i
 }
 
 func (self *Operation) Status() string {

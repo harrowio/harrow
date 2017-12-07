@@ -5,12 +5,10 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"os"
 
 	"github.com/gorilla/mux"
 
 	"github.com/harrowio/harrow/activities"
-	"github.com/harrowio/harrow/cmd/projector"
 	"github.com/harrowio/harrow/domain"
 	"github.com/harrowio/harrow/stores"
 	"github.com/harrowio/harrow/uuidhelper"
@@ -409,22 +407,25 @@ func (self orgHandler) ProjectCards(ctxt RequestContext) error {
 	}
 
 	cards := []*domain.ProjectCard{}
-	if response, err := http.Get(os.Getenv("HARROW_PROJECTOR_URL") + "/organizations/" + organizationUuid); err == nil {
-		cardsByProjectUuid := CardsByProjectUuid{}
-		body := &projector.Response{
-			Subject: &cardsByProjectUuid,
-		}
-
-		if err := json.NewDecoder(response.Body).Decode(body); err != nil {
-			ctxt.Log().Error().Msgf("/organizations/%s/project-cards", err)
-		}
-
-		if body.Error != "" {
-			ctxt.Log().Error().Msgf("/organizations/%s/project-cards", err)
-		}
-
-		cards = cardsByProjectUuid.ProjectCards()
-	}
+	//
+	// Projector currently can't start fast enough to be useful, so comment it out
+	//
+	// if response, err := http.Get(os.Getenv("HARROW_PROJECTOR_URL") + "/organizations/" + organizationUuid); err == nil {
+	// 	cardsByProjectUuid := CardsByProjectUuid{}
+	// 	body := &projector.Response{
+	// 		Subject: &cardsByProjectUuid,
+	// 	}
+	//
+	// 	if err := json.NewDecoder(response.Body).Decode(body); err != nil {
+	// 		ctxt.Log().Error().Msgf("/organizations/%s/project-cards", err)
+	// 	}
+	//
+	// 	if body.Error != "" {
+	// 		ctxt.Log().Error().Msgf("/organizations/%s/project-cards", err)
+	// 	}
+	//
+	// 	cards = cardsByProjectUuid.ProjectCards()
+	// }
 	if len(cards) == 0 {
 		cardsFromDB, err := stores.NewDbProjectCardStore(ctxt.Tx()).FindAllByOrganizationUuid(organizationUuid)
 		if err != nil {

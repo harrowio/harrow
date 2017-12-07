@@ -28,8 +28,12 @@ func Main() {
 	flag.Parse()
 
 	// Set up handler for signals from the operating system (e.g CTRL+C)
-	sig := make(chan os.Signal, 1)
-	signal.Notify(sig, os.Interrupt)
+	stop := make(chan os.Signal, 1)
+	signal.Notify(stop, os.Interrupt)
+
+	inter := make(chan os.Signal, 1)
+	signal.Notify(inter, syscall.SIGUSR1)
+	var restartSelf bool = true
 
 	listener, err := net.Listen("tcp", ":0")
 	go func(l net.Listener) {
@@ -51,7 +55,7 @@ func Main() {
 	// and start it in a goroutine
 	runner := &Runner{
 		config:       config,
-		errs:         make(chan error),
+		errs:         make(chan error, 1),
 		interval:     60,
 		log:          log.With().Str("host", *connStr).Logger(),
 		activitySink: activityBus,
@@ -66,9 +70,11 @@ func Main() {
 
 	// Wait for the runner to return an error or for an OS signal and then
 	// continue.
+O:
 	for {
 		select {
 		case e := <-runner.errs:
+
 			if err == nil {
 				log.Error().Msgf("runner sent a nil error (signals successful completion)")
 			} else {
@@ -81,18 +87,27 @@ func Main() {
 
 			runner.Stop("err") // premature stop, running syscall.Exec will mean we never continue
 
-			executable, _ := os.Executable()
-			execErr := syscall.Exec(executable, os.Args, os.Environ())
-			if execErr != nil {
-				panic(execErr)
+			if restartSelf {
+				executable, _ := os.Executable()
+				execErr := syscall.Exec(executable, os.Args, os.Environ())
+				if execErr != nil {
+					panic(execErr)
+				}
+				log.Error().Msgf("have been set to restartSelf=false, will exit cleanly")
+				os.Exit(0)
 			}
 
-		case s := <-sig:
-			log.Error().Msgf("received signal: %s", s)
+		case s := <-stop:
+			log.Error().Msgf("received signal, stopping: %s", s)
 			runner.Stop("sig")
+			break O
+
+		case s := <-inter:
+			log.Error().Msgf("received signal, will exit at next opportunity: %s", s)
+			restartSelf = false
 		}
 	}
 
-	log.Info().Msgf("trying to drop out of main")
+	log.Info().Msgf("dropping out of Main()")
 
 }

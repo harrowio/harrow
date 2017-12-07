@@ -7,3 +7,6 @@ config.db
 
 # the dotenv file (env.sample is committed)
 .env
+
+# binaries we need because of Go
+src/github.com/jteeuwen

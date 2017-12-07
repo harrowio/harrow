@@ -5,8 +5,6 @@ import (
 	"net"
 	"time"
 
-	"golang.org/x/net/netutil"
-
 	"github.com/harrowio/harrow/bus/activity"
 	"github.com/harrowio/harrow/config"
 	"github.com/harrowio/harrow/domain"
@@ -30,7 +28,20 @@ func init() {
 	OS = git.NewOperatingSystem(c.FilesystemConfig().GitTempDir)
 }
 
-func MountAll(r *mux.Router, ctxt ServerContext) {
+func ListenAndServe(l zerolog.Logger, db *sqlx.DB, bus activity.Sink, kv stores.KeyValueStore, ss stores.SecretKeyValueStore, c *config.Config) {
+
+	ctxt := NewStandardContext(db, c, kv, ss)
+	ctxt.SetLogger(l)
+
+	r := mux.NewRouter()
+	activitySink = NewBusSink(bus)
+
+	r.NotFoundHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.String() != "/inform" {
+			l.Warn().Msgf("404 invoked: %s", r.URL.String())
+		}
+	})
+
 	MountIndexHandler(r, ctxt)
 
 	MountActivitiesHandler(r, ctxt)
@@ -65,23 +76,6 @@ func MountAll(r *mux.Router, ctxt ServerContext) {
 	MountUserHandler(r, ctxt)
 	MountUserVerificationHandler(r, ctxt)
 	MountWebhookHandler(r, ctxt)
-}
-
-func ListenAndServe(l zerolog.Logger, db *sqlx.DB, bus activity.Sink, kv stores.KeyValueStore, ss stores.SecretKeyValueStore, c *config.Config) {
-
-	ctxt := NewStandardContext(db, c, kv, ss)
-	ctxt.SetLogger(l)
-
-	r := mux.NewRouter()
-	activitySink = NewBusSink(bus)
-
-	r.NotFoundHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.URL.String() != "/inform" {
-			l.Warn().Msgf("404 invoked: %s", r.URL.String())
-		}
-	})
-
-	MountAll(r, ctxt)
 
 	listener, err := net.Listen("tcp", c.HttpConfig().String())
 	if err != nil {
@@ -91,7 +85,8 @@ func ListenAndServe(l zerolog.Logger, db *sqlx.DB, bus activity.Sink, kv stores.
 	ctxt.Log().Info().Msgf("listening on %s", c.HttpConfig())
 
 	ctxt.Log().Info().Msgf("setting max simultanious connections to %d", c.HttpConfig().MaxSimultaneousConns)
-	listener = netutil.LimitListener(listener, c.HttpConfig().MaxSimultaneousConns)
+
+	// listener = netutil.LimitListener(listener, c.HttpConfig().MaxSimultaneousConns)
 
 	server := &http.Server{
 		Addr:           ":8080",
