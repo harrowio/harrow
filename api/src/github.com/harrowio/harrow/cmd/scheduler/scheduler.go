@@ -16,7 +16,7 @@ func schedulableFromUuid(db *sqlx.DB, uuid string) (domain.Schedulable, error) {
 	defer tx.Rollback()
 	store := stores.NewDbScheduleStore(tx)
 	log.Debug().Msgf("schedulableFromUuid: loading schedule %q", uuid)
-	sched, err := store.FindByUuid(uuid)
+	sched, err := store.FindInclArchivedByUuid(uuid)
 	if err != nil {
 		return nil, err
 	}

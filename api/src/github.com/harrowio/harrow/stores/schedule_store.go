@@ -38,6 +38,24 @@ func (store DbScheduleStore) FindByUuid(uuid string) (*domain.Schedule, error) {
 
 }
 
+func (store DbScheduleStore) FindInclArchivedByUuid(uuid string) (*domain.Schedule, error) {
+
+	var schedule *domain.Schedule = &domain.Schedule{Uuid: uuid}
+
+	var q string = `SELECT * FROM schedules WHERE uuid = $1`
+	err := store.tx.Get(schedule, q, schedule.Uuid)
+
+	if err == sql.ErrNoRows {
+		return nil, new(domain.NotFoundError)
+	}
+
+	if err != nil {
+		return nil, err
+	}
+
+	return schedule, nil
+}
+
 func (store DbScheduleStore) Create(schedule *domain.Schedule) (string, error) {
 
 	if err := schedule.Validate(); err != nil {
