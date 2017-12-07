@@ -78,10 +78,10 @@ func Test_Secret_Links(t *testing.T) {
 	secret := &Secret{Uuid: "456", EnvironmentUuid: "123"}
 	resp := secret.Links(make(map[string]map[string]string), "https", "test.tld")
 	want := map[string]map[string]string{
-		"self": map[string]string{
+		"self": {
 			"href": "https://test.tld/secrets/456",
 		},
-		"environment": map[string]string{
+		"environment": {
 			"href": "https://test.tld/environments/123",
 		},
 	}

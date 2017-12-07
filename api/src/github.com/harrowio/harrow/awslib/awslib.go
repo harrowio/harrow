@@ -60,7 +60,7 @@ func FilterInstancesByTag(asInstances []*autoscaling.Instance, tag string) ([]*e
 		params := &ec2.DescribeInstancesInput{
 			InstanceIds: instanceIDs,
 			Filters: []*ec2.Filter{
-				&ec2.Filter{Name: aws.String("tag-key"), Values: []*string{aws.String(tag)}},
+				{Name: aws.String("tag-key"), Values: []*string{aws.String(tag)}},
 			},
 			NextToken: nextToken,
 		}
@@ -85,7 +85,7 @@ func FilterInstancesByTag(asInstances []*autoscaling.Instance, tag string) ([]*e
 func GetTags(instanceId string) ([]*ec2.TagDescription, error) {
 	input := &ec2.DescribeTagsInput{
 		Filters: []*ec2.Filter{
-			&ec2.Filter{Name: aws.String("resource-id"), Values: []*string{aws.String(instanceId)}},
+			{Name: aws.String("resource-id"), Values: []*string{aws.String(instanceId)}},
 		},
 	}
 	out, err := ec2Service.DescribeTags(input)
@@ -136,7 +136,7 @@ func PutMetricData(metricName string, value float64) error {
 	input := &cloudwatch.PutMetricDataInput{
 		Namespace: aws.String("harrow"),
 		MetricData: []*cloudwatch.MetricDatum{
-			&cloudwatch.MetricDatum{
+			{
 				MetricName: aws.String(metricName),
 				Value:      aws.Float64(value),
 			},

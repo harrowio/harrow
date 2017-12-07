@@ -159,10 +159,10 @@ func Test_txService_CapabilitiesBySubject_returnsSetOfAllSubjectsWithCapabilitie
 	service := NewService(tx, user, config.GetConfig())
 
 	expected := map[string][]string{
-		"public":       []string{"read"},
-		"session":      []string{"create", "validate"},
-		"user":         []string{"signup"},
-		"organization": []string{"create"},
+		"public":       {"read"},
+		"session":      {"create", "validate"},
+		"user":         {"signup"},
+		"organization": {"create"},
 	}
 
 	capabilities := service.CapabilitiesBySubject()

@@ -130,7 +130,7 @@ func Test_Operation_Environment_ReturnsEnvironmentForAJob(t *testing.T) {
 
 	store := &mockEnvStore{
 		byJobUuid: map[string]*Environment{
-			job.Uuid: &Environment{
+			job.Uuid: {
 				Uuid: job.EnvironmentUuid,
 			},
 		},
@@ -164,8 +164,8 @@ func Test_Operation_Secrets(t *testing.T) {
 	}
 
 	expSecrets := []*Secret{
-		&Secret{EnvironmentUuid: env.Uuid},
-		&Secret{EnvironmentUuid: env.Uuid},
+		{EnvironmentUuid: env.Uuid},
+		{EnvironmentUuid: env.Uuid},
 	}
 	secretStore := &mockSecretStore{
 		byEnvironmentUuid: map[string][]*Secret{
@@ -201,8 +201,8 @@ func Test_Operation_IsReady(t *testing.T) {
 	}
 
 	secrets := []*Secret{
-		&Secret{EnvironmentUuid: env.Uuid, Status: SecretPending},
-		&Secret{EnvironmentUuid: env.Uuid, Status: SecretPending},
+		{EnvironmentUuid: env.Uuid, Status: SecretPending},
+		{EnvironmentUuid: env.Uuid, Status: SecretPending},
 	}
 	secretStore := &mockSecretStore{
 		byEnvironmentUuid: map[string][]*Secret{
@@ -211,8 +211,8 @@ func Test_Operation_IsReady(t *testing.T) {
 	}
 
 	repos := []*Repository{
-		&Repository{Uuid: "485f5eb0-b1e6-4617-b409-efd7d29ecfac"},
-		&Repository{Uuid: "3b58159a-39f8-4227-9e07-429dbbf89063"},
+		{Uuid: "485f5eb0-b1e6-4617-b409-efd7d29ecfac"},
+		{Uuid: "3b58159a-39f8-4227-9e07-429dbbf89063"},
 	}
 	reposStore := &mockRepositoryStore{
 		byJobUuid: map[string][]*Repository{
@@ -230,8 +230,8 @@ func Test_Operation_IsReady(t *testing.T) {
 
 	// Adding only the RepositoryCredentials should not make the operation ready
 	repoCredentials := []*RepositoryCredential{
-		&RepositoryCredential{RepositoryUuid: repos[0].Uuid},
-		&RepositoryCredential{RepositoryUuid: repos[1].Uuid},
+		{RepositoryUuid: repos[0].Uuid},
+		{RepositoryUuid: repos[1].Uuid},
 	}
 	repoCredentialsStore = &mockRepositoryCredentialsStore{
 		byRepositoryUuid: map[string]*RepositoryCredential{
@@ -274,8 +274,8 @@ func Test_Operation_Repositories_JobOperation(t *testing.T) {
 	}
 
 	repos := []*Repository{
-		&Repository{Uuid: "485f5eb0-b1e6-4617-b409-efd7d29ecfac"},
-		&Repository{Uuid: "3b58159a-39f8-4227-9e07-429dbbf89063"},
+		{Uuid: "485f5eb0-b1e6-4617-b409-efd7d29ecfac"},
+		{Uuid: "3b58159a-39f8-4227-9e07-429dbbf89063"},
 	}
 	reposStore := &mockRepositoryStore{
 		byJobUuid: map[string][]*Repository{

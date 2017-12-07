@@ -71,7 +71,7 @@ func (l *capabilityList) add(capabilities []string) *capabilityList {
 	}
 
 	merged := make([]string, 0, len(set))
-	for cap, _ := range set {
+	for cap := range set {
 		merged = append(merged, cap)
 	}
 

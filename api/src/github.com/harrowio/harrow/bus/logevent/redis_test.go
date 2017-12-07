@@ -39,7 +39,7 @@ func Test_RedisSource(t *testing.T) {
 		transport.Close()
 	}()
 	cnt := 0
-	for _ = range msgs {
+	for range msgs {
 		cnt++
 	}
 	if cnt != n {

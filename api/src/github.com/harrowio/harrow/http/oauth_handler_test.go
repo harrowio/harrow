@@ -143,7 +143,7 @@ func Test_OAuthHandler_GithubCallbackSignin_FailsOnMissingTokenAndNoVerifiedEmai
 			Name:  user.Name,
 			Login: "testik",
 			Emails: []github.GithubEmail{
-				github.GithubEmail{
+				{
 					Email:    user.Email,
 					Verified: false,
 					Primary:  true,
@@ -170,7 +170,7 @@ func Test_OAuthHandler_GithubCallbackSignin_FailsOnMissingTokenButExistingUser(t
 			Name:  user.Name,
 			Login: "testik",
 			Emails: []github.GithubEmail{
-				github.GithubEmail{
+				{
 					Email:    user.Email,
 					Verified: true,
 					Primary:  true,
@@ -196,12 +196,12 @@ func Test_OAuthHandler_GithubCallbackSignin_CreatesAnUserWithVerifiedPrimary(t *
 			Name:  "Foo Bar",
 			Login: "testik",
 			Emails: []github.GithubEmail{
-				github.GithubEmail{
+				{
 					Email:    "foo@bar.com",
 					Verified: true,
 					Primary:  true,
 				},
-				github.GithubEmail{
+				{
 					Email:    "foo@another.com",
 					Verified: true,
 					Primary:  false,
@@ -257,12 +257,12 @@ func Test_OAuthHandler_GithubCallbackSignin_CreatesAnUserWithVerifiedSecondary(t
 			Name:  "Foo Bar",
 			Login: "testik",
 			Emails: []github.GithubEmail{
-				github.GithubEmail{
+				{
 					Email:    "foo@bar.com",
 					Verified: false, // Primary email not verified!
 					Primary:  true,
 				},
-				github.GithubEmail{
+				{
 					Email:    "foo@another.com",
 					Verified: true,
 					Primary:  false,
@@ -295,7 +295,7 @@ func testUrlParam(u *url.URL, key, value string) error {
 
 	str := u.String()
 	query := strings.IndexRune(str, '?')
-	v, err := url.ParseQuery(str[query+1 : len(str)])
+	v, err := url.ParseQuery(str[query+1:])
 	if err != nil {
 		return err
 	}

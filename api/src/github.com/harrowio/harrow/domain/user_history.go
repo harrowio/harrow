@@ -42,7 +42,7 @@ func (self *Set) Size() int { return len(self.items) }
 func (self *Set) Intersect(other *Set) *Set {
 	result := NewSet()
 
-	for item, _ := range self.items {
+	for item := range self.items {
 		if other.Includes(item) {
 			result.Add(item)
 		}

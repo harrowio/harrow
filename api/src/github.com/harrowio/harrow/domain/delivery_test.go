@@ -27,13 +27,13 @@ func Test_Delivery_Links(t *testing.T) {
 	}
 
 	expected := map[string]map[string]string{
-		"self": map[string]string{
+		"self": {
 			"href": "http://www.example.com/deliveries/607982b8-b0f1-4762-8bd1-ac230310ef8e",
 		},
-		"webhook": map[string]string{
+		"webhook": {
 			"href": "http://www.example.com/webhooks/54d4fc6c-a5e3-4fd0-b707-7a295c3da6d7",
 		},
-		"schedule": map[string]string{
+		"schedule": {
 			"href": "http://www.example.com/schedules/13fdf67b-b672-4713-914f-d02b066e3173",
 		},
 	}

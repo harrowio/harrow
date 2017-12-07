@@ -56,7 +56,7 @@ func Test_linksForSubject_mergesCapabilitiesIn(t *testing.T) {
 
 	auth := test_helpers.NewMockAuthzService()
 	auth.CapabilitiesBySubjectMap = map[string][]string{
-		"projects": []string{"create", "read"},
+		"projects": {"create", "read"},
 	}
 	result := linksForSubject(auth, req, subject)
 
@@ -79,7 +79,7 @@ func Test_linksForSubject_mergesCapabilitiesForSelfBasedOnAuthorizationName(t *t
 
 	auth := test_helpers.NewMockAuthzService()
 	auth.CapabilitiesBySubjectMap = map[string][]string{
-		"foo": []string{"archive"},
+		"foo": {"archive"},
 	}
 	result := linksForSubject(auth, req, subject)
 
@@ -99,7 +99,7 @@ func Test_linksForSubject_mergesCapabilitiesForPluralResources(t *testing.T) {
 	auth := test_helpers.NewMockAuthzService()
 
 	auth.CapabilitiesBySubjectMap = map[string][]string{
-		"job": []string{"create"},
+		"job": {"create"},
 	}
 	result := linksForSubject(auth, req, subject)
 
@@ -119,7 +119,7 @@ func Test_linksForSubject_pluralizesWordsEndingOnY(t *testing.T) {
 	auth := test_helpers.NewMockAuthzService()
 
 	auth.CapabilitiesBySubjectMap = map[string][]string{
-		"repository": []string{"create"},
+		"repository": {"create"},
 	}
 	result := linksForSubject(auth, req, subject)
 

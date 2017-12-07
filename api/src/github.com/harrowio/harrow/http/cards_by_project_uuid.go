@@ -34,7 +34,7 @@ func (self *CardsByProjectUuid) UnmarshalJSON(data []byte) error {
 		return err
 	}
 
-	for projectUuid, _ := range self.Cards {
+	for projectUuid := range self.Cards {
 		self.Order = append(self.Order, projectUuid)
 	}
 

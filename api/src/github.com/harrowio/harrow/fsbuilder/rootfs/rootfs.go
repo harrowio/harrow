@@ -387,9 +387,9 @@ func (self *rootFs) buildFilesystem() (io.Reader, error) {
 	gitAnalyzeRepository := MustAsset("templates/git-analyze-repository")
 
 	var executableFiles []rootFsFile = []rootFsFile{
-		rootFsFile{path: ".bin/git-analyze-repository", contents: gitAnalyzeRepository},
-		rootFsFile{path: ".bin/setup", contents: setupShBuffer.Bytes()},
-		rootFsFile{path: ".bin/git-ssh", contents: []byte("#!/bin/sh -e\nexec /usr/bin/ssh -o LogLevel=quiet -o PasswordAuthentication=no -o StrictHostKeyChecking=no \"$@\"\n")},
+		{path: ".bin/git-analyze-repository", contents: gitAnalyzeRepository},
+		{path: ".bin/setup", contents: setupShBuffer.Bytes()},
+		{path: ".bin/git-ssh", contents: []byte("#!/bin/sh -e\nexec /usr/bin/ssh -o LogLevel=quiet -o PasswordAuthentication=no -o StrictHostKeyChecking=no \"$@\"\n")},
 	}
 
 	// Check what kind of operation we're running

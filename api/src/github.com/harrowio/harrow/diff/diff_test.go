@@ -46,10 +46,10 @@ func TestChanges_returns_a_list_of_changed_lines(t *testing.T) {
 	}
 
 	expected := []*Change{
-		&Change{Context, 1, "a"},
-		&Change{Removal, 2, "b"},
-		&Change{Addition, 2, "d"},
-		&Change{Context, 3, "c"},
+		{Context, 1, "a"},
+		{Removal, 2, "b"},
+		{Addition, 2, "d"},
+		{Context, 3, "c"},
 	}
 
 	if got, want := changes, expected; !reflect.DeepEqual(got, want) {
@@ -64,18 +64,18 @@ func TestChanges_increases_line_numbers_for_every_addition(t *testing.T) {
 	}
 
 	expected := []*Change{
-		&Change{Addition, 1, "A=1"},
-		&Change{Context, 2, "a() {"},
-		&Change{Context, 3, "	date"},
-		&Change{Context, 4, "}"},
-		&Change{Context, 5, ""},
-		&Change{Addition, 6, "C=1"},
-		&Change{Addition, 7, ""},
-		&Change{Context, 8, "b() {"},
-		&Change{Context, 9, "	date"},
-		&Change{Context, 10, "}"},
-		&Change{Addition, 11, ""},
-		&Change{Addition, 12, "B=1"},
+		{Addition, 1, "A=1"},
+		{Context, 2, "a() {"},
+		{Context, 3, "	date"},
+		{Context, 4, "}"},
+		{Context, 5, ""},
+		{Addition, 6, "C=1"},
+		{Addition, 7, ""},
+		{Context, 8, "b() {"},
+		{Context, 9, "	date"},
+		{Context, 10, "}"},
+		{Addition, 11, ""},
+		{Addition, 12, "B=1"},
 	}
 
 	if got, want := changes, expected; !reflect.DeepEqual(got, want) {
@@ -100,13 +100,13 @@ func TestChanges_extracts_line_number_from_hunk_header(t *testing.T) {
 	}
 
 	expected := []*Change{
-		&Change{Context, 65, "65"},
-		&Change{Context, 66, "66"},
-		&Change{Context, 67, "67"},
-		&Change{Removal, 68, "68"},
-		&Change{Context, 68, "69"},
-		&Change{Context, 69, "70"},
-		&Change{Context, 70, "71"},
+		{Context, 65, "65"},
+		{Context, 66, "66"},
+		{Context, 67, "67"},
+		{Removal, 68, "68"},
+		{Context, 68, "69"},
+		{Context, 69, "70"},
+		{Context, 70, "71"},
 	}
 
 	if got, want := changes, expected; !reflect.DeepEqual(got, want) {
@@ -131,19 +131,19 @@ func TestChanges_extracts_processes_multiple_hunk_headers(t *testing.T) {
 	}
 
 	expected := []*Change{
-		&Change{Context, 65, "65"},
-		&Change{Context, 66, "66"},
-		&Change{Context, 67, "67"},
-		&Change{Removal, 68, "68"},
-		&Change{Context, 68, "69"},
-		&Change{Context, 69, "70"},
-		&Change{Context, 70, "71"},
-		&Change{Context, 95, "95"},
-		&Change{Context, 96, "96"},
-		&Change{Context, 97, "97"},
-		&Change{Removal, 98, "98"},
-		&Change{Context, 98, "99"},
-		&Change{Context, 99, "100"},
+		{Context, 65, "65"},
+		{Context, 66, "66"},
+		{Context, 67, "67"},
+		{Removal, 68, "68"},
+		{Context, 68, "69"},
+		{Context, 69, "70"},
+		{Context, 70, "71"},
+		{Context, 95, "95"},
+		{Context, 96, "96"},
+		{Context, 97, "97"},
+		{Removal, 98, "98"},
+		{Context, 98, "99"},
+		{Context, 99, "100"},
 	}
 
 	if got, want := changes, expected; !reflect.DeepEqual(got, want) {

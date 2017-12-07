@@ -20,7 +20,7 @@ type OAuthProviderConfig struct {
 func (c Config) OAuthConfig() OAuthConfig {
 	return OAuthConfig{
 		Providers: map[string]OAuthProviderConfig{
-			"github": OAuthProviderConfig{
+			"github": {
 				ClientId:     os.Getenv("HAR_OAUTH_GITHUB_CLIENT_ID"),
 				ClientSecret: os.Getenv("HAR_OAUTH_GITHUB_CLIENT_SECRET"),
 				ProviderUrl:  getEnvWithDefault("HAR_OAUTH_GITHUB_PROVIDER_URL", "https://test.tld/#/a/github/callback/"),

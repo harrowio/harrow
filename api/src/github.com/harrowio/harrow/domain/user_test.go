@@ -27,7 +27,7 @@ func (store *mockSubscriptionStore) Find(watchableUuid, event, userUuid string) 
 func (store *mockSubscriptionStore) FindEventsForUser(watchableId, userUuid string) ([]string, error) {
 	prefix := watchableId + ":" + userUuid + ":"
 	result := []string{}
-	for key, _ := range store.subscriptions {
+	for key := range store.subscriptions {
 		if strings.HasPrefix(key, prefix) {
 			result = append(result, key[len(prefix):])
 		}

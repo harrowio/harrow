@@ -87,12 +87,12 @@ func NewCapabilityMissingError(haveCapabilities map[string]bool, missingCapabili
 		status: 403,
 		code:   "capability_missing",
 		errors: map[string][]string{
-			"missing_capability": []string{missingCapability},
-			"have_capabilities":  []string{},
+			"missing_capability": {missingCapability},
+			"have_capabilities":  {},
 		},
 	}
 
-	for capabilityName, _ := range haveCapabilities {
+	for capabilityName := range haveCapabilities {
 		result.errors["have_capabilities"] = append(result.errors["have_capabilities"], capabilityName)
 	}
 
@@ -105,7 +105,7 @@ func NewMalformedParameters(param string, err error) *Error {
 		code:   "malformed_parameter",
 		msg:    err.Error(),
 		errors: map[string][]string{
-			param: []string{"malformed"},
+			param: {"malformed"},
 		},
 	}
 }

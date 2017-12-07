@@ -106,7 +106,7 @@ func Main() {
 		waitTime99Metrics   []Metric = []Metric{}
 		waitTime95Metrics   []Metric = []Metric{}
 		waitTimeMeanMetrics []Metric = []Metric{}
-		pendingOpCounts     []Metric = []Metric{Metric{X: time.Now().Unix(), Y: pendingOpCount}}
+		pendingOpCounts     []Metric = []Metric{{X: time.Now().Unix(), Y: pendingOpCount}}
 	)
 
 	for _, t := range timeouts {

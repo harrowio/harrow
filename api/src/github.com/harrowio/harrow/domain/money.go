@@ -93,5 +93,5 @@ func (self Money) MarshalJSON() ([]byte, error) {
 }
 
 func (self *Money) UnmarshalJSON(src []byte) error {
-	return self.Scan(src[1:len(src)])
+	return self.Scan(src[1:])
 }

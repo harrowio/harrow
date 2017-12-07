@@ -38,10 +38,10 @@ func Test_ProjectMembership_Links(t *testing.T) {
 	pm.Links(links, "http", "example.com")
 
 	expected := map[string]map[string]string{
-		"project": map[string]string{
+		"project": {
 			"href": "http://example.com/projects/" + pm.ProjectUuid,
 		},
-		"user": map[string]string{
+		"user": {
 			"href": "http://example.com/users/" + pm.UserUuid,
 		},
 	}

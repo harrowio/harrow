@@ -16,13 +16,13 @@ func Test_ScheduledExecution_ExecutionsBetween(t *testing.T) {
 	to := must3339("2000-01-01T00:08:05Z")
 
 	expected := []*ScheduledExecution{
-		&ScheduledExecution{Time: must3339("2000-01-01T00:02:00Z"), Spec: eachTwoSpec, Description: "each two"},
-		&ScheduledExecution{Time: must3339("2000-01-01T00:03:00Z"), Spec: eachThreeSpec, Description: "each three"},
-		&ScheduledExecution{Time: must3339("2000-01-01T00:04:00Z"), Spec: eachTwoSpec, Description: "each two"},
-		&ScheduledExecution{Time: must3339("2000-01-01T00:06:00Z"), Spec: eachTwoSpec, Description: "each two"},
-		&ScheduledExecution{Time: must3339("2000-01-01T00:06:00Z"), Spec: eachThreeSpec, Description: "each three"},
-		&ScheduledExecution{Time: must3339("2000-01-01T00:07:00Z"), Spec: onSevenSpec, Description: "on seven"},
-		&ScheduledExecution{Time: must3339("2000-01-01T00:08:00Z"), Spec: eachTwoSpec, Description: "each two"},
+		{Time: must3339("2000-01-01T00:02:00Z"), Spec: eachTwoSpec, Description: "each two"},
+		{Time: must3339("2000-01-01T00:03:00Z"), Spec: eachThreeSpec, Description: "each three"},
+		{Time: must3339("2000-01-01T00:04:00Z"), Spec: eachTwoSpec, Description: "each two"},
+		{Time: must3339("2000-01-01T00:06:00Z"), Spec: eachTwoSpec, Description: "each two"},
+		{Time: must3339("2000-01-01T00:06:00Z"), Spec: eachThreeSpec, Description: "each three"},
+		{Time: must3339("2000-01-01T00:07:00Z"), Spec: onSevenSpec, Description: "on seven"},
+		{Time: must3339("2000-01-01T00:08:00Z"), Spec: eachTwoSpec, Description: "each two"},
 	}
 
 	executions, err := ExecutionsBetween(from, to, -1, []*Schedule{eachTwo, eachThree, onSeven})
@@ -60,7 +60,7 @@ func Test_ScheduledExecution_ExecutionsBetween_Hourly(t *testing.T) {
 	from := must3339("2000-01-01T00:00:00Z")
 	to := must3339("2000-01-02T00:00:00Z")
 	schedules := []*Schedule{
-		&Schedule{Cronspec: &hourlySpec, Description: "each hour"},
+		{Cronspec: &hourlySpec, Description: "each hour"},
 	}
 	executions, err := ExecutionsBetween(from, to, -1, schedules)
 	if err != nil {
@@ -83,10 +83,10 @@ func Test_ScheduledExecution_ExecutionsBetween_OneTimes(t *testing.T) {
 	from := must3339("2000-01-01T00:00:00Z")
 	to := must3339("2000-01-02T00:00:00Z")
 	schedules := []*Schedule{
-		&Schedule{Timespec: &withinSpec, Description: "spec within"},
-		&Schedule{Timespec: &anotherWithinSpec, Description: "another spec within"},
+		{Timespec: &withinSpec, Description: "spec within"},
+		{Timespec: &anotherWithinSpec, Description: "another spec within"},
 		// this Schedule should not appear in the output
-		&Schedule{Timespec: &notWithinSpec, Description: "spec outside"},
+		{Timespec: &notWithinSpec, Description: "spec outside"},
 	}
 	executions, err := ExecutionsBetween(from, to, -1, schedules)
 	if err != nil {
@@ -114,9 +114,9 @@ func Test_ScheduledExecution_ExecutionsBetween_OneTimes_WithN(t *testing.T) {
 	from := must3339("2000-01-01T00:00:00Z")
 	to := must3339("2000-01-02T00:00:00Z")
 	schedules := []*Schedule{
-		&Schedule{Timespec: &withinSpec, Description: "spec within"},
-		&Schedule{Timespec: &anotherWithinSpec, Description: "another spec within"},
-		&Schedule{Timespec: &notWithinSpec, Description: "not within"},
+		{Timespec: &withinSpec, Description: "spec within"},
+		{Timespec: &anotherWithinSpec, Description: "another spec within"},
+		{Timespec: &notWithinSpec, Description: "not within"},
 	}
 	// N=1
 	executions, err := ExecutionsBetween(from, to, 1, schedules)
@@ -141,10 +141,10 @@ func Test_ScheduledExecution_ExecutionsBetween_Mixed_WithN(t *testing.T) {
 	from := must3339("2000-01-01T00:00:00Z")
 	to := must3339("2000-01-02T00:00:00Z")
 	schedules := []*Schedule{
-		&Schedule{Timespec: &withinSpec, Description: "spec within"},
-		&Schedule{Cronspec: &minutelySpec, Description: "each other minute"},
-		&Schedule{Timespec: &anotherWithinSpec, Description: "another spec within"},
-		&Schedule{Timespec: &notWithinSpec, Description: "not within"},
+		{Timespec: &withinSpec, Description: "spec within"},
+		{Cronspec: &minutelySpec, Description: "each other minute"},
+		{Timespec: &anotherWithinSpec, Description: "another spec within"},
+		{Timespec: &notWithinSpec, Description: "not within"},
 	}
 	executions, err := ExecutionsBetween(from, to, 5, schedules)
 	if err != nil {

@@ -173,7 +173,7 @@ func (s *txService) Can(action string, thing interface{}) (bool, error) {
 
 func (s *txService) useBasicCapablities() {
 	s.capabilities = BasicCapabilities()
-	for capability, _ := range s.addedRoles {
+	for capability := range s.addedRoles {
 		s.capabilities[capability] = true
 	}
 }
@@ -507,7 +507,7 @@ func (s *txService) CanUpdate(thing interface{}) (bool, error) {
 
 func (self *txService) CapabilitiesBySubject() map[string][]string {
 	result := map[string][]string{}
-	for cap, _ := range self.capabilities {
+	for cap := range self.capabilities {
 		sep := strings.Index(cap, "-")
 		verb := cap[0:sep]
 		subject := cap[sep+1:]

@@ -26,16 +26,16 @@ func Test_Webhook_Links(t *testing.T) {
 	}
 
 	expected := map[string]map[string]string{
-		"self": map[string]string{
+		"self": {
 			"href": "http://www.example.com/webhooks/607982b8-b0f1-4762-8bd1-ac230310ef8e",
 		},
-		"project": map[string]string{
+		"project": {
 			"href": "http://www.example.com/projects/07597891-3495-46af-b702-babfaacec89a",
 		},
-		"creator": map[string]string{
+		"creator": {
 			"href": "http://www.example.com/users/a175d3c4-8bc9-42f9-afd1-adeaf9d2e306",
 		},
-		"job": map[string]string{
+		"job": {
 			"href": "http://www.example.com/jobs/6d17d7f0-06aa-47e4-b5a3-6c20b4005f40",
 		},
 	}
