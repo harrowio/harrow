@@ -1,5 +1,8 @@
 ---
 
+- include_role:
+    name: harrow.base
+
 - apt:
     name: "{{ item }}"
     update_cache: true
@@ -7,6 +10,12 @@
     - libpq-dev
     - "postgresql={{harrow.postgresql.version}}*"
     - python-psycopg2
+
+- name: backup postgres cron job
+  cron:
+    name: backup redis
+    special_time: daily
+    job: "/usr/local/bin/harrow-backup postgres"
 
 - name: stop postgresql before lobotomising it
   systemd:

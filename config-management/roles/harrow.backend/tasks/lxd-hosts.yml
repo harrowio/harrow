@@ -1,7 +1,0 @@
----
-
-- lineinfile:
-    line: "{{ hostvars[item]['ansible_default_ipv4']['address'] }} {{ item }}"
-    dest: /etc/hosts
-  with_items:
-    - "{{ groups['lxd'] }}"

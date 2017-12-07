@@ -15,3 +15,21 @@ grafana.metrics-01.prod.harrow.io {
     transparent
   }
 }
+
+elasticsearch.metrics-01.prod.harrow.io {
+  log stdout
+  basicauth / {{ vault.basicauth.username }} {{ vault.basicauth.password }}
+  proxy / elasticsearch:9200 {
+    header_upstream -Authorization
+    transparent
+  }
+}
+
+kibana.metrics-01.prod.harrow.io {
+  log stdout
+  basicauth / {{ vault.basicauth.username }} {{ vault.basicauth.password }}
+  proxy / elasticsearch:5601 {
+    header_upstream -Authorization
+    transparent
+  }
+}

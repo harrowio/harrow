@@ -5,7 +5,7 @@ influxdb:
   volumes:
     - /var/lib/influxdb:/var/lib/influxdb
   ports:
-    - "8086:8086"
+    - "127.0.0.1:8086:8086"
 
 grafana:
   image: grafana/grafana:latest
@@ -18,7 +18,7 @@ grafana:
     - GF_SECURITY_ADMIN_USER={{ vault.grafana.admin_username }}
     - GF_SECURITY_ADMIN_PASSWORD={{ vault.grafana.admin_password }}
   ports:
-    - "3000:3000"
+    - "127.0.0.1:3000:3000"
   links:
     - influxdb
 
@@ -34,5 +34,17 @@ caddy:
    - /etc/caddy:/root/.caddy
   links:
     - grafana:grafana_host
+    - elasticsearch
     - influxdb
 
+elasticsearch:
+  image: nshou/elasticsearch-kibana:latest
+  container_name: elasticsearch
+  restart: always
+  ports:
+    - "127.0.0.1:5601:5601" #kibana
+    - "127.0.0.1:9200:9200" #elasticsearch http/rest
+  volumes:
+    - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+  environment:
+    ES_JAVA_OPTS: "-Xmx256m -Xms256m"

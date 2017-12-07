@@ -14,6 +14,7 @@ harrow:
   services:
     notify_on_failure: false
 
+
   victorops:
     enabled: "{{ vault.victorops.enabled }}"
     api_id: "{{ vault.victorops.api_id }}"
@@ -47,8 +48,8 @@ harrow:
         enabled: true
       authentication:
         enabled: true
-      app_id: {{ vault.github.oauth.app_id }}
-      app_secret: {{ vault.github.oauth.app_secret }}
+      app_id: "{{ vault.github.oauth.app_id }}"
+      app_secret: "{{ vault.github.oauth.app_secret }}"
       redirect_uri_pattern: 'https://www.${domain}/#/a/github/callback/%s'
 
   features:
@@ -59,6 +60,8 @@ harrow:
     guest_account:
       enabled: true
     public_projects:
+      enabled: true
+    billing:
       enabled: true
 
   rabbitmq:
@@ -85,26 +88,26 @@ harrow:
   postgresql:
     databases:
       - environment: test
+        host: localhost
         name: harrow_test
         password: test
         port: 5432
         sslmode: 'disable'
-        host: /var/run/postgresql
         username: test
       - environment: development
+        host: localhost
         name: "{{ shared.postgresql.development.name }}"
-        username: "{{ shared.postgresql.development.username }}"
         password: "{{ vault.postgresql.development.password }}"
-        port: 6432
-        host: /var/run/postgresql
+        port: 5432
         sslmode: 'disable'
+        username: "{{ shared.postgresql.development.username }}"
       - environment: production
+        host: localhost
         name: "{{ shared.postgresql.production.name }}"
-        username: "{{ shared.postgresql.production.username }}"
         password: "{{ vault.postgresql.production.password }}"
-        port: 6432
-        host: /var/run/postgresql
+        port: 5432
         sslmode: 'disable'
+        username: "{{ shared.postgresql.production.username }}"
 
   environment: production
 

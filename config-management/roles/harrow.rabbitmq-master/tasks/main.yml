@@ -1,5 +1,8 @@
 ---
 
+- include_role:
+    name: harrow.base
+
 - name: install rabbitmq-server package
   apt:
     name: rabbitmq-server

@@ -1,0 +1,57 @@
+#!/bin/bash -e
+
+# vim: ai ts=2 sw=2 et sts=2 ft=sh
+# vim: autoindent tabstop=2 shiftwidth=2 expandtab softtabstop=2 filetype=sh
+
+export AWS_ACCESS_KEY_ID={{ vault.backup.aws_access_key_id }}
+export AWS_SECRET_ACCESS_KEY={{ vault.backup.aws_secret_access_key }}
+export AWS_DEFAULT_REGION={{ vault.backup.aws_region }}
+
+function backup_op_logs {
+  /usr/bin/aws s3 sync \
+    --sse=aws:kms \
+    --storage-class=STANDARD_IA \
+    "/var/lib/harrow/op-logs/" \
+    "s3://{{ vault.backup.aws_s3_bucket_name }}/operation-logs-hetzner/"
+}
+
+function backup_redis {
+  dirname=redis-hetzner/$(date --iso-8601=minutes)
+  /usr/bin/aws s3 cp \
+    --sse=aws:kms \
+    --storage-class=STANDARD_IA \
+    "/var/lib/harrow/redis/dump.rdb" \
+    "s3://{{ vault.backup.aws_s3_bucket_name }}/$dirname/dump.rdb"
+}
+
+function backup_postgres {
+  dir=$(mktemp -d)
+  file=$(date --iso-8601=minutes)/{{ shared.postgresql.production.name }}.sqlc
+  trap 'rm -rf "$dir"' EXIT
+  /usr/bin/pg_dump \
+    --username {{ shared.postgresql.production.username }} \
+    -Fc {{ shared.postgresql.production.name }} > "$file"
+  /usr/bin/aws s3 cp \
+    --sse=aws:kms \
+    "$dir/$file" \
+    "s3://{{ vault.backup.aws_s3_bucket_name }}/postgresql-hetzner/$file"
+}
+
+case "$1" in
+  postgres)
+    backup_postgres
+    ;;
+
+  redis)
+    backup_redis
+    ;;
+
+  op-logs)
+    backup_op_logs
+    ;;
+
+  *)
+    echo $"Usage: $0 {postgres|redis|op-logs}"
+    exit 1
+
+  esac

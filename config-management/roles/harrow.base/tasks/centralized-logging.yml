@@ -1,0 +1,51 @@
+---
+
+- name: ensure that fluentd deps are installed
+  apt:
+    name: "{{ item }}"
+  with_items:
+    - ruby
+    - ruby-dev
+    - build-essential
+
+- name: install fluentd and plugins for system
+  gem:
+    name: "{{ item.name }}"
+    version: "{{ item.version }}"
+    state: present
+  with_items:
+    - { name: 'oj', version: '3.3.9'}
+    - { name: 'fluentd', version: '0.14.22'}
+    - { name: 'fluent-plugin-elasticsearch', version: '1.10.2'}
+
+- name: make fluentd config dir
+  file:
+    path: /etc/fluent
+    state: directory
+
+- name: write config file for fluentd (nice and simple)
+  copy:
+    dest: /etc/fluent/fluent.conf
+    content: |
+      <source>
+        @type exec
+        command /bin/journalctl -f -n 0 -o json
+        tag systemd
+        format json
+      </source>
+
+      <match **>
+        @type elasticsearch
+        user {{ vault.basicauth.username }}
+        password {{ vault.basicauth.password }}
+        hosts elasticsearch.metrics-01.prod.harrow.io
+        scheme https
+        logstash_format true
+        reload_connections false
+
+        buffer_type memory
+        flush_interval 60
+        retry_limit 17
+        retry_wait 1.0
+        num_threads 1
+      </match>

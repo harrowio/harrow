@@ -1,6 +1,7 @@
 ---
 
 - include: apt-no-ipv6.yml
+- include: centralized-logging.yml
 - include: disable-ipv6.yml
 - include: email-routing.yml
 - include: harrow-user.yml

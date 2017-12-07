@@ -71,6 +71,15 @@
     - postfix
     - email-routing
 
+- name: "unset incorrect {{ item }}"
+  lineinfile:
+    path: /etc/postfix/main.cf
+    regexp: "{{item}}"
+    state: absent
+  with_items:
+    - "^relayhost \\=$"
+    - "^inet_interfaces \\= localhost$"
+
 - name: "set relayhost"
   blockinfile:
     content: "relayhost = [{{ harrow.email_routing.sasl.host }}]:{{ harrow.email_routing.sasl.port }}"

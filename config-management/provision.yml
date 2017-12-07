@@ -35,25 +35,29 @@
   roles:
      - { role: dj-wasabi.telegraf }
   vars:
+    telegraf_agent_hostname: "{{ ansible_nodename }}"
     telegraf_agent_output:
       - type: influxdb
         config:
-          - urls = ["http://{{ vault.influxdb.basicauth.username }}:{{ vault.influxdb.basicauth.password }}@{{ vault.influxdb.host }}:{{ vault.influxdb.port }}"]
+          - urls = ["https://{{ vault.influxdb.basicauth.username }}:{{ vault.influxdb.basicauth.password }}@{{ vault.influxdb.host }}"]
           - database = "telegraf"
         tagpass:
           - diskmetrics = ["true"]
-    telegraf_plugins_default:
+    telegraf_plugins_extra:
       - plugin: redis
-      # - plugin: rabbitmq
-      #   config:
-      #   - username = "{{ shared.rabbitmq.production.username }}"
-      #   - password = "{{ vault.rabbitmq.production.password }}"
+      # TODO: ensure we can loop here, or something - kinda annoying that I can't loop over
+      # variables in yaml itself
+      # - plugin: postgresql
+      #     - address = "postgres://{{ pg.username }}:{{ pg.password }}@{{ pg.host }}:{{ pg.port }}/{{ pg.name }}?sslmode=disable"
+      - plugin: rabbitmq
+        config:
+          - username = "{{ shared.rabbitmq.production.username }}"
+          - password = "{{ vault.rabbitmq.production.password }}"
   tags:
     - metrics
 
 - hosts: all
   roles:
-    - harrow.base
     - franklinkim.ufw
   tags:
     - base

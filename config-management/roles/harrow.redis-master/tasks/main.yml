@@ -1,11 +1,20 @@
 ---
 
+- include_role:
+    name: harrow.base
+
 - apt:
     name: "{{ item }}"
     update_cache: true
   with_items:
     - redis-server
     - sysfsutils
+
+- name: backup redis cron job
+  cron:
+    name: backup redis
+    special_time: daily
+    job: "/usr/local/bin/harrow-backup redis"
 
 - name: /var/lib/harrow/redis
   file:

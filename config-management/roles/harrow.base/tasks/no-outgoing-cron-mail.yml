@@ -1,4 +1,10 @@
+# - name: disable outbound cron mail
+#   cronvar:
+#     name: MAILTO
+#     value: ""
+
 - name: disable outbound cron mail
-  cronvar:
-    name: EMAIL
-    value: "root@localhost"
+  cron:
+    name: MAILTO
+    value: ""
+    env: yes

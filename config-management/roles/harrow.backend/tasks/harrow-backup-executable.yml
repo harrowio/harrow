@@ -1,0 +1,16 @@
+---
+
+- name: harrow-backup/restore executable
+  template:
+    src: "usr/local/bin/{{ item }}.j2"
+    dest: "/usr/local/bin/{{ item }}"
+    mode: 0766
+  with_items:
+    - harrow-backup
+    - harrow-restore
+
+- name: backup operation-logs
+  cron:
+    name: backup op-logs
+    special_time: daily
+    job: "/usr/local/bin/harrow-backup op-logs"

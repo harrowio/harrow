@@ -1,3 +1,8 @@
+---
+
+- include_role:
+    name: harrow.base
+
 - set_fact: compose_dir=/var/tmp/ansible-docker-service
 
 - file:
@@ -8,6 +13,26 @@
   template:
     src: "docker-compose.yml"
     dest: "{{ compose_dir }}/docker-compose.yml"
+
+- name: copy elasticsearch config into place
+  copy:
+    src: elasticsearch.yml
+    dest: "{{ compose_dir }}/elasticsearch.yml"
+
+# - name: configure sane port forwarding and firewalling
+#   replace:
+#     regexp: '^(DEFAULT_FORWARD_POLICY=")(DROP)(")$'
+#     replace: '\1ALLOW\3'
+#     path: /etc/default/ufw
+#   notify:
+#     - restart ufw
+#
+# - name: stop docker fiddling with NAT prerouting and bypassing firewall
+#   lineinfile:
+#     line: DOCKER_OPTS="--iptables=false"
+#     path: /etc/default/docker
+#   notify:
+#     - restart docker
 
 - apt:
     name: "{{ item }}"
@@ -37,12 +62,12 @@
     state: latest
 
 - pip:
-    name: "{{ item }}"
+    name: "{{ item.name }}"
     state: latest
   with_items:
-    - docker
-    - docker-compose
-    - splitdrive
+    - { name: pip, version: "latest", install: true }
+    - { name: setuptools, version: "latest", install: true }
+    - { name: docker-compose, version: "latest", install: true }
 
 - docker_service:
     project_src: "{{ compose_dir }}"
