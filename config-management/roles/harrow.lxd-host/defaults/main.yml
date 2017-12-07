@@ -4,4 +4,4 @@ lxd:
    - /dev/sdc
    - /dev/sdd
   baseimage:
-    fingerprint: 'a98b7dde384a25db0a960a8c3f595e98ad60ddaeaaab2c81e562f008018e7739'
+    fingerprint: '4edc4a445f165767eeaf9b1b9b0c7778da2f9c29a5bbca5cb67723dd9fdac06f'

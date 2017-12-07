@@ -1,6 +1,11 @@
-- include: python-deps.yml
-- include: lxd.yml
-- include: baseimage.yml
-- include: tools.yml
-- include: ssh.yml
+---
 
+- include_role:
+    name: harrow.base
+
+- include: archive.yml
+- include: baseimage.yml
+- include: lxd.yml
+- include: python-deps.yml
+- include: ssh.yml
+- include: tools.yml

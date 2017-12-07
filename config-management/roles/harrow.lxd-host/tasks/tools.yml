@@ -31,6 +31,7 @@
     name: "kill too-old containers"
     minute: "*/5"
     job: "/usr/local/bin/lxd-kill-old kill"
+    state: absent
   tags:
     - lxd
 

@@ -1,0 +1,15 @@
+---
+
+- name: disable lvm backup retention (mins)
+  lineinfile:
+    path: /etc/lvm/lvm.conf
+    regexp: '^(.*)retain_min = (.*)$'
+    line: '\1retain_min = 90'
+    backrefs: yes
+
+- name: disable lvm backup retention (days)
+  lineinfile:
+    path: /etc/lvm/lvm.conf
+    regexp: '^(.*)retain_days = (.*)$'
+    line: '\1retain_days = 0'
+    backrefs: yes
