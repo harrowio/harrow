@@ -30,7 +30,6 @@ type FatalError struct {
 
 func runUserScript(log logger.Logger, client *ssh.Client, activitySink ActivitySink, db *sqlx.DB, operationUuid string, entrypoint string, config *config.Config) error {
 
-	log.Debug().Msg("setting up log sink (redis) db:0")
 	wg := new(sync.WaitGroup)
 	logSinkClient := redis.NewTCPClient(config.RedisConnOpts(0))
 	defer logSinkClient.Close()
@@ -60,7 +59,6 @@ func runUserScript(log logger.Logger, client *ssh.Client, activitySink ActivityS
 		for {
 			l, more := <-lexemes
 			if !more {
-				log.Warn().Msgf("no more lexemes coming, breaking loop")
 				break
 			}
 			err := logSink.Publish(operationUuid, int(l.Fd), l.T, l.Event)
@@ -74,7 +72,6 @@ func runUserScript(log logger.Logger, client *ssh.Client, activitySink ActivityS
 				E:  loxer.SerializedEvent{Inner: l.Event},
 			})
 		}
-		log.Debug().Msg("lexemes closed, persisting logs")
 		ft := logevent.NewFileTransport(config, log)
 		if err := ft.WriteLexemes(operationUuid, loxerEvents); err != nil {
 			log.Error().Msgf("ft.writelexemes(): %s", err)
@@ -88,7 +85,6 @@ func runUserScript(log logger.Logger, client *ssh.Client, activitySink ActivityS
 				log.Error().Msgf("logsink.eof(%s): %s", operationUuid, err)
 			}
 		}
-		log.Debug().Msgf("wg-1 lexemes")
 	}(log)
 	wg.Add(1)
 	go func(log logger.Logger) {
@@ -118,8 +114,6 @@ func runUserScript(log logger.Logger, client *ssh.Client, activitySink ActivityS
 				}
 			}
 		}
-		log.Debug().Msg("controlmessages closed")
-		log.Debug().Msgf("wg-1 control messages")
 	}(log)
 
 	log.Debug().Msg("starting new client session to run job")
