@@ -24,14 +24,12 @@ import (
 	"github.com/harrowio/harrow/cmd/migrate"
 	"github.com/harrowio/harrow/cmd/notifier"
 	"github.com/harrowio/harrow/cmd/op-metrics"
-	"github.com/harrowio/harrow/cmd/operation-runner"
 	"github.com/harrowio/harrow/cmd/postal-worker"
 	"github.com/harrowio/harrow/cmd/projector"
 	"github.com/harrowio/harrow/cmd/report-build-status-to-github"
 	"github.com/harrowio/harrow/cmd/runner"
 	"github.com/harrowio/harrow/cmd/scheduler"
 	"github.com/harrowio/harrow/cmd/user-script-runner"
-	vmexLXD "github.com/harrowio/harrow/cmd/vmex-lxd"
 	"github.com/harrowio/harrow/cmd/ws"
 	"github.com/harrowio/harrow/cmd/zob"
 	"github.com/rs/zerolog"
@@ -59,14 +57,12 @@ func main() {
 		metadataPreflight.ProgramName:              metadataPreflight.Main,
 		migrate.ProgramName:                        migrate.Main,
 		notifier.ProgramName:                       notifier.Main,
-		operationRunner.ProgramName:                operationRunner.Main,
 		runner.ProgramName:                         runner.Main,
 		postalWorker.ProgramName:                   postalWorker.Main,
 		projector.ProgramName:                      projector.Main,
 		reportBuildStatusToGitHub.ProgramName:      reportBuildStatusToGitHub.Main,
 		scheduler.ProgramName:                      scheduler.Main,
 		userScriptRunner.ProgramName:               userScriptRunner.Main,
-		vmexLXD.ProgramName:                        vmexLXD.Main,
 		ws.ProgramName:                             ws.Main,
 		zob.ProgramName:                            zob.Main,
 	}
