@@ -76,10 +76,18 @@ func (lxd *LXD) DestroyContainer() error {
 			if strings.Contains(string(output), "error: not found") {
 				return nil // container does not exist and error was "error: not found" (exit status: 1)
 			}
-			if err := goback.Wait(b); err != nil { // goback.ErrMaxAttemptsExceeded incase we're over-time
+			if strings.Contains(string(output), "error: Could not remove LV named") {
+				// container exists in LXD DB but underlaying storage has been removed, newer versions
+				// of LXD handle this more gracefully
+				return nil
+			}
+			if errBack := goback.Wait(b); errBack != nil { // goback.ErrMaxAttemptsExceeded incase we're over-time
 				return errors.Wrap(err, "max attempts exceeded waiting to destroy container")
+			} else {
+				lxd.log.Info().Msgf("error destroying container, will retry: %s", err)
 			}
 			return nil
+
 		}
 
 	}
@@ -92,8 +100,10 @@ func (lxd *LXD) WaitForContainerNetworking(d time.Duration) error {
 	for {
 		err := lxd.CheckContainerNetworking()
 		if err != nil {
-			if err := goback.Wait(b); err != nil { // goback.ErrMaxAttemptsExceeded incase we're over-time
+			if errBack := goback.Wait(b); errBack != nil { // goback.ErrMaxAttemptsExceeded incase we're over-time
 				return errors.Wrap(err, "max attempts exceeded waiting for networking to come up")
+			} else {
+				lxd.log.Info().Msgf("error waiting for container networking, will retry: %s", err)
 			}
 		}
 		break
@@ -206,27 +216,47 @@ func (lxd *LXD) CheckContainerNetworking() error {
 }
 
 func (lxd *LXD) sshClient() (*ssh.Client, error) {
+
+	b := &goback.SimpleBackoff{Min: 1 * time.Second, Max: 60 * time.Minute, Factor: 2}
+
 	sshConfig, err := lxd.config.GetSshConfig()
 	if err != nil {
 		return nil, errors.Wrap(err, "could not get ssh configuration")
 	}
-	client, err := ssh.Dial("tcp", lxd.connURL.Host, sshConfig)
-	if err != nil {
-		lxd.log.Fatal().Msgf("Unable to open ssh connection: %s", err)
+	for {
+		client, err := ssh.Dial("tcp", lxd.connURL.Host, sshConfig)
+		if err != nil {
+			if errBack := goback.Wait(b); errBack != nil { // goback.ErrMaxAttemptsExceeded incase we're over-time
+				return nil, errors.Wrap(err, "max attempts exceeded waiting to dial ssh to host")
+			} else {
+				lxd.log.Info().Msgf("error dialing ssh connection, will retry: %s", err)
+			}
+		} else {
+			return client, nil
+		}
 	}
-	return client, nil
 }
 
 func (lxd *LXD) sshSession() (*ssh.Session, error) {
-	client, err := lxd.sshClient()
-	if err != nil {
-		return nil, errors.Wrap(err, "could not get ssh client")
+
+	b := &goback.SimpleBackoff{Min: 1 * time.Second, Max: 60 * time.Minute, Factor: 2}
+
+	for {
+		client, err := lxd.sshClient()
+		if err != nil {
+			return nil, errors.Wrap(err, "could not get ssh client")
+		}
+		session, err := client.NewSession()
+		if err != nil {
+			if errBack := goback.Wait(b); errBack != nil { // goback.ErrMaxAttemptsExceeded incase we're over-time
+				return nil, errors.Wrap(err, "max attempts exceeded waiting to start ssh session")
+			} else {
+				lxd.log.Info().Msgf("error starting ssh session, will retry: %s", err)
+			}
+		} else {
+			return session, nil
+		}
 	}
-	session, err := client.NewSession()
-	if err != nil {
-		return nil, errors.Wrap(err, "could not start ssh session")
-	}
-	return session, nil
 }
 
 func (lxd *LXD) containerName() string {
