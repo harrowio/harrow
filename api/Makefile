@@ -17,6 +17,7 @@ release: build
 
 build:
 	go generate -x github.com/harrowio/harrow/cmd/...
+	go generate -x github.com/harrowio/harrow/fsbuilder/...
 	go build -i ${BUILD_OPTS} -o ${TARGET_NAME} github.com/harrowio/harrow/cmd/harrow
 
 include ${mkfile_dir}/test.mk
