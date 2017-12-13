@@ -191,7 +191,6 @@ func (self *rootFs) constructContext() error {
 	if err != nil {
 		return fmt.Errorf("Can't load operation repositories: %s", err)
 	} else {
-		fmt.Fprintf(os.Stderr, "found some repos %#v\n", repositories)
 		self.OperationCtxt.Repositories = repositories
 	}
 
@@ -235,19 +234,15 @@ func (self *rootFs) constructContext() error {
 			continue
 		}
 
-		fmt.Fprintf(os.Stderr, "do we get here?\n")
-
 		sshRepositoryCredential, err := domain.AsSshRepositoryCredential(repositoryCredential)
 		if err != nil {
 			self.Log().Warn().Msgf("Can't load RepositoryCredential: %s", err)
 			continue
 		}
 
-		fmt.Fprintf(os.Stderr, "getting handle on Git repo\n")
 		if gitRepo, err := repository.Git(); err == nil {
 			if gitRepo.UsesSSH() {
 				self.OperationCtxt.AddKey("repository", repositoryCredential.Name, sshRepositoryCredential.PrivateKey, sshRepositoryCredential.PublicKey)
-				fmt.Fprintf(os.Stderr, "repouses ssh credentials are %v", repositoryCredential)
 				self.OperationCtxt.AddSshConfig(repository, repositoryCredential)
 			} else {
 				fmt.Fprintf(os.Stderr, "repo claims not use ssh")
