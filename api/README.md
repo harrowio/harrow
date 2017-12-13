@@ -12,7 +12,8 @@ The project includes a `docker-compose.yml` file which can start the
 dependencies enough to run the test suite.
 
     $ go get -u github.com/jteeuwen/go-bindata/...
-    $ (cd src/github.com/harrowio/harrow && glide install)
+    $ go get -u github.com/golang/dep/cmd/dep
+    $ (cd src/github.com/harrowio/harrow && dep ensure)
 
 ## Installation
 
