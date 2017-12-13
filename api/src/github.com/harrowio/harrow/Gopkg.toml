@@ -31,15 +31,19 @@
 
 [[constraint]]
   name = "github.com/carlescere/goback"
+  version = "ebe10501f4c4682dd56f50a33dac8cb44f025109"
 
 [[constraint]]
   name = "github.com/craigmj/gototp"
+  version = "bbfd598b42caf9b1db7318cae7e10d0b94846f56"
 
 [[constraint]]
   name = "github.com/dhamidi/timespec"
+  version = "be9b77fa8b17bd771c1782f246be9194ff5b6792"
 
 [[constraint]]
   name = "github.com/golang/protobuf"
+  version = "748d386b5c1ea99658fd69fe9f03991ce86a90c1"
 
 [[constraint]]
   name = "github.com/gorhill/cronexpr"
@@ -55,12 +59,15 @@
 
 [[constraint]]
   name = "github.com/jameskeane/bcrypt"
+  version = "c3cd44c1e20fec46baad45b108a45be93394dc8d"
 
 [[constraint]]
   name = "github.com/jmoiron/sqlx"
+  version = "8ed836a8adb659e8492bcaa49e0880bb84075fe2"
 
 [[constraint]]
   name = "github.com/lib/pq"
+  version = "2704adc878c21e1329f46f6e56a1c387d788ff94"
 
 [[constraint]]
   name = "github.com/lionelbarrow/braintree-go"
@@ -68,9 +75,11 @@
 
 [[constraint]]
   name = "github.com/mohamedattahri/mail"
+  version = "52bc9c59063f12d07450d2ce7853cac3d3892a74"
 
 [[constraint]]
   name = "github.com/nu7hatch/gouuid"
+  version = "179d4d0c4d8d407a32af483c2354df1d2c91e6c3"
 
 [[constraint]]
   name = "github.com/pkg/errors"
