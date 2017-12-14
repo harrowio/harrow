@@ -47,7 +47,7 @@ func Main() {
 	// Get configuration from ENV (see config package)
 	config := config.GetConfig()
 
-	// we use this to emit some activitiyes when things happen
+	// we use this to emit some activities when things happen
 	activityBus := activity.NewAMQPTransport(config.AmqpConnectionString(), fmt.Sprintf("runner-%s", connStr))
 	defer activityBus.Close()
 

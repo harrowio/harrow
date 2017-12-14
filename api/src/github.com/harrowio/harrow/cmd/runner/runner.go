@@ -205,9 +205,6 @@ func (r *Runner) runOperation(op *domain.Operation) {
 	if err != nil {
 		r.errs <- errors.Wrap(err, "could not start database transaction")
 	}
-	defer tx.Commit()
-
-	var opStore *stores.DbOperationStore = stores.NewDbOperationStore(tx)
 
 	r.log.Info().Msgf("operation to run is: %s", op.Uuid)
 	o := Operation{
@@ -219,7 +216,8 @@ func (r *Runner) runOperation(op *domain.Operation) {
 	}
 
 	r.log.Info().Msg("marking operation as proceeding to run it")
-	opStore.MarkAsStarted(op.Uuid)
+	stores.NewDbOperationStore(tx).MarkAsStarted(op.Uuid)
+	tx.Commit()
 
 	switch op.IsUserJob() {
 	case true:
