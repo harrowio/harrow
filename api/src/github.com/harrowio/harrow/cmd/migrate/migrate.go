@@ -6,7 +6,6 @@ import (
 	"os"
 
 	"github.com/harrowio/harrow/config"
-	"github.com/lib/pq"
 	"github.com/rs/zerolog"
 	migrate "github.com/rubenv/sql-migrate"
 )
@@ -41,10 +40,11 @@ func Main() {
 	}
 
 	if err != nil {
-		log.Info().Msgf("error while running migrations: %#v", err)
-		if pqErr, ok := err.(*pq.Error); ok {
-			log.Fatal().Msg(pqErr.Table)
-		}
+		log.Info().Msgf("error while running migrations: %s", err)
+		// if pqErr, ok := err.(pq.Error); ok {
+		// 	log.Warn().Msg(pqErr.Message)
+		// 	log.Fatal().Msg(pqErr.Table)
+		// }
 	}
 
 	log.Info().Msgf("applied %d migrations.\n", n)
