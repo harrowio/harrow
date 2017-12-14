@@ -117,6 +117,7 @@ func Main() {
 	sshConf.User = user
 	log.Debug().Msgf("done, dialing ssh %s %v", addr, sshConf)
 	client, err := ssh.Dial("tcp", addr, sshConf)
+
 	if err != nil {
 		log.Fatal().Msgf("unable to open ssh connection: %s", err)
 	}
@@ -196,8 +197,6 @@ func deadlineReached(db *sqlx.DB, c *config.Config, connect string, operationUui
 	activityBus := activity.NewAMQPTransport(c.AmqpConnectionString(), "harrow/fsbuilder")
 	defer activityBus.Close()
 	activityBus.Publish(activities.OperationTimedOut(operationUuid))
-
-	// deleteContainer(connect, operationUuid)
 
 	// sysexits.h: #define EX_TEMPFAIL	75	/* temp failure; user is invited to retry */
 	os.Exit(75)
