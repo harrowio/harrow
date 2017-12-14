@@ -55,3 +55,11 @@ func getEnvBoolWithDefault(k string, d bool) bool {
 	}
 	return val
 }
+
+func getEnvDurationWithDefault(k string, d time.Duration) time.Duration {
+	val, err := time.ParseDuration(getEnvWithDefault(k, fmt.Sprintf("%s", d)))
+	if err != nil {
+		panic(fmt.Sprintf("can't parse env variable '%s' as duration", k))
+	}
+	return val
+}

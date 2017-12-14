@@ -20,9 +20,11 @@ const imageName = "harrow-baseimage"
 type LXD struct {
 	config  *config.Config
 	connURL *url.URL
-	log     logger.Logger
 
-	containerUuid string
+	log      logger.Logger
+	reporter Reporter
+
+	containerUUID string
 }
 
 func (lxd *LXD) MakeContainer() error {
@@ -47,6 +49,8 @@ func (lxd *LXD) MakeContainer() error {
 		return errors.Wrap(err, "expected note about 'Starting <name>', wasn't recieved")
 	}
 
+	lxd.reporter.MadeContainer()
+
 	return nil
 }
 
@@ -69,6 +73,7 @@ func (lxd *LXD) DestroyContainer() error {
 		output, err := session.CombinedOutput(cmdStr)
 
 		if err == nil {
+			lxd.reporter.DestroyedContainer()
 			return nil // container deleted successfully
 		}
 
@@ -84,13 +89,12 @@ func (lxd *LXD) DestroyContainer() error {
 			if errBack := goback.Wait(b); errBack != nil { // goback.ErrMaxAttemptsExceeded incase we're over-time
 				return errors.Wrap(err, "max attempts exceeded waiting to destroy container")
 			} else {
+				lxd.reporter.DestroyContainerWillRetry()
 				lxd.log.Info().Msgf("error destroying container, will retry: %s", err)
 			}
-			return nil
-
 		}
-
 	}
+	return nil
 }
 
 func (lxd *LXD) WaitForContainerNetworking(d time.Duration) error {
@@ -226,6 +230,7 @@ func (lxd *LXD) sshClient() (*ssh.Client, error) {
 	for {
 		client, err := ssh.Dial("tcp", lxd.connURL.Host, sshConfig)
 		if err != nil {
+			lxd.reporter.SSHError(err)
 			if errBack := goback.Wait(b); errBack != nil { // goback.ErrMaxAttemptsExceeded incase we're over-time
 				return nil, errors.Wrap(err, "max attempts exceeded waiting to dial ssh to host")
 			} else {
@@ -248,6 +253,7 @@ func (lxd *LXD) sshSession() (*ssh.Session, error) {
 		}
 		session, err := client.NewSession()
 		if err != nil {
+			lxd.reporter.SSHError(err)
 			if errBack := goback.Wait(b); errBack != nil { // goback.ErrMaxAttemptsExceeded incase we're over-time
 				return nil, errors.Wrap(err, "max attempts exceeded waiting to start ssh session")
 			} else {
@@ -260,7 +266,7 @@ func (lxd *LXD) sshSession() (*ssh.Session, error) {
 }
 
 func (lxd *LXD) containerName() string {
-	return fmt.Sprintf("%s-%s", lxd.prefix(), lxd.containerUuid)
+	return fmt.Sprintf("%s-%s", lxd.prefix(), lxd.containerUUID)
 }
 
 func (lxd *LXD) prefix() string {

@@ -51,6 +51,9 @@ func Main() {
 	activityBus := activity.NewAMQPTransport(config.AmqpConnectionString(), fmt.Sprintf("runner-%s", connStr))
 	defer activityBus.Close()
 
+	// Reporter tracks metrics and emits stats
+	var reporter = NewInfluxDBReporter(log, config.InfluxDBConfig(), *connStr)
+
 	// Configure the runner with the things we have (log, interval, etc)
 	// and start it in a goroutine
 	runner := &Runner{
@@ -59,6 +62,7 @@ func Main() {
 		interval:     60,
 		log:          log.With().Str("host", *connStr).Logger(),
 		activitySink: activityBus,
+		reporter:     reporter,
 	}
 
 	if err := runner.SetLXDConnStr(*connStr); err != nil {
@@ -99,6 +103,7 @@ O:
 
 		case s := <-stop:
 			log.Error().Msgf("received signal, stopping: %s", s)
+			reporter.Signal(s)
 			runner.Stop("sig")
 			break O
 

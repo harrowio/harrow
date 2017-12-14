@@ -14,10 +14,11 @@ import (
 )
 
 type Operation struct {
-	db     *sqlx.DB
-	config *config.Config
-	lxd    *LXD
-	log    logger.Logger
+	db       *sqlx.DB
+	config   *config.Config
+	lxd      *LXD
+	log      logger.Logger
+	reporter Reporter
 
 	op *domain.Operation
 }

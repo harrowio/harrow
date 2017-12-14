@@ -33,7 +33,10 @@ type Runner struct {
 	config   *config.Config
 	interval int
 	errs     chan error
+
+	// tracking
 	log      logger.Logger
+	reporter Reporter
 
 	// internally set
 	connURL *url.URL
@@ -58,9 +61,10 @@ func (r *Runner) Start() {
 	)
 
 	r.lxd = &LXD{
-		config:  r.config,
-		connURL: r.connURL,
-		log:     r.log,
+		config:   r.config,
+		connURL:  r.connURL,
+		log:      r.log,
+		reporter: r.reporter,
 	}
 
 	r.db, err = r.config.DB()
@@ -115,8 +119,10 @@ func (r *Runner) Start() {
 			go func(quit chan bool, sendOn chan<- *domain.Operation, db *sqlx.DB) {
 				opdob := OperationFromDbOrBus{
 					db:        db,
-					log:       r.log,
 					dbConnStr: pgDSN,
+
+					log:      r.log,
+					reporter: r.reporter,
 				}
 				if err := opdob.NextOn(quit, sendOn); err != nil {
 					r.log.Info().Msgf("searching goroutine sending on err chan (%s)", err)
@@ -141,12 +147,15 @@ func (r *Runner) Start() {
 		// healchChecks might be a channel that never yields (if we never go into
 		// <-containerNetworkUp), but then we should exit with an error immediately
 		case err := <-connectionLost:
+			r.reporter.LongPollLost()
 			r.errs <- errors.Wrap(err, "long running container connection lost")
 
 		// healchChecks might be a channel that never yields (if we never go into
 		// <-containerNetworkUp), but then we should exit with an error immediately
 		case <-healthChecks:
-			if err := r.lxd.CheckContainerNetworking(); err != nil {
+			if err := r.lxd.CheckContainerNetworking(); err == nil {
+				r.reporter.Heartbeat()
+			} else {
 				r.errs <- errors.Wrap(err, "container failed periodic networking health check")
 			}
 		}
@@ -164,6 +173,7 @@ func (r *Runner) Stop(reason string) {
 		r.stopper = nil
 		r.log.Info().Msg("waiting for clean shutdown...")
 		<-stopped
+		r.reporter.CleanShutdown()
 		r.log.Info().Msg("got clean shutdown notice, returning from Stop()")
 	}
 }
@@ -178,7 +188,7 @@ func (r *Runner) SetLXDConnStr(connStr string) (err error) {
 
 func (r *Runner) MakeContainer(uuid string, res chan error) {
 
-	r.lxd.containerUuid = uuid
+	r.lxd.containerUUID = uuid
 
 	r.log.Debug().Msg("checking container health")
 	exists, err := r.lxd.ContainerExists()

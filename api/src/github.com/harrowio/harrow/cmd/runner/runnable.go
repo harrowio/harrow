@@ -18,7 +18,9 @@ import (
 type OperationFromDbOrBus struct {
 	dbConnStr string
 	db        *sqlx.DB
-	log       logger.Logger
+
+	log      logger.Logger
+	reporter Reporter
 }
 
 func (ofdob *OperationFromDbOrBus) WaitForNew(quit chan bool) bool { // look again
@@ -124,6 +126,7 @@ func (ofdob *OperationFromDbOrBus) Next() (*domain.Operation, error) {
 	ofdob.log.Debug().Msg(re.ReplaceAllString(query, " "))
 	err = tx.Get(op, query)
 	if err == sql.ErrNoRows {
+		ofdob.reporter.PolledNoWork()
 		ofdob.log.Debug().Msg("no rows found, but no errors")
 		return nil, nil
 	}
@@ -147,11 +150,15 @@ func (ofdob *OperationFromDbOrBus) Next() (*domain.Operation, error) {
 		return ofdob.Next()
 	}
 
-	if err := appendStatusLog(ofdob.log, tx, op.Uuid, "vm.reserved", fmt.Sprintf("Reserved, will be	started (wait time %s)", time.Now().UTC().Sub(*op.CreatedAt))); err != nil {
+	var waitTime = time.Now().UTC().Sub(*op.CreatedAt)
+	ofdob.reporter.WaitTime(waitTime)
+
+	if err := appendStatusLog(ofdob.log, tx, op.Uuid, "vm.reserved", fmt.Sprintf("Reserved, will be	started (wait time %s)", waitTime)); err != nil {
 		return nil, errors.Wrap(err, "could not append vm.reserved message to operation status logs")
 	}
 	tx.Commit()
 
+	ofdob.reporter.PolledFoundWork()
 	ofdob.log.Info().Str("runnable", "Next()").Msg("returning")
 	return op, nil
 }
