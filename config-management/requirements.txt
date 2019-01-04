@@ -6,4 +6,4 @@ ipaddress==1.0.17
 pyasn1==0.1.9
 pycparser==2.14
 six==1.10.0
-pyyaml==3.12
+pyyaml>=4.2b1
