@@ -15,7 +15,7 @@
     "coffee-script": "1.7.1",
     "css-loader": "0.25.0",
     "debug": "2.6.9",
-    "electron": "^1.6.11",
+    "electron": "^9.1.0",
     "expose-loader": "0.7.1",
     "extract-text-webpack-plugin": "1.0.1",
     "favicons-webpack-plugin": "0.0.9",
